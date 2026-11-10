@@ -37,9 +37,16 @@ export function buildFlashcardDeck(entries,{theme='all',scope='all',favorites=[]
  return result;
 }
 
-export function createFlashcardSession(ids,direction='term'){
- if(!Array.isArray(ids)||!ids.length||new Set(ids).size!==ids.length||!ids.every(validId)||!['term','definition'].includes(direction))return null;
- return {ids:[...ids],index:0,revealed:false,ratings:{},finished:false,direction};
+export function createFlashcardSession(ids,direction='term',random=Math.random){
+ if(!Array.isArray(ids)||!ids.length||new Set(ids).size!==ids.length||!ids.every(validId)||!['term','definition','mixed'].includes(direction))return null;
+ const session={ids:[...ids],index:0,revealed:false,ratings:{},finished:false,direction};
+ if(direction==='mixed'){
+  const first=random()<0.5?'term':'definition',second=first==='term'?'definition':'term';
+  const values=ids.map((_,index)=>index%2===0?first:second);
+  for(let i=values.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[values[i],values[j]]=[values[j],values[i]]}
+  session.directions=Object.fromEntries(ids.map((id,index)=>[id,values[index]]));
+ }
+ return session;
 }
 export function flipFlashcard(session){return session&&!session.finished?{...session,revealed:!session.revealed}:session}
 export function moveFlashcard(session,index){
@@ -68,8 +75,9 @@ export function validateFlashcards(value){
  if(!record(value)||!record(value.status)||Object.keys(value.status).length>2000||!Object.entries(value.status).every(([id,v])=>validId(id)&&rating(v)))return false;
  if(value.reviewedAt!==undefined&&(!record(value.reviewedAt)||Object.keys(value.reviewedAt).length>2000||!Object.entries(value.reviewedAt).every(([id,date])=>validId(id)&&id in value.status&&typeof date==='string'&&Number.isFinite(Date.parse(date)))))return false;
  const session=value.session;if(session==null)return true;
- if(!record(session)||!Array.isArray(session.ids)||!session.ids.length||session.ids.length>2000||!session.ids.every(validId)||new Set(session.ids).size!==session.ids.length||!Number.isInteger(session.index)||session.index<0||session.index>=session.ids.length||typeof session.revealed!=='boolean'||typeof session.finished!=='boolean'||!['term','definition'].includes(session.direction)||!record(session.ratings))return false;
+ if(!record(session)||!Array.isArray(session.ids)||!session.ids.length||session.ids.length>2000||!session.ids.every(validId)||new Set(session.ids).size!==session.ids.length||!Number.isInteger(session.index)||session.index<0||session.index>=session.ids.length||typeof session.revealed!=='boolean'||typeof session.finished!=='boolean'||!['term','definition','mixed'].includes(session.direction)||!record(session.ratings))return false;
  const ids=new Set(session.ids);
+ if(session.direction==='mixed'&&(!record(session.directions)||Object.keys(session.directions).length!==ids.size||!Object.entries(session.directions).every(([id,value])=>ids.has(id)&&['term','definition'].includes(value))))return false;
  if(!Object.entries(session.ratings).every(([id,v])=>ids.has(id)&&rating(v)&&value.status[id]===v))return false;
  return !session.finished||session.ids.every(id=>rating(session.ratings[id]));
 }

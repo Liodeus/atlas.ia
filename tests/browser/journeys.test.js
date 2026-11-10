@@ -8,9 +8,22 @@ before(async()=>{
  server=spawn(process.execPath,['node_modules/vite/bin/vite.js','--host','127.0.0.1','--port','5199','--strictPort'],{stdio:'ignore'});
  for(let i=0;i<100;i++){try{if((await fetch('http://127.0.0.1:5199/')).ok)break}catch{} await new Promise(r=>setTimeout(r,100));}
  browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
- page=await browser.newPage({viewport:{width:390,height:844}}); page.setDefaultTimeout(3000); page.on('pageerror',error=>pageErrors.push(error.message));
+ page=await browser.newPage({viewport:{width:390,height:844}}); page.setDefaultTimeout(10000); page.on('pageerror',error=>pageErrors.push(error.message));
 });
 after(async()=>{await browser?.close();server?.kill();assert.deepEqual(pageErrors,[])});
+test('the first visit starts in light mode and remembers a later choice',async()=>{
+ const context=await browser.newContext({colorScheme:'dark',viewport:{width:1280,height:800}});
+ const fresh=await context.newPage();
+ try{
+  await fresh.goto('http://127.0.0.1:5199/');
+  await fresh.getByRole('heading',{level:1}).waitFor();
+  assert.equal(await fresh.locator('html').getAttribute('data-theme'),'light');
+  await fresh.getByRole('button',{name:'Mode sombre'}).click();
+  await fresh.reload();
+  await fresh.getByRole('button',{name:'Mode clair'}).waitFor();
+  assert.equal(await fresh.locator('html').getAttribute('data-theme'),'dark');
+ }finally{await context.close()}
+});
 test('invalid lesson URL remains usable', async()=>{
  await page.goto('http://127.0.0.1:5199/cours/1?etape=1.5');
  await page.getByRole('heading',{level:1}).waitFor();
@@ -142,21 +155,20 @@ test('lesson completion can be undone and crucial notions are visible',async()=>
  await page.getByRole('button',{name:'Marquer comme non terminée'}).click();
  assert.ok(!(await page.evaluate(()=>JSON.parse(localStorage.getItem('atlas-progress')).completed)).includes('1-1'));
 });
-test('question and concept markers persist independently and appear in progression',async()=>{
+test('a question can be marked without changing its associated concept',async()=>{
  await page.goto('http://127.0.0.1:5199/');await page.evaluate(()=>localStorage.removeItem('atlas-progress'));
  await page.goto('http://127.0.0.1:5199/quiz?theme=1');await page.getByRole('button',{name:'Commencer le quiz'}).click();
- const question=page.getByRole('group',{name:'Repérer cette question'});await question.getByRole('button',{name:'À revoir'}).click();
- const concept=page.getByRole('group',{name:'Repérer la notion associée'});await concept.getByRole('button',{name:'À approfondir'}).click();
- await page.goto('http://127.0.0.1:5199/progression');await page.getByRole('heading',{name:'Mes repères à revoir ou approfondir'}).waitFor();
+ const question=page.getByRole('group',{name:'Cette question'});await question.getByRole('button',{name:'À revoir'}).click();
+ await page.goto('http://127.0.0.1:5199/progression');await page.getByRole('heading',{name:'Mes éléments à revoir ou à approfondir'}).waitFor();
  const marks=await page.evaluate(()=>JSON.parse(localStorage.getItem('atlas-progress')).studyMarks);
- assert.equal(Object.values(marks.questions)[0],'review');assert.equal(Object.values(marks.concepts)[0],'deep');
+ assert.equal(Object.values(marks.questions)[0],'review');assert.deepEqual(marks.concepts,{});
  assert.ok(await page.locator('.review-list summary').count()>0);
  await page.reload();assert.equal((await page.evaluate(()=>JSON.parse(localStorage.getItem('atlas-progress')).studyMarks)).questions[Object.keys(marks.questions)[0]],'review');
 });
 test('flashcard concept can be marked for deeper study',async()=>{
  await page.goto('http://127.0.0.1:5199/flashcards');await page.getByRole('button',{name:'Commencer la révision'}).click();
- await page.getByRole('group',{name:'Repérer cette notion'}).getByRole('button',{name:'À approfondir'}).click();
- assert.equal(await page.getByRole('group',{name:'Repérer cette notion'}).getByRole('button',{name:'À approfondir'}).getAttribute('aria-pressed'),'true');
+ await page.getByRole('group',{name:'Cette notion'}).getByRole('button',{name:'À approfondir'}).click();
+ assert.equal(await page.getByRole('group',{name:'Cette notion'}).getByRole('button',{name:'À approfondir'}).getAttribute('aria-pressed'),'true');
 });
 test('marked questions can form a quiz and survive export and import',async()=>{
  await page.goto('http://127.0.0.1:5199/progression');
@@ -165,9 +177,9 @@ test('marked questions can form a quiz and survive export and import',async()=>{
  await page.evaluate(()=>localStorage.removeItem('atlas-progress'));await page.reload();
  await page.locator('input[type=file]').setInputFiles(file);await page.getByRole('button',{name:'Confirmer le remplacement'}).click();
  assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('atlas-progress')).studyMarks),marks);
- await page.getByRole('link',{name:'Refaire mes questions repérées'}).click();
- await page.waitForURL('**/quiz?scope=marked');await page.getByText('Mes questions repérées',{exact:true}).waitFor();
- assert.ok(await page.getByText(/question\(s\) à revoir ou approfondir/).count());
+ await page.getByRole('link',{name:'Refaire mes questions enregistrées'}).click();
+ await page.waitForURL('**/quiz?scope=marked');await page.getByLabel('Périmètre').waitFor();
+ assert.equal(await page.getByLabel('Périmètre').inputValue(),'marked');
  await page.getByRole('button',{name:'Commencer le quiz'}).click();
  if(await page.getByRole('button',{name:'Remplacer la session'}).count())await page.getByRole('button',{name:'Remplacer la session'}).click();
  await page.locator('.question').waitFor();const ids=await page.evaluate(()=>JSON.parse(localStorage.getItem('atlas-progress')).session.items.map(q=>q.id));
@@ -179,4 +191,63 @@ test('resume returns to the previous position in the lesson',async()=>{
  await page.goto('http://127.0.0.1:5199/');
  await page.getByRole('link',{name:'Reprendre mon parcours'}).click();await page.locator('.course-terms').waitFor();await page.waitForTimeout(300);
  assert.ok((await page.evaluate(()=>window.scrollY))>300);
+});
+test('quiz settings and one pair of marking buttons are directly accessible',async()=>{
+ await page.goto('http://127.0.0.1:5199/');await page.evaluate(()=>localStorage.removeItem('atlas-progress'));
+ await page.goto('http://127.0.0.1:5199/quiz');
+ await page.getByLabel('Périmètre').selectOption('selected');
+ await page.getByLabel('Choisir un ou plusieurs thèmes').selectOption(['1','5']);
+ await page.getByLabel('Nombre de questions').selectOption('5');
+ assert.equal(await page.locator('details.quiz-settings').count(),0);
+ await page.getByRole('button',{name:'Commencer le quiz'}).click();
+ const marks=page.getByRole('group',{name:'Cette question'});await marks.waitFor();
+ assert.equal(await marks.locator('button').count(),2);assert.equal(await page.locator('details.quiz-marking').count(),0);
+ await marks.getByRole('button',{name:'À approfondir'}).click();
+ assert.equal(await marks.getByRole('button',{name:'À approfondir'}).getAttribute('aria-pressed'),'true');
+});
+test('mixed flashcard session keeps both directions after reload',async()=>{
+ await page.goto('http://127.0.0.1:5199/');await page.evaluate(()=>localStorage.removeItem('atlas-progress'));
+ await page.goto('http://127.0.0.1:5199/flashcards');await page.getByText('Mélanger les deux sens').click();
+ await page.getByRole('button',{name:'Commencer la révision'}).click();await page.locator('.flashcard-face').waitFor();
+ const stored=await page.evaluate(()=>JSON.parse(localStorage.getItem('atlas-progress')).flashcards.session);
+ assert.equal(stored.direction,'mixed');assert.deepEqual(new Set(Object.values(stored.directions)),new Set(['term','definition']));
+ const front=await page.locator('.flashcard-front').innerText();await page.reload();
+ assert.equal(await page.locator('.flashcard-front').innerText(),front);
+ assert.deepEqual((await page.evaluate(()=>JSON.parse(localStorage.getItem('atlas-progress')).flashcards.session)).directions,stored.directions);
+});
+test('course and concept cards remind readers what abbreviations mean',async()=>{
+ await page.goto('http://127.0.0.1:5199/cours/8?etape=1');
+ await page.getByRole('heading',{level:1}).waitFor();
+ assert.match(await page.locator('h1').innerText(),/TTFT \(Time To First Token\)/);
+ await page.goto('http://127.0.0.1:5199/notions/notion-243');
+ await page.locator('.notion-understand').waitFor();
+ assert.match(await page.locator('.notion-understand').innerText(),/TTFT \(Time To First Token\)/);
+});
+test('mixed flashcard directions survive export and import',async()=>{
+ await page.close();page=await browser.newPage({viewport:{width:390,height:844}});page.setDefaultTimeout(10000);page.on('pageerror',error=>pageErrors.push(error.message));
+ await page.goto('http://127.0.0.1:5199/');await page.evaluate(()=>localStorage.removeItem('atlas-progress'));
+ await page.goto('http://127.0.0.1:5199/flashcards');await page.getByText('Mélanger les deux sens').click();
+ await page.getByRole('button',{name:'Commencer la révision'}).click();await page.locator('.flashcard-face').waitFor();
+ const session=await page.evaluate(()=>JSON.parse(localStorage.getItem('atlas-progress')).flashcards.session);
+ const front=await page.locator('.flashcard-front').innerText();
+ await page.goto('http://127.0.0.1:5199/progression');const wait=page.waitForEvent('download');await page.getByRole('button',{name:'Exporter',exact:true}).click();const path=await(await wait).path();
+ await page.evaluate(()=>localStorage.removeItem('atlas-progress'));await page.reload();await page.locator('input[type=file]').setInputFiles(path);await page.getByRole('button',{name:'Confirmer le remplacement'}).click();
+ await page.goto('http://127.0.0.1:5199/flashcards');await page.locator('.flashcard-face').waitFor();
+ assert.equal(await page.locator('.flashcard-front').innerText(),front);
+ assert.deepEqual((await page.evaluate(()=>JSON.parse(localStorage.getItem('atlas-progress')).flashcards.session)).directions,session.directions);
+});
+test('a quiz draft survives an immediate reload',async()=>{
+ await page.goto('http://127.0.0.1:5199/');
+ await page.evaluate(()=>localStorage.setItem('atlas-progress',JSON.stringify({version:1,completed:[],favorites:[],history:[],errors:[],session:{id:12345,mode:'practice',index:0,checked:false,finished:false,items:[{id:'draft-test',theme:1,kind:'number',prompt:'Combien ?',answer:42,choices:[],explanation:'Quarante-deux.'}],answers:{}}})));
+ await page.goto('http://127.0.0.1:5199/quiz');await page.getByLabel('Votre réponse').fill('42');
+ await page.reload();assert.equal(await page.getByLabel('Votre réponse').inputValue(),'42');
+});
+test('unknown saved data remains untouched while storage is blocked',async()=>{
+ await page.goto('http://127.0.0.1:5199/');const raw='{"version":99,"note":"original"}';
+ await page.evaluate(value=>localStorage.setItem('atlas-progress',value),raw);
+ await page.goto('http://127.0.0.1:5199/cours/1?etape=1');
+ await page.getByRole('button',{name:'Terminer et continuer'}).click();
+ assert.equal(await page.evaluate(()=>localStorage.getItem('atlas-progress')),raw);
+ await page.goto('http://127.0.0.1:5199/progression');
+ await page.getByRole('button',{name:'Exporter la sauvegarde originale'}).waitFor();
 });

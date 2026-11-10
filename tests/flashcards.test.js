@@ -92,3 +92,15 @@ test('revision dates are recorded, survive old backups and select cards due for 
  assert.deepEqual(dueFlashcardIds(old,'2026-11-10T12:00:00.000Z'),['notion-1']);
  assert.equal(validateFlashcards({...old,reviewedAt:{'notion-1':'invalid'}}),false);
 });
+
+test('mixed sessions preserve a balanced direction for each card and validate backups',()=>{
+ const ids=['notion-1','notion-2','notion-3','notion-4'];
+ const session=createFlashcardSession(ids,'mixed',()=>0.3);
+ assert.equal(session.direction,'mixed');
+ assert.deepEqual(Object.keys(session.directions).sort(),ids);
+ assert.equal(Object.values(session.directions).filter(value=>value==='term').length,2);
+ assert.equal(validateFlashcards({status:{},session}),true);
+ assert.equal(validateFlashcards({status:{},session:{...session,directions:{'notion-1':'invalid'}}}),false);
+ const moved=moveFlashcard(session,1);
+ assert.deepEqual(moved.directions,session.directions);
+});

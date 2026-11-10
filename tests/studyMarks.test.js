@@ -13,3 +13,10 @@ test('import removes markers whose question or concept no longer exists',()=>{
  const marks={questions:{'q-1':'review','q-2':'deep'},concepts:{'notion-1':'deep','notion-2':'review'}};
  assert.deepEqual(cleanStudyMarks(marks,new Set(['q-1']),new Set(['notion-1'])),{questions:{'q-1':'review'},concepts:{'notion-1':'deep'}});
 });
+test('marking a question leaves an independently marked concept unchanged',()=>{
+ const old={questions:{'q-1':'review'},concepts:{'notion-1':'deep'}};
+ const changed=toggleStudyMark(old,'questions','q-1','deep');
+ assert.equal(changed.questions['q-1'],'deep');assert.equal(changed.concepts['notion-1'],'deep');
+ const removed=toggleStudyMark(changed,'questions','q-1','deep');
+ assert.equal(removed.questions['q-1'],undefined);assert.equal(removed.concepts['notion-1'],'deep');
+});

@@ -1,0 +1,11 @@
+import themes from './themes.js';
+import {learningOrder} from './lessonNavigation.js';
+export {default as themes} from './themes.js';
+export const orderedThemes=learningOrder.map(id=>themes.find(t=>t.id===id));
+export const moduleNumber=id=>String(learningOrder.indexOf(id)+1).padStart(2,'0');
+export const entries=themes.flatMap(t=>t.entries), entriesById=new Map(entries.map(entry=>[entry.id,entry])), priority=entries.filter(e=>e.priority), initial={version:1,completed:[],favorites:[],history:[],errors:[],session:null};
+export const short=['Fondamentaux','Transformer','Attention & Long Context','Mixture of Experts','Tokens & Generation','Training','Fine-tuning & Alignment','Inference & Performance','Embeddings & RAG','Prompts & Output Formats','Agents & Tools','Evaluation & Metrics','LLM Security & Privacy','Multimodal Models','Infrastructure & Deployment','Ecosystem & Licenses','Agent Harness & Tooling','Model Families'];
+export const icons=['◈','✳','◎','✣','▦','⌁','✺','◉','⌘','✎','✦','◫','◇','◐','▤','◉','⌬','◈'];
+export const descriptions=['Les bases pour se repérer dans l’univers de l’IA.','Les composants qui donnent forme aux modèles.','Comment les tokens échangent de l’information.','Comprendre les experts et leur routage.','Du texte aux unités traitées par le modèle.','Données, optimisation et apprentissage.','Adapter un modèle à de nouveaux usages.','Mémoire, vitesse et Quantization.','Relier les modèles à des connaissances externes.','Formuler des consignes et structurer les réponses.','Faire agir un modèle avec des outils.','Mesurer les résultats et leurs limites.','Identifier les risques et protéger les systèmes.','Du texte aux images, au son et à la vidéo.','Faire fonctionner les modèles à grande échelle.','Comprendre les modèles ouverts et leurs licences.','Comprendre le Harness, MCP et les bonnes pratiques des agents.','Reconnaître les familles et choisir leurs variantes avec discernement.'];
+export const sourceLabels=['Fondamentaux','Architecture','Attention','Experts','Tokens','Training','Adaptation','Inference','RAG','Prompts','Agents','Evaluation','Security','Multimodal','Infrastructure','Ecosystem','Agent Harness','Model Families'];
+export const themeById=id=>themes.find(t=>t.id===Number(id));

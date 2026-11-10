@@ -11,7 +11,7 @@ Site pédagogique en français sur l’IA, les LLM et les agents. Les 506 défin
 - La page « Distinctions » compare 35 paires de notions : elle explique chaque terme, leur différence et, lorsque c’est utile, un exemple et des liens vers les fiches.
 - Dans un cours, les flèches gauche et droite passent à la leçon précédente ou suivante. Elles ne marquent pas automatiquement les leçons comme terminées et ne perturbent pas les contrôles des démonstrations.
 - Les quiz proposent 278 questions rédigées, filtrables par thème et niveau. Il est possible de revenir à une réponse, de la modifier et de recalculer le score, même après le résultat. En mode Évaluation, les corrections restent masquées jusqu’au résultat ; si le quiz est rouvert ensuite, le site indique que les corrections ont déjà été affichées.
-- Les flashcards reprennent les 551 notions, dans les deux sens, avec filtres par thème, favoris ou cartes à revoir. Chaque repère « Je connais » ou « À revoir » peut être modifié ; la session et les repères sont enregistrés localement et inclus dans les exports de progression. Les flèches permettent de naviguer entre les cartes et la touche Espace retourne la carte lorsqu’elle est focalisée.
+- Les flashcards reprennent les 551 notions, dans les deux sens ou en mélangeant les sens dans une même session ; le sens de chaque carte reste stable après reprise. Des filtres permettent de choisir un thème, les favoris ou les cartes à revoir. Chaque repère « Je connais » ou « À revoir » peut être modifié ; la session et les repères sont enregistrés localement et inclus dans les exports de progression. Les flèches permettent de naviguer entre les cartes et la touche Espace retourne la carte lorsqu’elle est focalisée.
 - Les noms des concepts techniques sont présentés en anglais et les explications sont en français.
 
 ## Développement
@@ -80,6 +80,8 @@ RewriteRule ^ index.html [L]
 
 La progression est locale au navigateur. Utiliser « Progression », puis « Exporter » avant de changer d’appareil ou de supprimer les données du navigateur. L’import remplace la progression locale après confirmation. Une sauvegarde illisible ou d’une version inconnue est conservée et peut être exportée avant toute restauration. Conserver une copie de la sauvegarde dans un emplacement personnel.
 
+Les réponses validées et les autres changements de progression sont enregistrés immédiatement. Les saisies en cours dans un quiz sont regroupées pendant 200 ms, puis enregistrées ; elles sont aussi enregistrées lors du rechargement ou de la mise en arrière-plan de la page. Une interruption brutale pendant ces 200 ms peut donc faire perdre la dernière saisie.
+
 ## Parcours, révisions et vérifications
 
 L’accueil propose la première leçon ou la dernière leçon commencée si elle n’est pas terminée ; sinon il propose la prochaine leçon non terminée dans l’ordre conseillé. Terminer une leçon indique une étape de lecture, et non une validation de maîtrise. Le quiz d’un thème peut aider à vérifier des acquis.
@@ -97,11 +99,11 @@ npm run build
 npm run check:budget
 ```
 
-Pour utiliser un navigateur Chromium déjà installé, définir `CHROMIUM_PATH` avec son chemin. Le budget contrôle la taille non compressée du fichier JavaScript principal : les autres fichiers chargés à la demande ne sont pas inclus. La vérification automatisée ne remplace pas une relecture humaine des contenus, un chronométrage auprès de débutants ou une évaluation avec lecteur d’écran.
+Pour utiliser un navigateur Chromium déjà installé, définir `CHROMIUM_PATH` avec son chemin. Le budget contrôle la taille non compressée des fichiers JavaScript initiaux, y compris les modules préchargés ; les fichiers chargés à la demande ne sont pas inclus. La vérification automatisée ne remplace pas une relecture humaine des contenus, un chronométrage auprès de débutants ou une évaluation avec lecteur d’écran.
 
 Pour les contenus évolutifs, noter les sources et leur date de consultation, comparer régulièrement les affirmations aux documents d’origine et faire relire tout changement technique. Après toute mise à jour du contenu ou des dépendances, lancer les tests, la construction et les parcours navigateur ; contrôler aussi manuellement les exemples qui dépendent de versions ou de licences.
 
-Dans un quiz, « Repérer cette question » et « Repérer la notion associée » permettent de choisir « À revoir » ou « À approfondir ». Les flashcards et les fiches proposent le même repérage pour les notions. Un nouveau clic sur le repère actif le retire ; ces repères sont distincts des réponses et de l’autoévaluation des flashcards. La page Progression les rassemble et permet de relancer un quiz sur les questions repérées. Ils sont inclus dans l’export de progression.
+Dans un quiz, « À revoir » et « À approfondir » enregistrent la question. Sa notion associée reste accessible depuis la correction ; elle peut être enregistrée séparément depuis sa fiche ou une flashcard. Les réglages de thème, niveau, nombre de questions et mode sont disponibles directement avant de commencer. Les flashcards et les fiches proposent les mêmes choix pour les notions. Les choix des questions et des notions restent indépendants. Un nouveau clic sur le repère actif le retire ; ces repères sont distincts des réponses et de l’autoévaluation des flashcards. La page Progression les rassemble et permet de relancer un quiz sur les questions enregistrées. Ils sont inclus dans l’export de progression.
 
 Une session de quiz inachevée demande une confirmation avant son remplacement. Les nouveaux résultats conservent le contexte et les corrections ; les anciens résultats sans ces données restent lisibles. La position de lecture est mémorisée localement sur cet appareil et n’est pas incluse dans l’export. Les rappels de révision sont indicatifs ; ils ne démontrent pas la maîtrise d’une notion.
 
@@ -134,3 +136,5 @@ npm run test:pages
 Les liens directs et les rechargements utilisent une page `404.html` de secours qui redirige vers l’application en conservant le chemin, les paramètres et le fragment. La requête initiale d’un lien profond reçoit donc une réponse HTTP 404 avant la redirection ; JavaScript doit être activé. La progression reste locale au navigateur : un export est nécessaire pour la transférer ou la sauvegarder. Ne pas placer de secrets ou de sauvegardes personnelles dans un dépôt public.
 
 `VITE_BASE_PATH` permet de construire pour un autre chemin de déploiement, par exemple `VITE_BASE_PATH=/nom-du-depot/ npm run build`. Pour un domaine personnalisé servi à la racine, configurer le domaine dans les paramètres GitHub Pages et créer la variable de dépôt **Settings → Secrets and variables → Actions → Variables → New repository variable** : `ATLAS_BASE_PATH` avec la valeur `/`. Relancer ensuite le workflow Pages. Sans cette variable, le workflow utilise le sous-chemin du dépôt.
+
+Dans les cours et fiches, les abréviations reconnues sont développées à leur première occurrence dans un passage, par exemple « TTFT (Time To First Token) ». Les réponses des flashcards inversées ne sont pas développées à l’avance afin de ne pas dévoiler la notion.
