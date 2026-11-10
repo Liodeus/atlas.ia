@@ -1,0 +1,896 @@
+{
+  "1": [
+    {
+      "goal": "Situer AI, Machine Learning, Deep Learning et Language Models, puis distinguer une capacité observée d’une promesse générale.",
+      "sections": [
+        {
+          "heading": "Partir d’une tâche observable",
+          "paragraphs": [
+            "Imaginez un service de courrier fictif. Un programme applique une règle écrite : si une adresse figure sur une liste, le message est bloqué. Un autre apprend à reconnaître des messages indésirables à partir d’exemples. Tous deux peuvent participer à un système d’Artificial Intelligence (AI), mais seul le second utilise ici le Machine Learning (ML). AI désigne un ensemble de techniques ; ML désigne l’apprentissage de régularités à partir de données.",
+            "Le Deep Learning (DL) est une famille de ML qui utilise des réseaux de neurones à plusieurs couches. Ces couches apprennent des transformations des entrées. Il ne faut donc pas choisir entre AI, ML et DL comme entre trois produits exclusifs : un même système peut relever des trois. La question utile est de savoir quelle tâche il accomplit et comment il a été construit."
+          ]
+        },
+        {
+          "heading": "Reconnaître les tâches de langage",
+          "paragraphs": [
+            "Natural Language Processing (NLP) regroupe le traitement informatique du langage. Natural Language Understanding (NLU) désigne des tâches d’interprétation, par exemple identifier le sujet d’un message. Natural Language Generation (NLG) désigne la production de texte, par exemple rédiger une réponse. Le mot Understanding nomme ici une tâche ; il ne démontre pas une compréhension humaine.",
+            "Un Large Language Model (LLM) est un grand modèle de langage. Un Small Language Model (SLM) est relativement compact, sans seuil universel séparant les deux. L’un comme l’autre peut être utilisé pour classer, reformuler ou générer. Generative AI désigne la production de contenu : un assistant qui rédige une réponse relève de cette catégorie, tandis qu’un filtre qui renvoie seulement une étiquette accomplit une tâche de classification."
+          ]
+        },
+        {
+          "heading": "Séparer performance et intelligence générale",
+          "paragraphs": [
+            "Artificial General Intelligence (AGI) désigne l’idée d’une capacité générale sur une large variété de tâches cognitives ; sa définition reste discutée. Artificial Superintelligence (ASI) désigne une hypothèse de capacités dépassant largement celles des humains dans de nombreux domaines. Ces expressions ne sont pas des mesures que l’on peut déduire d’une réponse réussie.",
+            "Dans notre service fictif, un excellent filtre peut échouer à rédiger une réponse, et un rédacteur fluide peut inventer une date. Pour décrire le système, dites ce qui a été testé : classer des messages, identifier leur intention ou produire un brouillon. Cette description est plus informative qu’un qualificatif général comme « intelligent »."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Suivre une même demande à travers plusieurs fonctions",
+          "paragraphs": [
+            "Un client écrit : « Mon colis était prévu mardi ; pouvez-vous vérifier ? » Une fonction NLU peut reconnaître une demande de suivi. Une recherche retrouve ensuite un statut. Une fonction NLG rédige la réponse. Ces rôles peuvent être assurés par plusieurs modèles ou par un même LLM, mais ils restent des étapes distinctes à vérifier.",
+            "Si la réponse annonce mercredi alors que le statut indique jeudi, le problème concerne le contenu produit. Si la demande est classée « remboursement », l’erreur apparaît plus tôt. Décomposer la tâche permet de localiser l’échec plutôt que d’attribuer une qualité unique à l’ensemble de l’assistant."
+          ]
+        },
+        {
+          "heading": "Choisir entre petit et grand sans raccourci",
+          "paragraphs": [
+            "Pour un tri limité à quelques catégories, un SLM peut suffire. Pour une demande longue et variée, un autre modèle peut être nécessaire. Ce sont des hypothèses à tester sur les mêmes messages, avec les mêmes catégories et critères. Ni la taille du fichier ni l’appellation LLM ne permettent à elles seules de conclure.",
+            "Exercice de transfert : classez « détecter la langue », « rédiger un courrier » et « comparer deux résumés ». La première tâche relève surtout de l’analyse du langage, la deuxième de la génération, la troisième de l’évaluation. Un seul produit peut proposer les trois ; cela ne prouve ni AGI ni une qualité égale sur chacune."
+          ]
+        }
+      ],
+      "takeaways": [
+        "AI est une famille large ; ML et DL décrivent des façons d’apprendre.",
+        "NLP, NLU et NLG décrivent des tâches, tandis que LLM et SLM décrivent des modèles de langage.",
+        "Une réussite locale ne démontre ni AGI ni ASI."
+      ],
+      "concepts": [
+        "notion-1",
+        "notion-2",
+        "notion-3",
+        "notion-4",
+        "notion-5",
+        "notion-6",
+        "notion-7",
+        "notion-9",
+        "notion-10",
+        "notion-11",
+        "notion-12"
+      ]
+    },
+    {
+      "goal": "Distinguer architecture, étape d’adaptation et usage conversationnel pour lire correctement la description d’un modèle.",
+      "sections": [
+        {
+          "heading": "La base apprise et ses adaptations",
+          "paragraphs": [
+            "Un Foundation Model est préentraîné sur des données suffisamment variées pour servir de point de départ à plusieurs usages. Foundation décrit cette polyvalence et ce rôle de base. Base Model désigne généralement un modèle avant une adaptation particulière aux consignes ou au dialogue. Les deux expressions peuvent donc décrire le même modèle sous des angles différents.",
+            "Un Instruct Model a été adapté pour suivre des consignes. Un Chat Model vise les échanges conversationnels, avec des messages et des rôles. Ces catégories se recoupent souvent. Dans un exemple fictif, une base peut prolonger « Résume ce rapport : » comme un texte à compléter, tandis qu’une variante instruct cherche davantage à fournir le résumé demandé. Aucune étiquette ne garantit le résultat sur tous les rapports."
+          ]
+        },
+        {
+          "heading": "Comprendre ce que nomme l’architecture",
+          "paragraphs": [
+            "Transformer désigne une architecture qui combine notamment Attention et transformations des représentations. GPT, pour Generative Pre-trained Transformer, est l’appellation d’une famille de modèles génératifs fondés sur cette architecture. Transformer ne signifie donc ni nécessairement chatbot ni nécessairement GPT. On rencontre aussi des Transformers pour les images et d’autres signaux.",
+            "Un Autoregressive Model produit une séquence en conditionnant chaque nouvel élément sur ceux qui précèdent. Dans un exemple préparé, après « Le chat », le modèle choisit un Token, ajoute ce Token au contexte, puis continue. Ce principe décrit la génération ; il ne dit pas si le modèle a été adapté aux consignes."
+          ]
+        },
+        {
+          "heading": "Trois organisations du traitement",
+          "paragraphs": [
+            "Un Encoder-only Model transforme l’entrée en représentations, utiles notamment à la classification ou à la recherche. Un Decoder-only Model autorégressif prolonge un préfixe. Un Encoder-Decoder, aussi appelé Seq2Seq, encode une entrée puis produit une sortie en s’appuyant sur cette représentation : la traduction est un exemple classique.",
+            "Enfin, Dense Model décrit une organisation où les composants concernés sont utilisés pour chaque Token, à la différence d’un routage qui en sélectionne seulement une partie. Dense n’oppose pas compréhension et génération. Pour lire une fiche, séparez donc quatre questions : quelle architecture, quelle adaptation, quel mode de génération et quels composants actifs ?"
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Décomposer une fiche de modèle fictive",
+          "paragraphs": [
+            "La fiche indique : « Foundation Model, Decoder-only Transformer, variante Instruct, Dense ». Foundation décrit le point de départ polyvalent ; Decoder-only Transformer décrit l’organisation ; Instruct décrit une adaptation ; Dense décrit l’activation des composants. Ces mots apportent des informations complémentaires, pas quatre niveaux d’intelligence.",
+            "Imaginez une deuxième variante issue de la même base, adaptée à la conversation. Elle peut partager une grande partie de l’architecture et pourtant réagir différemment au même texte. Pour comparer les variantes, il faut respecter le format de dialogue attendu et évaluer les réponses, pas seulement lire le nom de famille."
+          ]
+        },
+        {
+          "heading": "Pourquoi un format de dialogue compte",
+          "paragraphs": [
+            "Un modèle reçoit une représentation structurée des messages, pas les bulles visibles dans une interface. L’application doit indiquer correctement qui parle et où une réponse commence. Un modèle adapté au chat peut mal fonctionner si l’entrée est construite avec une convention incompatible. Ce problème de format est distinct d’un manque de connaissances.",
+            "Exercice : une base génère des phrases grammaticales mais ignore une consigne de liste. Cela montre une capacité de génération, sans démontrer un bon suivi des instructions. Tester une variante instruct et vérifier son format d’entrée sont des pistes cohérentes ; changer seulement l’étiquette affichée dans l’application n’adapte pas les Parameters."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Foundation, Base, Instruct et Chat décrivent des rôles ou adaptations qui peuvent se recouper.",
+        "Transformer nomme une architecture ; Autoregressive décrit un principe de génération.",
+        "Encoder-only, Decoder-only et Encoder-Decoder organisent différemment entrée et sortie."
+      ],
+      "concepts": [
+        "notion-8",
+        "notion-13",
+        "notion-14",
+        "notion-15",
+        "notion-16",
+        "notion-17",
+        "notion-30",
+        "notion-31",
+        "notion-32",
+        "notion-33",
+        "notion-34"
+      ]
+    },
+    {
+      "goal": "Décomposer un besoin en rôles spécialisés et choisir ce qu’il faut mesurer pour comparer des modèles.",
+      "sections": [
+        {
+          "heading": "Produire, représenter et reclasser",
+          "paragraphs": [
+            "Une bibliothèque fictive veut répondre aux questions sur ses documents. Un Embedding Model transforme une question ou un passage en vecteur pour permettre des comparaisons. Un Reranker Model réévalue des passages déjà récupérés. Un modèle génératif rédige ensuite la réponse. Ce sont trois rôles différents, même si un produit les assemble derrière un seul bouton.",
+            "Un Code Model est spécialisé dans le code, par exemple la complétion ou l’analyse de programmes. Un Reasoning Model est optimisé pour des tâches demandant plusieurs étapes de résolution. Ces appellations indiquent un objectif de conception ; un test de programme ou une vérification de solution reste nécessaire. Une réponse longue n’est pas, à elle seule, une preuve de raisonnement réussi."
+          ]
+        },
+        {
+          "heading": "Proposer une solution et la contrôler",
+          "paragraphs": [
+            "Un Verifier Model évalue la validité d’une solution candidate selon un critère. Un Reward Model apprend à donner des scores à des réponses ou comportements. Les rôles peuvent se rapprocher, mais un score de préférence ou de style ne constitue pas automatiquement un contrôle factuel. Pour une preuve, il faut savoir ce que le vérificateur vérifie réellement.",
+            "Test-Time Compute désigne le calcul mobilisé pendant la résolution d’une requête : essais supplémentaires, recherche de pistes ou vérification. Inference-Time Scaling décrit l’amélioration possible avec davantage de ce calcul. Dans un cas fictif, vérifier plusieurs programmes avec des tests peut aider à sélectionner un candidat ; produire davantage de programmes sans critère fiable ne garantit aucun progrès."
+          ]
+        },
+        {
+          "heading": "Choisir aussi les entrées et les sorties",
+          "paragraphs": [
+            "Un Multimodal Model accepte ou produit plusieurs types de signaux. Un Vision-Language Model (VLM) relie vision et langage, par exemple une photo et une question. Un Vision-Language-Action Model (VLA) relie perception, langage et actions, notamment pour piloter un système robotique. Accepter une image n’implique ni accepter tous les formats ni pouvoir exécuter une action.",
+            "Un World Model apprend une représentation de l’évolution d’un environnement. Il peut servir à prévoir les conséquences d’une action, mais cette prévision peut être imparfaite. Pour choisir, décrivez la tâche, les données disponibles, les sorties attendues et le contrôle possible. Un assistant documentaire, un lecteur de photos et un robot n’ont pas les mêmes besoins ni les mêmes conséquences en cas d’erreur."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Construire une chaîne documentaire vérifiable",
+          "paragraphs": [
+            "Notre bibliothèque cherche une date dans un règlement. L’Embedding Model aide à retrouver les passages proches de la question. Le Reranker les ordonne. Le générateur répond avec une référence. Si le document est absent des candidats, le Reranker ne peut pas le faire réapparaître par simple reclassement ; si le passage est présent mais mal interprété, l’échec est différent.",
+            "Préparez quelques questions avec leur passage attendu. Vérifiez d’abord la récupération, puis le classement, puis l’appui de la réponse sur le document. Ce protocole fictif ne mesure pas une performance universelle ; il donne un moyen concret de comparer des composants sans confondre leurs responsabilités."
+          ]
+        },
+        {
+          "heading": "Décider où dépenser le calcul supplémentaire",
+          "paragraphs": [
+            "Pour produire un programme, un Reasoning Model peut proposer une solution, un outil peut exécuter des tests et un vérificateur peut examiner un échec. Le calcul supplémentaire est utile s’il apporte une information qui change la sélection ou la correction. Répéter exactement une génération déterministe sans nouveau signal n’explore pas une nouvelle piste.",
+            "Exercice : une application doit lire une étiquette sur une photo et annoncer son contenu. Un VLM est une piste pour l’entrée image ; un contrôle des caractères ou une demande de meilleure photo reste utile. Un VLA n’est pas requis tant qu’aucune action physique n’est demandée. La spécialisation pertinente découle de la tâche, pas du nombre de mots techniques dans la fiche."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Séparez production, représentation, classement et vérification.",
+        "Davantage de Test-Time Compute aide seulement si les essais et contrôles sont pertinents.",
+        "Choisissez les modalités et les droits d’action selon la tâche réelle."
+      ],
+      "concepts": [
+        "notion-18",
+        "notion-19",
+        "notion-20",
+        "notion-21",
+        "notion-22",
+        "notion-23",
+        "notion-24",
+        "notion-25",
+        "notion-26",
+        "notion-27",
+        "notion-28",
+        "notion-29"
+      ]
+    }
+  ],
+  "2": [
+    {
+      "goal": "Suivre le passage d’un Token à une représentation, puis aux scores de sortie, en distinguant ce qui est appris de ce qui est calculé.",
+      "sections": [
+        {
+          "heading": "Des valeurs stockées aux valeurs calculées",
+          "paragraphs": [
+            "Un modèle transforme des nombres. Un Parameter est une valeur ajustée pendant le Training ; un Weight est un type de Parameter utilisé dans ces transformations. Un Bias est un Parameter additif, lorsqu’une couche en possède. Ce Bias numérique ne désigne pas un biais social. Pendant une Inference ordinaire avec modèle gelé, ces valeurs stockées restent inchangées.",
+            "Une Layer est une étape de transformation. Son résultat contient des Activations, valeurs calculées sur l’entrée courante. Un Hidden State est une représentation interne, généralement un vecteur par position à une couche donnée. Deux phrases produisent donc des Hidden States différents avec les mêmes Weights. Confondre les deux reviendrait à confondre une recette avec les ingrédients déjà transformés pendant son exécution."
+          ]
+        },
+        {
+          "heading": "Représenter une entrée sans lui attribuer des cases de sens",
+          "paragraphs": [
+            "L’Embedding Layer associe chaque Token ID à un vecteur appris. La Hidden Dimension, souvent notée d_model, est la taille des vecteurs internes du Transformer. Elle ne compte ni les mots du vocabulaire ni les phrases mémorisées. Dans un exemple fictif, deux occurrences du même Token peuvent partir du même vecteur puis recevoir des représentations différentes selon leur contexte.",
+            "Representation Learning désigne l’apprentissage de représentations utiles aux tâches. Le réseau n’a pas besoin que chaque coordonnée soit étiquetée « sujet », « animal » ou « date ». Des propriétés peuvent être distribuées entre plusieurs valeurs. Pour suivre le calcul, retenez donc le rôle du vecteur : transporter une information transformable, pas une fiche de dictionnaire lisible."
+          ]
+        },
+        {
+          "heading": "Passer d’une représentation à des candidats",
+          "paragraphs": [
+            "À la sortie d’un modèle génératif, la Vocabulary Head, ou LM Head, projette le Hidden State vers des scores de Tokens candidats. Chaque score brut est un Logit. Softmax transforme un ensemble de scores en une distribution de probabilités normalisées. Une règle de sélection choisit ensuite un Token ; une probabilité élevée n’est pas une mesure de vérité factuelle.",
+            "Weight Tying consiste à partager certains Parameters compatibles, notamment entre l’Embedding Layer d’entrée et la projection de sortie. Partager cette matrice évite deux ensembles indépendants de Weights ; cela ne supprime ni le calcul de sortie ni les Tokens du vocabulaire. Le chemin à retenir est : identifiant, représentation, transformations, scores, sélection."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Pourquoi les représentations changent sans apprentissage",
+          "paragraphs": [
+            "Prenez les deux phrases fictives « la banque ferme » et « la berge du fleuve ». Un réseau traite chaque entrée avec ses Parameters stockés. Les opérations d’une couche calculent de nouvelles Activations, puis les couches suivantes les transforment encore. Changer la phrase modifie le calcul courant ; cela ne signifie pas que le modèle a été réentraîné.",
+            "Un cache peut conserver certaines représentations pour éviter de les recalculer. Ce stockage temporaire n’est toujours pas une mise à jour des Weights. Pour diagnostiquer un système, demandez séparément : quelles valeurs appartiennent au modèle, lesquelles dépendent de la requête, et lesquelles sont conservées par l’application ? Cette séparation sera utile pour comprendre mémoire et performances."
+          ]
+        },
+        {
+          "heading": "Cas guidé : lire une trace simplifiée",
+          "paragraphs": [
+            "Une trace fictive affiche successivement un Token ID, un vecteur en entrée, plusieurs vecteurs intermédiaires et une liste de scores. Classez ces objets avant de lire la suite. Le Token ID est un identifiant ; les vecteurs sont des représentations ; les derniers scores sont des Logits. Les Weights sont les valeurs utilisées par les transformations, pas tous les nombres qui apparaissent dans la trace.",
+            "Le service change ensuite la question mais garde le même fichier de modèle. Qu’est-ce qui peut changer ? Les IDs, les Activations, les Hidden States et les Logits. Qu’est-ce qui reste fixe dans cette hypothèse ? Les Parameters. Enfin, si une matrice d’entrée est aussi utilisée à la sortie, concluez à un partage compatible de Weights, pas à une disparition du calcul de la Vocabulary Head."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Parameters et Weights sont appris ; Activations et Hidden States sont calculés pour une entrée.",
+        "L’Embedding Layer produit des vecteurs, dont la Hidden Dimension décrit la taille.",
+        "La LM Head produit des Logits ; les probabilités de Tokens ne certifient pas les faits."
+      ],
+      "concepts": [
+        "notion-35",
+        "notion-36",
+        "notion-37",
+        "notion-38",
+        "notion-39",
+        "notion-40",
+        "notion-51",
+        "notion-52",
+        "notion-53",
+        "notion-61",
+        "notion-62",
+        "notion-67"
+      ]
+    },
+    {
+      "goal": "Lire un bloc Transformer en distinguant échange entre positions, transformation locale et chemins qui facilitent le calcul.",
+      "sections": [
+        {
+          "heading": "Deux opérations complémentaires",
+          "paragraphs": [
+            "Après la conversion des Tokens en vecteurs, un bloc Transformer classique combine deux types de travail. L’Attention fait circuler de l’information entre positions autorisées. Le Feed-Forward Network (FFN), souvent appelé MLP, transforme ensuite la représentation de chaque position séparément. Il utilise généralement les mêmes Parameters à toutes les positions du bloc.",
+            "Dans un exemple fictif, l’Attention permet à la représentation d’un pronom de recevoir de l’information de plusieurs mots du contexte. Le FFN transforme la représentation ainsi enrichie. Cette description ne signifie pas qu’une tête a toujours le rôle « trouver le nom du pronom » : elle indique le trajet de l’information, pas une règle linguistique imposée."
+          ]
+        },
+        {
+          "heading": "Introduire de la non-linéarité",
+          "paragraphs": [
+            "Une Activation Function transforme les valeurs calculées par le réseau. Une non-linéarité permet d’aller au-delà d’une simple succession de transformations linéaires. ReLU remplace les entrées négatives par zéro et conserve les positives. GELU et SiLU, aussi appelée Swish, sont d’autres fonctions lisses utilisées dans des architectures de réseaux.",
+            "SwiGLU désigne une organisation du FFN avec une branche de porte utilisant une activation de type Swish. L’idée d’une porte est de moduler une branche du calcul par une autre, pas de donner une autorisation à un utilisateur. Ces noms décrivent des choix de calcul ; comparer leur qualité exige de considérer le modèle entraîné, et pas seulement la fonction isolée."
+          ]
+        },
+        {
+          "heading": "Transporter et normaliser les représentations",
+          "paragraphs": [
+            "Une Residual Connection, ou Skip Connection, contourne un sous-bloc et additionne son entrée à son résultat. Ce chemin permet de conserver une contribution de l’entrée pendant les transformations. Il faut le dessiner comme une branche qui rejoint le calcul, pas comme une troisième opération indépendante placée après Attention et FFN.",
+            "LayerNorm normalise les Activations d’une représentation en utilisant notamment leur moyenne et leur dispersion. RMSNorm ajuste leur échelle à partir de leur moyenne quadratique, sans le même recentrage. Pre-Norm place la normalisation avant le sous-bloc ; Post-Norm la place, dans le schéma usuel, après l’addition résiduelle. Ces opérations organisent le calcul sans garantir qu’une représentation corresponde à un concept humain simple."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Suivre un sous-bloc Pre-Norm sans formule",
+          "paragraphs": [
+            "Partez d’un vecteur en entrée. Une branche le conserve pour la Residual Connection. L’autre passe par la normalisation, puis par l’Attention ou le FFN. Les deux branches se rejoignent par addition. Le résultat devient l’entrée du sous-bloc suivant. Le dessin explique pourquoi retirer la branche résiduelle change l’organisation, même si l’Attention et le FFN restent présents.",
+            "Dans le FFN, une transformation peut agrandir temporairement la représentation, appliquer une Activation Function, puis revenir à la dimension attendue. Les détails varient : certaines architectures utilisent des portes, certaines organisent différemment normalisation et résiduels. Le schéma est un exemple de bloc, pas la définition exhaustive de tous les Transformers."
+          ]
+        },
+        {
+          "heading": "Cas guidé : trouver l’opération responsable",
+          "paragraphs": [
+            "On vous présente trois effets fictifs : A mélange les informations de plusieurs positions ; B transforme une position sans lire directement les autres ; C ajoute au résultat une copie de l’entrée. Associez chaque effet à son mécanisme. A décrit l’Attention, B le FFN standard, C une Residual Connection. La normalisation ne remplace aucun de ces trois rôles.",
+            "Un second dessin place « ReLU » sous la liste des Tokens. Cela signifie-t-il que ReLU choisit le prochain mot ? Non : elle transforme des valeurs internes. La sélection du prochain Token utilise les scores de sortie et une règle de génération. Vérifiez enfin où se trouve la normalisation : avant le sous-bloc correspond à Pre-Norm, après l’addition résiduelle au schéma Post-Norm décrit ici."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Attention échange entre positions ; le FFN standard transforme chaque position séparément.",
+        "Les Activation Functions apportent des transformations non linéaires.",
+        "Residual Connections et normalisations organisent le calcul sans remplacer Attention ou FFN."
+      ],
+      "concepts": [
+        "notion-41",
+        "notion-42",
+        "notion-43",
+        "notion-44",
+        "notion-45",
+        "notion-46",
+        "notion-47",
+        "notion-48",
+        "notion-49",
+        "notion-50"
+      ]
+    },
+    {
+      "goal": "Expliquer les rôles de Q/K/V et de la position, puis distinguer observation et intervention sur les représentations.",
+      "sections": [
+        {
+          "heading": "Produire Q, K et V",
+          "paragraphs": [
+            "Une Projection Matrix est une matrice apprise qui transforme une représentation vers un espace de calcul. Dans l’Attention, des projections produisent Query (Q), Key (K) et Value (V). La compatibilité entre Q et K fournit des scores ; les pondérations qui en résultent servent à combiner V. Q, K et V ne sont pas trois mots de la phrase.",
+            "Une Attention Head utilise ses projections pour calculer une combinaison d’informations. Par analogie seulement, Q exprime ce qui est recherché, K ce qui permet de comparer et V ce qui sera combiné. Les opérations sont numériques. Une Head ne représente pas nécessairement un spécialiste de la grammaire ou une explication complète de la réponse."
+          ]
+        },
+        {
+          "heading": "Donner un rôle à l’ordre",
+          "paragraphs": [
+            "Positional Encoding désigne les mécanismes qui apportent l’information de position. « Le chien suit le chat » et « Le chat suit le chien » contiennent les mêmes mots mais pas la même relation. RoPE, Rotary Position Embedding, introduit la position par des rotations de composantes de Q et K. La comparaison devient ainsi sensible aux positions relatives.",
+            "ALiBi agit autrement : il ajoute aux scores d’Attention des biais dépendant des distances entre positions. YaRN est une méthode d’extension du contexte qui adapte l’utilisation de RoPE. Ces techniques ne promettent pas une mémoire illimitée. Modifier l’encodage ou accepter une entrée plus longue ne prouve pas que les informations éloignées seront bien utilisées."
+          ]
+        },
+        {
+          "heading": "Observer ce que représentent les calculs",
+          "paragraphs": [
+            "Mechanistic Interpretability cherche à comprendre les mécanismes internes qui contribuent aux comportements. Un Sparse Autoencoder (SAE) peut décomposer des Activations en Features dont peu sont actives à la fois. C’est un outil d’analyse appris, pas un dictionnaire parfait fourni par le modèle.",
+            "Superposition désigne le partage de directions de représentation par plusieurs Features. Elle aide à comprendre pourquoi un neurone peut participer à plusieurs comportements. Un Steering Vector, utilisé en Activation Steering, modifie certaines Activations pour influencer une sortie. Cette intervention ne nécessite pas une mise à jour des Weights de base, mais son effet peut être partiel, contextuel ou indésirable."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Comparer les rôles sans calculer de matrices",
+          "paragraphs": [
+            "Pour une position choisie, suivez trois questions : quelles positions sont autorisées, comment leurs Keys se comparent-elles à la Query, puis quelles Values sont combinées ? Le masque répond à la première question. Q/K contribuent à la deuxième. V intervient dans la troisième. Le mécanisme positionnel modifie aussi la manière dont l’ordre entre dans ces relations.",
+            "RoPE et ALiBi ne sont donc pas deux noms d’une même opération : rotations des projections dans un cas, biais sur les scores dans l’autre. Dans une étude de contexte plus long, il faut distinguer changement de mécanisme, adaptation éventuelle du Training et mesures de qualité. Un effet de vitesse ne démontre pas que le modèle retrouve mieux une exception située loin dans un document."
+          ]
+        },
+        {
+          "heading": "Cas guidé : ce qu’une intervention permet de conclure",
+          "paragraphs": [
+            "Un chercheur observe une Feature associée à des textes juridiques, puis ajoute un Steering Vector et obtient un vocabulaire plus formel. Qu’a-t-il montré ? Une intervention sur les Activations a influencé certaines sorties dans les cas testés. Il n’a pas démontré que la Feature contient toute la notion de droit, ni que le modèle est devenu fiable sur un contrat.",
+            "Pour renforcer l’analyse, comparez des entrées différentes, une condition sans intervention et des effets secondaires sur d’autres tâches. Si un SAE reconstruit imparfaitement les Activations, ses Features restent une approximation. Cette prudence ne rend pas l’analyse inutile : elle évite de transformer une corrélation ou une intervention locale en explication universelle du modèle."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Q et K servent à calculer des pondérations ; V porte les informations combinées.",
+        "Position, masque et projection ont des rôles distincts.",
+        "Une Feature ou une Attention Head ne constitue pas automatiquement une explication complète du comportement."
+      ],
+      "concepts": [
+        "notion-54",
+        "notion-55",
+        "notion-56",
+        "notion-57",
+        "notion-58",
+        "notion-59",
+        "notion-60",
+        "notion-63",
+        "notion-64",
+        "notion-65",
+        "notion-66"
+      ]
+    }
+  ],
+  "3": [
+    {
+      "goal": "Expliquer ce que combine l’Attention et comparer les organisations de Heads sans les confondre avec des Experts.",
+      "sections": [
+        {
+          "heading": "Combiner des représentations selon le contexte",
+          "paragraphs": [
+            "L’Attention construit une représentation en combinant des informations provenant de positions autorisées. Dans « la valise ne ferme pas car elle est pleine », le calcul de la position « elle » peut utiliser plusieurs éléments du contexte. Il ne choisit pas nécessairement un seul mot et n’implique pas une attention consciente.",
+            "En Self-Attention, Query, Keys et Values proviennent de la même séquence. En Cross-Attention, les Queries viennent d’une séquence et les Keys/Values d’une autre représentation, par exemple un texte source encodé pendant une traduction. La différence porte sur l’origine des informations, pas sur leur degré de pertinence."
+          ]
+        },
+        {
+          "heading": "Passer de la compatibilité à une combinaison",
+          "paragraphs": [
+            "Un Attention Score mesure une compatibilité entre une Query et une Key. Dans Scaled Dot-Product Attention, les produits de Q et K sont mis à l’échelle, les positions interdites sont masquées, puis les scores autorisés sont normalisés. Les pondérations obtenues servent à combiner les Values. On peut comprendre cet ordre sans calculer les matrices.",
+            "Full Attention ou Dense Attention considère toutes les connexions autorisées par le masque. Dense ne signifie donc pas « accès au futur ». Une position peut consulter tout son passé et sa position courante tout en respectant un masque causal. Le masque indique ce qui est possible ; les scores et pondérations indiquent comment les contributions autorisées sont combinées."
+          ]
+        },
+        {
+          "heading": "Comparer plusieurs organisations de Heads",
+          "paragraphs": [
+            "Multi-Head Attention (MHA) réalise plusieurs attentions avec des projections différentes puis combine leurs résultats. Dans la forme classique, chaque Query Head possède ses propres Key/Value Heads. Multi-Query Attention (MQA) conserve plusieurs Query Heads mais partage une seule paire de Key/Value Heads entre elles. Grouped-Query Attention (GQA) utilise un partage intermédiaire, par groupes.",
+            "Multi-Head Latent Attention (MLA) compresse des informations K/V dans une représentation latente apprise, notamment pour réduire le cache de génération. Ce n’est ni un simple partage GQA ni une Quantization du même cache. Ces architectures doivent être prévues dans le modèle et prises en charge par le moteur ; elles ne sont pas des réglages de Prompt interchangeables."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Pourquoi partager K/V peut économiser de la mémoire",
+          "paragraphs": [
+            "Pendant une génération avec cache, les Keys et Values des positions passées sont conservées. Si plusieurs Query Heads partagent les mêmes K/V, ces données n’ont pas besoin d’exister séparément pour chaque Query Head. Cela explique l’intérêt de MQA et GQA. L’effet réel sur la mémoire totale dépend aussi des dimensions, des couches et du nombre de requêtes.",
+            "MLA agit sur une autre représentation de ce qui est conservé. Pour comparer ces options, séparez la taille des Weights, la taille du cache et les calculs nécessaires pour utiliser le cache. Réduire un de ces volumes ne permet pas de promettre un facteur de vitesse universel. La qualité du modèle doit également être mesurée après les choix d’architecture."
+          ]
+        },
+        {
+          "heading": "Cas guidé : identifier le partage sans calcul",
+          "paragraphs": [
+            "Imaginez huit Query Heads. Le modèle A leur associe huit paires de K/V ; B en partage une seule ; C utilise deux paires, chacune pour un groupe de quatre Queries. Identifiez les organisations avant de poursuivre. A correspond ici à MHA, B à MQA, C à GQA. Aucun des trois ne décrit un Router sélectionnant des Experts.",
+            "Choisissez ensuite une position d’une matrice d’Attention. Repérez ses connexions autorisées, puis imaginez que l’une reçoit un poids élevé. Pouvez-vous conclure que ce Token explique à lui seul la réponse finale ? Non : plusieurs Heads, couches et autres transformations interviennent. Le diagramme représente un calcul local, pas une preuve complète de la décision du modèle."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Self-Attention et Cross-Attention distinguent l’origine des représentations combinées.",
+        "Les scores portent sur Q/K ; la combinaison utilise V et respecte le masque.",
+        "MHA, MQA, GQA et MLA organisent différemment les représentations d’Attention."
+      ],
+      "concepts": [
+        "notion-68",
+        "notion-69",
+        "notion-70",
+        "notion-71",
+        "notion-84",
+        "notion-85",
+        "notion-86",
+        "notion-87",
+        "notion-88",
+        "notion-89"
+      ]
+    },
+    {
+      "goal": "Lire un Attention Mask et prévoir les connexions directes qu’autorisent les motifs causaux, locaux et Sparse.",
+      "sections": [
+        {
+          "heading": "Commencer par les positions interdites",
+          "paragraphs": [
+            "Un Attention Mask est une règle qui autorise ou interdit des connexions. Causal Attention interdit de consulter les positions futures. Lors du Training sur une phrase complète, cette règle empêche une position de voir le Token qu’elle doit apprendre à prédire. Bidirectional Attention autorise l’accès aux deux côtés lorsque la tâche s’y prête, par exemple pour encoder une entrée.",
+            "Dans un diagramme, chaque ligne correspond à la position qui consulte, et chaque colonne à une position consultable. Une case autorisée ne signifie pas que son poids sera élevé. Une case masquée ne peut pas contribuer directement à ce calcul. Garder cette différence évite de confondre un dessin de connexions avec des scores mesurés dans un modèle."
+          ]
+        },
+        {
+          "heading": "Réduire les connexions sans tout couper",
+          "paragraphs": [
+            "Sparse Attention conserve seulement certaines connexions. Local Attention privilégie un voisinage ; Sliding Window Attention utilise une fenêtre récente qui avance avec la position dans le cas causal présenté ici. Global Attention ajoute des positions capables de communiquer avec de nombreuses autres. Ces motifs peuvent se combiner : voisinage pour chaque Token et accès plus large pour certains Tokens.",
+            "Block-Sparse Attention sélectionne des blocs de connexions, ce qui peut mieux correspondre au traitement matériel que des cases isolées. Strided Attention utilise des positions régulièrement espacées. Dilated Attention utilise des espacements pour couvrir des distances plus grandes, parfois à différentes échelles. Ces deux dernières appellations recouvrent des motifs proches selon les architectures : il faut regarder les connexions réellement définies."
+          ]
+        },
+        {
+          "heading": "Distinguer motif fixe et choix dépendant de l’entrée",
+          "paragraphs": [
+            "Dynamic Sparse Attention fait dépendre certaines connexions du contenu ou de scores calculés sur l’entrée. Un motif local fixe donne toujours les mêmes types de voisins ; un motif dynamique peut sélectionner d’autres positions pour une autre phrase. Dans les deux cas, la sélection peut réduire le travail, mais sa propre réalisation a aussi un coût.",
+            "Une fenêtre locale décrit les connexions directes d’une couche. L’information peut parcourir plusieurs étapes à travers plusieurs couches. Il serait donc trompeur de dire que tout ce qui précède la fenêtre est forcément sans influence sur l’ensemble du réseau. Il faut distinguer accès direct, influence indirecte et qualité réellement obtenue sur la tâche."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Relier motif et problème à résoudre",
+          "paragraphs": [
+            "Pour une tâche où un mot dépend surtout de ses voisins, une fenêtre locale peut fournir beaucoup d’information utile. Pour relier deux passages très éloignés, une connexion globale ou un motif à plus longue portée peut être importante. Ce raisonnement aide à formuler une hypothèse ; il ne remplace pas un test sur les documents réels.",
+            "Moins de cases calculées ne garantit pas une exécution plus rapide. Des motifs irréguliers peuvent coûter cher à organiser, tandis que des blocs réguliers peuvent mieux utiliser le matériel. FlashAttention répond à une autre question, celle des accès mémoire du calcul : un motif Sparse et une implémentation optimisée peuvent être associés."
+          ]
+        },
+        {
+          "heading": "Cas guidé : parcourir six positions",
+          "paragraphs": [
+            "Prenez six Tokens nommés T1 à T6 et choisissez la ligne T5. Avec un masque causal dense, T5 peut consulter T1 à T5. Avec une fenêtre causale de trois positions, position courante comprise, il consulte T3, T4 et T5. Avec une Attention bidirectionnelle sans autre restriction, il peut aussi consulter T6.",
+            "Ajoutez maintenant un Token global T1 à la fenêtre locale. T5 retrouve un accès direct à T1 sans récupérer automatiquement toutes les positions intermédiaires. Dessinez les cases avant de comparer vos réponses. Enfin, demandez ce que le diagramme ne montre pas : les poids appris, les Values combinées et la propagation à travers plusieurs couches. Les connexions autorisées ne suffisent pas à prédire la réponse finale."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Causal et bidirectionnel indiquent les directions accessibles ; Sparse décrit une restriction supplémentaire des connexions.",
+        "Les motifs locaux, globaux, par blocs et espacés répondent à des besoins différents et peuvent se combiner.",
+        "Une fenêtre de couche ne résume pas toutes les influences à travers le réseau."
+      ],
+      "concepts": [
+        "notion-73",
+        "notion-74",
+        "notion-75",
+        "notion-76",
+        "notion-77",
+        "notion-78",
+        "notion-79",
+        "notion-80",
+        "notion-81",
+        "notion-82",
+        "notion-83"
+      ]
+    },
+    {
+      "goal": "Comparer capacité de contexte, qualité de récupération et coût du calcul, puis situer les alternatives à l’Attention classique.",
+      "sections": [
+        {
+          "heading": "Accepter une longueur et utiliser l’information",
+          "paragraphs": [
+            "Un Long-Context Model est conçu pour recevoir de longues séquences. Context Extension regroupe les adaptations qui augmentent la longueur exploitable. Context Length Extrapolation consiste à utiliser une longueur supérieure à celle habituellement rencontrée pendant le Training. Ces expressions ne certifient pas que chaque détail du document sera utilisé correctement.",
+            "Lost in the Middle décrit une difficulté observée lorsque l’information utile est placée au milieu du contexte. Context Rot est une appellation plus large pour des dégradations possibles lorsque le contexte s’allonge ou se charge. Les phénomènes sont liés mais ne sont pas des synonymes stricts. Un test doit varier longueur, position et quantité de contenu non pertinent."
+          ]
+        },
+        {
+          "heading": "Optimiser calcul, cache et distribution",
+          "paragraphs": [
+            "FlashAttention calcule l’Attention exacte en réorganisant les opérations pour réduire les mouvements mémoire. PagedAttention organise le KV Cache en blocs, notamment pour limiter le gaspillage et faciliter son utilisation entre requêtes. Ring Attention distribue le calcul sur plusieurs appareils en faisant circuler des blocs. Ces techniques visent des coûts différents et peuvent être complémentaires.",
+            "Un Attention Sink est une position qui reçoit une part importante de l’Attention, souvent parmi les positions initiales, sans être nécessairement importante pour le sens. Certaines stratégies de cache préservent ces positions. Linear Attention désigne des méthodes qui réorganisent ou modifient le mécanisme pour viser un coût linéaire avec la longueur ; cela ne signifie pas simplement exécuter FlashAttention plus vite."
+          ]
+        },
+        {
+          "heading": "Traiter le passé avec un état",
+          "paragraphs": [
+            "Un Recurrent Neural Network (RNN) transmet un état d’une étape à la suivante. LSTM est une famille de RNN utilisant des portes pour gérer la conservation et la mise à jour d’information. Un State Space Model (SSM) décrit l’évolution d’un état selon une dynamique. Ces familles sont liées par le traitement séquentiel, sans être des noms interchangeables.",
+            "Mamba utilise des SSM sélectifs dont des éléments de la dynamique dépendent de l’entrée. Une Hybrid Architecture peut combiner SSM et Attention. Un état compact limite certains coûts, mais ne conserve pas forcément chaque détail du passé. Pour choisir, demandez si la tâche exige de retrouver exactement un passage ancien ou de suivre surtout une évolution générale."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Construire un test de contexte qui distingue les échecs",
+          "paragraphs": [
+            "Dans un protocole fictif, placez une règle de remboursement dans un document, puis son exception ailleurs. Posez une question qui exige les deux. Recommencez en déplaçant l’exception au début, au milieu et à la fin, sans changer la réponse attendue. Ajoutez ensuite des passages sans rapport. Vous testez l’utilisation des informations, pas seulement l’acceptation du fichier.",
+            "Mesurez séparément réponse correcte, passage retrouvé et temps de traitement. Un modèle peut accepter la longueur mais manquer l’exception ; un autre peut retrouver les deux passages et mal les combiner. Une accélération mémoire ne résout pas automatiquement ces erreurs. De même, préserver un Attention Sink n’équivaut pas à conserver une copie exhaustive de toutes les informations anciennes."
+          ]
+        },
+        {
+          "heading": "Cas guidé : expliquer trois améliorations différentes",
+          "paragraphs": [
+            "Trois équipes annoncent « meilleur Long Context ». A réduit les échanges mémoire à calcul d’Attention équivalent ; B augmente la capacité d’entrée ; C réussit davantage de questions sur des exceptions éloignées. Classez leurs résultats : A améliore l’exécution, B la capacité, C une mesure de qualité. Les trois annonces ne répondent pas à la même question.",
+            "Pour les comparer, demandez les documents, les positions testées et les conditions matérielles. Si une quatrième équipe utilise un SSM ou une architecture hybride, ne supposez ni absence de mémoire ni conservation parfaite : testez les mêmes dépendances. L’objectif n’est pas de choisir la technologie au nom le plus récent, mais de vérifier quelle information reste exploitable à un coût acceptable."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Longueur acceptée, information utilisée et vitesse sont trois propriétés distinctes.",
+        "FlashAttention, PagedAttention et Ring Attention ciblent des coûts différents.",
+        "SSM, Mamba et architectures hybrides offrent d’autres traitements du passé, avec leurs propres compromis."
+      ],
+      "concepts": [
+        "notion-72",
+        "notion-90",
+        "notion-91",
+        "notion-92",
+        "notion-93",
+        "notion-94",
+        "notion-95",
+        "notion-96",
+        "notion-97",
+        "notion-98",
+        "notion-99",
+        "notion-100",
+        "notion-101",
+        "notion-102"
+      ]
+    }
+  ],
+  "4": [
+    {
+      "goal": "Identifier Experts et Router dans un MoE et suivre le calcul conditionnel sans attribuer aux Experts des métiers humains.",
+      "sections": [
+        {
+          "heading": "Remplacer une transformation par plusieurs possibilités",
+          "paragraphs": [
+            "Mixture of Experts (MoE) désigne une architecture qui combine plusieurs sous-réseaux appelés Experts. Dans de nombreux LLM, ils remplacent certains FFN des blocs Transformer. Un Expert reçoit une représentation et la transforme. Il ne s’agit pas nécessairement d’un modèle conversationnel complet ni d’un agent possédant ses propres outils.",
+            "Le Router, ou Gating Network, utilise la représentation d’entrée pour choisir ou pondérer les Experts. Les sorties pertinentes sont ensuite combinées et le réseau poursuit son calcul. Imaginez un bloc fictif possédant quatre Experts : la représentation d’un Token arrive au Router, passe par certains Experts, puis ressort sous une forme transformée."
+          ]
+        },
+        {
+          "heading": "Comprendre où se trouve la sélection",
+          "paragraphs": [
+            "Un Sparse MoE n’exécute qu’une partie des Experts pour chaque Token. Un Dense MoE combine les contributions de tous les Experts concernés. La distinction porte sur la participation au calcul, pas sur le nombre total d’Experts stockés. Le même Token écrit à deux endroits peut recevoir des représentations différentes et donc un routage différent.",
+            "Conditional Computation désigne plus largement un calcul exécuté seulement sous certaines conditions, selon l’entrée ou une décision. Le Sparse MoE en est un exemple. Ce n’est pas la même sélection que Sparse Attention : le Router choisit des sous-réseaux, tandis qu’un masque d’Attention restreint des connexions entre positions."
+          ]
+        },
+        {
+          "heading": "Experts partagés et Experts routés",
+          "paragraphs": [
+            "Un Routed Expert est sélectionné conditionnellement par le Router. Un Shared Expert peut participer systématiquement, ou selon l’organisation retenue, en complément des Experts routés. Il faut donc lire ce que compte une description comme « deux Experts actifs » : elle peut viser les seuls Experts routés et laisser des composants partagés en dehors de ce nombre.",
+            "Le mot Expert ne garantit pas une spécialisation humaine comme « médecine » ou « traduction ». Une spécialisation peut émerger pendant le Training et rester difficile à interpréter. Pour expliquer l’architecture à ce stade, suivez les représentations et les chemins sélectionnés plutôt que d’inventer des étiquettes de métier."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Le routage dépend d’une représentation, pas seulement d’un mot",
+          "paragraphs": [
+            "Dans deux phrases fictives, « banque » apparaît dans un contexte financier puis dans une expression inhabituelle. Le Token ID peut être identique, mais les couches précédentes ont produit des représentations différentes. Le Router voit ces représentations et peut leur attribuer des scores différents. Cela explique pourquoi une table « mot vers Expert » ne décrit pas le fonctionnement général.",
+            "Le choix peut aussi différer d’une couche MoE à l’autre. Une route observée pour un Token dans un bloc n’est pas une identité permanente de ce Token. Pour analyser une spécialisation, il faut examiner beaucoup d’entrées et distinguer les couches. La présence d’un Expert fréquemment activé ne suffit pas à établir ce qu’il a appris."
+          ]
+        },
+        {
+          "heading": "Cas guidé : dessiner deux chemins",
+          "paragraphs": [
+            "Construisez un exemple préparé avec quatre Routed Experts et un Shared Expert. Pour le Token A, le Router choisit E1 et E3 ; pour B, il choisit E2 et E3. Le Shared Expert participe aux deux. Dessinez séparément les deux routes, puis leur combinaison. Quels Experts routés sont communs ? E3. Lesquels changent ? E1 et E2.",
+            "Peut-on conclure que E3 comprend les deux sujets ? Non, le dessin indique seulement une participation au calcul. Peut-on supprimer E4 parce qu’il n’a été choisi ni pour A ni pour B ? Non, deux exemples ne décrivent pas l’ensemble des usages. Enfin, compter seulement les deux Routed Experts omet le Shared Expert et les autres composants communs du modèle."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Un Expert est un sous-réseau ; le Router choisit ou pondère ses contributions.",
+        "Sparse MoE et Dense MoE diffèrent par les Experts qui participent au calcul.",
+        "La sélection dépend des représentations ; les noms de métiers ne décrivent pas automatiquement les Experts."
+      ],
+      "concepts": [
+        "notion-103",
+        "notion-104",
+        "notion-105",
+        "notion-106",
+        "notion-107",
+        "notion-110",
+        "notion-111",
+        "notion-119"
+      ]
+    },
+    {
+      "goal": "Interpréter Top-k Routing et les comptes de Parameters, puis expliquer pourquoi un bon routage doit aussi gérer la charge.",
+      "sections": [
+        {
+          "heading": "Du classement à la sélection",
+          "paragraphs": [
+            "Top-k Routing sélectionne les k Experts les mieux notés pour l’élément traité, dans le schéma présenté ici. Top-1 en retient un ; Top-2 en retient deux. Le nombre retenu ne fixe pas leur identité. Deux Tokens peuvent suivre des chemins différents, et les sorties des Experts sélectionnés sont combinées selon les pondérations du mécanisme.",
+            "Dans un exemple fictif, le classement pour A commence par E1, puis E3 ; pour B, il commence par E3, puis E2. Top-1 utilise E1 pour A et E3 pour B. Top-2 ajoute E3 pour A et E2 pour B. Cette activité illustre une règle préparée : elle ne calcule pas de vrais scores de Router."
+          ]
+        },
+        {
+          "heading": "Compter ce qui existe et ce qui travaille",
+          "paragraphs": [
+            "Total Parameters compte tous les Parameters du modèle. Active Parameters décrit ceux utilisés pour un Token ou un calcul donné. Dans un Sparse MoE, cela comprend les Experts sélectionnés mais aussi les composants communs pertinents. Compter seulement les Experts ne donne donc pas automatiquement le nombre de Parameters actifs.",
+            "Les Experts non sélectionnés pour un Token existent toujours et doivent être stockés quelque part pour servir à d’autres Tokens. Deux modèles ayant autant de Parameters actifs peuvent différer par leur mémoire totale, leurs échanges et leur qualité. Le nombre actif est une information utile sur le calcul, pas un chronomètre ni une garantie de performance."
+          ]
+        },
+        {
+          "heading": "Éviter les files d’attente autour d’un seul Expert",
+          "paragraphs": [
+            "Une Load Balancing Loss peut encourager une répartition moins déséquilibrée pendant le Training. Un Expert Collapse apparaît lorsque le routage se concentre trop et laisse certains Experts très peu utilisés. Le but n’est pas nécessairement une égalité parfaite à chaque instant, mais une utilisation compatible avec l’apprentissage et les ressources.",
+            "Le Capacity Factor règle la capacité d’accueil des Experts dans certaines implémentations. Lorsque trop de Tokens arrivent, des politiques peuvent les réacheminer ou pratiquer le Token Dropping : certains Tokens ne passent alors pas par l’Expert prévu. Cela ne signifie pas nécessairement effacer les Tokens du texte. La politique exacte et l’existence même d’une capacité fixe dépendent du système."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Distinguer préférence du Router et capacité d’exécution",
+          "paragraphs": [
+            "Un classement exprime quels Experts le Router souhaite utiliser. Une contrainte de capacité exprime combien d’éléments peuvent être traités selon la politique du système. Ces deux informations peuvent entrer en tension. Augmenter le nombre d’Experts ne garantit pas une meilleure répartition si le Router continue à privilégier toujours le même.",
+            "Pour comprendre un problème, examinez le nombre de Tokens reçus par Expert, les éventuels réacheminements et les résultats de la tâche. Une Load Balancing Loss peut aider, mais son choix influence aussi l’optimisation. Il faut observer à la fois l’utilisation des ressources et la qualité, sans supposer qu’une répartition uniforme constitue l’unique objectif."
+          ]
+        },
+        {
+          "heading": "Cas guidé : un Expert trop sollicité",
+          "paragraphs": [
+            "Dans un Batch fictif, six Tokens sont tous routés en premier vers E1. La capacité choisie dans cet exemple autorise quatre passages sur E1. Repérez le problème : deux Tokens dépassent cette capacité. Sans politique supplémentaire, la liste de préférences du Router ne suffit pas à expliquer comment ces deux Tokens seront traités.",
+            "Comparez deux politiques fictives : réacheminer les deux Tokens vers un autre Expert disponible, ou ne pas exécuter leur branche d’Expert dans ce passage. Elles ne produisent pas nécessairement le même résultat. Pour conclure, demandez la politique implémentée et mesurez son impact. Enfin, vérifiez que le nombre de Weights de E1 n’a pas changé : la capacité portait sur les Tokens reçus, pas sur la taille de l’Expert."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Top-k fixe le nombre d’Experts sélectionnés, pas leur identité pour tous les Tokens.",
+        "Total Parameters inclut les composants non actifs pour le Token considéré.",
+        "Charge, capacité et qualité doivent être examinées ensemble ; Token Dropping ne signifie pas forcément supprimer du texte."
+      ],
+      "concepts": [
+        "notion-108",
+        "notion-109",
+        "notion-113",
+        "notion-114",
+        "notion-115",
+        "notion-116",
+        "notion-117",
+        "notion-118"
+      ]
+    },
+    {
+      "goal": "Expliquer les coûts de stockage et de communication d’un Sparse MoE et distinguer routage, Sparsity et Pruning.",
+      "sections": [
+        {
+          "heading": "Répartir les Experts entre appareils",
+          "paragraphs": [
+            "Expert Parallelism place des Experts sur plusieurs GPU ou autres accélérateurs. Lorsqu’un Router choisit un Expert distant, la représentation du Token doit lui parvenir, puis le résultat doit être récupéré ou combiné à l’endroit requis. On économise certains calculs d’Experts non sélectionnés, mais on ajoute des besoins de communication.",
+            "Dans un exemple fictif, E1 et E2 se trouvent sur le GPU A, E3 et E4 sur le GPU B. Un Token routé vers E1 et E3 sollicite les deux appareils. Le trajet ne dépend pas seulement du nombre d’Experts choisis : leur placement, la taille des échanges et les autres Tokens traités influencent le temps réel."
+          ]
+        },
+        {
+          "heading": "Dire précisément ce qui est Sparse",
+          "paragraphs": [
+            "Sparsity désigne des valeurs, connexions ou activations nulles ou non utilisées, selon l’objet considéré. Dans Sparse MoE, certains Experts ne sont pas exécutés pour un Token. Dans Sparse Attention, certaines connexions entre positions sont absentes. Des Weights clairsemés constituent encore un autre cas. Le mot seul ne décrit ni le calcul ni le gain matériel.",
+            "Pruning retire ou neutralise des Parameters, connexions ou structures jugés peu utiles. C’est différent du routage : un Expert non choisi pour cette entrée peut servir à l’entrée suivante, alors qu’une structure retirée par Pruning n’est plus disponible de la même façon. Le gain du Pruning dépend notamment du caractère exploitable de la structure restante par le moteur."
+          ]
+        },
+        {
+          "heading": "Évaluer un modèle dans son service réel",
+          "paragraphs": [
+            "Un modèle peut posséder beaucoup de Parameters totaux, peu de Parameters actifs par Token et néanmoins nécessiter plusieurs appareils pour stocker ses Experts. Si les échanges deviennent le coût principal, réduire encore le calcul actif ne donnera pas forcément une accélération proportionnelle. Une estimation fondée seulement sur le nombre de Parameters manque cette partie du problème.",
+            "Pour comparer des configurations, utilisez des requêtes représentatives : longueur de contexte, nombre de demandes simultanées et diversité des entrées. Observez mémoire, temps d’attente et débit, puis vérifiez la qualité. Une configuration rapide pour un Token isolé ne décrit pas forcément ce qui arrive quand de nombreux Tokens attendent le même Expert."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Le rôle du regroupement des échanges",
+          "paragraphs": [
+            "Un service peut regrouper les représentations destinées à un même Expert ou appareil afin de mieux utiliser ses ressources. Cette organisation peut améliorer l’efficacité, mais crée aussi des contraintes de synchronisation et de planification. Les communications ne sont donc pas simplement une flèche gratuite entre deux boîtes du diagramme.",
+            "Une répartition plus équilibrée peut éviter qu’un appareil travaille pendant que d’autres attendent. Pourtant, le placement physique et les liens réseau comptent aussi. À quantité de calcul comparable, deux déploiements peuvent produire des temps différents. C’est pourquoi les statistiques de routage et les mesures du service complètent la description de l’architecture."
+          ]
+        },
+        {
+          "heading": "Cas guidé : choisir l’hypothèse à tester",
+          "paragraphs": [
+            "Deux configurations fictives utilisent le même modèle et le même Top-k. A conserve les Experts sollicités sur des appareils proches ; B les répartit sur des machines reliées plus lentement. B répond moins vite. Avant de conclure que le modèle est mauvais, formulez une hypothèse : le temps de communication peut limiter le service.",
+            "Pour la tester, comparez les traces d’exécution et les transferts sur les mêmes requêtes. Vérifiez aussi les files d’attente par Expert. Si quelqu’un propose de supprimer les Experts rarement appelés sur ce petit jeu, demandez une évaluation plus large : ce Pruning modifierait le modèle, contrairement à un simple changement de placement. Ni la rareté observée ni la Sparsity annoncée ne garantissent un retrait sans perte de qualité."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Expert Parallelism distribue les Experts et entraîne des communications.",
+        "Sparsity décrit plusieurs objets possibles ; Pruning et routage sont des opérations différentes.",
+        "Le gain réel se mesure avec stockage, échanges, charge et qualité, pas seulement les Parameters actifs."
+      ],
+      "concepts": [
+        "notion-112",
+        "notion-120",
+        "notion-121"
+      ]
+    }
+  ],
+  "5": [
+    {
+      "goal": "Expliquer comment le texte devient des Token IDs et reconnaître les unités de contenu et les marqueurs de contrôle.",
+      "sections": [
+        {
+          "heading": "Un Token n’est pas une unité grammaticale imposée",
+          "paragraphs": [
+            "Un Token est une unité manipulée par le modèle. Pour le texte, il peut représenter un mot, un fragment, une ponctuation ou une combinaison avec un espace. Le Tokenizer est le programme qui convertit le texte en identifiants ; Tokenization est le nom de cette opération. Compter les mots séparés par des espaces ne donne donc pas le compte exact de Tokens.",
+            "Dans un découpage entièrement fictif, « bonjour ! » pourrait devenir « bon », « jour » et « ! », avec un traitement de l’espace prévu par le Tokenizer. Un autre découpage peut conserver « bonjour » en une unité. Ce ne sont pas deux interprétations du sens : ce sont deux règles de représentation de l’entrée."
+          ]
+        },
+        {
+          "heading": "Vocabulaire et unités de sous-mots",
+          "paragraphs": [
+            "Le Vocabulary est l’ensemble des unités reconnues, et Vocab Size sa taille. Chaque identifiant renvoie à une unité de ce vocabulaire. Le même nombre peut désigner des unités différentes dans deux Tokenizers. Il faut donc utiliser le Tokenizer prévu pour le modèle, même si deux vocabulaires ont le même nombre d’entrées.",
+            "Subword Tokenization permet de composer des mots à partir de fragments. Byte Pair Encoding (BPE) apprend un vocabulaire en fusionnant progressivement des unités adjacentes fréquentes, selon la variante utilisée. SentencePiece est une boîte à outils qui peut apprendre et appliquer différents modèles de Tokenization, notamment BPE ou Unigram, sans exiger un découpage préalable en mots. Ce n’est pas simplement un autre nom de BPE."
+          ]
+        },
+        {
+          "heading": "Reconnaître les marqueurs qui ne sont pas du texte ordinaire",
+          "paragraphs": [
+            "Un Special Token joue un rôle de formatage ou de contrôle. BOS marque un début de séquence dans les conventions qui l’utilisent ; EOS peut marquer une fin. PAD complète artificiellement des séquences pour former certains lots. Ces marqueurs appartiennent au traitement technique de l’entrée et ne doivent pas être confondus avec un mot que l’utilisateur souhaite lire.",
+            "Les conventions varient selon les modèles. Un système peut ne pas utiliser BOS, partager certains identifiants ou employer des marqueurs spécifiques de conversation. Pour compter une requête complète, il faut tenir compte de la mise en forme réellement transmise, pas seulement du texte visible dans la zone de saisie."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Pourquoi le même message peut avoir plusieurs coûts",
+          "paragraphs": [
+            "Le découpage dépend du texte, de sa langue et du vocabulaire appris. Des références produit, du code ou des caractères peu fréquents peuvent se répartir en davantage d’unités qu’une expression courante. Une moyenne de caractères par Token peut aider à estimer grossièrement, mais elle ne remplace pas le comptage adapté au modèle.",
+            "Certaines méthodes proposent aussi un échantillonnage de segmentations, utile notamment pendant le Training. Dans un comptage déterministe ordinaire, la Seed de génération ne redécoupe pas le Prompt. Il faut distinguer les réglages de Tokenization et les réglages qui sélectionnent la sortie du modèle. La Temperature de génération intervient après ce découpage."
+          ]
+        },
+        {
+          "heading": "Cas guidé : réparer un comptage de requête",
+          "paragraphs": [
+            "Une application fictive compte uniquement les mots du message utilisateur, puis découvre que le service annonce davantage de Tokens. Cherchez trois explications possibles avant de poursuivre : découpage en sous-mots, instructions ajoutées par l’application et marqueurs de conversation. Ces éléments suffisent à rendre le comptage de mots incomplet.",
+            "La correction consiste à utiliser le bon Tokenizer sur l’entrée mise en forme selon les conventions du modèle, puis à vérifier les règles de comptage du service. Si un collègue propose le Tokenizer d’un autre modèle ayant la même Vocab Size, refusez cette équivalence : la taille ne garantit ni les mêmes unités ni les mêmes IDs. Le résultat attendu est une représentation compatible, pas simplement un nombre ressemblant."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Token, mot et caractère ne sont pas des unités interchangeables.",
+        "Tokenizer et vocabulaire doivent correspondre au modèle utilisé.",
+        "Les Special Tokens et la mise en forme peuvent participer au compte de l’entrée."
+      ],
+      "concepts": [
+        "notion-122",
+        "notion-123",
+        "notion-124",
+        "notion-125",
+        "notion-126",
+        "notion-127",
+        "notion-128",
+        "notion-129",
+        "notion-130",
+        "notion-131"
+      ]
+    },
+    {
+      "goal": "Suivre un dialogue du Chat Template à la génération et comprendre ce qui consomme la Context Window.",
+      "sections": [
+        {
+          "heading": "Construire l’entrée réellement reçue",
+          "paragraphs": [
+            "Un Chat Template définit comment sérialiser les rôles et les messages dans le format attendu. Le modèle ne reçoit pas les bulles dessinées à l’écran : il reçoit une entrée où les instructions, messages et marqueurs sont organisés selon cette convention. Une conversation mal formatée peut provoquer des comportements inattendus sans que les connaissances du modèle aient changé.",
+            "La Context Window borne la quantité de Tokens traitables selon les limites du modèle et du service. Les Prompt Tokens comprennent l’entrée réellement fournie, dont instructions, historique et documents. Les Completion Tokens désignent les Tokens générés. Leur partage dans le budget dépend du système ; il faut vérifier ses limites plutôt que supposer une règle identique partout."
+          ]
+        },
+        {
+          "heading": "Traiter le Prompt puis prolonger la séquence",
+          "paragraphs": [
+            "Le Prefill traite les Tokens du contexte initial et prépare les représentations nécessaires, notamment le KV Cache lorsqu’il est utilisé. Le calcul à la fin du préfixe fournit des scores pour choisir la continuation. Le Decode poursuit ensuite la génération avec les Tokens déjà produits, en réutilisant les calculs compatibles.",
+            "Next-Token Prediction consiste à produire une distribution sur le prochain Token. Après la sélection, ce Token rejoint le contexte utilisé pour la suite. Dans un exemple préparé, « Le chat » devient « Le chat dort », puis « Le chat dort sur ». Le texte n’est pas obligatoirement planifié intégralement avant le premier affichage, et chaque étape peut encore mener à une erreur."
+          ]
+        },
+        {
+          "heading": "Afficher et arrêter sont des décisions distinctes",
+          "paragraphs": [
+            "Streaming transmet progressivement des fragments de sortie au lieu d’attendre la réponse entière. Les fragments affichés ne correspondent pas toujours à un Token chacun : le service et l’interface peuvent les regrouper. Le Streaming décrit un mode de transmission ; il ne démontre ni raisonnement humain visible ni vérité de la réponse.",
+            "Une Stop Sequence est un motif qui déclenche l’arrêt selon la configuration. Elle peut correspondre à plusieurs Tokens et se distingue d’un EOS défini par le modèle. D’autres limites, comme le maximum de sortie, peuvent aussi interrompre la génération. Un arrêt ne signifie donc pas forcément que la tâche est terminée ou que l’objet JSON demandé est complet."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Préparer le budget sans inventer une mémoire automatique",
+          "paragraphs": [
+            "Dans un budget fictif de cent unités partagées, l’application réserve une partie pour les instructions, une autre pour l’historique, un document et la réponse. Ajouter le document peut dépasser la capacité prévue. Ce n’est pas au diagramme de décider automatiquement quoi oublier : l’application peut refuser l’entrée, réduire l’historique ou choisir des passages, selon sa politique.",
+            "Un résumé d’historique peut conserver l’essentiel mais perdre une précision importante. Une recherche peut retrouver un passage utile mais manquer une exception. Ces choix modifient les informations disponibles pour répondre. Conserver un historique sur disque ne signifie pas que tout cet historique est présent dans la Context Window de chaque requête."
+          ]
+        },
+        {
+          "heading": "Cas guidé : comprendre une réponse interrompue",
+          "paragraphs": [
+            "Un assistant fictif reçoit un rapport, attend avant le premier texte puis affiche un début de réponse JSON qui s’arrête au milieu d’un champ. Distinguez trois questions : qu’a-t-il reçu, où a été passé le temps initial, et pourquoi la sortie s’est-elle arrêtée ? Le Prompt complet et le Chat Template renseignent la première ; Prefill, file d’attente et autres coûts contribuent à la deuxième.",
+            "Pour la troisième, vérifiez la limite de sortie, un éventuel EOS ou une Stop Sequence, et les informations de fin renvoyées par le service. Ne déduisez pas que le modèle « pense encore » parce que l’objet est incomplet. La réponse pratique est de détecter la fin et de valider le contenu reçu, puis de prévoir une continuation ou une nouvelle requête si le système le permet."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Le Chat Template organise l’entrée ; la Context Window limite ce qui est effectivement traité.",
+        "Prefill prépare le contexte ; Decode ajoute progressivement des Tokens.",
+        "Streaming concerne la transmission, et une condition d’arrêt ne garantit pas une réponse complète."
+      ],
+      "concepts": [
+        "notion-132",
+        "notion-133",
+        "notion-134",
+        "notion-135",
+        "notion-136",
+        "notion-137",
+        "notion-146",
+        "notion-147"
+      ]
+    },
+    {
+      "goal": "Comparer les règles de sélection des Tokens et expliquer pourquoi elles modifient la variété sans vérifier les faits.",
+      "sections": [
+        {
+          "heading": "Une distribution n’est pas une vérification",
+          "paragraphs": [
+            "À chaque étape, le modèle fournit des scores de Tokens candidats. Les Log Probabilities, ou Logprobs, expriment leurs probabilités sur une échelle logarithmique, utile pour comparer ou combiner des scores. Il n’est pas nécessaire de les calculer ici : retenez qu’elles décrivent la probabilité attribuée par le modèle, pas la certitude qu’une affirmation est vraie.",
+            "Temperature modifie la dispersion de la distribution utilisée pour le Sampling. Une température positive plus basse concentre généralement les choix sur les candidats déjà favorisés ; une plus haute les rend moins concentrés. Une date inventée peut rester le candidat préféré. Baisser Temperature ne consulte aucune source qui permettrait de la corriger."
+          ]
+        },
+        {
+          "heading": "Limiter les candidats ou maintenir plusieurs pistes",
+          "paragraphs": [
+            "Top-k Sampling limite le tirage aux k Tokens les mieux notés. Top-p, aussi appelé Nucleus Sampling, conserve le plus petit ensemble des Tokens les plus probables dont la probabilité cumulée atteint un seuil. Le premier règle un nombre de candidats ; le second une masse de probabilité. Ils peuvent être combinés, et l’ordre des transformations dépend de l’implémentation.",
+            "Greedy Decoding choisit le Token le plus probable à chaque étape. Beam Search maintient plusieurs séquences candidates, développe leurs prolongements et conserve les mieux notées selon son score. Le Sampling ordinaire tire une continuation selon une distribution. Ces règles ne recherchent pas toutes de la même façon ; aucune ne garantit une réponse exacte ou utile à toutes les tâches."
+          ]
+        },
+        {
+          "heading": "Influencer répétition, biais et reproductibilité",
+          "paragraphs": [
+            "Repetition Penalty modifie les scores pour décourager certaines répétitions. Frequency Penalty tient compte de la fréquence d’un Token, tandis que Presence Penalty peut dépendre de sa présence antérieure selon le service. Logit Bias ajuste directement les scores de Tokens ciblés. Ces interventions portent sur les candidats, pas sur la compréhension du besoin.",
+            "Determinism décrit la reproductibilité d’un calcul sous des conditions données. Une Seed contrôle une partie de l’aléatoire, mais elle ne garantit pas la même sortie avec un autre moteur, matériel ou modèle. Pour comparer des réglages, conservez le même protocole et examinez plusieurs résultats. Un texte moins variable peut être uniformément faux, et une pénalité excessive peut supprimer une répétition nécessaire."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Comparer Top-k et Top-p sur une distribution préparée",
+          "paragraphs": [
+            "Imaginez trois candidats fictifs qui concentrent presque toute la probabilité, suivis de nombreux candidats peu probables. Top-k égal à cinq peut garder cinq candidats ; un Top-p choisi pour couvrir l’essentiel de la probabilité peut en garder moins. Si la distribution devient plus dispersée, ce même Top-p peut en conserver davantage. Il n’existe donc pas de conversion universelle entre k et p.",
+            "Greedy conserve une seule continuation à chaque étape, même si un deuxième choix proche mènerait plus tard à une meilleure séquence. Beam Search conserve plusieurs pistes mais les évalue selon un score qui ne représente pas nécessairement toutes les qualités humaines souhaitées. La sélection reste un compromis de génération, distinct d’une vérification externe de la réponse."
+          ]
+        },
+        {
+          "heading": "Cas guidé : varier un slogan sans abîmer une référence",
+          "paragraphs": [
+            "Une application fictive écrit des slogans contenant exactement la référence « AB-202 ». Elle veut plus de variété et modifie Temperature, puis constate que certains slogans déforment la référence. Commencez par séparer les critères : variété des formulations, conservation de la référence et pertinence. Un changement de Sampling peut aider le premier sans garantir les deux autres.",
+            "Comparez les réglages sur les mêmes demandes et contrôlez la référence explicitement. Une Repetition Penalty trop forte pourrait aussi décourager sa répétition lorsqu’elle est demandée. Un Logit Bias sur un Token ne garantit pas à lui seul une contrainte portant sur plusieurs Tokens ou leur ordre. Pour obtenir une structure stricte, il faut un mécanisme approprié et une validation ; pour vérifier un fait, il faut des éléments de preuve."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Temperature et Sampling modifient les choix de Tokens, pas la vérité des faits.",
+        "Top-k fixe des candidats en nombre ; Top-p les limite par probabilité cumulée.",
+        "Penalties, Logit Bias et Seed nécessitent un protocole de test ; aucun ne remplace la validation de la sortie."
+      ],
+      "concepts": [
+        "notion-138",
+        "notion-139",
+        "notion-140",
+        "notion-141",
+        "notion-142",
+        "notion-143",
+        "notion-144",
+        "notion-145",
+        "notion-148",
+        "notion-149"
+      ]
+    }
+  ]
+}

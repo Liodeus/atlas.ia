@@ -1,0 +1,3640 @@
+[
+  {
+    "id": 1,
+    "title": "Fondamentaux et familles de modèles",
+    "entries": [
+      {
+        "id": "notion-1",
+        "name": "IA (Artificial Intelligence)",
+        "definition": "ensemble de techniques permettant à des systèmes d'accomplir des tâches associées à l'intelligence.",
+        "priority": true,
+        "theme": 1
+      },
+      {
+        "id": "notion-2",
+        "name": "Machine Learning (ML)",
+        "definition": "apprentissage de régularités à partir de données plutôt que de règles écrites à la main.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-3",
+        "name": "Deep Learning (DL)",
+        "definition": "apprentissage automatique reposant sur des réseaux de neurones profonds.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-4",
+        "name": "LLM (Large Language Model)",
+        "definition": "grand modèle conçu pour traiter et générer du langage.",
+        "priority": true,
+        "theme": 1
+      },
+      {
+        "id": "notion-5",
+        "name": "SLM (Small Language Model)",
+        "definition": "modèle de langage relativement compact, souvent moins coûteux à exécuter.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-6",
+        "name": "AGI (Artificial General Intelligence)",
+        "definition": "idée d'une IA capable d'accomplir de manière générale une large variété de tâches cognitives ; définition discutée.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-7",
+        "name": "ASI (Artificial Superintelligence)",
+        "definition": "notion hypothétique d'une IA dépassant largement les capacités humaines dans de nombreux domaines.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-8",
+        "name": "Foundation Model",
+        "definition": "modèle préentraîné polyvalent servant de base à de nombreux usages.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-9",
+        "name": "Generative AI (GenAI)",
+        "definition": "IA produisant du contenu : texte, code, images, audio ou vidéo.",
+        "priority": true,
+        "theme": 1
+      },
+      {
+        "id": "notion-10",
+        "name": "NLP (Natural Language Processing)",
+        "definition": "traitement automatique du langage naturel.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-11",
+        "name": "NLU (Natural Language Understanding)",
+        "definition": "tâches visant à interpréter le sens du langage.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-12",
+        "name": "NLG (Natural Language Generation)",
+        "definition": "génération automatique de texte.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-13",
+        "name": "Transformer",
+        "definition": "architecture neuronale reposant notamment sur l'attention.",
+        "priority": true,
+        "theme": 1
+      },
+      {
+        "id": "notion-14",
+        "name": "GPT (Generative Pre-trained Transformer)",
+        "definition": "appellation d'une famille de modèles Transformer génératifs préentraînés.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-15",
+        "name": "Base Model",
+        "definition": "modèle de base, généralement avant son adaptation au dialogue et aux instructions.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-16",
+        "name": "Instruct Model",
+        "definition": "modèle adapté pour suivre les consignes des utilisateurs.",
+        "priority": true,
+        "theme": 1
+      },
+      {
+        "id": "notion-17",
+        "name": "Chat Model",
+        "definition": "modèle optimisé pour des échanges conversationnels.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-18",
+        "name": "Test-Time Compute",
+        "definition": "ressources de calcul supplémentaires mobilisées pendant la résolution d'une requête.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-19",
+        "name": "Inference-Time Scaling",
+        "definition": "amélioration possible des performances en augmentant le calcul ou les essais pendant l'inférence.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-20",
+        "name": "Verifier Model",
+        "definition": "modèle ou système chargé d'évaluer la validité d'une solution candidate.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-21",
+        "name": "Reasoning Model",
+        "definition": "modèle ou système optimisé pour des tâches nécessitant plusieurs étapes de résolution.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-22",
+        "name": "Code Model",
+        "definition": "modèle spécialisé pour produire, compléter ou analyser du code.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-23",
+        "name": "Embedding Model",
+        "definition": "modèle qui transforme une entrée en représentation vectorielle.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-24",
+        "name": "Reranker Model",
+        "definition": "modèle qui reclasse des résultats déjà récupérés selon leur pertinence.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-25",
+        "name": "Reward Model",
+        "definition": "modèle apprenant à attribuer un score à des réponses ou comportements.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-26",
+        "name": "Multimodal Model",
+        "definition": "modèle traitant plusieurs modalités, par exemple texte et image.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-27",
+        "name": "VLM (Vision-Language Model)",
+        "definition": "modèle combinant compréhension visuelle et langage.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-28",
+        "name": "VLA (Vision-Language-Action)",
+        "definition": "modèle reliant perception, langage et actions, notamment en robotique.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-29",
+        "name": "World Model",
+        "definition": "modèle apprenant une représentation de l'évolution d'un environnement.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-30",
+        "name": "Autoregressive Model",
+        "definition": "modèle générant les éléments d'une séquence conditionnellement aux précédents.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-31",
+        "name": "Encoder-only Model",
+        "definition": "architecture centrée sur l'encodage d'une entrée, souvent utile à la classification.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-32",
+        "name": "Decoder-only Model",
+        "definition": "architecture fréquemment utilisée pour générer du texte token après token.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-33",
+        "name": "Encoder-Decoder / Seq2Seq",
+        "definition": "architecture qui encode une entrée puis génère une sortie correspondante.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-34",
+        "name": "Dense Model",
+        "definition": "modèle où les composants concernés sont généralement activés pour chaque token, par opposition à un routage sparse.",
+        "priority": false,
+        "theme": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Anatomie d'un réseau et d'un Transformer",
+    "entries": [
+      {
+        "id": "notion-35",
+        "name": "Parameter / Weight (paramètre / poids)",
+        "definition": "valeur numérique apprise pendant l'entraînement.",
+        "priority": true,
+        "theme": 2
+      },
+      {
+        "id": "notion-36",
+        "name": "Bias (biais numérique)",
+        "definition": "paramètre additif d'une couche ; à distinguer d'un biais sociétal.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-37",
+        "name": "Layer (couche)",
+        "definition": "étape de transformation dans un réseau neuronal.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-38",
+        "name": "Hidden State",
+        "definition": "représentation interne calculée à une étape du modèle.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-39",
+        "name": "Hidden Dimension / d_model",
+        "definition": "taille des vecteurs internes du Transformer.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-40",
+        "name": "Activation",
+        "definition": "sortie numérique d'un neurone ou d'une couche.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-41",
+        "name": "Activation Function",
+        "definition": "fonction non linéaire appliquée aux valeurs du réseau.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-42",
+        "name": "ReLU",
+        "definition": "fonction d'activation qui remplace les valeurs négatives par zéro.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-43",
+        "name": "GELU",
+        "definition": "fonction d'activation lisse très utilisée dans les Transformers.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-44",
+        "name": "SiLU / Swish",
+        "definition": "autre fonction d'activation présente dans de nombreux modèles.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-45",
+        "name": "SwiGLU",
+        "definition": "mécanisme de couche feed-forward utilisant des portes et une activation de type Swish.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-46",
+        "name": "FFN / MLP (Feed-Forward Network)",
+        "definition": "sous-réseau traitant les représentations des tokens après l'attention.",
+        "priority": true,
+        "theme": 2
+      },
+      {
+        "id": "notion-47",
+        "name": "Residual Connection / Skip Connection",
+        "definition": "chemin qui additionne l'entrée d'un bloc à sa sortie.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-48",
+        "name": "LayerNorm",
+        "definition": "normalisation des activations au sein d'une couche.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-49",
+        "name": "RMSNorm",
+        "definition": "variante de normalisation fondée sur la moyenne quadratique.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-50",
+        "name": "Pre-Norm / Post-Norm",
+        "definition": "position de la normalisation avant ou après un sous-bloc.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-51",
+        "name": "Softmax",
+        "definition": "transformation de scores en distribution de valeurs positives normalisées.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-52",
+        "name": "Logit",
+        "definition": "score brut produit avant conversion en probabilité.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-53",
+        "name": "Embedding Layer",
+        "definition": "table ou transformation associant chaque token à un vecteur.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-54",
+        "name": "Positional Encoding",
+        "definition": "mécanisme signalant l'ordre ou la position des tokens.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-55",
+        "name": "RoPE (Rotary Position Embedding)",
+        "definition": "encodage positionnel utilisant des rotations des vecteurs Q et K.",
+        "priority": true,
+        "theme": 2
+      },
+      {
+        "id": "notion-56",
+        "name": "ALiBi",
+        "definition": "mécanisme ajoutant des biais dépendant de la distance entre positions d'attention.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-57",
+        "name": "YaRN",
+        "definition": "méthode d'extension de contexte fondée sur l'adaptation de l'encodage RoPE.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-58",
+        "name": "Attention Head",
+        "definition": "tête d'attention apprenant une certaine manière de relier des positions.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-59",
+        "name": "Projection Matrix",
+        "definition": "matrice qui transforme les représentations vers d'autres espaces, par exemple Q, K ou V.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-60",
+        "name": "Q / K / V (Query, Key, Value)",
+        "definition": "trois projections utilisées pour calculer et agréger l'attention.",
+        "priority": true,
+        "theme": 2
+      },
+      {
+        "id": "notion-61",
+        "name": "Weight Tying",
+        "definition": "partage de certains poids, notamment entre embeddings d'entrée et sortie.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-62",
+        "name": "Vocabulary Head / LM Head",
+        "definition": "projection des états internes vers les scores des tokens du vocabulaire.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-63",
+        "name": "Mechanistic Interpretability",
+        "definition": "recherche visant à comprendre les mécanismes internes responsables des comportements d'un modèle.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-64",
+        "name": "Sparse Autoencoder (SAE)",
+        "definition": "autoencodeur encourageant une représentation clairsemée, utilisé notamment pour analyser les activations internes.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-65",
+        "name": "Superposition",
+        "definition": "encodage de plusieurs caractéristiques dans des directions qui se chevauchent dans les représentations.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-66",
+        "name": "Steering Vector / Activation Steering",
+        "definition": "modification contrôlée de certaines activations pour influencer le comportement d'un modèle.",
+        "priority": false,
+        "theme": 2
+      },
+      {
+        "id": "notion-67",
+        "name": "Representation Learning",
+        "definition": "apprentissage de caractéristiques internes utiles à diverses tâches.",
+        "priority": false,
+        "theme": 2
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Attention, contexte long et architectures alternatives",
+    "entries": [
+      {
+        "id": "notion-68",
+        "name": "Attention",
+        "definition": "mécanisme permettant à des positions d'une séquence de pondérer l'information d'autres positions.",
+        "priority": true,
+        "theme": 3
+      },
+      {
+        "id": "notion-69",
+        "name": "Self-Attention",
+        "definition": "attention entre des positions d'une même séquence.",
+        "priority": true,
+        "theme": 3
+      },
+      {
+        "id": "notion-70",
+        "name": "Cross-Attention",
+        "definition": "attention d'une séquence vers les représentations d'une autre, ou d'une autre modalité.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-71",
+        "name": "Full / Dense Attention",
+        "definition": "attention calculée sur toutes les positions autorisées par le masque.",
+        "priority": true,
+        "theme": 3
+      },
+      {
+        "id": "notion-72",
+        "name": "Context Length Extrapolation",
+        "definition": "emploi d'un modèle sur une séquence plus longue que celle généralement vue à l'entraînement.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-73",
+        "name": "Sparse Attention",
+        "definition": "attention limitée à certaines connexions entre positions ; ses gains réels dépendent de son implémentation.",
+        "priority": true,
+        "theme": 3
+      },
+      {
+        "id": "notion-74",
+        "name": "Local Attention",
+        "definition": "chaque token prête attention principalement aux positions proches.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-75",
+        "name": "Sliding Window Attention (SWA)",
+        "definition": "attention causale limitée à une fenêtre récente glissante.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-76",
+        "name": "Global Attention",
+        "definition": "certaines positions disposent de connexions vers un grand nombre d'autres positions.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-77",
+        "name": "Block-Sparse Attention",
+        "definition": "sélection de blocs de positions plutôt que de connexions individuelles.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-78",
+        "name": "Strided Attention",
+        "definition": "attention suivant un motif de positions régulièrement espacées.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-79",
+        "name": "Dilated Attention",
+        "definition": "attention échantillonnant des positions à différents intervalles.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-80",
+        "name": "Dynamic Sparse Attention",
+        "definition": "motifs clairsemés déterminés dynamiquement selon les entrées ou les scores.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-81",
+        "name": "Causal Attention",
+        "definition": "empêche une position de consulter les tokens futurs lors de la prédiction autorégressive.",
+        "priority": true,
+        "theme": 3
+      },
+      {
+        "id": "notion-82",
+        "name": "Bidirectional Attention",
+        "definition": "une position peut consulter celles situées des deux côtés quand la tâche le permet.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-83",
+        "name": "Attention Mask",
+        "definition": "matrice ou règle interdisant certaines connexions d'attention.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-84",
+        "name": "Attention Score",
+        "definition": "mesure de compatibilité calculée entre une requête Q et une clé K.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-85",
+        "name": "Scaled Dot-Product Attention",
+        "definition": "Attention utilisant les produits scalaires entre Q et K, mis à l’échelle avant Softmax pour obtenir les pondérations de V.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-86",
+        "name": "Multi-Head Attention (MHA)",
+        "definition": "plusieurs têtes d'attention apprennent des relations en parallèle.",
+        "priority": true,
+        "theme": 3
+      },
+      {
+        "id": "notion-87",
+        "name": "Multi-Query Attention (MQA)",
+        "definition": "plusieurs têtes de requêtes partagent une seule tête K/V.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-88",
+        "name": "Grouped-Query Attention (GQA)",
+        "definition": "les têtes de requêtes sont réparties en groupes ; chaque groupe partage une tête de clés et une tête de valeurs.",
+        "priority": true,
+        "theme": 3
+      },
+      {
+        "id": "notion-89",
+        "name": "Multi-Head Latent Attention (MLA)",
+        "definition": "mécanisme comprimant des représentations liées aux clés/valeurs dans un espace latent.",
+        "priority": true,
+        "theme": 3
+      },
+      {
+        "id": "notion-90",
+        "name": "Linear Attention",
+        "definition": "famille de méthodes modifiant le calcul de l'attention pour tendre vers un coût linéaire en longueur de séquence.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-91",
+        "name": "FlashAttention",
+        "definition": "algorithme exact d'attention optimisé pour réduire les mouvements de données en mémoire ; pas synonyme de sparse attention.",
+        "priority": true,
+        "theme": 3
+      },
+      {
+        "id": "notion-92",
+        "name": "PagedAttention",
+        "definition": "technique de gestion de la mémoire du KV cache par blocs, utilisée pour servir les LLM.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-93",
+        "name": "Attention Sink",
+        "definition": "positions initiales absorbant souvent une part importante de l'attention, utiles à certaines stratégies de cache.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-94",
+        "name": "Ring Attention",
+        "definition": "calcul distribué de l'attention avec circulation de blocs entre accélérateurs.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-95",
+        "name": "Long-Context Model",
+        "definition": "modèle conçu pour accepter de longues séquences de tokens.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-96",
+        "name": "Context Extension",
+        "definition": "techniques augmentant la taille de contexte exploitable par un modèle.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-97",
+        "name": "Context Rot / Lost in the Middle",
+        "definition": "dégradation possible de l'exploitation d'informations dans des contextes longs.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-98",
+        "name": "SSM (State Space Model)",
+        "definition": "famille de modèles séquentiels utilisant un état interne plutôt qu'une attention complète classique.",
+        "priority": true,
+        "theme": 3
+      },
+      {
+        "id": "notion-99",
+        "name": "Mamba",
+        "definition": "architecture séquentielle utilisant des modèles d'état sélectifs.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-100",
+        "name": "Hybrid Architecture",
+        "definition": "modèle combinant plusieurs mécanismes, comme attention et SSM.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-101",
+        "name": "Recurrent Neural Network (RNN)",
+        "definition": "réseau traitant une séquence via un état transmis d'une étape à la suivante.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-102",
+        "name": "LSTM",
+        "definition": "type de RNN avec portes pour préserver des informations sur de longues périodes.",
+        "priority": false,
+        "theme": 3
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "MoE, experts, routage et sparsité",
+    "entries": [
+      {
+        "id": "notion-103",
+        "name": "MoE (Mixture of Experts)",
+        "definition": "architecture combinant plusieurs sous-réseaux « experts » et un mécanisme de sélection.",
+        "priority": true,
+        "theme": 4
+      },
+      {
+        "id": "notion-104",
+        "name": "Sparse MoE",
+        "definition": "MoE qui n'active qu'une partie des experts disponibles pour chaque token ou élément traité.",
+        "priority": true,
+        "theme": 4
+      },
+      {
+        "id": "notion-105",
+        "name": "Dense MoE",
+        "definition": "variante combinant potentiellement tous les experts à chaque entrée.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-106",
+        "name": "Expert",
+        "definition": "sous-réseau spécialisé, souvent une couche FFN, sélectionné par le routeur.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-107",
+        "name": "Router / Gating Network",
+        "definition": "réseau qui choisit et pondère les experts sollicités.",
+        "priority": true,
+        "theme": 4
+      },
+      {
+        "id": "notion-108",
+        "name": "Top-k Routing",
+        "definition": "sélection des k experts les mieux notés pour une entrée.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-109",
+        "name": "Top-1 / Top-2 Routing",
+        "definition": "activation respectivement d'un ou de deux experts.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-110",
+        "name": "Shared Expert",
+        "definition": "expert actif pour de nombreux tokens en plus d'experts routés.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-111",
+        "name": "Routed Expert",
+        "definition": "expert sélectionné conditionnellement par le routeur.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-112",
+        "name": "Expert Parallelism",
+        "definition": "répartition des experts d'un MoE sur plusieurs accélérateurs.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-113",
+        "name": "Load Balancing Loss",
+        "definition": "terme d'entraînement favorisant une répartition équilibrée entre experts.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-114",
+        "name": "Expert Collapse",
+        "definition": "situation où le routeur utilise trop peu d'experts.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-115",
+        "name": "Capacity Factor",
+        "definition": "paramètre contrôlant la capacité d'accueil des experts dans certains MoE.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-116",
+        "name": "Token Dropping",
+        "definition": "omission du calcul d’un Expert pour certains Tokens en cas de capacité dépassée ; cela ne signifie pas nécessairement supprimer ces Tokens de la séquence.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-117",
+        "name": "Active Parameters",
+        "definition": "paramètres réellement utilisés pour un calcul ou un token donné.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-118",
+        "name": "Total Parameters",
+        "definition": "ensemble des paramètres du modèle, activés ou non à chaque passage.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-119",
+        "name": "Conditional Computation",
+        "definition": "calcul exécuté seulement pour certaines entrées ou selon une décision de routage.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-120",
+        "name": "Sparsity",
+        "definition": "propriété selon laquelle certaines connexions, activations ou valeurs sont nulles ou non utilisées.",
+        "priority": false,
+        "theme": 4
+      },
+      {
+        "id": "notion-121",
+        "name": "Pruning",
+        "definition": "suppression de paramètres, connexions ou structures jugés peu utiles.",
+        "priority": false,
+        "theme": 4
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Tokenisation, génération et fenêtres de contexte",
+    "entries": [
+      {
+        "id": "notion-122",
+        "name": "Token",
+        "definition": "unité de texte, de code ou parfois d'une autre modalité traitée par le modèle.",
+        "priority": true,
+        "theme": 5
+      },
+      {
+        "id": "notion-123",
+        "name": "Tokenizer",
+        "definition": "programme convertissant des entrées en identifiants de tokens.",
+        "priority": true,
+        "theme": 5
+      },
+      {
+        "id": "notion-124",
+        "name": "Tokenization",
+        "definition": "opération de découpage et de codage en tokens.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-125",
+        "name": "Subword Tokenization",
+        "definition": "découpage en unités plus petites que les mots entiers.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-126",
+        "name": "BPE (Byte Pair Encoding)",
+        "definition": "méthode courante d'apprentissage d'un vocabulaire de sous-mots.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-127",
+        "name": "SentencePiece",
+        "definition": "boîte à outils de tokenisation indépendante d'un découpage préalable en mots.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-128",
+        "name": "Vocabulary / Vocab Size",
+        "definition": "ensemble des tokens reconnus et sa taille.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-129",
+        "name": "Special Token",
+        "definition": "token réservé à un rôle de formatage ou de contrôle.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-130",
+        "name": "BOS / EOS",
+        "definition": "tokens de début et de fin de séquence.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-131",
+        "name": "PAD Token",
+        "definition": "token servant à compléter artificiellement des séquences dans un lot.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-132",
+        "name": "Chat Template",
+        "definition": "convention de sérialisation des rôles et des messages pour un modèle de chat.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-133",
+        "name": "Context Window",
+        "definition": "capacité maximale en tokens du contexte traité, avec une répartition entrée/sortie variable selon le système.",
+        "priority": true,
+        "theme": 5
+      },
+      {
+        "id": "notion-134",
+        "name": "Prompt Tokens / Completion Tokens",
+        "definition": "tokens de l'entrée et tokens générés en sortie.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-135",
+        "name": "Prefill",
+        "definition": "phase de traitement du prompt avant la génération des nouveaux tokens.",
+        "priority": true,
+        "theme": 5
+      },
+      {
+        "id": "notion-136",
+        "name": "Decode",
+        "definition": "phase générant les tokens successivement à partir de l'état courant.",
+        "priority": true,
+        "theme": 5
+      },
+      {
+        "id": "notion-137",
+        "name": "Next-Token Prediction",
+        "definition": "prédiction d'une distribution sur le token suivant.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-138",
+        "name": "Log Probability / Logprob",
+        "definition": "logarithme de la probabilité attribuée à une sortie.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-139",
+        "name": "Temperature",
+        "definition": "paramètre contrôlant la dispersion de la distribution d'échantillonnage.",
+        "priority": true,
+        "theme": 5
+      },
+      {
+        "id": "notion-140",
+        "name": "Top-k Sampling",
+        "definition": "tirage limité aux k tokens les mieux notés.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-141",
+        "name": "Top-p / Nucleus Sampling",
+        "definition": "tirage parmi le plus petit ensemble de tokens dépassant un seuil de probabilité cumulée.",
+        "priority": true,
+        "theme": 5
+      },
+      {
+        "id": "notion-142",
+        "name": "Greedy Decoding",
+        "definition": "choix du token le plus probable à chaque étape.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-143",
+        "name": "Beam Search",
+        "definition": "exploration de plusieurs suites candidates de génération.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-144",
+        "name": "Repetition Penalty",
+        "definition": "mécanisme pénalisant la répétition de tokens ou séquences.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-145",
+        "name": "Frequency / Presence Penalty",
+        "definition": "réglages ajustant la probabilité de tokens déjà présents.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-146",
+        "name": "Stop Sequence",
+        "definition": "séquence qui provoque l'arrêt de génération.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-147",
+        "name": "Streaming",
+        "definition": "transmission progressive des tokens au lieu d'attendre la sortie entière.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-148",
+        "name": "Determinism / Seed",
+        "definition": "contrôle partiel de la reproductibilité de la génération ; non garanti entre tous environnements.",
+        "priority": false,
+        "theme": 5
+      },
+      {
+        "id": "notion-149",
+        "name": "Logit Bias",
+        "definition": "modification directe de scores de tokens particuliers avant échantillonnage.",
+        "priority": false,
+        "theme": 5
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Entraînement, données et optimisation",
+    "entries": [
+      {
+        "id": "notion-150",
+        "name": "Pretraining (préentraînement)",
+        "definition": "apprentissage initial du modèle sur un grand corpus.",
+        "priority": true,
+        "theme": 6
+      },
+      {
+        "id": "notion-151",
+        "name": "Training Dataset / Corpus",
+        "definition": "ensemble de documents ou d'exemples utilisés pour l'apprentissage.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-152",
+        "name": "Self-Supervised Learning",
+        "definition": "apprentissage avec des cibles construites à partir des données elles-mêmes.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-153",
+        "name": "Supervised Learning",
+        "definition": "apprentissage à partir d'exemples accompagnés de réponses ou étiquettes de référence.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-154",
+        "name": "Unsupervised Learning",
+        "definition": "apprentissage de structures sans étiquettes de référence explicites.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-155",
+        "name": "Policy (politique)",
+        "definition": "règle ou modèle donnant une distribution d'actions à choisir dans un état.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-156",
+        "name": "Reinforcement Learning (RL)",
+        "definition": "apprentissage visant à optimiser des récompenses au fil de décisions.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-157",
+        "name": "Epoch",
+        "definition": "passage sur une fois l'ensemble de données considéré.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-158",
+        "name": "Batch / Mini-batch",
+        "definition": "ensemble d'exemples traités conjointement.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-159",
+        "name": "Batch Size",
+        "definition": "nombre d'exemples regroupés dans un lot.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-160",
+        "name": "Gradient",
+        "definition": "ensemble de dérivées décrivant comment la Loss varie localement avec les Parameters ; la descente suit la direction opposée pour chercher à la réduire.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-161",
+        "name": "Backpropagation",
+        "definition": "calcul des gradients à travers les couches du réseau.",
+        "priority": true,
+        "theme": 6
+      },
+      {
+        "id": "notion-162",
+        "name": "Gradient Descent",
+        "definition": "mise à jour des Parameters dans la direction opposée au Gradient, avec un pas choisi pour chercher à réduire la Loss.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-163",
+        "name": "Gradient Accumulation",
+        "definition": "accumulation de gradients sur plusieurs micro-lots avant mise à jour.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-164",
+        "name": "Optimizer",
+        "definition": "algorithme mettant à jour les paramètres à partir des gradients.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-165",
+        "name": "Adam / AdamW",
+        "definition": "optimiseurs adaptatifs courants, AdamW séparant la décroissance des poids.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-166",
+        "name": "Learning Rate",
+        "definition": "facteur qui règle l’amplitude d’une mise à jour, conjointement aux gradients et à la règle de l’Optimizer.",
+        "priority": true,
+        "theme": 6
+      },
+      {
+        "id": "notion-167",
+        "name": "Learning Rate Schedule",
+        "definition": "évolution programmée du taux d'apprentissage.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-168",
+        "name": "Warmup",
+        "definition": "période initiale où le taux d'apprentissage augmente progressivement.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-169",
+        "name": "Loss Function",
+        "definition": "objectif chiffré que l'entraînement cherche à minimiser.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-170",
+        "name": "Cross-Entropy Loss",
+        "definition": "perte souvent utilisée pour prédire des tokens ou des classes.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-171",
+        "name": "Perplexity",
+        "definition": "mesure de performance probabiliste d'un modèle de langage sur des données.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-172",
+        "name": "Regularization",
+        "definition": "techniques limitant le surapprentissage ou favorisant des solutions robustes.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-173",
+        "name": "Dropout",
+        "definition": "désactivation aléatoire de certaines activations pendant l'entraînement.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-174",
+        "name": "Weight Decay",
+        "definition": "pénalisation favorisant des poids moins grands.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-175",
+        "name": "Overfitting",
+        "definition": "apprentissage trop spécifique aux données d'entraînement, au détriment de la généralisation.",
+        "priority": true,
+        "theme": 6
+      },
+      {
+        "id": "notion-176",
+        "name": "Underfitting",
+        "definition": "modèle insuffisamment adapté aux données d'entraînement.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-177",
+        "name": "Generalization",
+        "definition": "capacité à fonctionner sur des exemples non vus.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-178",
+        "name": "Train / Validation / Test Split",
+        "definition": "séparation des données pour apprentissage, réglage et évaluation finale.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-179",
+        "name": "Data Deduplication",
+        "definition": "élimination de doublons dans un corpus.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-180",
+        "name": "Data Contamination",
+        "definition": "présence d'exemples d'évaluation dans les données d'entraînement ou d'adaptation.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-181",
+        "name": "Data Curation",
+        "definition": "sélection, nettoyage et préparation des exemples.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-182",
+        "name": "Synthetic Data",
+        "definition": "données créées artificiellement, souvent avec un autre modèle.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-183",
+        "name": "Scaling Laws",
+        "definition": "relations empiriques entre taille du modèle, données, calcul et performance.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-184",
+        "name": "Compute-Optimal Training",
+        "definition": "recherche d'un équilibre efficace entre ressources, taille du modèle et volume de données.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-185",
+        "name": "FLOP / FLOPs",
+        "definition": "opération flottante / nombre de ces opérations, indicateur de calcul.",
+        "priority": false,
+        "theme": 6
+      },
+      {
+        "id": "notion-186",
+        "name": "Checkpoint",
+        "definition": "état sauvegardé du modèle pendant ou après l'entraînement.",
+        "priority": false,
+        "theme": 6
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Adaptation, post-training et alignement",
+    "entries": [
+      {
+        "id": "notion-187",
+        "name": "Fine-tuning",
+        "definition": "adaptation d'un modèle préentraîné à de nouvelles données ou tâches.",
+        "priority": true,
+        "theme": 7
+      },
+      {
+        "id": "notion-188",
+        "name": "Full Fine-tuning",
+        "definition": "mise à jour de la quasi-totalité ou de la totalité des paramètres.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-189",
+        "name": "SFT (Supervised Fine-Tuning)",
+        "definition": "adaptation supervisée sur des exemples de consignes et de bonnes réponses.",
+        "priority": true,
+        "theme": 7
+      },
+      {
+        "id": "notion-190",
+        "name": "Instruction Tuning",
+        "definition": "entraînement destiné à améliorer le respect de consignes.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-191",
+        "name": "Continued Pretraining",
+        "definition": "poursuite du préentraînement sur un nouveau corpus ou domaine.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-192",
+        "name": "Domain Adaptation",
+        "definition": "adaptation à un secteur ou un type de données particulier.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-193",
+        "name": "PEFT (Parameter-Efficient Fine-Tuning)",
+        "definition": "méthodes n'entraînant qu'une petite partie des paramètres ou des modules ajoutés.",
+        "priority": true,
+        "theme": 7
+      },
+      {
+        "id": "notion-194",
+        "name": "LoRA (Low-Rank Adaptation)",
+        "definition": "adaptation par matrices supplémentaires de faible rang.",
+        "priority": true,
+        "theme": 7
+      },
+      {
+        "id": "notion-195",
+        "name": "QLoRA",
+        "definition": "adaptation de type LoRA avec modèle de base quantifié pour économiser la mémoire.",
+        "priority": true,
+        "theme": 7
+      },
+      {
+        "id": "notion-196",
+        "name": "Adapter",
+        "definition": "petit module entraînable ajouté à un modèle généralement gelé.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-197",
+        "name": "Prompt Tuning / Soft Prompt",
+        "definition": "adaptation via vecteurs de prompt appris, différents d'un prompt texte.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-198",
+        "name": "Prefix Tuning",
+        "definition": "adaptation par états de préfixe entraînables injectés dans des couches.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-199",
+        "name": "Model Merging",
+        "definition": "combinaison de poids ou d'adaptations provenant de plusieurs modèles.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-200",
+        "name": "Knowledge Distillation",
+        "definition": "transfert de comportements d'un modèle professeur vers un modèle élève.",
+        "priority": true,
+        "theme": 7
+      },
+      {
+        "id": "notion-201",
+        "name": "Teacher / Student Model",
+        "definition": "modèle de référence et modèle qui apprend de ses sorties.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-202",
+        "name": "Alignment",
+        "definition": "ajustement du comportement d'un modèle selon des objectifs et préférences souhaités.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-203",
+        "name": "RLHF (Reinforcement Learning from Human Feedback)",
+        "definition": "optimisation utilisant des signaux de préférence humaine et de l'apprentissage par renforcement.",
+        "priority": true,
+        "theme": 7
+      },
+      {
+        "id": "notion-204",
+        "name": "RLAIF",
+        "definition": "utilisation de retours produits par une IA plutôt que par des humains pour guider l'optimisation.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-205",
+        "name": "RLVR (Reinforcement Learning with Verifiable Rewards)",
+        "definition": "apprentissage par renforcement guidé par des vérifications automatiques, par exemple tests de code ou réponses calculables.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-206",
+        "name": "Process Reward Model (PRM)",
+        "definition": "modèle qui évalue des étapes intermédiaires plutôt que seulement le résultat final.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-207",
+        "name": "Outcome Reward Model (ORM)",
+        "definition": "modèle qui évalue principalement le résultat final d'une tentative.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-208",
+        "name": "DPO (Direct Preference Optimization)",
+        "definition": "optimisation directe sur des paires de réponses préférées et rejetées.",
+        "priority": true,
+        "theme": 7
+      },
+      {
+        "id": "notion-209",
+        "name": "PPO (Proximal Policy Optimization)",
+        "definition": "algorithme d'apprentissage par renforcement utilisé dans certains post-entraînements.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-210",
+        "name": "GRPO (Group Relative Policy Optimization)",
+        "definition": "optimisation par groupes de réponses utilisant des récompenses relatives.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-211",
+        "name": "ORPO",
+        "definition": "méthode de préférence combinant une perte supervisée et un terme fondé sur les rapports de chances.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-212",
+        "name": "Preference Dataset",
+        "definition": "ensemble de comparaisons exprimant quelle réponse est préférée.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-213",
+        "name": "Reward Hacking",
+        "definition": "comportement optimisant une mesure de récompense sans atteindre réellement le but.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-214",
+        "name": "Reward Shaping",
+        "definition": "conception de récompenses intermédiaires pour guider l'apprentissage.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-215",
+        "name": "Constitutional AI",
+        "definition": "approche d'entraînement où des principes explicites guident l'évaluation ou la révision des réponses.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-216",
+        "name": "Human-in-the-Loop (HITL)",
+        "definition": "intervention humaine à des étapes clés du processus.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-217",
+        "name": "Post-training",
+        "definition": "ensemble des étapes d'adaptation du modèle après le préentraînement initial.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-218",
+        "name": "Alignment Tax / Capability Trade-off",
+        "definition": "possible coût de performance associé à certaines contraintes de comportement.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-219",
+        "name": "Machine Unlearning",
+        "definition": "techniques visant à réduire ou retirer l'influence d'une partie des données apprises.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-220",
+        "name": "Catastrophic Forgetting",
+        "definition": "perte de certaines compétences lors d'une adaptation sur de nouvelles données.",
+        "priority": false,
+        "theme": 7
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Inférence, optimisation, mémoire et performances",
+    "entries": [
+      {
+        "id": "notion-221",
+        "name": "Inference (inférence)",
+        "definition": "exécution d'un modèle entraîné pour produire une prédiction ou une réponse.",
+        "priority": true,
+        "theme": 8
+      },
+      {
+        "id": "notion-222",
+        "name": "Quantization (quantification)",
+        "definition": "représentation de poids ou activations avec moins de bits pour réduire le coût matériel.",
+        "priority": true,
+        "theme": 8
+      },
+      {
+        "id": "notion-223",
+        "name": "FP32 / FP16 / BF16",
+        "definition": "formats numériques à virgule flottante utilisés pour stocker et calculer.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-224",
+        "name": "FP8 / FP4",
+        "definition": "formats flottants plus compacts utilisés dans certaines optimisations matérielles.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-225",
+        "name": "INT8 / INT4",
+        "definition": "formats entiers sur 8 ou 4 bits souvent employés en quantification.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-226",
+        "name": "PTQ (Post-Training Quantization)",
+        "definition": "quantification appliquée après l'entraînement.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-227",
+        "name": "QAT (Quantization-Aware Training)",
+        "definition": "entraînement tenant compte des effets de la quantification.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-228",
+        "name": "AWQ (Activation-Aware Weight Quantization)",
+        "definition": "méthode de quantification des poids utilisant l'information des activations.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-229",
+        "name": "GPTQ",
+        "definition": "famille de méthodes de quantification post-entraînement des poids de LLM.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-230",
+        "name": "GGUF",
+        "definition": "format de fichiers utilisé notamment pour distribuer et charger des modèles quantifiés localement.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-231",
+        "name": "ONNX",
+        "definition": "format d'échange de graphes de modèles et écosystème d'exécution associé.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-232",
+        "name": "KV Cache (Key-Value Cache)",
+        "definition": "conservation des clés et valeurs d'attention pour éviter de les recalculer à chaque token.",
+        "priority": true,
+        "theme": 8
+      },
+      {
+        "id": "notion-233",
+        "name": "Prefix Caching",
+        "definition": "réutilisation du calcul d'un préfixe identique entre plusieurs requêtes.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-234",
+        "name": "Prompt Caching",
+        "definition": "mise en cache de parties d'entrées pour économiser du calcul selon le fournisseur.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-235",
+        "name": "KV Cache Quantization",
+        "definition": "compression numérique des entrées du cache K/V.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-236",
+        "name": "KV Cache Offloading",
+        "definition": "déplacement de tout ou partie du cache hors de la mémoire accélérateur.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-237",
+        "name": "Speculative Decoding",
+        "definition": "génération de tokens candidats par un modèle rapide puis validation par un modèle cible.",
+        "priority": true,
+        "theme": 8
+      },
+      {
+        "id": "notion-238",
+        "name": "Draft Model",
+        "definition": "petit modèle proposant les tokens candidats en speculative decoding.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-239",
+        "name": "Continuous Batching",
+        "definition": "regroupement dynamique de requêtes actives pendant la génération.",
+        "priority": true,
+        "theme": 8
+      },
+      {
+        "id": "notion-240",
+        "name": "Dynamic Batching",
+        "definition": "création de lots à la volée selon les requêtes reçues.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-241",
+        "name": "Chunked Prefill",
+        "definition": "découpage du traitement du prompt en morceaux planifiables.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-242",
+        "name": "Disaggregated Prefill / Decode",
+        "definition": "exécution des deux phases sur des ressources séparées.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-243",
+        "name": "TTFT (Time To First Token)",
+        "definition": "délai avant l'arrivée du premier token généré.",
+        "priority": true,
+        "theme": 8
+      },
+      {
+        "id": "notion-244",
+        "name": "TTLT (Time To Last Token)",
+        "definition": "délai jusqu'au dernier token généré.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-245",
+        "name": "Tokens per Second (TPS)",
+        "definition": "débit de production des tokens, souvent exprimé par requête.",
+        "priority": true,
+        "theme": 8
+      },
+      {
+        "id": "notion-246",
+        "name": "Throughput",
+        "definition": "volume total de travail traité par unité de temps.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-247",
+        "name": "Latency",
+        "definition": "temps pris par une requête ou une partie de son traitement.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-248",
+        "name": "P50 / P95 / P99 Latency",
+        "definition": "percentiles des temps de réponse, utiles pour mesurer les cas lents.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-249",
+        "name": "Concurrency",
+        "definition": "nombre de requêtes pouvant être traitées simultanément.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-250",
+        "name": "Tail Latency",
+        "definition": "latence des requêtes les plus lentes.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-251",
+        "name": "Batch Size at Inference",
+        "definition": "nombre d'entrées traitées ensemble pendant le service.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-252",
+        "name": "Memory Bandwidth",
+        "definition": "vitesse de transfert vers ou depuis la mémoire, souvent cruciale pour le décodage.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-253",
+        "name": "Compute-Bound / Memory-Bound",
+        "definition": "tâche limitée principalement par la puissance de calcul ou par les accès mémoire.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-254",
+        "name": "Model Serving",
+        "definition": "mise à disposition d'un modèle pour répondre à des requêtes.",
+        "priority": true,
+        "theme": 8
+      },
+      {
+        "id": "notion-255",
+        "name": "Inference Engine",
+        "definition": "logiciel exécutant efficacement les calculs de génération.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-256",
+        "name": "Kernel Fusion",
+        "definition": "combinaison d'opérations bas niveau pour limiter les transferts et surcoûts.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-257",
+        "name": "CUDA Kernel",
+        "definition": "fonction de calcul exécutée sur GPU NVIDIA avec CUDA.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-258",
+        "name": "Compilation / Graph Optimization",
+        "definition": "transformation du graphe de calcul pour accélérer l'exécution.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-259",
+        "name": "Weight-Only Quantization",
+        "definition": "quantification des poids tout en conservant d'autres calculs à une précision plus élevée.",
+        "priority": false,
+        "theme": 8
+      },
+      {
+        "id": "notion-260",
+        "name": "Offloading",
+        "definition": "placement de certains poids ou caches sur CPU, disque ou autre mémoire.",
+        "priority": false,
+        "theme": 8
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Embeddings, moteurs de recherche et RAG",
+    "entries": [
+      {
+        "id": "notion-261",
+        "name": "RAG (Retrieval-Augmented Generation)",
+        "definition": "récupération de sources externes pertinentes avant de générer une réponse.",
+        "priority": true,
+        "theme": 9
+      },
+      {
+        "id": "notion-262",
+        "name": "Retrieval",
+        "definition": "recherche de passages ou documents candidats.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-263",
+        "name": "Embedding",
+        "definition": "vecteur représentant une entrée dans un espace numérique.",
+        "priority": true,
+        "theme": 9
+      },
+      {
+        "id": "notion-264",
+        "name": "Embedding Space",
+        "definition": "espace où des vecteurs peuvent être comparés selon leur proximité.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-265",
+        "name": "Vector Database",
+        "definition": "base ou moteur optimisé pour stocker et interroger des vecteurs.",
+        "priority": true,
+        "theme": 9
+      },
+      {
+        "id": "notion-266",
+        "name": "Semantic Search",
+        "definition": "recherche fondée sur la proximité de sens plutôt que sur les seuls mots exacts.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-267",
+        "name": "Keyword Search",
+        "definition": "recherche par correspondance de termes.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-268",
+        "name": "BM25",
+        "definition": "méthode classique de classement de documents selon les mots de la requête.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-269",
+        "name": "RRF (Reciprocal Rank Fusion)",
+        "definition": "fusion de plusieurs listes de résultats à partir de leurs rangs plutôt que de scores absolus.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-270",
+        "name": "MMR (Maximal Marginal Relevance)",
+        "definition": "sélection favorisant la pertinence et la diversité des résultats récupérés.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-271",
+        "name": "Hybrid Search",
+        "definition": "combinaison de recherche lexicale et vectorielle.",
+        "priority": true,
+        "theme": 9
+      },
+      {
+        "id": "notion-272",
+        "name": "Cosine Similarity",
+        "definition": "mesure de proximité fondée sur l'angle entre deux vecteurs.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-273",
+        "name": "Dot Product",
+        "definition": "produit scalaire utilisé comme score de similarité ou d'attention.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-274",
+        "name": "Nearest Neighbor Search (kNN)",
+        "definition": "recherche des k vecteurs les plus proches.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-275",
+        "name": "ANN (Approximate Nearest Neighbor)",
+        "definition": "recherche approximative de voisins proches, souvent plus rapide à grande échelle.",
+        "priority": true,
+        "theme": 9
+      },
+      {
+        "id": "notion-276",
+        "name": "HNSW",
+        "definition": "structure de graphe efficace pour la recherche approximative de voisins.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-277",
+        "name": "IVF (Inverted File Index)",
+        "definition": "indexation vectorielle partitionnant l'espace en groupes.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-278",
+        "name": "Metadata Filtering",
+        "definition": "filtrage de documents selon des attributs non vectoriels.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-279",
+        "name": "Chunking",
+        "definition": "découpage de documents en passages indexables.",
+        "priority": true,
+        "theme": 9
+      },
+      {
+        "id": "notion-280",
+        "name": "Chunk Size / Overlap",
+        "definition": "longueur des passages et répétition entre passages adjacents.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-281",
+        "name": "Parent-Child Retrieval",
+        "definition": "recherche de petits passages puis restitution d'un contexte parent plus large.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-282",
+        "name": "Reranking",
+        "definition": "reclassement des candidats récupérés avec un modèle souvent plus précis.",
+        "priority": true,
+        "theme": 9
+      },
+      {
+        "id": "notion-283",
+        "name": "Late Interaction / ColBERT",
+        "definition": "approche de recherche combinant tardivement les représentations des tokens de requête et de document.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-284",
+        "name": "Cross-Encoder",
+        "definition": "modèle évaluant conjointement une requête et un document pour la pertinence.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-285",
+        "name": "Bi-Encoder",
+        "definition": "modèle encodant séparément une requête et un document en vecteurs comparables.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-286",
+        "name": "Query Rewriting",
+        "definition": "reformulation d'une question pour améliorer la recherche.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-287",
+        "name": "Query Expansion",
+        "definition": "enrichissement d'une requête par des termes connexes.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-288",
+        "name": "Multi-Query Retrieval",
+        "definition": "plusieurs recherches reformulées pour couvrir davantage de documents.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-289",
+        "name": "HyDE (Hypothetical Document Embeddings)",
+        "definition": "recherche à partir d'un document hypothétique généré pour la requête.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-290",
+        "name": "Grounding",
+        "definition": "ancrage d'une réponse dans des éléments externes vérifiables.",
+        "priority": true,
+        "theme": 9
+      },
+      {
+        "id": "notion-291",
+        "name": "Attribution / Citation Grounding",
+        "definition": "rattachement explicite d'affirmations à des sources identifiées.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-292",
+        "name": "Knowledge Graph",
+        "definition": "représentation de faits sous forme d'entités et de relations.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-293",
+        "name": "GraphRAG",
+        "definition": "approche de RAG exploitant un graphe de connaissances ou de relations.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-294",
+        "name": "Agentic RAG",
+        "definition": "recherche documentaire orchestrée par un agent qui choisit ses étapes.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-295",
+        "name": "Retrieval Recall / Precision",
+        "definition": "capacité de récupération à trouver les bons documents, avec peu d'intrus.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-296",
+        "name": "Contextual Compression",
+        "definition": "réduction de passages récupérés à l'information pertinente.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-297",
+        "name": "Index Freshness",
+        "definition": "caractère récent des documents présents dans l'index de recherche.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-298",
+        "name": "Embedding Drift",
+        "definition": "changement de caractéristiques des représentations affectant les comparaisons dans le temps.",
+        "priority": false,
+        "theme": 9
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Prompts, consignes et formats de sortie",
+    "entries": [
+      {
+        "id": "notion-299",
+        "name": "Prompt",
+        "definition": "entrée envoyée au modèle pour orienter sa réponse.",
+        "priority": true,
+        "theme": 10
+      },
+      {
+        "id": "notion-300",
+        "name": "Prompt Engineering",
+        "definition": "conception et amélioration de prompts pour une tâche.",
+        "priority": true,
+        "theme": 10
+      },
+      {
+        "id": "notion-301",
+        "name": "System Message / System Prompt",
+        "definition": "instructions de haut niveau définissant le cadre de l'assistant.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-302",
+        "name": "Developer Message",
+        "definition": "consignes applicatives distinctes de la requête finale de l'utilisateur.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-303",
+        "name": "User Message",
+        "definition": "demande ou contenu fourni par l'utilisateur.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-304",
+        "name": "Few-Shot Prompting",
+        "definition": "présentation de quelques exemples de la tâche attendue.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-305",
+        "name": "Zero-Shot Prompting",
+        "definition": "demande sans exemple fourni dans le prompt.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-306",
+        "name": "One-Shot Prompting",
+        "definition": "demande accompagnée d'un unique exemple.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-307",
+        "name": "In-Context Learning (ICL)",
+        "definition": "adaptation du comportement à partir des exemples inclus dans le contexte, sans changer les poids.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-308",
+        "name": "Chain-of-Thought (CoT)",
+        "definition": "raisonnement explicité en étapes ; ne garantit pas que l'explication reflète le calcul interne.",
+        "priority": true,
+        "theme": 10
+      },
+      {
+        "id": "notion-309",
+        "name": "Self-Consistency",
+        "definition": "comparaison de plusieurs réponses ou parcours pour améliorer un choix final.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-310",
+        "name": "Tree of Thoughts (ToT)",
+        "definition": "exploration structurée de plusieurs pistes de raisonnement.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-311",
+        "name": "Prompt Chaining",
+        "definition": "enchaînement de plusieurs prompts ou appels de modèles.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-312",
+        "name": "Structured Output",
+        "definition": "réponse contrainte à une structure attendue, telle qu'un objet JSON.",
+        "priority": true,
+        "theme": 10
+      },
+      {
+        "id": "notion-313",
+        "name": "JSON Schema",
+        "definition": "description formelle des champs et types attendus en JSON.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-314",
+        "name": "Constrained Decoding",
+        "definition": "génération limitée aux continuations conformes à des règles ou un schéma.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-315",
+        "name": "Grammar-Constrained Generation",
+        "definition": "génération dont les continuations autorisées sont contraintes par une grammaire explicite pendant le choix des Tokens.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-316",
+        "name": "Tool Schema",
+        "definition": "description formelle des paramètres d'un outil accessible à un modèle.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-317",
+        "name": "Context Engineering",
+        "definition": "conception des données, outils et instructions réellement placés dans le contexte.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-318",
+        "name": "Prompt Template",
+        "definition": "modèle réutilisable de prompt avec variables.",
+        "priority": false,
+        "theme": 10
+      },
+      {
+        "id": "notion-319",
+        "name": "Guardrail",
+        "definition": "contrôle applicatif de conformité, sécurité ou format placé autour de l'usage du modèle.",
+        "priority": false,
+        "theme": 10
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Agents, outils et orchestration",
+    "entries": [
+      {
+        "id": "notion-320",
+        "name": "AI Agent",
+        "definition": "système qui utilise un modèle pour décider de certaines étapes et exécuter des actions via des outils.",
+        "priority": true,
+        "theme": 11
+      },
+      {
+        "id": "notion-321",
+        "name": "Agentic Workflow",
+        "definition": "processus dans lequel un agent planifie, agit et adapte son exécution.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-322",
+        "name": "Tool Calling / Function Calling",
+        "definition": "demande structurée d'exécution d'un outil externe.",
+        "priority": true,
+        "theme": 11
+      },
+      {
+        "id": "notion-323",
+        "name": "Tool Result / Tool Output",
+        "definition": "résultat renvoyé par un outil, à traiter comme une donnée externe potentiellement non fiable.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-324",
+        "name": "Planner",
+        "definition": "composant qui décompose un objectif en sous-tâches.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-325",
+        "name": "Executor",
+        "definition": "composant qui réalise les actions ou appels prévus.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-326",
+        "name": "Orchestrator",
+        "definition": "composant organisant les étapes, agents et outils.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-327",
+        "name": "ReAct",
+        "definition": "schéma de fonctionnement alternant réflexion, action et observation.",
+        "priority": true,
+        "theme": 11
+      },
+      {
+        "id": "notion-328",
+        "name": "Observe–Act Loop",
+        "definition": "cycle répétant observation de l'environnement et action.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-329",
+        "name": "Multi-Agent System",
+        "definition": "système coordonnant plusieurs agents.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-330",
+        "name": "Supervisor Agent",
+        "definition": "agent qui délègue et supervise d'autres agents.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-331",
+        "name": "Sub-Agent",
+        "definition": "agent spécialisé appelé par un agent ou orchestrateur principal.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-332",
+        "name": "Handoff",
+        "definition": "transfert de responsabilité ou de contexte vers un autre agent.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-333",
+        "name": "Tool Router",
+        "definition": "composant déterminant quel outil doit recevoir une requête.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-334",
+        "name": "Model Router / Model Cascading",
+        "definition": "sélection du modèle le plus approprié en fonction d'une requête.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-335",
+        "name": "A2A (Agent-to-Agent)",
+        "definition": "famille de conventions ou protocoles pour faire communiquer des agents entre eux.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-336",
+        "name": "Computer Use",
+        "definition": "capacité d'un agent à interagir avec une interface graphique en cliquant et en saisissant du texte.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-337",
+        "name": "MCP (Model Context Protocol)",
+        "definition": "protocole pour connecter des applications d'IA à des outils et sources de contexte.",
+        "priority": true,
+        "theme": 11
+      },
+      {
+        "id": "notion-338",
+        "name": "Plugin / Connector",
+        "definition": "intégration donnant accès à une application ou un système externe.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-339",
+        "name": "Skill",
+        "definition": "procédure ou capacité réutilisable mise à disposition d'un agent.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-340",
+        "name": "Agent Memory",
+        "definition": "stockage d'informations utiles sur plusieurs étapes ou interactions.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-341",
+        "name": "Short-Term Memory",
+        "definition": "état de travail et contexte récent.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-342",
+        "name": "Long-Term Memory",
+        "definition": "conservation durable d'informations pour des interactions futures.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-343",
+        "name": "Episodic Memory",
+        "definition": "stockage d'événements ou d'interactions passés.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-344",
+        "name": "Semantic Memory",
+        "definition": "stockage de faits ou de connaissances abstraites.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-345",
+        "name": "Human Approval / Human-in-the-Loop",
+        "definition": "Human Approval est une validation humaine avant une action ; c’est une forme de Human-in-the-Loop, qui peut aussi intervenir pour annoter, corriger ou superviser.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-346",
+        "name": "Sandbox",
+        "definition": "environnement isolant l'exécution de code ou d'outils.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-347",
+        "name": "Idempotency",
+        "definition": "propriété d'une opération répétée sans effet additionnel indésirable.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-348",
+        "name": "Workflow State",
+        "definition": "représentation de l'avancement et des résultats intermédiaires d'un processus.",
+        "priority": false,
+        "theme": 11
+      },
+      {
+        "id": "notion-349",
+        "name": "Rollback",
+        "definition": "retour à un état antérieur après une action ou un échec.",
+        "priority": false,
+        "theme": 11
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Évaluation, qualité, métriques et limites",
+    "entries": [
+      {
+        "id": "notion-350",
+        "name": "SOTA (State of the Art)",
+        "definition": "meilleur niveau connu dans un domaine ou sur un test précis à un instant donné.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-351",
+        "name": "Benchmark",
+        "definition": "jeu d'épreuves standardisé pour comparer des modèles ou systèmes.",
+        "priority": true,
+        "theme": 12
+      },
+      {
+        "id": "notion-352",
+        "name": "Eval / Evaluation Harness",
+        "definition": "protocole ou logiciel qui exécute et mesure des tests de modèles.",
+        "priority": true,
+        "theme": 12
+      },
+      {
+        "id": "notion-353",
+        "name": "Ground Truth",
+        "definition": "référence considérée comme correcte pour évaluer une sortie.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-354",
+        "name": "Golden Dataset",
+        "definition": "ensemble d'exemples de référence validés.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-355",
+        "name": "Hallucination",
+        "definition": "génération d'une affirmation non fondée ou fausse, présentée comme plausible.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-356",
+        "name": "Factuality",
+        "definition": "exactitude factuelle d'une sortie.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-357",
+        "name": "Faithfulness",
+        "definition": "fidélité d'une réponse aux sources ou preuves fournies.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-358",
+        "name": "Helpfulness",
+        "definition": "utilité de la réponse pour l'objectif de l'utilisateur.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-359",
+        "name": "Robustness",
+        "definition": "capacité à maintenir un comportement correct malgré des perturbations.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-360",
+        "name": "Calibration",
+        "definition": "correspondance entre niveaux de confiance et fréquences réelles de réussite.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-361",
+        "name": "Confidence Score",
+        "definition": "estimation de confiance, qui peut être mal calibrée.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-362",
+        "name": "Accuracy",
+        "definition": "proportion de prédictions exactes parmi les cas évalués.",
+        "priority": true,
+        "theme": 12
+      },
+      {
+        "id": "notion-363",
+        "name": "Precision",
+        "definition": "parmi les prédictions positives, proportion réellement positive.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-364",
+        "name": "Recall / Rappel",
+        "definition": "parmi les vrais cas positifs, proportion correctement retrouvée.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-365",
+        "name": "F1 Score",
+        "definition": "moyenne harmonique de précision et de rappel.",
+        "priority": true,
+        "theme": 12
+      },
+      {
+        "id": "notion-366",
+        "name": "False Positive (FP)",
+        "definition": "cas annoncé positif alors qu'il ne l'est pas.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-367",
+        "name": "False Negative (FN)",
+        "definition": "cas positif passé inaperçu.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-368",
+        "name": "Confusion Matrix",
+        "definition": "tableau des erreurs et succès de classification.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-369",
+        "name": "Pass@k",
+        "definition": "mesure de la proportion de tâches pour lesquelles au moins une des k propositions satisfait le critère de réussite défini.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-370",
+        "name": "Exact Match (EM)",
+        "definition": "proportion de réponses correspondant exactement à la référence.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-371",
+        "name": "BLEU / ROUGE",
+        "definition": "métriques de similarité textuelle historiquement utilisées en traduction ou résumé.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-372",
+        "name": "Semantic Similarity",
+        "definition": "proximité de sens entre deux textes.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-373",
+        "name": "LLM-as-a-Judge",
+        "definition": "utilisation d'un autre modèle pour noter une réponse ou une interaction.",
+        "priority": true,
+        "theme": 12
+      },
+      {
+        "id": "notion-374",
+        "name": "Pairwise Evaluation",
+        "definition": "comparaison de deux réponses plutôt qu'une note absolue.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-375",
+        "name": "Human Evaluation",
+        "definition": "appréciation directe par des évaluateurs humains.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-376",
+        "name": "A/B Testing",
+        "definition": "comparaison de versions sur des groupes ou des flux distincts.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-377",
+        "name": "Model Collapse",
+        "definition": "dégradation possible quand l'entraînement réutilise excessivement des sorties synthétiques de modèles.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-378",
+        "name": "Data Leakage",
+        "definition": "fuite d'informations entre entraînement, réglage et évaluation.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-379",
+        "name": "Distribution Shift",
+        "definition": "changement entre les données rencontrées et celles utilisées lors du développement.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-380",
+        "name": "OOD (Out-of-Distribution)",
+        "definition": "données situées hors de la distribution habituelle d'entraînement.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-381",
+        "name": "Regression Test",
+        "definition": "test vérifiant qu'une modification n'a pas détérioré un comportement antérieur.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-382",
+        "name": "Red Team Evaluation",
+        "definition": "tests adversariaux cherchant à provoquer des comportements problématiques.",
+        "priority": false,
+        "theme": 12
+      },
+      {
+        "id": "notion-383",
+        "name": "Pareto Frontier",
+        "definition": "ensemble des compromis non dominés, par exemple qualité contre coût et latence.",
+        "priority": false,
+        "theme": 12
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Sécurité, sûreté et confidentialité des LLM",
+    "entries": [
+      {
+        "id": "notion-384",
+        "name": "Prompt Injection",
+        "definition": "tentative de détourner les instructions d'un modèle via un contenu contrôlé par un attaquant.",
+        "priority": true,
+        "theme": 13
+      },
+      {
+        "id": "notion-385",
+        "name": "Direct Prompt Injection",
+        "definition": "attaque insérée directement dans une entrée adressée au système.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-386",
+        "name": "Indirect Prompt Injection",
+        "definition": "instructions hostiles cachées dans une source externe lue par le modèle.",
+        "priority": true,
+        "theme": 13
+      },
+      {
+        "id": "notion-387",
+        "name": "Jailbreak",
+        "definition": "contournement tenté des restrictions comportementales d'un modèle.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-388",
+        "name": "System Prompt Leakage",
+        "definition": "exposition d'instructions internes censées rester non publiques.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-389",
+        "name": "Data Exfiltration",
+        "definition": "sortie non autorisée d'informations vers une destination externe.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-390",
+        "name": "Least Privilege (moindre privilège)",
+        "definition": "donner à chaque composant uniquement les permissions nécessaires.",
+        "priority": true,
+        "theme": 13
+      },
+      {
+        "id": "notion-391",
+        "name": "Trust Boundary",
+        "definition": "frontière entre contenu/instructions de niveaux de confiance différents.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-392",
+        "name": "Untrusted Input",
+        "definition": "donnée externe qui ne doit pas devenir une instruction privilégiée.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-393",
+        "name": "Tool Output Injection",
+        "definition": "injection placée dans la réponse d'un outil consommée par l'agent.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-394",
+        "name": "RAG Poisoning",
+        "definition": "modification hostile des documents ou résultats utilisés comme sources RAG.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-395",
+        "name": "Data Poisoning",
+        "definition": "altération malveillante des données d'entraînement ou d'adaptation.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-396",
+        "name": "Model Poisoning",
+        "definition": "modification malveillante d'un modèle ou de ses poids.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-397",
+        "name": "Backdoor / Trigger",
+        "definition": "comportement caché activé par une condition particulière.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-398",
+        "name": "Model Extraction",
+        "definition": "tentative de reproduire ou dérober le fonctionnement d'un modèle via ses interfaces.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-399",
+        "name": "Model Inversion",
+        "definition": "tentative d'inférer des caractéristiques des données d'entraînement depuis un modèle.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-400",
+        "name": "Membership Inference",
+        "definition": "estimation de la présence d'un exemple dans les données d'entraînement.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-401",
+        "name": "Sensitive Information Disclosure",
+        "definition": "divulgation d'informations privées ou confidentielles.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-402",
+        "name": "PII (Personally Identifiable Information)",
+        "definition": "données permettant d'identifier une personne.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-403",
+        "name": "Secret Management",
+        "definition": "gestion sécurisée des clés, tokens et identifiants d'accès.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-404",
+        "name": "Excessive Agency",
+        "definition": "permissions, autonomie ou capacités trop larges accordées à un agent.",
+        "priority": true,
+        "theme": 13
+      },
+      {
+        "id": "notion-405",
+        "name": "Improper Output Handling",
+        "definition": "absence de validation de la sortie avant son emploi par un système aval.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-406",
+        "name": "Output Validation",
+        "definition": "vérification de la structure, du contenu et de la sûreté des sorties.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-407",
+        "name": "Content Filtering",
+        "definition": "détection ou blocage de contenus selon des règles.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-408",
+        "name": "Moderation",
+        "definition": "classification ou traitement de contenus au regard de critères de sécurité.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-409",
+        "name": "Rate Limiting",
+        "definition": "limitation du nombre ou du rythme des appels.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-410",
+        "name": "Denial of Service (DoS)",
+        "definition": "attaque visant à rendre un service indisponible.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-411",
+        "name": "Unbounded Consumption",
+        "definition": "consommation non maîtrisée de tokens, calcul ou outils.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-412",
+        "name": "Adversarial Example",
+        "definition": "entrée spécialement construite pour tromper un modèle.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-413",
+        "name": "Red Teaming",
+        "definition": "exercice organisé de tests offensifs dans un cadre autorisé.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-414",
+        "name": "Defense in Depth",
+        "definition": "superposition de contrôles complémentaires plutôt qu'une protection unique.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-415",
+        "name": "Audit Log / Trace",
+        "definition": "journal des actions, appels et décisions utile aux enquêtes.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-416",
+        "name": "Provenance",
+        "definition": "information sur l'origine et les transformations d'un contenu ou d'une donnée.",
+        "priority": false,
+        "theme": 13
+      },
+      {
+        "id": "notion-417",
+        "name": "PII Redaction",
+        "definition": "suppression ou masquage des données personnelles sensibles.",
+        "priority": false,
+        "theme": 13
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Images, audio, vidéo et modèles génératifs",
+    "entries": [
+      {
+        "id": "notion-418",
+        "name": "Multimodalité",
+        "definition": "capacité à traiter ou générer plusieurs types de signaux.",
+        "priority": true,
+        "theme": 14
+      },
+      {
+        "id": "notion-419",
+        "name": "Image Encoder",
+        "definition": "module transformant une image en représentations utilisables par un modèle.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-420",
+        "name": "Vision Transformer (ViT)",
+        "definition": "Transformer adapté au traitement des images.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-421",
+        "name": "Patch Embedding",
+        "definition": "transformation de régions d'image en vecteurs d'entrée.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-422",
+        "name": "OCR (Optical Character Recognition)",
+        "definition": "extraction de texte à partir d'images.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-423",
+        "name": "Image Captioning",
+        "definition": "production d'une description textuelle d'une image.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-424",
+        "name": "Visual Question Answering (VQA)",
+        "definition": "réponse à une question fondée sur une image.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-425",
+        "name": "Grounded Vision",
+        "definition": "liaison entre affirmations textuelles et régions ou éléments visuels.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-426",
+        "name": "Text-to-Image",
+        "definition": "génération d'image à partir d'une description textuelle.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-427",
+        "name": "Image-to-Image",
+        "definition": "transformation d'une image guidée par des instructions ou une autre référence.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-428",
+        "name": "Text-to-Video",
+        "definition": "génération de vidéo à partir d'une description.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-429",
+        "name": "Diffusion Model",
+        "definition": "modèle génératif apprenant à inverser un processus de perturbation progressive.",
+        "priority": true,
+        "theme": 14
+      },
+      {
+        "id": "notion-430",
+        "name": "Denoising",
+        "definition": "étape de suppression progressive de bruit dans certaines méthodes génératives.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-431",
+        "name": "Latent Diffusion",
+        "definition": "diffusion effectuée dans un espace latent comprimé plutôt que sur les pixels directement.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-432",
+        "name": "Diffusion Transformer (DiT)",
+        "definition": "architecture de génération par diffusion utilisant des blocs Transformer.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-433",
+        "name": "Flow Matching",
+        "definition": "méthode d'entraînement apprenant une dynamique de transport entre distributions.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-434",
+        "name": "Sampler / Scheduler",
+        "definition": "mécanisme contrôlant les étapes de génération d'un modèle de diffusion.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-435",
+        "name": "Guidance / CFG (Classifier-Free Guidance)",
+        "definition": "technique renforçant l'adhésion d'une génération aux conditions demandées.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-436",
+        "name": "VAE (Variational Autoencoder)",
+        "definition": "modèle apprenant à encoder et décoder via un espace latent probabiliste.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-437",
+        "name": "GAN (Generative Adversarial Network)",
+        "definition": "système entraînant un générateur face à un discriminateur.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-438",
+        "name": "Autoencoder",
+        "definition": "modèle qui apprend à encoder une entrée puis à la reconstruire depuis une représentation interne, pas nécessairement de dimension plus petite.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-439",
+        "name": "Latent Space",
+        "definition": "espace de représentations internes apprises, dont les coordonnées décrivent des caractéristiques des données sans devoir être directement lisibles par un humain.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-440",
+        "name": "ASR (Automatic Speech Recognition)",
+        "definition": "conversion de parole en texte.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-441",
+        "name": "TTS (Text-to-Speech)",
+        "definition": "synthèse de parole depuis un texte.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-442",
+        "name": "Speech-to-Speech",
+        "definition": "transformation ou génération vocale directement depuis de l'audio.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-443",
+        "name": "Voice Activity Detection (VAD)",
+        "definition": "détection de zones contenant de la parole.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-444",
+        "name": "Speaker Diarization",
+        "definition": "attribution des segments de parole à des locuteurs distincts, sans nécessairement connaître leur identité réelle.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-445",
+        "name": "Audio Tokenization / Codec Tokens",
+        "definition": "représentation d'audio en unités discrètes exploitables par un modèle.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-446",
+        "name": "Streaming ASR",
+        "definition": "transcription progressive d'une entrée audio en cours.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-447",
+        "name": "Real-Time Multimodal",
+        "definition": "traitement interactif de texte, son, image ou vidéo avec faible latence.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-448",
+        "name": "Action Token",
+        "definition": "représentation discrète d'une action dans certains modèles d'action ou de robotique.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-449",
+        "name": "JEPA (Joint Embedding Predictive Architecture)",
+        "definition": "famille de méthodes prédisant des représentations latentes plutôt que de reconstruire le signal brut.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-450",
+        "name": "Contrastive Learning",
+        "definition": "apprentissage rapprochant les représentations de paires liées et éloignant celles de paires différentes.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-451",
+        "name": "CLIP",
+        "definition": "approche d'apprentissage contrastif reliant représentations d'images et de textes.",
+        "priority": false,
+        "theme": 14
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Infrastructure, déploiement et exploitation",
+    "entries": [
+      {
+        "id": "notion-452",
+        "name": "GPU (Graphics Processing Unit)",
+        "definition": "accélérateur massivement parallèle très utilisé pour les réseaux neuronaux.",
+        "priority": true,
+        "theme": 15
+      },
+      {
+        "id": "notion-453",
+        "name": "TPU (Tensor Processing Unit)",
+        "definition": "accélérateur spécialisé dans les calculs de tenseurs.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-454",
+        "name": "NPU (Neural Processing Unit)",
+        "definition": "processeur spécialisé pour certains calculs d'IA.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-455",
+        "name": "VRAM / HBM",
+        "definition": "mémoire vidéo / mémoire à large bande passante employée par les accélérateurs.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-456",
+        "name": "Tensor",
+        "definition": "tableau multidimensionnel de valeurs numériques.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-457",
+        "name": "Matrix Multiplication (MatMul)",
+        "definition": "opération dominante de nombreuses couches des réseaux neuronaux.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-458",
+        "name": "Tensor Core",
+        "definition": "unité matérielle spécialisée dans certaines opérations matricielles.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-459",
+        "name": "CUDA",
+        "definition": "plateforme de programmation parallèle pour GPU NVIDIA.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-460",
+        "name": "ROCm",
+        "definition": "écosystème logiciel de calcul accéléré notamment utilisé avec GPU AMD.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-461",
+        "name": "PyTorch",
+        "definition": "bibliothèque courante de développement de modèles neuronaux.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-462",
+        "name": "JAX",
+        "definition": "environnement de calcul numérique et d'autodifférentiation performant.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-463",
+        "name": "Hugging Face Transformers",
+        "definition": "bibliothèque d'architectures et d'outils pour utiliser des modèles préentraînés.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-464",
+        "name": "vLLM",
+        "definition": "moteur de service de LLM optimisé pour le débit et la gestion de mémoire.",
+        "priority": true,
+        "theme": 15
+      },
+      {
+        "id": "notion-465",
+        "name": "llama.cpp",
+        "definition": "moteur d'inférence particulièrement connu pour l'exécution locale de modèles.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-466",
+        "name": "TensorRT-LLM",
+        "definition": "ensemble d'optimisations pour l'inférence de LLM, notamment sur GPU NVIDIA.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-467",
+        "name": "Triton",
+        "definition": "langage et environnement pour écrire des kernels optimisés sur accélérateurs.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-468",
+        "name": "Data Parallelism",
+        "definition": "copie du modèle sur plusieurs dispositifs traitant des portions différentes de données.",
+        "priority": true,
+        "theme": 15
+      },
+      {
+        "id": "notion-469",
+        "name": "Tensor Parallelism",
+        "definition": "répartition de calculs matriciels et de tenseurs d'une couche sur plusieurs dispositifs.",
+        "priority": true,
+        "theme": 15
+      },
+      {
+        "id": "notion-470",
+        "name": "Pipeline Parallelism",
+        "definition": "distribution de couches successives sur plusieurs dispositifs.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-471",
+        "name": "Model Parallelism",
+        "definition": "terme général pour répartir les calculs d'un même modèle.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-472",
+        "name": "Distributed Training",
+        "definition": "entraînement réparti sur plusieurs dispositifs ou machines.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-473",
+        "name": "Gradient Checkpointing / Activation Checkpointing",
+        "definition": "recalcul de certaines activations pour économiser la mémoire d'entraînement.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-474",
+        "name": "ZeRO",
+        "definition": "famille de stratégies répartissant les états d'optimisation, gradients et paramètres.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-475",
+        "name": "Sharding",
+        "definition": "partitionnement de poids, données ou caches entre ressources.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-476",
+        "name": "Inference Endpoint",
+        "definition": "point d'accès réseau exposant les capacités d'un modèle.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-477",
+        "name": "API (Application Programming Interface)",
+        "definition": "interface logicielle structurée pour appeler un service.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-478",
+        "name": "SLA / SLO",
+        "definition": "engagement / objectif de niveau de service, notamment sur disponibilité et latence.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-479",
+        "name": "Observability",
+        "definition": "collecte de métriques, traces et journaux pour comprendre un système.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-480",
+        "name": "Model Registry",
+        "definition": "catalogue versionné des modèles et de leurs métadonnées.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-481",
+        "name": "MLflow / Experiment Tracking",
+        "definition": "outils ou pratiques de suivi des expériences et versions de modèles.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-482",
+        "name": "MLOps / LLMOps",
+        "definition": "pratiques d'industrialisation, surveillance et maintenance des modèles / applications LLM.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-483",
+        "name": "Canary Deployment",
+        "definition": "diffusion progressive d'une nouvelle version sur une fraction du trafic.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-484",
+        "name": "Rollback Deployment",
+        "definition": "retour à une version précédente lors d'un problème.",
+        "priority": false,
+        "theme": 15
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Distribution des modèles, écosystème et culture technique",
+    "entries": [
+      {
+        "id": "notion-485",
+        "name": "Open Weights",
+        "definition": "poids téléchargeables, avec des droits d'utilisation qui dépendent de la licence.",
+        "priority": true,
+        "theme": 16
+      },
+      {
+        "id": "notion-486",
+        "name": "Open Source",
+        "definition": "accès au code source sous une licence répondant à des critères d'ouverture ; à distinguer de simples poids ouverts.",
+        "priority": true,
+        "theme": 16
+      },
+      {
+        "id": "notion-487",
+        "name": "Proprietary / Closed Model",
+        "definition": "modèle dont les poids ou les conditions d'utilisation restent contrôlés par son éditeur.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-488",
+        "name": "Model Card",
+        "definition": "fiche documentant usages, limites, risques et conditions d'un modèle.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-489",
+        "name": "Dataset Card",
+        "definition": "documentation de l'origine, du contenu et des limites d'un jeu de données.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-490",
+        "name": "License",
+        "definition": "règles juridiques d'utilisation, modification et redistribution d'un modèle ou de son code.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-491",
+        "name": "Commercial-Use License",
+        "definition": "licence précisant les droits d'exploitation commerciale.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-492",
+        "name": "Gated Model",
+        "definition": "modèle dont les fichiers exigent un accès ou l'acceptation de conditions.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-493",
+        "name": "API-only Model",
+        "definition": "modèle utilisable via un service sans accès direct aux poids.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-494",
+        "name": "On-Premises / Self-Hosted",
+        "definition": "déploiement sur l'infrastructure du client / hébergement géré par soi-même.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-495",
+        "name": "Edge AI / On-Device AI",
+        "definition": "traitement local sur un équipement proche de l'utilisateur.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-496",
+        "name": "Model Hub",
+        "definition": "plateforme de publication, recherche et téléchargement de modèles.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-497",
+        "name": "Leaderboard",
+        "definition": "classement de modèles d'après certaines évaluations.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-498",
+        "name": "AI Slop",
+        "definition": "appellation familière de contenu généré massivement par IA avec une faible qualité ou faible valeur.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-499",
+        "name": "Frontier Model",
+        "definition": "terme informel désignant des modèles à la pointe des capacités disponibles.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-500",
+        "name": "Model Family",
+        "definition": "ensemble de variantes apparentées d'un modèle.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-501",
+        "name": "Model Variant / Size",
+        "definition": "déclinaison différant par sa taille, ses capacités ou son mode d'emploi.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-502",
+        "name": "Research Paper / Preprint",
+        "definition": "publication scientifique / manuscrit diffusé avant examen formel éventuel.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-503",
+        "name": "ArXiv",
+        "definition": "plateforme de diffusion de prépublications scientifiques.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-504",
+        "name": "Reproducibility",
+        "definition": "capacité à reproduire un résultat avec des conditions et procédures documentées.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-505",
+        "name": "Inference Cost / Token Pricing",
+        "definition": "coût de traitement des entrées et sorties, souvent tarifé au token.",
+        "priority": false,
+        "theme": 16
+      },
+      {
+        "id": "notion-506",
+        "name": "TCO (Total Cost of Ownership)",
+        "definition": "coût total d'exploitation, intégrant matériel, hébergement et maintenance.",
+        "priority": false,
+        "theme": 16
+      }
+    ]
+  }
+]

@@ -1,0 +1,934 @@
+{
+  "6": [
+    {
+      "goal": "Comprendre ce qu’un modèle apprend de son corpus et organiser des données qui permettent de mesurer ses progrès réels.",
+      "sections": [
+        {
+          "heading": "Apprendre une tâche commence par définir un signal",
+          "paragraphs": [
+            "Le Pretraining est la première grande phase d’apprentissage d’un modèle. Un Training Dataset, aussi appelé corpus, fournit les exemples à partir desquels ses Parameters sont ajustés. Pour un modèle de langage, l’objectif peut être de prédire la suite d’un texte. Ce travail apprend des régularités utiles, mais le corpus n’est pas conservé comme une bibliothèque de fiches consultées une à une.",
+            "La manière de construire la cible distingue plusieurs approches. En Supervised Learning, chaque exemple possède une réponse ou un Label de référence. En Self-Supervised Learning, la cible vient des données elles-mêmes : cacher une partie du texte ou décaler les Tokens fournit une question et sa réponse attendue. Unsupervised Learning désigne plus largement la recherche de structures sans Labels explicites ; selon les classifications, le Self-Supervised Learning en constitue une famille particulière."
+          ]
+        },
+        {
+          "heading": "Les données doivent représenter le travail à accomplir",
+          "paragraphs": [
+            "Imaginons un assistant destiné au support technique. Des conversations réelles, des notices et des exemples synthétiques ne lui apprennent pas exactement les mêmes choses. La Data Curation consiste à sélectionner, nettoyer et préparer ce corpus selon l’objectif. La Data Deduplication retire les répétitions inutiles : mille copies d’une même notice ne constituent pas mille situations différentes.",
+            "Les Synthetic Data sont créées artificiellement, souvent par un autre modèle. Elles peuvent enrichir des cas rares ou fournir des formats réguliers, mais elles peuvent aussi répéter les erreurs de leur générateur. Il faut examiner leur origine, leur diversité et leurs réponses. Un corpus très bien présenté peut rester pauvre si tous ses exemples utilisent le même type de question."
+          ]
+        },
+        {
+          "heading": "Séparer l’apprentissage, les choix et le jugement final",
+          "paragraphs": [
+            "Le Train / Validation / Test Split attribue trois rôles différents aux données. Le Training sert aux mises à jour des Parameters ; la validation aide à comparer les réglages ; le Test Dataset réservé estime le résultat après ces choix. Si les réponses du test se trouvent dans le corpus, une Data Contamination peut donner l’impression que le modèle généralise alors qu’il a déjà rencontré les exemples évalués.",
+            "Tous les apprentissages ne reposent pas sur une réponse cible fournie à chaque étape. En Reinforcement Learning, une Policy choisit des actions selon la situation et reçoit un signal de récompense. Le but est d’améliorer les décisions selon ce signal. Cette autre organisation explique pourquoi il faut toujours demander quel comportement est récompensé : « apprendre sur des données » ne précise pas encore ce que le modèle apprend à optimiser."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : préparer un corpus de support",
+          "paragraphs": [
+            "L’équipe rassemble les échanges de plusieurs clients. Si des messages presque identiques d’un même incident se trouvent dans le Training et dans le test, le score mesure en partie une familiarité avec cet incident. Une séparation par conversation, client ou période peut être plus informative qu’un tirage aléatoire ligne par ligne. Le bon choix dépend du futur usage : répondre à de nouveaux incidents ou transférer le système à de nouveaux clients ne pose pas la même question.",
+            "Après avoir dédupliqué les échanges, l’équipe réserve des incidents complets pour l’évaluation. Elle vérifie aussi que les résumés synthétiques de ces incidents n’ont pas été réintroduits dans le Training. La contamination peut passer par une reformulation ou un document dérivé, pas seulement par une copie exacte. Le dossier de préparation doit donc conserver la provenance et les transformations appliquées aux données.",
+            "À vous de décider : deux messages concernent la même panne, mais l’un est reformulé par un modèle. Les placer dans deux ensembles différents produit-il un test indépendant ? Non, leur proximité avec le même incident peut faciliter artificiellement la réussite. Regrouper les éléments liés avant la séparation protège mieux le sens de l’évaluation."
+          ]
+        },
+        {
+          "heading": "Le volume ne remplace pas la couverture",
+          "paragraphs": [
+            "Ajouter des exemples améliore surtout les situations qu’ils représentent. Si les demandes complexes, les fautes de frappe ou certaines langues sont absentes, le corpus supplémentaire peut augmenter le volume sans réduire ces lacunes. Une revue utile compare les catégories du corpus aux situations attendues, puis examine les erreurs sur chaque catégorie plutôt que la seule moyenne.",
+            "La validation sert à choisir, donc elle finit elle aussi par influencer le système. Après de nombreuses décisions fondées sur ses résultats, elle ne joue plus le rôle d’un test final indépendant. Il faut conserver un ensemble réservé ou organiser une nouvelle évaluation représentative pour estimer les effets de ces choix sur des cas réellement nouveaux."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Définir le signal d’apprentissage avant de sélectionner les données.",
+        "Distinguer les rôles du Training, de la validation et du test réservé.",
+        "Contrôler la provenance, les répétitions et la couverture des données."
+      ],
+      "concepts": [
+        "notion-150",
+        "notion-151",
+        "notion-152",
+        "notion-153",
+        "notion-154",
+        "notion-155",
+        "notion-156",
+        "notion-178",
+        "notion-179",
+        "notion-180",
+        "notion-181",
+        "notion-182"
+      ]
+    },
+    {
+      "goal": "Suivre une mise à jour de Parameters et comprendre le rôle de la Loss, des Gradients et des réglages de l’Optimizer.",
+      "sections": [
+        {
+          "heading": "D’une prédiction à une valeur de Loss",
+          "paragraphs": [
+            "Le modèle reçoit un Batch, ou Mini-batch, contenant plusieurs exemples. La Batch Size indique combien sont traités ensemble ; une Epoch correspond à un passage sur l’ensemble de données considéré. Ces unités ne sont pas interchangeables : une Epoch peut contenir de nombreux Batches et donc de nombreuses mises à jour. Refaire une Epoch consiste à revoir ces exemples, éventuellement dans un autre ordre.",
+            "Une Loss Function transforme l’écart entre les prédictions et les cibles en une valeur à minimiser. Pour prédire des classes ou des Tokens, la Cross-Entropy Loss pénalise notamment le fait d’attribuer une faible probabilité à la cible correcte. La Perplexity résume l’incertitude d’un modèle de langage à partir de cette Loss moyenne. Une valeur plus faible sur un corpus donné traduit de meilleures probabilités prédictives, pas une preuve que les réponses sont factuellement fiables."
+          ]
+        },
+        {
+          "heading": "Calculer une direction puis décider d’un pas",
+          "paragraphs": [
+            "Le Gradient décrit comment la Loss varie localement quand chaque Parameter change. La Backpropagation calcule ces dérivées en remontant le graphe de calcul. Elle ne choisit pas à elle seule les nouveaux Weights. Un Optimizer utilise les Gradients pour décider d’une mise à jour ; le Gradient Descent en est le principe simple, avec un déplacement opposé au Gradient.",
+            "Le Learning Rate règle l’amplitude des mises à jour des Parameters. Un pas trop grand peut dépasser une zone favorable et rendre le Training instable ; un pas trop petit peut ralentir les progrès. Adam utilise des estimations des Gradients et de leurs carrés pour adapter les mises à jour. AdamW conserve cette logique mais applique séparément la Weight Decay, une réduction des Weights. Ces méthodes modifient le calcul du pas, pas la définition des cibles."
+          ]
+        },
+        {
+          "heading": "Organiser plusieurs étapes de Training",
+          "paragraphs": [
+            "Le Learning Rate Schedule fait évoluer le Learning Rate au cours du Training. Un Warmup l’augmente progressivement au début, avant les phases suivantes du Schedule. Si un Batch souhaité ne tient pas en mémoire, Gradient Accumulation permet d’accumuler les contributions de plusieurs Micro-batches avant une mise à jour. Le Batch effectif augmente, sans rendre chaque Micro-batch physiquement plus grand.",
+            "Un Checkpoint sauvegarde l’état du modèle à une étape donnée. Pour reprendre fidèlement un Training interrompu, les Weights seuls peuvent ne pas suffire : les états de l’Optimizer, du Schedule et de l’exécution comptent aussi. Pour comparer deux essais, il faut donc identifier non seulement le fichier final, mais aussi les données, la Batch Size, les mises à jour et les réglages qui y ont conduit."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : une prédiction de Token incorrecte",
+          "paragraphs": [
+            "Le texte de référence attend « lundi », mais le modèle attribue davantage de probabilité à « mardi ». La Cross-Entropy mesure l’écart par rapport à « lundi ». La Backpropagation calcule quelles variations des Parameters affectent cette Loss, puis l’Optimizer effectue une mise à jour. Le processus ne remplace pas une case « mardi » par une case « lundi » : de nombreux Parameters contribuent à de nombreux contextes.",
+            "Au Batch suivant, la Loss peut remonter parce que les exemples sont différents. Une courbe de Training n’est donc pas une promesse de baisse à chaque étape. Pour interpréter une tendance, on compare des mesures suffisamment représentatives et on vérifie aussi la validation. Une modification qui facilite les exemples du Batch courant peut dégrader d’autres situations.",
+            "Avant de changer un réglage, retracez la chaîne : quelle est la cible, quelle probabilité reçoit-elle, quelle Loss est calculée et quel Optimizer applique la mise à jour ? Cela permet de distinguer une mauvaise donnée, une erreur de calcul et un Learning Rate inadapté. Changer simultanément ces trois éléments empêcherait d’identifier la cause des progrès."
+          ]
+        },
+        {
+          "heading": "Comparer deux configurations sans confondre les unités",
+          "paragraphs": [
+            "Une équipe double Gradient Accumulation mais conserve le nombre d’Epochs. Elle traite autant d’exemples, tout en effectuant moins souvent les mises à jour. Son Schedule doit être interprété avec son unité : nombre de mises à jour, nombre de Tokens ou progression dans le corpus. Garder les mêmes valeurs numériques ne signifie pas garder la même dynamique d’apprentissage.",
+            "La Perplexity n’est comparable que sous des conditions compatibles, notamment le corpus, son découpage et le Tokenizer. Un changement de Tokenization modifie les unités prédites. Comparer directement les chiffres de deux systèmes sans connaître ces conditions peut produire un classement trompeur. La mesure sert à comprendre un objectif précis, puis doit être complétée par l’évaluation de la tâche visée."
+          ]
+        }
+      ],
+      "takeaways": [
+        "La Backpropagation calcule les Gradients ; l’Optimizer met à jour les Parameters.",
+        "Epoch, Batch, Micro-batch et mise à jour décrivent des unités différentes.",
+        "Interpréter une Loss ou une Perplexity avec le protocole qui l’a produite."
+      ],
+      "concepts": [
+        "notion-157",
+        "notion-158",
+        "notion-159",
+        "notion-160",
+        "notion-161",
+        "notion-162",
+        "notion-163",
+        "notion-164",
+        "notion-165",
+        "notion-166",
+        "notion-167",
+        "notion-168",
+        "notion-169",
+        "notion-170",
+        "notion-171",
+        "notion-186"
+      ]
+    },
+    {
+      "goal": "Distinguer un apprentissage insuffisant d’un Overfitting et décider quoi modifier à partir des courbes et des contraintes de calcul.",
+      "sections": [
+        {
+          "heading": "Ce que disent ensemble Training et validation",
+          "paragraphs": [
+            "La Generalization est la capacité à réussir sur des exemples distincts de ceux utilisés pour apprendre. L’Overfitting apparaît lorsque le modèle s’adapte trop aux particularités du Training, au détriment de cette capacité. Une Loss de Training qui baisse pendant que la Loss de validation remonte est un signal classique à examiner, si les données et le protocole de validation restent comparables.",
+            "L’Underfitting correspond à un apprentissage insuffisant : le modèle représente mal les régularités utiles, y compris sur le Training. Il peut manquer de capacité, de calcul, d’informations ou de réglages adaptés. Underfitting et Overfitting demandent des actions différentes. Ajouter encore des étapes n’est pas la même décision quand les erreurs restent élevées partout et quand seul le Training continue à progresser."
+          ]
+        },
+        {
+          "heading": "Réduire l’adaptation aux détails inutiles",
+          "paragraphs": [
+            "La Regularization rassemble des méthodes qui favorisent certaines solutions et limitent une adaptation trop spécifique. Le Dropout désactive aléatoirement certaines Activations pendant le Training, selon sa configuration. Il pousse le réseau à ne pas dépendre toujours des mêmes chemins. Dans l’usage courant, ce comportement aléatoire est désactivé pendant l’Inference.",
+            "La Weight Decay réduit les Weights selon la règle de l’Optimizer. Elle agit sur les Parameters, contrairement au Dropout qui agit sur les Activations pendant le calcul. Ces choix ne remplacent pas des données représentatives. Une validation qui couvre mal l’usage peut conduire à retenir un modèle apparemment bien régularisé mais fragile sur les situations réellement rencontrées."
+          ]
+        },
+        {
+          "heading": "Décider combien de calcul investir",
+          "paragraphs": [
+            "Les Scaling Laws décrivent des relations empiriques entre des ressources comme la taille du modèle, la quantité de données, le calcul et la Loss. Compute-Optimal Training cherche une répartition efficace de ces ressources pour un budget donné. Il ne s’agit pas de choisir systématiquement le modèle le plus grand : un modèle plus grand entraîné trop peu peut être moins intéressant qu’un autre mieux alimenté en données.",
+            "Les FLOPs comptent des opérations à virgule flottante et donnent une mesure du travail de calcul ; une FLOP désigne une opération. Ce nombre ne se confond ni avec le temps réel ni avec le coût financier. Les transferts mémoire, le matériel et l’utilisation des GPU influencent la durée. Une Scaling Law aide à planifier sous ses hypothèses ; l’évaluation des usages reste nécessaire pour choisir le modèle à conserver."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : le support s’améliore puis se dégrade",
+          "paragraphs": [
+            "Une équipe entraîne son assistant sur des demandes courantes. Au début, les Losses de Training et de validation diminuent ensemble. Plus tard, seule la première baisse et les réponses à des formulations nouvelles se détériorent. Elle peut comparer un Checkpoint antérieur, revoir le niveau de Regularization et enrichir les formulations représentées, au lieu d’ajouter automatiquement une nouvelle Epoch.",
+            "Avant de conclure à l’Overfitting, elle vérifie que la validation n’a pas changé de population ou de procédure. Un nouveau lot plus difficile peut aussi faire remonter la Loss. Le diagnostic repose sur plusieurs observations cohérentes : courbes comparables, erreurs concrètes et stabilité des conditions. Un seul chiffre ne permet pas de choisir la correction.",
+            "Examinez deux cas : dans le premier, les erreurs restent élevées sur Training et validation ; dans le second, le Training réussit mais la validation se dégrade. Le premier invite à rechercher un apprentissage insuffisant ou un problème de données. Le second invite à contrôler la généralisation et la comparabilité de la validation. La même baisse du Learning Rate ne répond pas automatiquement aux deux diagnostics."
+          ]
+        },
+        {
+          "heading": "Mesurer les compromis d’une correction",
+          "paragraphs": [
+            "Une hausse de Dropout ou de Weight Decay peut réduire l’écart entre Training et validation tout en rendant les deux performances médiocres. Réduire cet écart n’est donc pas un objectif suffisant. Il faut regarder le niveau absolu de qualité et les catégories d’erreurs importantes, puis décider si le modèle a besoin d’une meilleure couverture des données, d’autres réglages ou de davantage de capacité.",
+            "Pour planifier un nouvel entraînement, l’équipe peut utiliser une tendance empirique observée sur plusieurs petits essais. Elle garde séparées l’estimation de Loss, la mesure de qualité produit et la mesure de coût. Cette séparation évite de présenter une prédiction de Scaling Law comme une garantie de réussite sur toutes les demandes de support."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Diagnostiquer l’Overfitting dans des conditions de validation stables.",
+        "Dropout et Weight Decay régularisent des objets différents.",
+        "Estimer les besoins avec les Scaling Laws, puis évaluer la tâche."
+      ],
+      "concepts": [
+        "notion-172",
+        "notion-173",
+        "notion-174",
+        "notion-175",
+        "notion-176",
+        "notion-177",
+        "notion-183",
+        "notion-184",
+        "notion-185"
+      ]
+    }
+  ],
+  "7": [
+    {
+      "goal": "Choisir entre modifier le contexte, poursuivre un apprentissage et adapter le comportement d’un modèle, en identifiant ce qui est effectivement appris.",
+      "sections": [
+        {
+          "heading": "Une nouvelle entrée ou de nouveaux Parameters ?",
+          "paragraphs": [
+            "Réécrire un Prompt change les informations données au modèle pendant une requête. Le Fine-tuning utilise au contraire un apprentissage pour adapter des Parameters à partir de nouveaux exemples. Cette distinction permet de poser le bon diagnostic : si un assistant manque du document utile, lui donner ce document peut suffire ; s’il applique mal un comportement répété sur de nombreux cas, une adaptation peut être pertinente.",
+            "Le Post-training regroupe les étapes d’adaptation après le Pretraining initial. Instruction Tuning désigne un entraînement visant le suivi des consignes. Continued Pretraining poursuit plutôt un objectif de préentraînement sur un nouveau corpus. Domain Adaptation décrit le but, adapter le modèle à un secteur ou à une distribution particulière, et peut employer différentes méthodes. Ces noms ne décrivent donc pas tous le même niveau de décision."
+          ]
+        },
+        {
+          "heading": "Quand le mot Prompt désigne aussi des vecteurs appris",
+          "paragraphs": [
+            "Le Prompt Tuning entraîne un Soft Prompt, constitué de vecteurs ajoutés au contexte du modèle. Ces vecteurs ne sont pas nécessairement des mots lisibles du vocabulaire. Prefix Tuning utilise des états de préfixe entraînables introduits dans le calcul des Layers. Dans les deux cas, il existe un apprentissage : cela les distingue de la simple rédaction d’une consigne textuelle.",
+            "Pour un assistant de support, une équipe peut commencer par préciser la tâche et fournir quelques exemples dans le Prompt. Si les résultats restent insuffisants, elle compare une adaptation apprise sur un jeu de cas représentatifs. Il faut conserver les mêmes critères d’évaluation pour savoir si le gain vient du contexte ajouté, de l’apprentissage ou d’une différence dans les exemples utilisés."
+          ]
+        },
+        {
+          "heading": "Une adaptation doit aussi préserver ce qui fonctionnait",
+          "paragraphs": [
+            "Le Catastrophic Forgetting est une perte de compétences antérieures après un apprentissage sur de nouvelles données. Une adaptation très spécialisée peut améliorer le vocabulaire du support tout en dégradant d’autres tâches. L’Alignment Tax, ou Capability Trade-off, désigne plus généralement un coût possible en capacité associé à certaines contraintes de comportement. Ce compromis doit être mesuré, et non supposé identique pour tous les modèles.",
+            "Machine Unlearning vise à réduire ou retirer l’influence de certaines données apprises. Un refus obtenu par une nouvelle consigne ne démontre pas que cette influence a disparu des Weights. Adapter un style, faire respecter une règle et oublier une information sont trois objectifs différents. Les exemples d’entraînement et les critères de vérification doivent correspondre à l’objectif réellement recherché."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : un assistant connaît les mots mais pas le format",
+          "paragraphs": [
+            "L’assistant comprend les demandes de support, mais mélange diagnostic, action proposée et statut. L’équipe essaie d’abord un Prompt qui sépare ces trois éléments et présente quelques exemples. Si ce changement suffit sur des cas nouveaux, elle a amélioré l’entrée sans entraînement. Elle conserve un protocole commun pour comparer cette solution à une adaptation apprise.",
+            "Si le format reste instable, Instruction Tuning peut apprendre des couples demande-réponse conformes. Si le modèle comprend mal le vocabulaire du domaine, Continued Pretraining sur des textes adaptés répond à un autre besoin. Le choix dépend du défaut observé. Accumuler du texte technique ne remplace pas des démonstrations du comportement souhaité, et des démonstrations de format ne remplacent pas nécessairement une couverture du vocabulaire.",
+            "À vous de choisir : une nouvelle procédure arrive chaque semaine. Faut-il réentraîner le modèle à chaque publication ? Pas nécessairement : fournir la procédure à jour dans le contexte peut traiter le besoin de fraîcheur. Le Fine-tuning devient une hypothèse à tester si la manière d’appliquer les procédures reste insuffisante malgré un contexte adéquat."
+          ]
+        },
+        {
+          "heading": "Évaluer un changement sans masquer ses effets secondaires",
+          "paragraphs": [
+            "Une adaptation se compare sur deux ensembles : les cas qui motivent le changement et ceux qui représentent les capacités à préserver. Les critères peuvent distinguer le respect du format, l’exactitude des informations et le comportement en cas de données manquantes. Un meilleur score global peut cacher une dégradation sur une catégorie rare mais importante.",
+            "Pour une demande de Machine Unlearning, les essais doivent aussi rechercher l’influence résiduelle des données par plusieurs formulations et contextes. Le fait que l’assistant refuse une question directe ne prouve pas un effacement. Cette différence entre comportement observable et modification interne explique pourquoi un objectif d’oubli demande une méthode et une évaluation particulières."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Le Prompting textuel modifie l’entrée ; le Fine-tuning apprend une adaptation.",
+        "Prompt Tuning et Prefix Tuning utilisent des représentations entraînables.",
+        "Évaluer les compétences acquises, celles préservées et l’objectif exact de l’adaptation."
+      ],
+      "concepts": [
+        "notion-187",
+        "notion-190",
+        "notion-191",
+        "notion-192",
+        "notion-197",
+        "notion-198",
+        "notion-217",
+        "notion-218",
+        "notion-219",
+        "notion-220"
+      ]
+    },
+    {
+      "goal": "Comprendre comment Full Fine-tuning, LoRA et QLoRA répartissent les Parameters entraînés et comparer adaptation, combinaison de modèles et Distillation.",
+      "sections": [
+        {
+          "heading": "Choisir ce qui peut changer pendant l’apprentissage",
+          "paragraphs": [
+            "Le Full Fine-tuning rend entraînable la totalité ou la quasi-totalité des Parameters du modèle. Il offre une grande liberté d’adaptation, mais demande de conserver les éléments nécessaires aux Gradients et à l’Optimizer pour ces Parameters. La mémoire du Training ne se limite donc pas au fichier des Weights utilisé pour une simple Inference.",
+            "PEFT, pour Parameter-Efficient Fine-Tuning, rassemble des méthodes qui entraînent une petite partie des Parameters ou des composants ajoutés. Un Adapter est un module entraînable introduit dans un modèle généralement gelé. L’intérêt est de concentrer l’adaptation sur moins de valeurs, tout en utilisant les capacités du modèle de base. PEFT ne désigne pas une unique architecture de module."
+          ]
+        },
+        {
+          "heading": "LoRA apprend une correction ; QLoRA compacte aussi la base",
+          "paragraphs": [
+            "LoRA conserve généralement une matrice de base gelée et apprend une correction de faible rang à l’aide de petites matrices. Au lieu de modifier librement chaque valeur de la grande matrice, l’apprentissage exprime sa correction par une structure plus compacte. Les Layers ciblées et le rang choisi influencent la capacité d’adaptation et le nombre de Parameters entraînés.",
+            "QLoRA combine cette adaptation avec une base gelée quantifiée, stockée en 4 bits dans la méthode d’origine. Les Gradients servent à entraîner les Adapters LoRA à travers le calcul utilisant cette base. La petite taille de stockage ne signifie pas que toutes les Activations ou tous les calculs utilisent quatre bits. Il faut distinguer le format conservé en mémoire, le calcul effectué et les valeurs effectivement mises à jour."
+          ]
+        },
+        {
+          "heading": "Combiner des modèles n’est pas faire apprendre un Student",
+          "paragraphs": [
+            "Model Merging combine des Weights ou des adaptations provenant de plusieurs modèles compatibles. Le résultat dépend de la méthode et de la compatibilité des modèles de départ. Fusionner deux adaptations utiles séparément ne prouve pas que leurs qualités s’additionnent : elles peuvent aussi interférer. Le modèle obtenu doit être réévalué sur les tâches visées.",
+            "Knowledge Distillation entraîne un Student à partir des sorties ou d’autres signaux d’un Teacher. Teacher et Student désignent des rôles dans cet apprentissage, pas des garanties de qualité. Le Student peut être choisi pour son coût ou sa taille, mais il apprend un comportement plutôt que de recevoir simplement les mêmes Weights. Une Distillation peut être suivie d’une Quantization ; ce sont deux opérations différentes."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : adapter le même modèle pour deux équipes",
+          "paragraphs": [
+            "Deux équipes de support utilisent le même modèle de base mais des conventions de rédaction différentes. Elles peuvent entraîner deux Adapters et conserver une base commune. Pour comparer cette solution à deux Full Fine-tunings, on mesure la qualité sur chaque usage, la mémoire du Training et les contraintes de chargement en production. Le seul nombre de Parameters entraînés ne décrit pas tout le coût.",
+            "LoRA convient si une correction structurée permet d’atteindre la qualité attendue. Augmenter son rang accroît la capacité de la correction, mais n’est pas une assurance de meilleur résultat. QLoRA peut rendre l’adaptation possible avec moins de mémoire pour la base ; elle ajoute des choix de Quantization et de compatibilité du moteur. La comparaison doit conserver les mêmes cas et inclure les erreurs importantes.",
+            "Imaginez que l’équipe veuille ensuite un seul modèle pour les deux conventions. Model Merging est une piste expérimentale, mais il faut tester les cas où les conventions se contredisent. Une autre solution consiste à garder les Adapters séparés et à choisir explicitement celui correspondant à la demande. La décision dépend du comportement obtenu et de l’exploitation envisagée."
+          ]
+        },
+        {
+          "heading": "Ce que la Distillation peut transmettre, et ce qu’elle peut perdre",
+          "paragraphs": [
+            "Pour construire un Student, l’équipe demande au Teacher de traiter un corpus de situations représentatives. Si les sorties sont utilisées comme cibles sans contrôle, le Student peut apprendre les erreurs, le style excessivement affirmatif ou les oublis du Teacher. Les données de Distillation doivent donc être choisies et vérifiées selon le comportement que l’on souhaite transmettre.",
+            "Une évaluation distincte mesure ensuite ce que le Student reproduit réellement, notamment sur les cas rares et les formulations nouvelles. Une réponse proche du Teacher n’est pas toujours une réponse correcte : il faut garder des critères indépendants. La Distillation transfère un signal d’apprentissage, tandis que Model Merging combine des Parameters ; comparer leurs fichiers finaux ne permet pas de confondre ces processus."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Full Fine-tuning et PEFT diffèrent par les Parameters rendus entraînables.",
+        "QLoRA ajoute une base quantifiée à une adaptation LoRA.",
+        "Model Merging combine des Parameters ; Distillation entraîne un Student avec un signal fourni par un Teacher."
+      ],
+      "concepts": [
+        "notion-188",
+        "notion-193",
+        "notion-194",
+        "notion-195",
+        "notion-196",
+        "notion-199",
+        "notion-200",
+        "notion-201"
+      ]
+    },
+    {
+      "goal": "Relier SFT, préférences et récompenses aux comportements qu’ils cherchent à apprendre, puis reconnaître les limites d’un score d’Alignment.",
+      "sections": [
+        {
+          "heading": "Démontrer une réponse ou préférer une réponse",
+          "paragraphs": [
+            "Alignment désigne l’ajustement du comportement selon des objectifs et préférences souhaités. Le SFT, ou Supervised Fine-Tuning, apprend à produire des réponses cibles à partir d’exemples supervisés. Une bonne démonstration peut montrer comment répondre, structurer le texte ou reconnaître une information manquante. L’apprentissage dépend donc autant du choix des exemples que de leur quantité.",
+            "Un Preference Dataset contient des comparaisons de réponses à une même consigne. DPO, ou Direct Preference Optimization, utilise directement des réponses préférées et rejetées pour ajuster le modèle, sans entraîner séparément un Reward Model dans sa formulation classique. ORPO combine un objectif supervisé avec un terme de préférence fondé sur les rapports de chances. Dans les deux cas, apprendre une préférence ne rend pas cette préférence équivalente à une preuve de vérité."
+          ]
+        },
+        {
+          "heading": "D’où vient la récompense, et comment est-elle utilisée ?",
+          "paragraphs": [
+            "Un pipeline classique de RLHF apprend un Reward Model à partir de jugements humains, puis optimise la Policy avec ce signal. PPO est un algorithme de Reinforcement Learning utilisé dans certains de ces pipelines ; il encadre les changements de Policy pendant l’optimisation. GRPO compare des groupes de réponses en utilisant des récompenses relatives. Ces noms désignent des méthodes d’optimisation, pas l’origine du jugement.",
+            "RLAIF utilise des retours produits par une AI pour guider l’adaptation. RLVR s’appuie sur des récompenses vérifiables, comme le résultat de tests exécutés sur un programme. Un Process Reward Model évalue des étapes intermédiaires ; un Outcome Reward Model évalue le résultat final. Il faut séparer deux questions : qui ou quoi produit le signal, et sur quelle partie de la résolution ce signal porte."
+          ]
+        },
+        {
+          "heading": "Rendre le signal utile sans confondre score et objectif",
+          "paragraphs": [
+            "Reward Shaping consiste à construire ou ajouter des récompenses qui guident l’apprentissage, notamment sur des progrès intermédiaires. Reward Hacking apparaît quand le modèle améliore ce signal sans mieux satisfaire l’objectif réel. Par exemple, récompenser systématiquement la longueur peut apprendre à détailler des réponses plutôt qu’à les rendre exactes.",
+            "Constitutional AI utilise des principes explicites pour guider l’évaluation ou la révision de réponses dans un processus d’adaptation. Human-in-the-Loop maintient une intervention humaine à des étapes choisies, par exemple pour annoter des cas ambigus ou revoir les échecs importants. Ces dispositifs aident à construire et contrôler les signaux ; ils ne dispensent pas d’évaluer le comportement obtenu sur des situations distinctes."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : une réponse brève correcte face à une réponse longue fausse",
+          "paragraphs": [
+            "Une équipe annote des réponses de support. La première cite correctement la procédure mais reste courte ; la seconde paraît plus professionnelle et contient une étape inventée. Si les annotateurs préfèrent souvent la seconde pour sa fluidité, le Preference Dataset transmet ce critère implicite. DPO ou un Reward Model peut alors favoriser le style aux dépens de l’exactitude.",
+            "La correction commence dans la grille d’annotation : vérifier les faits nécessaires, distinguer exactitude et présentation, puis traiter les désaccords. Des comparaisons où les réponses ont une longueur et un style similaires aident à tester si le jugement porte sur le fond. L’équipe doit aussi conserver des cas réservés pour vérifier qu’une hausse du score de préférence correspond bien au comportement recherché.",
+            "À vous d’analyser le signal : une récompense fondée sur des tests de code réussis porte-t-elle sur le processus ou sur le résultat ? Elle peut porter sur le résultat final tout en étant calculée sans modèle de jugement appris. C’est pourquoi Process/Outcome et humain/AI/vérification automatique sont des dimensions qui ne se remplacent pas."
+          ]
+        },
+        {
+          "heading": "Une récompense vérifiable reste limitée par son vérificateur",
+          "paragraphs": [
+            "Des tests automatisés donnent un signal concret, mais ne couvrent pas forcément tous les comportements d’un programme. Un modèle peut réussir les cas visibles et échouer ailleurs. De même, un Reward Model peut reproduire des biais d’annotation. L’évaluation doit chercher les situations où le signal élevé et le bénéfice réel se séparent, plutôt que seulement confirmer les réussites attendues.",
+            "On peut comparer les réponses avant et après adaptation sur plusieurs axes : résolution de la tâche, exactitude, comportement face à une information manquante et coût. Une méthode d’optimisation ne remplace pas ces observations. PPO, GRPO, DPO ou ORPO répondent à des choix de Training ; la décision produit se fonde sur les effets mesurés et sur la qualité du signal utilisé."
+          ]
+        }
+      ],
+      "takeaways": [
+        "SFT apprend des réponses cibles ; les méthodes de préférence apprennent des comparaisons.",
+        "Distinguer l’origine de la récompense, l’objet évalué et l’algorithme d’optimisation.",
+        "Rechercher les écarts entre un meilleur score et un meilleur comportement."
+      ],
+      "concepts": [
+        "notion-189",
+        "notion-202",
+        "notion-203",
+        "notion-204",
+        "notion-205",
+        "notion-206",
+        "notion-207",
+        "notion-208",
+        "notion-209",
+        "notion-210",
+        "notion-211",
+        "notion-212",
+        "notion-213",
+        "notion-214",
+        "notion-215",
+        "notion-216"
+      ]
+    }
+  ],
+  "8": [
+    {
+      "goal": "Lire les mesures d’Inference en distinguant attente initiale, durée totale, débit et comportement sous charge.",
+      "sections": [
+        {
+          "heading": "Suivre une requête plutôt que chercher un seul chiffre",
+          "paragraphs": [
+            "L’Inference exécute un modèle déjà entraîné pour produire une sortie. Pour l’utilisateur, la Latency peut désigner plusieurs délais : l’attente avant de voir quelque chose, la durée d’une étape ou le temps jusqu’à la réponse complète. Une mesure utile commence donc par préciser le point de départ, le point d’arrivée et les conditions de la requête.",
+            "Le TTFT, Time To First Token, mesure le délai avant le premier Token. Le TTLT, Time To Last Token, va jusqu’au dernier. Tokens per Second, ou TPS, décrit un débit sur un intervalle défini, par exemple la génération après le premier Token. Un service peut commencer lentement puis produire la suite rapidement. Un autre peut réagir immédiatement mais prendre plus longtemps pour terminer la même réponse."
+          ]
+        },
+        {
+          "heading": "Distinguer l’expérience individuelle de la capacité du service",
+          "paragraphs": [
+            "Le Throughput mesure le travail total traité par unité de temps, par exemple les requêtes ou les Tokens de l’ensemble du service. La Concurrency décrit les requêtes simultanées ; la Batch Size at Inference décrit celles regroupées dans un calcul. Beaucoup de requêtes peuvent être en attente ou actives sans être toutes traitées dans le même Batch.",
+            "P50, P95 et P99 Latency décrivent des positions dans la distribution des délais. P50 est la médiane ; P95 indique un délai au-dessous duquel se situent environ 95 % des observations. La Tail Latency concerne les requêtes les plus lentes. Une bonne moyenne peut masquer leur dégradation : suivre plusieurs percentiles permet de voir une expérience que la moyenne seule résume mal."
+          ]
+        },
+        {
+          "heading": "Comprendre ce qui limite la vitesse observée",
+          "paragraphs": [
+            "La Memory Bandwidth mesure la vitesse de transfert des données depuis ou vers la mémoire. Une phase Memory-Bound attend principalement ces transferts ; une phase Compute-Bound est principalement limitée par les calculs. Ajouter de la puissance de calcul ne résout pas nécessairement une limite de bande passante, et la même application peut changer de limite selon la phase ou la charge.",
+            "Pour un assistant de support, il faut mesurer des Prompts courts et longs, des réponses de différentes tailles et des arrivées simultanées. Une hausse du Throughput obtenue avec de plus gros Batches peut modifier le temps d’attente. Le bon réglage dépend de l’objectif : un outil interactif et un traitement nocturne de documents ne donnent pas la même importance au TTFT et au volume total traité."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : comparer deux services qui semblent aussi rapides",
+          "paragraphs": [
+            "Deux services produisent un même volume de texte par minute. Dans le premier, les utilisateurs attendent longtemps avant le début des réponses ; dans le second, les réponses commencent vite mais progressent lentement. Leur Throughput comparable ne permet pas de conclure à une expérience identique. Il faut examiner le TTFT, le débit pendant le Decode et le TTLT pour les mêmes types de requêtes.",
+            "Ajoutez maintenant plusieurs utilisateurs simultanés. Certaines requêtes attendent dans une file, d’autres sont regroupées. Si seules les requêtes terminées rapidement alimentent le tableau observé, le bilan peut paraître favorable pendant que les requêtes lentes s’accumulent. Les erreurs, les abandons et les demandes encore en attente doivent rester visibles dans l’analyse du service.",
+            "À vous de lire le diagnostic : la moyenne reste stable, mais P95 augmente et la file s’allonge. On ne peut pas conclure que le service va bien. Les cas lents se dégradent ; il faut examiner les classes de requêtes concernées, leur contexte et la charge avant de choisir une optimisation."
+          ]
+        },
+        {
+          "heading": "Construire une comparaison interprétable",
+          "paragraphs": [
+            "Un essai de performance doit fixer ou documenter le modèle, le matériel, le moteur, les longueurs d’entrée et de sortie et le niveau de Concurrency. Il doit aussi préciser l’état des caches. Comparer un service avec un préfixe déjà calculé à un autre qui le découvre ne mesure pas seulement la différence entre leurs moteurs.",
+            "Une observation de Memory-Bound provient d’un profil des calculs et des transferts dans une configuration donnée. Elle ne transforme pas toutes les requêtes futures en problèmes de mémoire. Pour vérifier une amélioration, on modifie un facteur identifiable puis on remesure les délais et la qualité de service sous une charge représentative. Les indicateurs restent reliés à une situation, plutôt qu’à un classement abstrait de vitesse."
+          ]
+        }
+      ],
+      "takeaways": [
+        "TTFT, TTLT et TPS décrivent des aspects différents d’une requête.",
+        "Throughput, Concurrency et Batch Size ne sont pas interchangeables.",
+        "Examiner les percentiles, la charge et la limite matérielle réellement observée."
+      ],
+      "concepts": [
+        "notion-221",
+        "notion-243",
+        "notion-244",
+        "notion-245",
+        "notion-246",
+        "notion-247",
+        "notion-248",
+        "notion-249",
+        "notion-250",
+        "notion-251",
+        "notion-252",
+        "notion-253"
+      ]
+    },
+    {
+      "goal": "Comprendre ce que réduit la Quantization, distinguer formats numériques et formats de fichiers, puis estimer les compromis mémoire sans extrapoler la vitesse.",
+      "sections": [
+        {
+          "heading": "Stocker les Weights avec moins de bits",
+          "paragraphs": [
+            "La Quantization représente des valeurs avec une précision numérique réduite. Dans une Weight-Only Quantization, elle concerne les Weights ; elle ne précise pas à elle seule le format des Activations ou du KV Cache. Une estimation de mémoire doit donc annoncer ce qu’elle compte : les seuls Weights ou l’ensemble nécessaire à l’exécution.",
+            "FP32, FP16 et BF16 sont des formats à virgule flottante. FP16 et BF16 occupent chacun 16 bits, mais répartissent différemment la précision et la plage de valeurs représentables. FP8 et FP4 sont des familles de formats flottants plus compacts. INT8 et INT4 utilisent des représentations entières ; leur exploitation pour des valeurs réelles demande notamment des informations d’échelle. Le même nombre de bits ne désigne donc pas forcément le même format ni le même comportement numérique."
+          ]
+        },
+        {
+          "heading": "Choisir quand et comment la Quantization intervient",
+          "paragraphs": [
+            "PTQ, Post-Training Quantization, convertit un modèle après son Training. QAT, Quantization-Aware Training, prend en compte les effets de la Quantization pendant l’apprentissage pour aider le modèle à s’y adapter. Cette distinction porte sur le processus de préparation ; elle ne décrit pas à elle seule la précision finale ou les capacités du moteur qui exécutera le résultat.",
+            "AWQ utilise des informations sur les Activations pour guider la Quantization des Weights. GPTQ est une famille de méthodes de PTQ qui cherche à limiter les erreurs introduites dans les calculs lors de cette conversion. Les données utilisées pour préparer une conversion doivent représenter l’usage. Une méthode efficace sur un type de texte peut dégrader un autre cas, ce qui justifie une évaluation après conversion."
+          ]
+        },
+        {
+          "heading": "Le fichier, le moteur et la mémoire disponible",
+          "paragraphs": [
+            "GGUF est un format de fichier utilisé notamment pour distribuer et charger des modèles locaux, dont des versions quantifiées. Il ne signifie pas automatiquement « modèle en 4 bits ». ONNX représente un graphe de modèle pour l’échange et l’exécution dans des environnements compatibles. Ni l’extension du fichier ni la possibilité de le charger ne suffisent à prédire sa vitesse ou son exactitude.",
+            "L’Offloading place certains Weights ou états dans une autre mémoire, par exemple la RAM du CPU, plutôt que de tout garder dans la VRAM du GPU. Il peut permettre d’exécuter un modèle qui ne tient pas entièrement sur le GPU, mais ajoute des transferts. La Quantization réduit la représentation stockée ; l’Offloading déplace le stockage. Ces deux réponses à un problème de mémoire peuvent être combinées."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : savoir si le modèle va tenir dans la VRAM",
+          "paragraphs": [
+            "Un fichier de Weights occupe fictivement 8 Go à 16 bits par valeur. En conservant le même nombre de Weights à 4 bits, la partie théorique correspondant à ces valeurs occuperait quatre fois moins, soit 2 Go. Ce petit calcul est utile pour isoler l’effet du nombre de bits. Il ignore volontairement les métadonnées et ne décrit pas toute la mémoire du service.",
+            "Pour décider si le modèle tient sur le GPU, il faut ajouter les échelles et autres informations de Quantization, les Activations, le KV Cache et les besoins du moteur. Un long contexte ou plusieurs requêtes simultanées peuvent accroître ces autres besoins. Le fait que le fichier soit inférieur à la capacité de VRAM n’établit donc pas, à lui seul, que toutes les charges prévues seront acceptées.",
+            "À vous de choisir la mesure suivante : le modèle charge correctement mais échoue avec plusieurs longs documents. Recompter seulement les Weights ne suffit pas. Il faut observer la mémoire utilisée quand le contexte et la Concurrency augmentent, puis identifier si le cache ou les autres états provoquent le dépassement."
+          ]
+        },
+        {
+          "heading": "Vérifier une conversion sur ses effets réels",
+          "paragraphs": [
+            "Une équipe compare la version de référence et la version quantifiée sur les mêmes demandes, en suivant la qualité des réponses, la mémoire et les délais. Les cas sensibles aux valeurs numériques ou à des sorties très contraintes méritent d’être conservés dans cette comparaison. La taille du fichier permet de mesurer un gain de stockage ; elle ne valide pas le comportement du modèle.",
+            "Un format compact peut demander des opérations de conversion ou des Kernels spécifiques. Selon le matériel, leur coût peut réduire le gain attendu, voire rendre une configuration moins rapide. Le choix final associe donc précision, compatibilité et mesures. Il ne se résume pas à prendre le plus petit nombre de bits proposé."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Préciser les valeurs quantifiées : Weights, Activations ou cache.",
+        "Distinguer précision numérique, méthode de conversion et format de fichier.",
+        "Mesurer mémoire complète, qualité et Latency après conversion."
+      ],
+      "concepts": [
+        "notion-222",
+        "notion-223",
+        "notion-224",
+        "notion-225",
+        "notion-226",
+        "notion-227",
+        "notion-228",
+        "notion-229",
+        "notion-230",
+        "notion-231",
+        "notion-259",
+        "notion-260"
+      ]
+    },
+    {
+      "goal": "Suivre la vie du KV Cache et comprendre comment le moteur partage les ressources entre les requêtes et les phases de génération.",
+      "sections": [
+        {
+          "heading": "Réutiliser les calculs sans confondre les caches",
+          "paragraphs": [
+            "Pendant le Decode d’un Transformer causal, le KV Cache conserve des Keys et Values des Tokens déjà traités. Le modèle réutilise ces valeurs et ajoute celles du nouveau Token. Il doit encore calculer les nouvelles représentations et l’Attention utile : un cache évite certains recalculs, pas l’ensemble du travail nécessaire à la continuation.",
+            "Prefix Caching réutilise les calculs d’un préfixe compatible entre plusieurs requêtes. Prompt Caching est un terme de service dont les modalités dépendent du fournisseur ; il peut notamment s’appuyer sur un tel mécanisme. KV Cache Quantization réduit la précision des valeurs stockées dans le cache. KV Cache Offloading en déplace tout ou partie hors de la VRAM. Réutiliser, compacter et déplacer le cache sont trois décisions différentes."
+          ]
+        },
+        {
+          "heading": "Faire avancer plusieurs requêtes",
+          "paragraphs": [
+            "Dynamic Batching forme des groupes de requêtes selon leurs arrivées. Continuous Batching fait évoluer les requêtes actives au fil de la génération, en remplaçant celles qui se terminent. Les termes peuvent se recouvrir selon les systèmes : le point important est de savoir à quel moment un groupe peut changer et comment les nouvelles demandes sont admises.",
+            "Chunked Prefill découpe le traitement d’un long Prompt en portions planifiables, afin de mieux partager les ressources avec d’autres travaux. Disaggregated Prefill / Decode sépare les ressources chargées de ces deux phases. Le premier agit sur la taille des unités de travail ; le second sur leur placement. Séparer les phases introduit aussi le besoin de transférer les états nécessaires à leur enchaînement."
+          ]
+        },
+        {
+          "heading": "Le moteur exécute une stratégie, pas seulement un fichier",
+          "paragraphs": [
+            "Le Model Serving comprend l’accès au modèle, la gestion des requêtes et des ressources. L’Inference Engine exécute les calculs et coordonne la génération. Un CUDA Kernel est une fonction de calcul sur GPU NVIDIA ; Kernel Fusion regroupe des opérations pour réduire certains transferts ou surcoûts. Compilation / Graph Optimization transforme le graphe de calcul pour mieux l’exécuter dans une configuration donnée.",
+            "Speculative Decoding fait proposer plusieurs Tokens par un Draft Model rapide, puis les fait vérifier par un modèle cible. Le gain dépend du coût du brouillon, de la vérification et de la proportion de Tokens acceptés. Cette méthode peut s’ajouter aux stratégies de cache et de planification. Elle ne consiste pas à remplacer silencieusement toutes les réponses du modèle cible par celles du Draft Model."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : une longue notice ralentit les petites questions",
+          "paragraphs": [
+            "Un service traite à la fois des questions courtes et de longues notices. Une notice peut mobiliser beaucoup de travail pendant le Prefill tandis que les réponses courtes attendent leur prochain pas de Decode. Chunked Prefill permet de découper ce travail pour l’ordonnancer autrement ; Continuous Batching permet de renouveler les requêtes actives. Leurs effets se mesurent sur les délais, pas seulement sur le nombre total de requêtes.",
+            "Si les demandes partagent exactement une longue consigne commune compatible avec le cache, Prefix Caching peut éviter de recalculer cette partie. Une simple proximité de sens n’est pas suffisante pour réutiliser des représentations calculées. L’application doit aussi maîtriser les versions, les limites d’accès et les conditions d’invalidation : un résultat réutilisable doit correspondre au calcul réellement attendu.",
+            "Posez-vous cette question : après modification d’un document commun, peut-on conserver le même préfixe calculé ? Seulement si les données réellement utilisées par ce calcul restent identiques et compatibles. Une mise à jour de contenu modifie normalement la séquence concernée ; confondre la version documentaire avec une clé de cache trop large peut conduire à une réutilisation incorrecte."
+          ]
+        },
+        {
+          "heading": "Comprendre pourquoi une optimisation peut décevoir",
+          "paragraphs": [
+            "Un Draft Model très rapide mais souvent refusé par la cible peut apporter peu de bénéfice : la vérification reste nécessaire et de nombreuses propositions sont écartées. Dans les méthodes exactes de Speculative Decoding, la procédure d’acceptation est conçue pour conserver la distribution de sortie du modèle cible. Cette propriété vient de l’algorithme de vérification, pas de la seule présence de deux modèles.",
+            "De même, Offloading économise de la VRAM au prix de transferts, et une séparation Prefill/Decode peut demander davantage de coordination. Pour choisir, on compare une configuration de référence et une modification identifiable sur des longueurs, caches et charges représentatifs. Le moteur peut cumuler plusieurs techniques ; il faut garder une trace des changements pour comprendre ce qui explique le résultat."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Le KV Cache réutilise les Keys et Values du passé, sans supprimer tous les calculs du Decode.",
+        "Les stratégies de cache, de Batching et de placement répondent à des problèmes différents.",
+        "Évaluer les gains avec le coût des transferts, de la coordination et de la vérification."
+      ],
+      "concepts": [
+        "notion-232",
+        "notion-233",
+        "notion-234",
+        "notion-235",
+        "notion-236",
+        "notion-237",
+        "notion-238",
+        "notion-239",
+        "notion-240",
+        "notion-241",
+        "notion-242",
+        "notion-254",
+        "notion-255",
+        "notion-256",
+        "notion-257",
+        "notion-258"
+      ]
+    }
+  ],
+  "9": [
+    {
+      "goal": "Comprendre comment un texte devient un objet de recherche et choisir entre signaux lexicaux, vectoriels et recherche approximative.",
+      "sections": [
+        {
+          "heading": "Comparer des représentations plutôt que des phrases brutes",
+          "paragraphs": [
+            "Un Embedding est un vecteur numérique représentant une entrée. Les vecteurs vivent dans un Embedding Space où une mesure permet de les comparer. L’objectif est que certaines relations utiles à la tâche soient reflétées par cette proximité. Deux textes proches dans cet espace ne sont pas pour autant des preuves mutuelles : une question et une affirmation fausse sur le même sujet peuvent être très proches.",
+            "Un Bi-Encoder calcule séparément les représentations de la requête et du document. Les documents peuvent ainsi être représentés avant l’arrivée de la question. La Cosine Similarity compare l’orientation des vecteurs ; le Dot Product tient aussi compte de leur amplitude. Si les vecteurs sont normalisés à une longueur unitaire, les deux scores coïncident. Le choix de la mesure doit rester compatible avec l’apprentissage et l’usage des Embeddings."
+          ]
+        },
+        {
+          "heading": "Le sens et les mots exacts sont deux signaux utiles",
+          "paragraphs": [
+            "La Semantic Search cherche des contenus proches selon leur sens représenté. La Keyword Search s’appuie sur les termes présents dans la requête et les documents. BM25 est une méthode lexicale qui tient notamment compte de la fréquence des termes, de leur rareté dans le corpus et de la longueur des documents. Elle peut être particulièrement utile pour des références exactes ou des noms inhabituels.",
+            "Hybrid Search combine ces signaux. Dans un cas fictif de support, « mon appareil ne démarre plus » peut retrouver une notice parlant de mise sous tension grâce au signal sémantique. Un code d’erreur comme E17 appelle aussi une correspondance lexicale précise. Le choix utile n’est pas d’opposer systématiquement les deux méthodes, mais de vérifier leurs erreurs et leur complémentarité sur les demandes prévues."
+          ]
+        },
+        {
+          "heading": "Retrouver des voisins sans comparer chaque document",
+          "paragraphs": [
+            "Nearest Neighbor Search, souvent notée kNN, vise les k vecteurs les plus proches selon la mesure choisie. Une recherche exhaustive compare tous les candidats. ANN, Approximate Nearest Neighbor, cherche un compromis de coût en acceptant de ne pas toujours retourner les voisins exacts. Cette approximation concerne la recherche des vecteurs, pas la vérité des documents trouvés.",
+            "HNSW organise les vecteurs dans une structure de graphe qui guide le parcours vers des voisins proches. IVF partitionne l’espace en groupes et concentre la recherche sur une partie de ces groupes. Les réglages influencent la mémoire, le temps et les voisins retrouvés. Un index plus rapide peut manquer un passage utile ; il faut mesurer ce compromis avec des questions et des documents représentatifs."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : retrouver la bonne notice malgré des formulations différentes",
+          "paragraphs": [
+            "L’équipe crée trois demandes de support : une reformulation courante du problème, une référence de produit rare et un code d’erreur exact. Elle inspecte les passages retournés par Semantic Search et Keyword Search. Si la recherche sémantique retrouve le bon sujet mais le mauvais modèle de produit, la proximité vectorielle a capturé une relation utile mais insuffisante.",
+            "Elle essaie ensuite Hybrid Search et compare les résultats sur les mêmes demandes. L’objectif n’est pas de produire un score plus élevé dans l’absolu : les scores de deux méthodes ne partagent pas forcément la même échelle. On examine d’abord si les passages nécessaires remontent et quelles catégories d’erreurs persistent.",
+            "À vous de diagnostiquer : la requête contient E17, mais les résultats parlent surtout de E71. Modifier la formulation du Prompt de réponse ne corrige pas la sélection des sources. Il faut examiner le signal lexical, le découpage des références et le classement des passages avant d’accuser le générateur."
+          ]
+        },
+        {
+          "heading": "Tester l’index sans confondre deux types de qualité",
+          "paragraphs": [
+            "Pour évaluer une configuration ANN, une équipe peut comparer ses voisins à ceux d’une recherche exhaustive sur un sous-ensemble maîtrisé. Elle mesure alors l’effet de l’approximation de l’index. Même si les voisins exacts sont retrouvés, le modèle d’Embeddings ou la mesure peuvent encore classer un document peu utile près de la question.",
+            "Une seconde évaluation porte donc sur la pertinence documentaire réelle. Ces deux contrôles isolent les causes possibles d’un échec : l’index a-t-il raté les voisins prévus, ou les représentations rapprochent-elles les mauvais contenus ? Sans cette séparation, augmenter les ressources de l’index peut laisser intact un problème de représentation ou de données."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Un Embedding fournit une représentation comparable, pas une preuve de vérité.",
+        "Keyword Search et Semantic Search peuvent se compléter dans une Hybrid Search.",
+        "Distinguer la précision de la recherche ANN de la pertinence réelle des documents."
+      ],
+      "concepts": [
+        "notion-263",
+        "notion-264",
+        "notion-266",
+        "notion-267",
+        "notion-268",
+        "notion-271",
+        "notion-272",
+        "notion-273",
+        "notion-274",
+        "notion-275",
+        "notion-276",
+        "notion-277",
+        "notion-285"
+      ]
+    },
+    {
+      "goal": "Construire un pipeline RAG en reliant préparation du corpus, récupération, reclassement et création du contexte de réponse.",
+      "sections": [
+        {
+          "heading": "Préparer des passages que la recherche pourra utiliser",
+          "paragraphs": [
+            "RAG, Retrieval-Augmented Generation, récupère des informations externes puis les fournit au générateur. La préparation du corpus se fait généralement avant la requête : les documents sont découpés, représentés et indexés. Une Vector Database conserve les vecteurs et permet leurs recherches. Elle peut faire partie d’un service plus large, mais sa fonction n’est pas de rédiger elle-même la réponse finale.",
+            "Le Chunking découpe les documents en passages. Chunk Size indique leur taille ; Overlap conserve une partie commune entre passages voisins. Un passage trop court peut perdre une exception ou un titre. Un passage trop long peut mélanger des sujets et utiliser beaucoup de contexte. Parent-Child Retrieval permet de chercher des petits passages précis puis de restituer un contexte parent plus large.",
+            "Metadata Filtering limite les candidats selon leurs attributs : produit, date, langue ou périmètre autorisé. Pour un corpus partagé entre clients, les permissions doivent être appliquées avant de fournir les contenus au modèle. La similarité vectorielle ne vérifie pas un droit d’accès. La préparation doit donc conserver les métadonnées utiles, et pas seulement le texte et son vecteur."
+          ]
+        },
+        {
+          "heading": "Récupérer puis classer les bons candidats",
+          "paragraphs": [
+            "Retrieval constitue une première liste de passages. Si plusieurs recherches contribuent, RRF, Reciprocal Rank Fusion, peut fusionner leurs listes à partir des rangs plutôt que de comparer directement des scores incompatibles. MMR, Maximal Marginal Relevance, sélectionne des résultats en tenant compte à la fois de leur pertinence et de leur diversité, afin de limiter la répétition de passages très semblables.",
+            "Reranking réévalue les candidats pour affiner leur ordre. Un Cross-Encoder traite conjointement la requête et un passage afin de calculer leur pertinence ; cette évaluation peut être plus coûteuse que la recherche initiale. Late Interaction, comme dans ColBERT, conserve des représentations au niveau des Tokens et les combine tardivement pour comparer requête et document. Ces choix offrent des compromis différents entre richesse de comparaison et coût.",
+            "Le contexte final est construit à partir des passages retenus, puis le générateur répond. Un Reranker ne récupère pas magiquement un document absent de sa liste de candidats. Si la première recherche manque une source essentielle, il faut corriger cette étape ou lancer une autre recherche, pas seulement modifier le classement de ce qui a déjà été trouvé."
+          ]
+        },
+        {
+          "heading": "Transformer la requête sans inventer une source",
+          "paragraphs": [
+            "Query Rewriting reformule la question pour la rendre plus exploitable par la recherche. Query Expansion ajoute des termes connexes ; Multi-Query Retrieval lance plusieurs recherches reformulées pour couvrir différentes façons de décrire le besoin. Ces méthodes cherchent à mieux retrouver le corpus existant. Elles doivent conserver l’intention de départ, notamment les références de produit et les contraintes importantes.",
+            "HyDE, Hypothetical Document Embeddings, génère un document hypothétique à partir de la demande et utilise sa représentation pour chercher de vrais documents proches. Ce texte inventé sert d’aide à la recherche, pas de preuve à citer. Il faut garder séparés la requête transformée, les sources réellement retrouvées et les affirmations qui figureront dans la réponse."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : une règle séparée de son exception",
+          "paragraphs": [
+            "Une notice indique un délai standard, puis une exception pour un produit précis dans le paragraphe suivant. Le Chunking sépare les deux. Retrieval retrouve la règle générale et le générateur répond correctement par rapport à ce seul passage, mais incorrectement pour le produit demandé. Le défaut commence dans le contexte accessible, avant la génération.",
+            "L’équipe compare une taille de Chunk différente, un Overlap adapté et Parent-Child Retrieval. Elle vérifie ensuite les passages réellement fournis au modèle, et pas seulement les premiers résultats de recherche. Ajouter une exception au corpus ne sert à rien si la sélection finale l’écarte pour gagner de la place.",
+            "À vous de choisir un contrôle : le Reranker classe correctement les passages qu’il reçoit, mais l’exception manque. Une nouvelle mesure du Reranker ne suffit pas. Il faut regarder le découpage, les filtres et la liste issue de Retrieval, puis remonter vers la préparation du document si nécessaire."
+          ]
+        },
+        {
+          "heading": "Suivre les transformations pour comprendre une mauvaise réponse",
+          "paragraphs": [
+            "Un pipeline peut cumuler reformulation, plusieurs recherches, fusion, Reranking et compression. Sans trace de ces étapes, une mauvaise réponse ressemble à une erreur unique du modèle. En conservant la requête initiale, ses transformations, les candidats et le contexte final, on peut identifier le premier endroit où une information a été perdue ou un sujet a changé.",
+            "La comparaison de variantes se fait sur les mêmes cas. Une requête reformulée trop largement peut améliorer la diversité tout en ramenant un autre produit. Un filtre trop strict peut supprimer le seul document utile. L’objectif est de comprendre le compromis observé, plutôt que d’ajouter chaque technique disponible à tous les pipelines."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Le découpage et les métadonnées déterminent ce que la recherche pourra retrouver et utiliser.",
+        "Retrieval, fusion et Reranking ont des rôles différents.",
+        "Les reformulations et le document hypothétique de HyDE ne remplacent pas les sources réelles."
+      ],
+      "concepts": [
+        "notion-261",
+        "notion-262",
+        "notion-265",
+        "notion-269",
+        "notion-270",
+        "notion-278",
+        "notion-279",
+        "notion-280",
+        "notion-281",
+        "notion-282",
+        "notion-283",
+        "notion-284",
+        "notion-286",
+        "notion-287",
+        "notion-288",
+        "notion-289"
+      ]
+    },
+    {
+      "goal": "Vérifier séparément les sources retrouvées, le contexte fourni et les affirmations produites, y compris dans des recherches plus complexes.",
+      "sections": [
+        {
+          "heading": "Une source présente n’est pas encore une preuve suffisante",
+          "paragraphs": [
+            "Grounding consiste à appuyer la réponse sur des éléments externes vérifiables. Attribution, ou Citation Grounding, relie une affirmation à une source identifiée. Une citation doit permettre de contrôler le passage qui soutient réellement la phrase. Un lien vers un document sur le même sujet n’établit pas que ce document contient l’information annoncée.",
+            "Retrieval Recall mesure la part des documents pertinents de référence qui a été retrouvée ; Retrieval Precision mesure la part des résultats récupérés qui est pertinente. Retrouver tous les documents utiles peut coexister avec beaucoup de résultats inutiles. Inversement, une courte liste très pertinente peut manquer une exception essentielle. Ces deux mesures concernent la recherche, pas directement l’exactitude de la réponse finale."
+          ]
+        },
+        {
+          "heading": "Préserver le sens quand le corpus évolue",
+          "paragraphs": [
+            "Contextual Compression réduit les passages récupérés à l’information utile pour la question. Elle peut économiser du contexte, mais doit conserver les conditions, les exceptions et la provenance nécessaires. Supprimer un mot de négation ou la version du produit peut changer une règle même si le texte résultant paraît plus clair.",
+            "Index Freshness décrit la mise à jour de l’index par rapport aux documents disponibles. Embedding Drift concerne une évolution des représentations ou de leurs caractéristiques qui affecte les comparaisons. Changer d’Embedding Model sans recalculer les documents peut rendre les espaces incompatibles, même si les vecteurs ont la même dimension. Mettre à jour le texte, ses métadonnées et ses vecteurs demande donc une stratégie cohérente."
+          ]
+        },
+        {
+          "heading": "Chercher des relations et piloter plusieurs recherches",
+          "paragraphs": [
+            "Un Knowledge Graph représente des entités et leurs relations. GraphRAG utilise un graphe de connaissances ou de relations pour aider la récupération et la construction du contexte. Cela peut être utile quand la question relie plusieurs documents, par exemple un produit, son fournisseur et les procédures qui lui sont applicables. Le graphe doit lui aussi conserver des sources et être vérifié.",
+            "Agentic RAG confie à une boucle d’Agent le choix de certaines étapes de recherche : reformuler, consulter un autre corpus ou vérifier une réponse intermédiaire. Cette organisation peut explorer un besoin complexe, mais elle ajoute des décisions et des coûts à contrôler. Ni un graphe ni un Agent ne rendent une source exacte ou récente par leur seule présence."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : une réponse bien citée mais périmée",
+          "paragraphs": [
+            "Le système répond avec une procédure ancienne et cite correctement son document. La phrase peut être fidèle à cette source tout en étant fausse pour la situation actuelle. Pour diagnostiquer, l’équipe vérifie d’abord si la nouvelle version est présente dans l’index, puis si ses métadonnées permettent de la sélectionner, enfin si elle apparaît dans le contexte final.",
+            "Si la nouvelle version est absente, le problème relève de la mise à jour. Si elle est présente mais mal classée après un changement de modèle d’Embeddings, les représentations et l’index méritent une vérification. Si elle est dans le contexte et que le générateur choisit l’ancienne règle, il faut examiner l’interprétation des versions et les critères de réponse.",
+            "Pour diagnostiquer ce cas, indiquez quelle preuve vous demanderiez : le passage cité, sa date, la version du produit et le contenu effectivement transmis au générateur. Ces observations distinguent une citation inventée, une source obsolète et une erreur de lecture. Le même texte final peut masquer des causes différentes."
+          ]
+        },
+        {
+          "heading": "Construire une évaluation qui localise les erreurs",
+          "paragraphs": [
+            "Pour chaque question de test, l’équipe peut identifier les sources nécessaires, les affirmations attendues et les exceptions importantes. Elle examine la recherche, puis la sélection du contexte, puis la réponse. Cela permet de distinguer un manque de Recall, une liste encombrée, une compression destructrice et une affirmation non soutenue.",
+            "Une question relationnelle peut exiger plusieurs sources. GraphRAG ou Agentic RAG devient alors une hypothèse d’amélioration à comparer au pipeline existant, et non une conclusion automatique. Le succès se mesure à la couverture des informations nécessaires, à la justesse de la réponse et au coût des étapes supplémentaires. Conserver une solution simple comme référence aide à attribuer les gains réels."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Vérifier le lien précis entre chaque affirmation importante et sa source.",
+        "Séparer Recall, Precision et qualité de génération pour localiser les échecs.",
+        "Contrôler la fraîcheur, la compression et les représentations lorsque le corpus change."
+      ],
+      "concepts": [
+        "notion-290",
+        "notion-291",
+        "notion-292",
+        "notion-293",
+        "notion-294",
+        "notion-295",
+        "notion-296",
+        "notion-297",
+        "notion-298"
+      ]
+    }
+  ],
+  "10": [
+    {
+      "goal": "Construire un Prompt qui décrit une tâche vérifiable, situe les sources et sépare les instructions stables des informations variables.",
+      "sections": [
+        {
+          "heading": "Décrire le résultat attendu et les informations disponibles",
+          "paragraphs": [
+            "Un Prompt est l’entrée adressée au modèle pour orienter sa réponse. Le Prompt Engineering consiste à concevoir puis améliorer cette entrée pour une tâche donnée. Une demande comme « fais un bon résumé » laisse implicites le public, les informations à conserver et le format. Une demande plus exploitable précise ce que le lecteur doit apprendre et ce qui doit rester vérifiable.",
+            "Pour résumer un incident de support, on peut demander de conserver le produit concerné, le symptôme, les actions déjà tentées et le statut final. Ces contraintes décrivent le travail. Elles doivent être accompagnées du texte utile : une consigne précise ne crée pas les faits manquants. Le Context Engineering organise justement les instructions, documents, résultats d’outils et autres informations réellement disponibles dans le contexte."
+          ]
+        },
+        {
+          "heading": "Donner à chaque message et document le bon rôle",
+          "paragraphs": [
+            "Un System Message définit généralement le cadre de l’assistant ; un Developer Message peut porter les règles de l’application ; un User Message contient la demande et les informations de l’utilisateur. Les rôles disponibles et leur traitement dépendent de l’API utilisée. L’application doit connaître ce contrat, plutôt que supposer que tout texte placé récemment dans le contexte devient prioritaire.",
+            "Un document à résumer reste une source de données, même s’il contient une phrase impérative. Le Prompt doit permettre de distinguer les règles de la tâche du contenu à traiter. Un Prompt Template conserve une consigne réutilisable et des variables explicites, par exemple le document et son public. Les délimitations aident à rendre l’organisation lisible, mais ne remplacent pas les contrôles de confiance et d’action de l’application."
+          ]
+        },
+        {
+          "heading": "Montrer le comportement au lieu de seulement le nommer",
+          "paragraphs": [
+            "Zero-Shot Prompting demande la tâche sans démonstration. One-Shot Prompting ajoute un exemple ; Few-Shot Prompting en ajoute plusieurs. Les exemples peuvent montrer un format, une règle de classement ou la manière de traiter un cas ambigu. Ils font partie du contexte : les choisir demande de vérifier qu’ils représentent bien la consigne et ne contiennent pas de contradictions.",
+            "Pour le résumé d’incident, un exemple complet peut montrer comment signaler une cause inconnue plutôt que l’inventer. Un autre peut distinguer une action tentée d’une action confirmée comme efficace. Il vaut mieux choisir des cas qui révèlent ces différences que multiplier des exemples presque identiques. La qualité d’un Prompt se juge ensuite sur des cas nouveaux, pas sur sa longueur ni sur la solennité du rôle annoncé."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : passer d’une demande vague à une consigne vérifiable",
+          "paragraphs": [
+            "La première version demande « résume ce ticket comme un expert ». Elle produit des textes fluides mais omet parfois la dernière action et attribue une cause non confirmée. L’équipe examine ces défauts avant de réécrire. Elle précise les faits à conserver, demande de distinguer observation et hypothèse, puis fournit le ticket avec une délimitation claire.",
+            "Elle essaie ensuite un exemple qui contient une information manquante. La réponse attendue montre comment indiquer « non précisé » sans interrompre tout le résumé. Ce choix vise une erreur observée ; ce n’est pas un exemple décoratif. La comparaison sur d’autres tickets permet de voir si le modèle applique la règle ou copie seulement le style de la démonstration.",
+            "À vous de réviser la consigne : si la réponse oublie encore la date de résolution, ajouter « sois plus professionnel » cible-t-il le défaut ? Non. Il faut préciser cette information dans les critères et vérifier qu’elle existe dans le ticket fourni. Le changement doit répondre au problème constaté."
+          ]
+        },
+        {
+          "heading": "Comprendre ce qu’un Template peut et ne peut pas stabiliser",
+          "paragraphs": [
+            "Un Template rend réutilisables les consignes et leur organisation. Il ne rend pas toutes les entrées équivalentes. Un ticket très long, un échange contradictoire ou un document contenant une instruction hostile peut modifier le comportement. Des variables explicites facilitent l’analyse parce qu’on sait ce qui change d’une requête à l’autre.",
+            "Pour conserver cette lisibilité, l’application peut tracer la version du Template et les sources réellement insérées. Elle limite aussi le contexte aux informations nécessaires : ajouter tous les documents disponibles peut diluer les faits utiles ou dépasser la capacité prévue. Context Engineering et Prompt Engineering se rejoignent ici, tout en portant sur des périmètres différents."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Décrire une tâche et des critères observables plutôt qu’un résultat vaguement « excellent ».",
+        "Séparer les règles applicatives des documents à traiter.",
+        "Choisir les démonstrations pour les distinctions qu’elles enseignent."
+      ],
+      "concepts": [
+        "notion-299",
+        "notion-300",
+        "notion-301",
+        "notion-302",
+        "notion-303",
+        "notion-304",
+        "notion-305",
+        "notion-306",
+        "notion-317",
+        "notion-318"
+      ]
+    },
+    {
+      "goal": "Obtenir une sortie exploitable par un programme et distinguer structure valide, contenu correct et action autorisée.",
+      "sections": [
+        {
+          "heading": "Une structure est un contrat de données",
+          "paragraphs": [
+            "Structured Output désigne une sortie organisée selon une structure attendue, par exemple un objet JSON. Cette structure permet à l’application de retrouver des valeurs sans interpréter une phrase libre. Demander un format dans le Prompt exprime une attente ; la garantie réellement offerte dépend de la méthode de génération et des contrôles du service.",
+            "JSON Schema formalise des propriétés comme les champs requis, leurs types et certaines contraintes de valeur. Pour une extraction de facture, il peut demander un montant numérique et une devise appartenant à une liste. Il ne prouve pas que le montant a été correctement lu ni qu’il correspond au total à payer. Le schéma décrit la forme et certaines règles, tandis que le document source permet de vérifier les faits."
+          ]
+        },
+        {
+          "heading": "Contraindre la génération ou vérifier son résultat",
+          "paragraphs": [
+            "Constrained Decoding limite les continuations autorisées pendant la génération. Grammar-Constrained Generation applique ce principe à une grammaire explicite. La grammaire peut empêcher certaines formes invalides au moment où les Tokens sont choisis. Cette contrainte réduit un type d’erreur, mais le modèle peut encore choisir une valeur plausible et fausse dans un emplacement autorisé.",
+            "Un contrôle après génération peut vérifier la conformité de la sortie et demander une correction ou rejeter le résultat. Il faut prévoir ce que fait l’application quand une information manque, quand une valeur échoue à la validation ou quand le service refuse de produire une sortie. Une stratégie robuste n’invente pas une valeur uniquement pour satisfaire un champ obligatoire."
+          ]
+        },
+        {
+          "heading": "Le schéma d’un outil ne donne pas le droit de l’appeler",
+          "paragraphs": [
+            "Un Tool Schema décrit notamment le nom et les arguments d’un outil accessible au modèle. Selon le protocole, des schémas peuvent aussi décrire les sorties. Une demande conforme indique comment appeler la fonction ; elle n’établit pas que l’utilisateur possède les droits nécessaires ni que l’action correspond à son intention.",
+            "Un Guardrail est un contrôle autour de l’usage du modèle, portant par exemple sur le format, le contenu ou une action. Une validation de structure, une vérification des montants et un contrôle de permission répondent à des questions distinctes. Pour une facture, un objet valide peut servir à préparer une revue ; déclencher un paiement exige encore les autorisations et vérifications prévues par l’application."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : une facture correctement formatée mais mal comprise",
+          "paragraphs": [
+            "Le modèle renvoie un objet conforme au JSON Schema, mais utilise le sous-total à la place du total. La validation des types ne détecte pas cette confusion : les deux montants sont numériques et présents dans le document. Il faut vérifier les libellés, les relations entre montants et la provenance de la valeur extraite.",
+            "L’équipe peut demander un extrait justificatif ou une référence à la zone du document, puis contrôler cet élément. Une valeur absente doit être traitée selon le contrat, par exemple avec un état « à vérifier » ou une valeur nulle si le schéma l’autorise. Forcer un nombre dans tous les cas peut transformer un défaut d’information en invention bien structurée.",
+            "À vous de distinguer trois cas : une accolade manquante, un montant extrait du mauvais libellé et une demande de paiement sans droit. Le premier relève de la syntaxe ou du schéma ; le deuxième de la validation du contenu ; le troisième de l’autorisation. Aucun de ces contrôles ne remplace les deux autres."
+          ]
+        },
+        {
+          "heading": "Choisir le périmètre d’une contrainte",
+          "paragraphs": [
+            "Une grammaire très précise peut simplifier le traitement de sorties régulières. Elle peut aussi devenir trop étroite si les documents présentent des variantes légitimes. Le contrat doit définir les états réellement possibles, notamment données manquantes, refus et erreurs. Un schéma qui ne sait représenter que la réussite rend le traitement des autres cas plus difficile.",
+            "Les Guardrails se testent avec des exemples adaptés à leur rôle. Une série de JSON valides évalue mal la gestion des contenus trompeurs ; une liste d’actions permises ne teste pas la reconnaissance des montants. L’application doit vérifier chaque frontière concrète, puis examiner l’enchaînement : la sortie du modèle devient-elle une donnée affichée, une entrée de base de données ou un argument de commande ?"
+          ]
+        }
+      ],
+      "takeaways": [
+        "Une structure valide ne prouve pas l’exactitude des valeurs.",
+        "Constrained Decoding agit pendant la génération ; d’autres validations restent nécessaires.",
+        "Un Tool Schema décrit un appel, tandis que l’application contrôle son autorisation."
+      ],
+      "concepts": [
+        "notion-312",
+        "notion-313",
+        "notion-314",
+        "notion-315",
+        "notion-316",
+        "notion-319"
+      ]
+    },
+    {
+      "goal": "Comparer des Prompts et des stratégies de résolution sur des cas représentatifs, en reliant chaque amélioration à une hypothèse vérifiable.",
+      "sections": [
+        {
+          "heading": "Comparer des comportements, pas seulement de beaux exemples",
+          "paragraphs": [
+            "Une comparaison commence par une tâche, des cas représentatifs et des critères. Pour des résumés de support, on peut vérifier la conservation des faits, l’absence de cause inventée et le respect du format. Il faut évaluer les mêmes cas pour chaque variante, puis examiner les erreurs. Un exemple réussi montre une possibilité ; il ne mesure pas à lui seul la fréquence de réussite.",
+            "L’In-Context Learning permet au modèle d’exploiter des exemples présents dans le Prompt sans modifier ses Weights. Modifier les démonstrations peut donc changer les réponses. Pour comprendre l’effet d’un nouveau Prompt, on garde visibles ses différences : consigne, exemples, documents et réglages. Si tout change à la fois, il devient difficile d’attribuer le progrès à une décision précise."
+          ]
+        },
+        {
+          "heading": "Décomposer et explorer une résolution",
+          "paragraphs": [
+            "Chain-of-Thought désigne un raisonnement formulé en étapes. Une décomposition peut aider à organiser une tâche, mais le texte produit peut rester erroné et ne représente pas nécessairement les mécanismes internes du modèle. Pour vérifier le résultat, on recherche des éléments contrôlables : calculs utiles, sources, contraintes satisfaites ou tests, plutôt que la seule apparence d’un raisonnement détaillé.",
+            "Self-Consistency produit plusieurs résolutions puis agrège leurs conclusions selon une règle définie. Tree of Thoughts explore des pistes de manière structurée, avec des étapes de proposition, d’évaluation et de poursuite ou d’abandon. Ces méthodes utilisent du calcul supplémentaire pour chercher de meilleures solutions. Un accord entre réponses peut cependant refléter une erreur commune ou une même source défectueuse."
+          ]
+        },
+        {
+          "heading": "Enchaîner des tâches avec des contrôles explicites",
+          "paragraphs": [
+            "Prompt Chaining répartit le travail entre plusieurs appels, par exemple extraire les faits d’un ticket, rédiger un résumé, puis le contrôler. Chaque étape reçoit les informations nécessaires et produit un résultat exploitable par la suivante. Le découpage devient utile lorsque les étapes ont des objectifs distincts et que leurs sorties peuvent être vérifiées.",
+            "La chaîne doit revenir aux sources quand la vérification l’exige. Contrôler un résumé uniquement avec une extraction qui contient déjà une erreur peut valider la même erreur deux fois. Pour choisir entre un Prompt unique et une chaîne, on mesure donc la qualité finale, les erreurs intermédiaires, le coût et la Latency. Le nombre d’appels n’est pas un indicateur de sérieux à lui seul."
+          ]
+        }
+      ],
+      "deepDive": [
+        {
+          "heading": "Cas suivi : départager deux Prompts de résumé",
+          "paragraphs": [
+            "La première variante utilise une consigne courte ; la seconde ajoute des exemples et une extraction préalable des faits. L’équipe choisit des tickets de plusieurs types : demande simple, conversation contradictoire et incident non résolu. Elle définit avant l’essai les faits à conserver et les inférences interdites, puis compare les sorties à ces références.",
+            "Si la seconde variante améliore le style mais omet plus souvent une action déjà tentée, la conclusion ne doit pas se limiter à une préférence de lecture. L’équipe inspecte l’extraction : le fait y manque-t-il déjà, ou est-il perdu pendant la rédaction ? Cette observation indique l’étape à corriger. Un nouveau Prompt de vérification doit ensuite contrôler la source originale.",
+            "À vous de choisir le prochain essai : faut-il ajouter dix autres appels ou corriger la règle d’extraction qui omet les actions infructueuses ? Le second choix teste une hypothèse directement liée à l’erreur. Une exploration plus large peut être utile, mais doit répondre à un besoin observé et à un budget défini."
+          ]
+        },
+        {
+          "heading": "Évaluer les gains du calcul supplémentaire",
+          "paragraphs": [
+            "Pour Self-Consistency, on peut examiner les désaccords entre candidats et les cas où tous se trompent. Des formulations différentes ne rendent pas automatiquement leurs erreurs indépendantes. Pour Tree of Thoughts, on observe aussi la qualité de l’évaluateur qui décide quelles pistes poursuivre : un mauvais critère peut éliminer une solution correcte ou favoriser une impasse.",
+            "La comparaison doit garder un jeu de cas réservé après les choix de Prompt. Ajuster sans cesse la consigne sur les mêmes exemples peut finir par suradapter le système à ce petit ensemble. Un gain crédible se retrouve sur des formulations nouvelles et reste utile compte tenu des délais et des coûts. Cette vérification transforme une amélioration de démonstration en une décision exploitable."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Comparer les variantes sur les mêmes cas avec des critères explicites.",
+        "Une explication détaillée ou un accord entre réponses ne remplace pas une vérification indépendante.",
+        "Dans une chaîne, vérifier les informations importantes avec la source d’origine."
+      ],
+      "concepts": [
+        "notion-307",
+        "notion-308",
+        "notion-309",
+        "notion-310",
+        "notion-311"
+      ]
+    }
+  ]
+}

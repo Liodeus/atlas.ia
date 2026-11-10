@@ -1,0 +1,523 @@
+[
+  {
+    "title": "Sparse Attention ≠ Sparse MoE",
+    "left": {
+      "name": "Sparse Attention",
+      "explanation": "Limite les connexions utilisées entre positions d’une séquence, par exemple aux Tokens voisins ou à certains blocs.",
+      "concept": "notion-73"
+    },
+    "right": {
+      "name": "Sparse MoE",
+      "explanation": "Sélectionne une partie des sous-réseaux Experts pour traiter chaque Token, plutôt que de les exécuter tous.",
+      "concept": "notion-104"
+    },
+    "difference": "La sélection porte sur les connexions entre Tokens dans un cas, sur les Experts activés dans l’autre. Les deux mécanismes peuvent coexister.",
+    "example": "Un modèle peut consulter une fenêtre locale de Tokens avec Sparse Attention et sélectionner deux Experts par Token avec Sparse MoE."
+  },
+  {
+    "title": "FlashAttention ≠ Sparse Attention",
+    "left": {
+      "name": "FlashAttention",
+      "explanation": "Calcule l’Attention exacte en organisant les opérations pour réduire les transferts entre les niveaux de mémoire du GPU.",
+      "concept": "notion-91"
+    },
+    "right": {
+      "name": "Sparse Attention",
+      "explanation": "Réduit les connexions calculées entre positions selon un motif choisi, par exemple une fenêtre locale.",
+      "concept": "notion-73"
+    },
+    "difference": "FlashAttention change la manière de calculer l’Attention ; Sparse Attention change les connexions utilisées. Des implémentations peuvent combiner les deux.",
+    "example": "Optimiser les accès mémoire sur toutes les positions autorisées relève de FlashAttention ; limiter ces positions aux Tokens voisins relève de Sparse Attention."
+  },
+  {
+    "title": "PagedAttention ≠ FlashAttention",
+    "left": {
+      "name": "PagedAttention",
+      "explanation": "Organise le KV Cache en blocs qui peuvent être stockés à des endroits non contigus en mémoire, pour limiter le gaspillage et faciliter le partage.",
+      "concept": "notion-92"
+    },
+    "right": {
+      "name": "FlashAttention",
+      "explanation": "Optimise les accès mémoire pendant le calcul exact d’Attention afin d’éviter des lectures et écritures intermédiaires coûteuses.",
+      "concept": "notion-91"
+    },
+    "difference": "PagedAttention concerne l’organisation et l’accès au KV Cache ; FlashAttention concerne le calcul de l’Attention. Un même moteur peut utiliser ces deux optimisations."
+  },
+  {
+    "title": "GQA ≠ MoE",
+    "left": {
+      "name": "Grouped-Query Attention (GQA)",
+      "explanation": "Répartit les Query Heads en groupes ; les Query Heads d’un même groupe partagent une même Key Head et une même Value Head.",
+      "concept": "notion-88"
+    },
+    "right": {
+      "name": "Mixture of Experts (MoE)",
+      "explanation": "Combine plusieurs sous-réseaux Experts. Dans un Sparse MoE, un Router choisit ceux qui traitent chaque Token.",
+      "concept": "notion-103"
+    },
+    "difference": "GQA organise le partage des Keys et Values dans l’Attention ; MoE organise l’utilisation des Experts, souvent dans les FFN. Ils peuvent équiper le même modèle.",
+    "example": "Avec huit Query Heads en deux groupes, GQA utilise deux paires de Key/Value Heads ; un MoE peut en parallèle sélectionner deux Experts par Token."
+  },
+  {
+    "title": "RAG ≠ Fine-tuning",
+    "left": {
+      "name": "RAG",
+      "explanation": "Récupère des informations et les fournit au générateur pendant la requête, sans devoir modifier ses Weights à cette occasion.",
+      "concept": "notion-261"
+    },
+    "right": {
+      "name": "Fine-tuning",
+      "explanation": "Adapte un modèle déjà entraîné en mettant à jour des Parameters à partir de données et d’un objectif d’apprentissage.",
+      "concept": "notion-187"
+    },
+    "difference": "RAG change les informations disponibles dans le contexte ; Fine-tuning apprend une adaptation dans les Parameters. Une application peut combiner les deux.",
+    "example": "RAG peut retrouver le règlement mis à jour hier ; Fine-tuning peut apprendre à rédiger les réponses dans le format attendu."
+  },
+  {
+    "title": "Fine-tuning ≠ Prompting",
+    "left": {
+      "name": "Fine-tuning",
+      "explanation": "Utilise un apprentissage pour modifier tout ou partie des Parameters d’un modèle ou de ses composants d’adaptation.",
+      "concept": "notion-187"
+    },
+    "right": {
+      "name": "Prompting",
+      "explanation": "Fournit ici des consignes textuelles, des exemples ou du contexte à la requête, avec les Weights du modèle inchangés.",
+      "concept": null
+    },
+    "difference": "Le critère est la mise à jour de Parameters par apprentissage. Le Prompt Tuning de vecteurs appris n’est pas le Prompting textuel décrit ici.",
+    "example": "Entraîner un Adapter sur des courriers relève du Fine-tuning ; joindre deux courriers comme exemples dans le Prompt relève du Prompting."
+  },
+  {
+    "title": "Quantization ≠ Distillation",
+    "left": {
+      "name": "Quantization",
+      "explanation": "Représente des valeurs du modèle avec une précision numérique réduite, par exemple des Weights stockés sur moins de bits.",
+      "concept": "notion-222"
+    },
+    "right": {
+      "name": "Knowledge Distillation",
+      "explanation": "Entraîne un Student à reproduire des comportements d’un Teacher à partir de ses sorties ou d’autres signaux.",
+      "concept": "notion-200"
+    },
+    "difference": "Quantization agit sur la représentation numérique ; Distillation agit sur l’apprentissage du Student. Elles peuvent être combinées et doivent être évaluées après adaptation.",
+    "example": "Passer des Weights de 16 à 4 bits relève de Quantization ; entraîner un petit modèle sur les réponses d’un Teacher relève de Distillation."
+  },
+  {
+    "title": "Open Weights ≠ Open Source",
+    "left": {
+      "name": "Open Weights",
+      "explanation": "Désigne l’accès aux Weights d’un modèle selon les conditions proposées. Cet accès ne décrit pas à lui seul les droits ni les autres ressources disponibles.",
+      "concept": "notion-485"
+    },
+    "right": {
+      "name": "Open Source",
+      "explanation": "Suppose les libertés d’usage, d’étude, de modification et de partage, avec les ressources requises par la définition applicable au système.",
+      "concept": "notion-486"
+    },
+    "difference": "Un fichier téléchargeable ne suffit pas. Il faut examiner les licences et les ressources ; des obligations de licence peuvent subsister, notamment lors du partage de modifications."
+  },
+  {
+    "title": "Context Window ≠ Mémoire durable",
+    "left": {
+      "name": "Context Window",
+      "explanation": "Délimite la quantité de contexte, mesurée en Tokens, que le modèle peut traiter pour une requête selon ses limites d’entrée et de sortie.",
+      "concept": "notion-133"
+    },
+    "right": {
+      "name": "Long-Term Memory",
+      "explanation": "Conserve des informations au-delà d’une session et prévoit comment retrouver celles qui seront utiles à une requête future.",
+      "concept": "notion-342"
+    },
+    "difference": "La Context Window est une capacité de traitement ; la Long-Term Memory est un mécanisme de persistance et de récupération. Agrandir la première ne crée pas la seconde.",
+    "example": "Un long historique placé dans le Prompt occupe la Context Window ; un profil enregistré puis retrouvé le lendemain utilise une Long-Term Memory."
+  },
+  {
+    "title": "Prompt Injection ≠ Jailbreak",
+    "left": {
+      "name": "Prompt Injection",
+      "explanation": "Introduit des consignes qui détournent le comportement prévu, notamment en faisant traiter un contenu de moindre confiance comme une instruction autorisée.",
+      "concept": "notion-384"
+    },
+    "right": {
+      "name": "Jailbreak",
+      "explanation": "Cherche à contourner les restrictions de sécurité ou les Guardrails qui encadrent les réponses ou les actions du modèle.",
+      "concept": "notion-387"
+    },
+    "difference": "Prompt Injection décrit un détournement du traitement des consignes ; Jailbreak insiste sur le contournement des protections. Une même tentative peut relever des deux."
+  },
+  {
+    "title": "Hallucination ≠ Mensonge intentionnel",
+    "left": {
+      "name": "Hallucination",
+      "explanation": "Désigne une réponse fausse, inventée ou non soutenue par les informations pertinentes, même si elle paraît convaincante.",
+      "concept": "notion-355"
+    },
+    "right": {
+      "name": "Intentional Lying",
+      "explanation": "Consiste à affirmer volontairement ce que l’on tient pour faux afin d’induire autrui en erreur. Une erreur seule ne suffit pas à établir cette intention.",
+      "concept": null
+    },
+    "difference": "Hallucination décrit un défaut de la réponse ; Intentional Lying suppose que son auteur la tient pour fausse et cherche à tromper. Le seul texte erroné ne démontre pas cette intention.",
+    "example": "Une référence bibliographique inventée permet de constater une Hallucination ; elle ne prouve pas à elle seule un Intentional Lying."
+  },
+  {
+    "title": "Benchmark ≠ Qualité universelle",
+    "left": {
+      "name": "Benchmark",
+      "explanation": "Évalue des modèles sur des tâches, des données et un protocole définis, avec des métriques choisies.",
+      "concept": "notion-351"
+    },
+    "right": {
+      "name": "Performance Across Tasks",
+      "explanation": "Désigne ici la qualité sur plusieurs usages et conditions réelles. Elle demande des évaluations variées, adaptées aux besoins considérés.",
+      "concept": null
+    },
+    "difference": "Un Benchmark fournit une mesure limitée à son protocole. Il ne suffit pas à établir la qualité sur toutes les tâches, langues, contraintes ou populations.",
+    "example": "Un excellent score sur un Benchmark de code ne mesure pas, à lui seul, la qualité des réponses à des questions médicales."
+  },
+  {
+    "title": "Tokenizer ≠ Embedding Layer",
+    "left": {
+      "name": "Tokenizer",
+      "explanation": "Découpe le texte selon ses règles et le convertit en une séquence de Token IDs appartenant à son vocabulaire.",
+      "concept": "notion-123"
+    },
+    "right": {
+      "name": "Embedding Layer",
+      "explanation": "Associe les Token IDs à des vecteurs numériques appris, qui servent d’entrée aux calculs du réseau.",
+      "concept": "notion-53"
+    },
+    "difference": "Le Tokenizer détermine les unités et leurs identifiants ; l’Embedding Layer fournit leurs représentations numériques. Ces deux étapes se suivent dans un modèle textuel classique.",
+    "example": "Le Tokenizer convertit une phrase en identifiants ; l’Embedding Layer transforme chacun de ces identifiants en vecteur."
+  },
+  {
+    "title": "Weight ≠ Activation",
+    "left": {
+      "name": "Weight",
+      "explanation": "Est une valeur du modèle apprise pendant le Training. Elle reste fixe pendant une Inference ordinaire avec Weights gelés.",
+      "concept": "notion-35"
+    },
+    "right": {
+      "name": "Activation",
+      "explanation": "Est une valeur intermédiaire calculée pendant le traitement d’une entrée. Elle dépend de cette entrée et des Parameters utilisés.",
+      "concept": "notion-40"
+    },
+    "difference": "Un Weight appartient aux Parameters stockés ; une Activation appartient au calcul en cours. Des entrées différentes peuvent produire des Activations différentes avec les mêmes Weights."
+  },
+  {
+    "title": "Dense Attention ≠ Causal Attention",
+    "left": {
+      "name": "Dense Attention",
+      "explanation": "Calcule les connexions entre les positions autorisées sans ajouter de sélection locale ou d’autre motif Sparse.",
+      "concept": "notion-71"
+    },
+    "right": {
+      "name": "Causal Attention",
+      "explanation": "Interdit à une position de consulter les positions futures dans l’ordre de génération.",
+      "concept": "notion-81"
+    },
+    "difference": "Dense décrit les connexions calculées ; Causal décrit une restriction temporelle. Une Attention peut être à la fois dense sur les positions autorisées et causale.",
+    "example": "Consulter tout le préfixe disponible, mais aucun Token futur, correspond à une Dense Attention avec Causal Mask."
+  },
+  {
+    "title": "Total Parameters ≠ Active Parameters",
+    "left": {
+      "name": "Total Parameters",
+      "explanation": "Compte tous les Parameters du modèle, y compris ceux d’Experts qui ne sont pas sélectionnés pour un Token donné.",
+      "concept": "notion-118"
+    },
+    "right": {
+      "name": "Active Parameters",
+      "explanation": "Compte les Parameters effectivement utilisés pour traiter le Token considéré, y compris les composants communs et les Experts sélectionnés.",
+      "concept": "notion-117"
+    },
+    "difference": "Dans un Sparse MoE, le total renseigne notamment sur le stockage ; la partie active renseigne sur le calcul mobilisé par Token. Elle ne suffit pas à prédire la Latency.",
+    "example": "Un Expert ignoré pour un Token reste inclus dans les Total Parameters, mais pas dans les Active Parameters de ce Token."
+  },
+  {
+    "title": "Prefill ≠ Decode",
+    "left": {
+      "name": "Prefill",
+      "explanation": "Traite le contexte initial du Prompt pour produire les représentations nécessaires à la génération, notamment le KV Cache lorsque celui-ci est utilisé.",
+      "concept": "notion-135"
+    },
+    "right": {
+      "name": "Decode",
+      "explanation": "Prolonge la réponse à partir du contexte et des Tokens déjà générés, généralement par étapes successives.",
+      "concept": "notion-136"
+    },
+    "difference": "Prefill traite l’entrée disponible ; Decode produit la continuation. Leurs charges de calcul diffèrent, et le TTFT peut aussi inclure la file d’attente et les transferts.",
+    "example": "Lire un dossier de plusieurs pages mobilise le Prefill ; produire ensuite les phrases de réponse mobilise le Decode."
+  },
+  {
+    "title": "Top-k Sampling ≠ Top-p Sampling",
+    "left": {
+      "name": "Top-k Sampling",
+      "explanation": "Limite les candidats aux k Tokens les plus probables avant le Sampling, sous réserve des autres contraintes appliquées.",
+      "concept": "notion-140"
+    },
+    "right": {
+      "name": "Top-p Sampling",
+      "explanation": "Retient le plus petit ensemble des Tokens les plus probables dont la somme des probabilités atteint un seuil p.",
+      "concept": "notion-141"
+    },
+    "difference": "Top-k fixe une limite en nombre de candidats ; Top-p fixe une masse de probabilité cumulée. Avec Top-p, le nombre retenu varie selon la distribution.",
+    "example": "À Top-k égal à 5, on retient au plus cinq candidats ; à Top-p égal à 0,9, on en retient autant que nécessaire pour atteindre 90 % de probabilité."
+  },
+  {
+    "title": "LoRA ≠ QLoRA",
+    "left": {
+      "name": "LoRA",
+      "explanation": "Apprend de petites matrices d’adaptation de faible rang sur des Layers ciblées, en gardant généralement les Weights de base gelés.",
+      "concept": "notion-194"
+    },
+    "right": {
+      "name": "QLoRA",
+      "explanation": "Entraîne des Adapters LoRA à travers une base gelée et quantifiée, stockée en 4 bits dans la méthode d’origine.",
+      "concept": "notion-195"
+    },
+    "difference": "QLoRA combine LoRA et une base quantifiée pour réduire la mémoire d’adaptation. LoRA seul n’impose pas la Quantization des Weights de base.",
+    "example": "Les deux entraînent des Adapters LoRA ; QLoRA utilise en plus une base quantifiée et gelée pendant cette adaptation."
+  },
+  {
+    "title": "SFT ≠ DPO",
+    "left": {
+      "name": "Supervised Fine-Tuning (SFT)",
+      "explanation": "Apprend à produire des réponses cibles à partir d’exemples supervisés, par exemple des couples consigne-réponse.",
+      "concept": "notion-189"
+    },
+    "right": {
+      "name": "Direct Preference Optimization (DPO)",
+      "explanation": "Ajuste directement le modèle sur des paires de réponses préférées et rejetées pour une même consigne, sans Reward Model séparé dans sa formulation classique.",
+      "concept": "notion-208"
+    },
+    "difference": "SFT apprend à reproduire une cible ; DPO apprend une préférence relative entre deux réponses. Les deux modifient des Parameters et peuvent se succéder.",
+    "example": "Un exemple consigne-réponse attendue alimente un SFT ; une consigne avec deux réponses classées par préférence alimente un DPO."
+  },
+  {
+    "title": "TTFT ≠ Tokens per Second",
+    "left": {
+      "name": "TTFT",
+      "explanation": "Mesure le délai entre le début de la requête et la disponibilité du premier Token, selon le point de mesure choisi.",
+      "concept": "notion-243"
+    },
+    "right": {
+      "name": "Tokens per Second",
+      "explanation": "Mesure le nombre de Tokens produits par seconde sur un intervalle défini, par exemple le Decode après le premier Token.",
+      "concept": "notion-245"
+    },
+    "difference": "TTFT décrit l’attente initiale ; Tokens per Second décrit un débit. Il faut préciser l’intervalle et distinguer le débit d’une requête du débit global du service.",
+    "example": "Un service peut démarrer la réponse après deux secondes, puis produire la suite rapidement : TTFT élevé et débit de Decode élevé peuvent coexister."
+  },
+  {
+    "title": "Retrieval ≠ Reranking",
+    "left": {
+      "name": "Retrieval",
+      "explanation": "Recherche des documents ou passages candidats dans un corpus à partir d’une requête et de critères de recherche.",
+      "concept": "notion-262"
+    },
+    "right": {
+      "name": "Reranking",
+      "explanation": "Réévalue et réordonne une liste de candidats déjà récupérés, souvent avec un modèle plus coûteux par paire requête-document.",
+      "concept": "notion-282"
+    },
+    "difference": "Retrieval constitue la liste de candidats ; Reranking affine leur classement. Un Reranker qui ne reçoit que cette liste ne peut pas y ajouter un passage absent.",
+    "example": "Retrieval récupère trente passages ; Reranking place en tête les passages les plus pertinents parmi ces trente candidats."
+  },
+  {
+    "title": "Embedding Model ≠ Vector Database",
+    "left": {
+      "name": "Embedding Model",
+      "explanation": "Calcule des vecteurs représentant les textes ou autres entrées, afin de permettre des comparaisons dans un espace appris.",
+      "concept": "notion-23"
+    },
+    "right": {
+      "name": "Vector Database",
+      "explanation": "Stocke et indexe des vecteurs, puis permet de rechercher des voisins proches et d’appliquer des filtres sur leurs métadonnées.",
+      "concept": "notion-265"
+    },
+    "difference": "Le modèle produit les représentations ; la base les conserve et les recherche. Un produit peut intégrer les deux fonctions, mais elles restent distinctes.",
+    "example": "L’Embedding Model transforme un passage en vecteur ; la Vector Database retrouve les vecteurs proches de celui de la question."
+  },
+  {
+    "title": "Factuality ≠ Faithfulness",
+    "left": {
+      "name": "Factuality",
+      "explanation": "Évalue si les affirmations sont exactes par rapport aux faits et aux références fiables pertinentes.",
+      "concept": "notion-356"
+    },
+    "right": {
+      "name": "Faithfulness",
+      "explanation": "Évalue si la réponse est soutenue par les sources ou le contexte fournis, sans leur attribuer des informations qu’ils ne contiennent pas.",
+      "concept": "notion-357"
+    },
+    "difference": "Factuality concerne la justesse des affirmations ; Faithfulness concerne leur appui sur le contexte. Une source peut être erronée ou obsolète.",
+    "example": "Recopier fidèlement un ancien tarif devenu faux respecte la Faithfulness envers ce document, mais dégrade la Factuality actuelle."
+  },
+  {
+    "title": "Precision ≠ Recall",
+    "left": {
+      "name": "Precision",
+      "explanation": "Pour une classe positive définie, mesure la part des positifs prédits qui sont réellement positifs.",
+      "concept": "notion-363"
+    },
+    "right": {
+      "name": "Recall",
+      "explanation": "Pour cette même classe, mesure la part des positifs réels qui ont été détectés.",
+      "concept": "notion-364"
+    },
+    "difference": "Precision examine ce qui a été annoncé positif ; Recall examine ce qui devait être retrouvé. Les dénominateurs diffèrent, et les deux métriques peuvent évoluer différemment.",
+    "example": "Avec « spam » comme classe positive, Precision demande si les messages bloqués sont bien des spams ; Recall demande quelle part des spams a été bloquée."
+  },
+  {
+    "title": "Tool Calling ≠ AI Agent",
+    "left": {
+      "name": "Tool Calling",
+      "explanation": "Permet au modèle de proposer un appel d’outil structuré. L’application contrôle ses arguments, ses permissions et son exécution.",
+      "concept": "notion-322"
+    },
+    "right": {
+      "name": "AI Agent",
+      "explanation": "Poursuit un objectif au sein d’une boucle qui choisit des actions, examine leurs résultats et décide de poursuivre ou de terminer.",
+      "concept": "notion-320"
+    },
+    "difference": "Tool Calling est une capacité d’appel ; un AI Agent est une organisation du travail. Un appel isolé ne démontre pas une boucle autonome.",
+    "example": "Demander une fois la météo utilise Tool Calling ; comparer des itinéraires, consulter des outils et réviser le choix peut former une boucle d’AI Agent."
+  },
+  {
+    "title": "Data Parallelism ≠ Tensor Parallelism",
+    "left": {
+      "name": "Data Parallelism",
+      "explanation": "Dans sa forme classique, réplique le modèle sur plusieurs appareils qui traitent des données différentes ; le Training synchronise leurs Gradients.",
+      "concept": "notion-468"
+    },
+    "right": {
+      "name": "Tensor Parallelism",
+      "explanation": "Répartit les Tensors ou les calculs d’une même opération du modèle entre plusieurs GPU ou autres appareils de calcul.",
+      "concept": "notion-469"
+    },
+    "difference": "Data Parallelism répartit les données entre copies ; Tensor Parallelism répartit le calcul du modèle. Répliquer un modèle ne résout pas à lui seul un manque de VRAM par GPU.",
+    "example": "Deux GPU traitant chacun un Batch avec une copie complète utilisent Data Parallelism ; partager une même MatMul entre eux utilise Tensor Parallelism."
+  },
+  {
+    "title": "ASR ≠ TTS",
+    "left": {
+      "name": "Automatic Speech Recognition (ASR)",
+      "explanation": "Transforme la parole enregistrée ou reçue en direct en une transcription textuelle.",
+      "concept": "notion-440"
+    },
+    "right": {
+      "name": "Text-to-Speech (TTS)",
+      "explanation": "Transforme un texte en parole synthétisée, avec une voix et des caractéristiques audio choisies selon le système.",
+      "concept": "notion-441"
+    },
+    "difference": "ASR va de la parole vers le texte ; TTS va du texte vers la parole. Un assistant vocal peut utiliser les deux, mais ces fonctions ne se confondent pas.",
+    "example": "Transcrire une question prononcée mobilise ASR ; lire à voix haute la réponse écrite mobilise TTS."
+  },
+  {
+    "title": "Agent Harness ≠ Model",
+    "left": {
+      "name": "Agent Harness",
+      "explanation": "Organise la boucle, le contexte, les outils et les contrôles autour du modèle.",
+      "concept": "notion-507"
+    },
+    "right": {
+      "name": "LLM",
+      "explanation": "Produit des sorties à partir du contexte et des paramètres appris ; il ne décide pas seul des permissions réelles.",
+      "concept": "notion-4"
+    },
+    "difference": "Le Harness organise et encadre l’exécution ; le LLM traite le contexte et produit des propositions. Les responsabilités exactes dépendent du système.",
+    "example": "Un modèle propose une recherche ; le Harness vérifie si elle est autorisée et transmet le résultat."
+  },
+  {
+    "title": "MCP Client ≠ MCP Server",
+    "left": {
+      "name": "MCP Client",
+      "explanation": "Composant qui communique avec un MCP Server pour utiliser les capacités exposées.",
+      "concept": "notion-516"
+    },
+    "right": {
+      "name": "MCP Server",
+      "explanation": "Composant qui expose au Client des capacités telles que Tools, Resources et Prompts.",
+      "concept": "notion-517"
+    },
+    "difference": "Le Client demande ou consulte des capacités ; le Server les expose. Le Host accueille les connexions dans l’application.",
+    "example": "Dans un assistant de documents, le Client contacte un Server qui expose un Tool de recherche."
+  },
+  {
+    "title": "MCP Tool ≠ MCP Resource",
+    "left": {
+      "name": "MCP Tool",
+      "explanation": "Expose une opération que le Client peut demander d’exécuter avec des arguments.",
+      "concept": "notion-518"
+    },
+    "right": {
+      "name": "MCP Resource",
+      "explanation": "Expose un contenu identifié par une URI que le Client peut consulter.",
+      "concept": "notion-519"
+    },
+    "difference": "Le Tool représente une opération appelable ; la Resource représente un contenu à lire. Dans les deux cas, les accès doivent être contrôlés.",
+    "example": "Rechercher des documents peut être un Tool ; lire un document identifié peut être une Resource."
+  },
+  {
+    "title": "Context Compaction ≠ Context Reset",
+    "left": {
+      "name": "Context Compaction",
+      "explanation": "Réduit l’historique transmis, par exemple en résumant ou sélectionnant les informations utiles.",
+      "concept": "notion-523"
+    },
+    "right": {
+      "name": "Context Reset",
+      "explanation": "Démarre un nouveau contexte en y apportant les informations retenues pour reprendre le travail.",
+      "concept": "notion-524"
+    },
+    "difference": "La Compaction réduit le contexte pour continuer ; le Reset repart sur un nouveau contexte, éventuellement alimenté par un état de reprise. Les deux peuvent perdre des informations.",
+    "example": "Une session résume ses anciens échanges pour continuer, ou démarre une nouvelle session avec un document de reprise."
+  },
+  {
+    "title": "Model Family ≠ Model Variant",
+    "left": {
+      "name": "Model Family",
+      "explanation": "Regroupe des modèles apparentés sous un nom, sans définir à elle seule toutes les capacités et tous les droits.",
+      "concept": "notion-500"
+    },
+    "right": {
+      "name": "Model Variant",
+      "explanation": "Désigne un modèle précis ou une déclinaison à examiner avec sa version, ses modalités et ses conditions.",
+      "concept": "notion-501"
+    },
+    "difference": "La famille sert à situer un ensemble ; la variante précise est celle dont il faut vérifier les caractéristiques et la licence.",
+    "example": "Connaître la famille ne suffit pas pour savoir si une variante particulière accepte les images."
+  },
+  {
+    "title": "Agent Harness ≠ AI Agent",
+    "left": {
+      "name": "Agent Harness",
+      "explanation": "Ensemble de composants qui encadrent l’exécution, notamment la boucle, les outils, le contexte et les contrôles.",
+      "concept": "notion-507"
+    },
+    "right": {
+      "name": "AI Agent",
+      "explanation": "Système qui utilise un modèle et des mécanismes de contrôle pour réaliser des étapes vers un objectif, parfois avec des outils.",
+      "concept": "notion-320"
+    },
+    "difference": "Le Harness désigne l’infrastructure qui organise et encadre l’exécution ; l’Agent désigne le système qui agit vers un objectif. Leur frontière varie selon les produits.",
+    "example": "Un assistant qui cherche des documents est un Agent ; sa boucle, ses permissions et ses outils font partie de son Harness."
+  },
+  {
+    "title": "GPT ≠ gpt-oss",
+    "left": {
+      "name": "GPT",
+      "explanation": "Nom de famille de modèles d’OpenAI comprenant différentes générations et variantes.",
+      "concept": "notion-600"
+    },
+    "right": {
+      "name": "gpt-oss",
+      "explanation": "Famille de modèles d’OpenAI distribués avec leurs Weights pour des déploiements choisis par l’utilisateur.",
+      "concept": "notion-601"
+    },
+    "difference": "Ces noms renvoient à des offres distinctes ; la disponibilité des Weights de gpt-oss ne définit pas les conditions de toutes les variantes GPT.",
+    "example": "Avant de déployer un modèle localement, vérifiez les fichiers, la licence et les exigences de sa version précise."
+  }
+]

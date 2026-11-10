@@ -1,0 +1,15 @@
+services:
+  atlas:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      ATLAS_ADDRESS: ${ATLAS_DOMAIN:?Indiquez ATLAS_DOMAIN dans le fichier .env}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+volumes:
+  caddy_data:
+  caddy_config:
