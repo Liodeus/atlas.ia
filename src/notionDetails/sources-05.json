@@ -1,0 +1,71 @@
+{
+  "notion-124": [
+    "https://huggingface.co/docs/transformers/main_classes/tokenizer"
+  ],
+  "notion-125": [
+    "https://arxiv.org/abs/1508.07909"
+  ],
+  "notion-126": [
+    "https://huggingface.co/docs/transformers/tokenizer_summary"
+  ],
+  "notion-127": [
+    "https://arxiv.org/abs/1808.06226",
+    "https://github.com/google/sentencepiece"
+  ],
+  "notion-128": [
+    "https://huggingface.co/docs/transformers/tokenizer_summary",
+    "https://huggingface.co/docs/transformers/main_classes/tokenizer"
+  ],
+  "notion-129": [
+    "https://huggingface.co/docs/transformers/main_classes/tokenizer"
+  ],
+  "notion-130": [
+    "https://huggingface.co/docs/transformers/main_classes/text_generation",
+    "https://huggingface.co/docs/transformers/chat_templating"
+  ],
+  "notion-131": [
+    "https://huggingface.co/docs/transformers/main/pad_truncation"
+  ],
+  "notion-132": [
+    "https://huggingface.co/docs/transformers/chat_templating"
+  ],
+  "notion-134": [
+    "https://huggingface.co/docs/transformers/main_classes/text_generation",
+    "https://huggingface.co/docs/transformers/chat_templating"
+  ],
+  "notion-137": [
+    "https://huggingface.co/docs/transformers/tasks/language_modeling"
+  ],
+  "notion-138": [
+    "https://huggingface.co/docs/transformers/internal/generation_utils"
+  ],
+  "notion-140": [
+    "https://huggingface.co/docs/transformers/main_classes/text_generation"
+  ],
+  "notion-142": [
+    "https://huggingface.co/docs/transformers/generation_strategies",
+    "https://docs.pytorch.org/docs/2.15/notes/randomness.html"
+  ],
+  "notion-143": [
+    "https://huggingface.co/docs/transformers/generation_strategies"
+  ],
+  "notion-144": [
+    "https://huggingface.co/docs/transformers/internal/generation_utils"
+  ],
+  "notion-145": [
+    "https://docs.vllm.ai/en/latest/api/vllm/sampling_params/"
+  ],
+  "notion-146": [
+    "https://huggingface.co/docs/transformers/main_classes/text_generation",
+    "https://huggingface.co/docs/transformers/internal/generation_utils"
+  ],
+  "notion-147": [
+    "https://huggingface.co/docs/transformers/internal/generation_utils"
+  ],
+  "notion-148": [
+    "https://docs.pytorch.org/docs/2.15/notes/randomness.html"
+  ],
+  "notion-149": [
+    "https://docs.vllm.ai/en/latest/api/vllm/sampling_params/"
+  ]
+}

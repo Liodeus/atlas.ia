@@ -2,6 +2,9 @@ import {test, before, after} from 'node:test';
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {chromium} from 'playwright';
+import {notionContent} from '../../src/notionContent.js';
+import {notionContentSources} from '../../src/notionSources.js';
+import {expandAbbreviations} from '../../src/abbreviations.js';
 
 let server, browser, page; const pageErrors=[];
 before(async()=>{
@@ -223,6 +226,37 @@ test('course and concept cards remind readers what abbreviations mean',async()=>
  await page.locator('.notion-understand').waitFor();
  assert.match(await page.locator('.notion-understand').innerText(),/TTFT \(Time To First Token\)/);
 });
+test('formerly incomplete notions now show their own explanation, example and references',async()=>{
+ for(const id of ['notion-2','notion-3','notion-467','notion-507','notion-620']){
+  await page.goto('http://127.0.0.1:5199/notions/'+id);
+  await page.getByRole('heading',{name:'Pour comprendre',exact:true}).waitFor();
+  assert.equal(await page.locator('.notion-understand p').innerText(),expandAbbreviations(notionContent[id].explanation));
+  assert.equal(await page.locator('.notion-example').count(),1);
+  assert.equal(await page.locator('.notion-caution p').innerText(),expandAbbreviations(notionContent[id].misconception));
+  const more=page.locator('.notion-more');
+  assert.equal(await more.evaluate(e=>e.open),false);
+  await more.locator(':scope > summary').click();
+  for(const source of notionContentSources[id])assert.ok(await more.locator('a').evaluateAll((links,url)=>links.some(a=>a.href===url),source),`${id}: ${source}`);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth),true,id);
+ }
+});
+test('all course terms offer an optional deepening while essential mode stays compact',async()=>{
+ for(const theme of [1,17,18]){
+  await page.goto(`http://127.0.0.1:5199/cours/${theme}?etape=1`);
+  await page.getByRole('radio',{name:/Approfondi/}).check();
+  const terms=page.locator('.course-term');
+  const details=terms.locator('.course-term-detail');
+  assert.equal(await details.count(),await terms.count(),`theme ${theme}`);
+  assert.ok(await details.count()>0);
+  assert.equal(await details.evaluateAll(elements=>elements.every(e=>!e.open)),true);
+  const first=terms.first();
+  const id=(await first.getAttribute('id')).replace('course-term-','');
+  await first.getByText('Approfondir cette notion',{exact:true}).click();
+  assert.equal(await first.locator('.course-term-detail p').first().innerText(),expandAbbreviations(notionContent[id].explanation));
+  await page.getByRole('radio',{name:/Essentiel/}).check();
+  assert.equal(await page.locator('.course-term-detail').count(),0);
+ }
+});
 test('mixed flashcard directions survive export and import',async()=>{
  await page.close();page=await browser.newPage({viewport:{width:390,height:844}});page.setDefaultTimeout(10000);page.on('pageerror',error=>pageErrors.push(error.message));
  await page.goto('http://127.0.0.1:5199/');await page.evaluate(()=>localStorage.removeItem('atlas-progress'));
@@ -250,4 +284,42 @@ test('unknown saved data remains untouched while storage is blocked',async()=>{
  assert.equal(await page.evaluate(()=>localStorage.getItem('atlas-progress')),raw);
  await page.goto('http://127.0.0.1:5199/progression');
  await page.getByRole('button',{name:'Exporter la sauvegarde originale'}).waitFor();
+});
+
+test('secondary glossary filters stay visible in the summary and survive a notion visit',async()=>{
+ await page.goto('http://127.0.0.1:5199/glossaire');
+ const disclosure=page.locator('.glossary-options'),summary=disclosure.locator('summary');
+ await summary.focus();await page.keyboard.press('Enter');
+ await page.getByLabel('Essentiels',{exact:true}).check();
+ await page.getByRole('combobox',{name:'Trier les notions'}).click();
+ await page.getByRole('option',{name:'De A à Z',exact:true}).click();
+ await summary.click();
+ assert.match(await summary.innerText(),/De A à Z · Essentiels/);
+ const before=await page.locator('.results-count').innerText();
+ await page.locator('.gloss-card').first().click();await page.getByRole('link',{name:'Retour au glossaire'}).click();
+ assert.equal(await page.locator('.results-count').innerText(),before);
+ assert.match(await summary.innerText(),/Essentiels/);
+ await page.getByRole('button',{name:'Réinitialiser',exact:true}).click();
+ assert.match(await page.locator('.results-count').innerText(),/551 NOTIONS/);
+ assert.doesNotMatch(await summary.innerText(),/Essentiels/);
+});
+test('comparison deep links open the right disclosure and preserve keyboard access',async()=>{
+ await page.goto('http://127.0.0.1:5199/distinctions#distinction-2');
+ const item=page.locator('#distinction-2');await item.locator('.distinction-content').waitFor();
+ assert.equal(await item.evaluate(el=>el.open),true);
+ assert.equal(await item.locator('summary').evaluate(el=>el===document.activeElement),true);
+ await page.keyboard.press('Enter');assert.equal(await item.evaluate(el=>el.open),false);
+ await page.keyboard.press('Enter');assert.equal(await item.evaluate(el=>el.open),true);
+ await page.getByLabel('Rechercher une distinction').fill('aucun-resultat-xyz');
+ await page.getByRole('button',{name:'Effacer la recherche'}).click();
+ assert.equal(await page.locator('.distinction-card').count(),35);
+});
+test('theme resources remain reachable by keyboard without obscuring the lessons',async()=>{
+ await page.goto('http://127.0.0.1:5199/themes/1');
+ const resources=page.locator('.theme-extra').filter({hasText:'Les ressources du thème'});
+ await page.getByRole('link',{name:'Commencer la leçon 1'}).waitFor();
+ assert.equal(await page.locator('.theme-lessons .lesson-row').count(),3);
+ await resources.locator('summary').focus();await page.keyboard.press('Enter');
+ await resources.getByRole('link',{name:'Réviser avec les flashcards'}).click();
+ await page.waitForURL('**/flashcards?theme=1');await page.getByRole('button',{name:/Commencer.*session|Commencer la révision/}).waitFor();
 });

@@ -210,7 +210,7 @@ export const priorityContent = {
     misconception: "Une préférence humaine n'est pas une preuve de vérité. Optimiser une récompense peut encourager des réponses séduisantes ou des comportements qui exploitent ses imperfections."
   },
   'notion-208': {
-    explanation: "DPO ajuste directement un modèle sur des paires de réponses préférées et rejetées pour une même entrée. Son objectif augmente la préférence relative pour les bonnes réponses par rapport à un modèle de référence, sans entraîner explicitement un modèle de récompense séparé.",
+    explanation: "DPO ajuste directement un modèle sur des paires de réponses préférées et rejetées pour une même entrée. Son objectif augmente la préférence relative pour les réponses préférées par rapport à un modèle de référence, sans entraîner explicitement un modèle de récompense séparé.",
     example: "Exemple illustratif : pour une question identique, une réponse utile est préférée à une réponse hors sujet ; cette paire sert directement à l'entraînement DPO.",
     misconception: "DPO ne découvre pas seul ce qui est souhaitable. La qualité et la couverture des paires de préférence restent déterminantes."
   },
@@ -226,7 +226,7 @@ export const priorityContent = {
   },
   'notion-232': {
     explanation: "Le cache K/V conserve les clés et valeurs des tokens déjà traités par l'attention. Pendant la génération, le modèle les réutilise pour traiter le nouveau token sans recalculer systématiquement celles de tout le préfixe.",
-    example: "Exemple illustratif : au dixième token généré, le serveur réutilise les K/V du prompt et des neuf premiers tokens, puis ajoute les nouvelles valeurs au cache.",
+    example: "Exemple illustratif : après avoir traité T1 et T2, le modèle sélectionne T3. Pour prédire T4, il traite T3, réutilise les K/V de T1 et T2 et ajoute les K/V de T3 au cache.",
     misconception: "Le cache K/V n'est pas une mémoire de connaissances persistante. Il consomme de la mémoire et sa taille dépend notamment de la longueur du contexte."
   },
   'notion-237': {

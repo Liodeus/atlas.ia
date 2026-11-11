@@ -1,0 +1,147 @@
+{
+  "notion-36": {
+    "explanation": "Dans une transformation affine, le biais est un paramètre ajouté au résultat de la multiplication par les poids. Il permet de déplacer la réponse de la couche indépendamment de l’entrée, et son apprentissage ajuste ce décalage ; certaines architectures suppriment toutefois ces termes dans une partie de leurs couches.",
+    "example": "Exemple illustratif : un modèle qui estime la durée d’une livraison peut apprendre un décalage correspondant au temps de préparation, en plus d’une contribution liée à la distance à parcourir.",
+    "misconception": "Ce biais numérique n’est pas le biais social d’un modèle : supprimer les termes additifs ne supprime pas les stéréotypes présents dans ses données ou ses sorties."
+  },
+  "notion-37": {
+    "explanation": "Une couche applique une transformation définie aux représentations reçues et transmet son résultat à la suite du réseau. Elle peut contenir des paramètres appris ou effectuer une opération fixe ; le mot désigne parfois un bloc composé de plusieurs opérations, ce qui impose de vérifier la convention utilisée quand on compare des architectures.",
+    "example": "Exemple illustratif : dans un classifieur d’images, une couche transforme les caractéristiques visuelles en un nouveau vecteur, puis une autre convertit cette représentation en scores associés aux catégories à reconnaître.",
+    "misconception": "Le nombre de couches ne suffit pas à comparer deux modèles : leurs dimensions, leurs opérations et la définition même d’une couche peuvent différer."
+  },
+  "notion-38": {
+    "explanation": "Un Hidden State est une représentation intermédiaire calculée pendant le passage d’une entrée dans le modèle. Dans un Transformer, chaque position possède généralement un vecteur qui évolue d’une couche à l’autre et dépend du contexte accessible ; dans un réseau récurrent, l’état est également transmis d’une étape temporelle à la suivante.",
+    "example": "Exemple illustratif : un chercheur compare la représentation du mot « souris » dans un texte sur un ordinateur et dans un texte sur un animal, à la sortie d’une même couche.",
+    "misconception": "Un Hidden State n’est pas un poids du modèle : sa valeur change avec l’entrée, même lorsque les paramètres appris restent entièrement fixes pendant l’inférence."
+  },
+  "notion-39": {
+    "explanation": "La dimension d_model indique la largeur des vecteurs qui circulent dans le flux principal d’un Transformer. Elle contraint les dimensions des projections et des connexions résiduelles, sans être nécessairement égale à la largeur interne du réseau feed-forward ni à celle d’une tête d’attention ; l’augmenter modifie plusieurs coûts de calcul et de stockage.",
+    "example": "Exemple illustratif : avant de relier deux blocs, une équipe vérifie que leurs vecteurs de sortie et d’entrée ont des dimensions compatibles, ou ajoute une projection pour effectuer le changement de largeur.",
+    "misconception": "d_model ne mesure ni la longueur maximale du texte ni le nombre de connaissances du modèle ; c’est une dimension numérique de ses représentations."
+  },
+  "notion-40": {
+    "explanation": "Une activation est une valeur produite par le réseau lorsqu’il traite une entrée, par exemple la sortie d’un neurone, d’une couche ou d’un bloc. Ces valeurs dépendent des données et des poids ; leur observation aide à comprendre un calcul ou à diagnostiquer des problèmes numériques, tandis que leur stockage représente un coût mémoire.",
+    "example": "Exemple illustratif : pendant un entraînement, une équipe suit l’amplitude des activations après chaque bloc et repère une couche dont les valeurs deviennent anormalement grandes avant l’apparition d’erreurs numériques.",
+    "misconception": "Une activation élevée n’indique pas automatiquement qu’un neurone reconnaît un concept précis ; son interprétation dépend du contexte et des interactions avec le reste du réseau."
+  },
+  "notion-41": {
+    "explanation": "Une fonction d’activation introduit généralement une non-linéarité dans le réseau, permettant aux couches successives de représenter des relations plus complexes qu’une unique transformation affine. Son choix influence aussi la circulation des gradients et la distribution des valeurs ; elle fait partie de la conception du modèle et ne se remplace pas sans validation.",
+    "example": "Exemple illustratif : pour distinguer des groupes de points séparés par une frontière courbe, un réseau combine des transformations affines et des activations non linéaires au lieu d’empiler seulement des opérations linéaires.",
+    "misconception": "La fonction d’activation est une opération mathématique, pas une décision consciente d’activer un neurone ; sa sortie peut d’ailleurs être continue plutôt que binaire."
+  },
+  "notion-42": {
+    "explanation": "ReLU conserve les valeurs positives et remplace les valeurs négatives par zéro, élément par élément. Cette opération simple introduit une non-linéarité et peut produire des activations clairsemées ; sa dérivée nulle du côté négatif signifie toutefois que certaines unités peuvent recevoir peu de mises à jour si leurs entrées restent dans cette région.",
+    "example": "Exemple illustratif : dans une démonstration numérique, un vecteur contient une composante négative et une composante positive ; ReLU annule la première et conserve la seconde avant la transformation suivante.",
+    "misconception": "ReLU ne borne pas les valeurs positives et ne normalise pas leur somme ; elle ne remplace donc ni une normalisation ni une distribution de probabilités."
+  },
+  "notion-43": {
+    "explanation": "GELU multiplie une entrée par la valeur de la fonction de répartition d’une loi normale standard évaluée à cette entrée. Elle module ainsi les valeurs de manière lisse, contrairement à la coupure de ReLU, et s’utilise notamment dans les blocs feed-forward ; les bibliothèques peuvent proposer une formule approchée pour son calcul.",
+    "example": "Exemple illustratif : en inspectant un bloc Transformer, un développeur retrouve des petites valeurs négatives après GELU, alors qu’une activation ReLU les aurait remplacées par zéro dans cette même étape.",
+    "misconception": "La référence à une loi gaussienne ne signifie pas qu’un tirage aléatoire est effectué à chaque activation : GELU est une transformation déterministe de son entrée."
+  },
+  "notion-44": {
+    "explanation": "SiLU calcule le produit d’une valeur par sa sigmoid, ce qui donne une transition lisse et laisse passer certaines valeurs négatives atténuées. On l’appelle couramment Swish, même si ce dernier nom peut aussi désigner une famille avec un paramètre supplémentaire ; il faut donc vérifier la formule exacte de l’implémentation.",
+    "example": "Exemple illustratif : une équipe reproduit une architecture à partir de sa configuration et contrôle que l’activation annoncée comme Swish correspond bien à la formule SiLU utilisée dans la bibliothèque choisie.",
+    "misconception": "SiLU ne se limite pas à une sigmoid : le produit par l’entrée change sa forme, et sa sortie n’est pas bornée entre zéro et un."
+  },
+  "notion-45": {
+    "explanation": "SwiGLU construit une transformation à porte en multipliant deux projections de l’entrée, dont l’une passe par une activation Swish. Cette modulation élément par élément permet à une branche de contrôler la contribution de l’autre ; dans un Transformer, elle s’intègre au bloc feed-forward avec une projection de retour vers la dimension du modèle.",
+    "example": "Exemple illustratif : en lisant le schéma d’un bloc, un étudiant repère deux branches parallèles, une activation sur l’une d’elles, leur multiplication puis la projection qui rétablit la largeur attendue.",
+    "misconception": "SwiGLU n’est pas simplement un autre nom de SiLU : c’est une structure à plusieurs projections, dont SiLU peut constituer la fonction de porte."
+  },
+  "notion-47": {
+    "explanation": "Une connexion résiduelle additionne l’entrée d’un bloc à la transformation calculée par ce bloc, lorsque leurs dimensions sont compatibles. Le réseau peut ainsi apprendre une modification d’une représentation déjà disponible, et les gradients disposent d’un chemin supplémentaire pendant l’entraînement ; une projection peut être nécessaire si les dimensions changent.",
+    "example": "Exemple illustratif : un bloc d’attention calcule une contribution contextuelle, puis l’ajoute au vecteur qu’il a reçu afin que le bloc suivant dispose de la représentation initiale enrichie par cette contribution.",
+    "misconception": "Une Skip Connection ne saute pas forcément le calcul du bloc : dans la forme résiduelle habituelle, la branche transformée et le chemin direct sont tous deux utilisés."
+  },
+  "notion-48": {
+    "explanation": "LayerNorm recentre et remet à l’échelle les composantes d’une représentation à partir de leur moyenne et de leur variance, avec un terme de stabilité numérique. Dans un Transformer, cette opération est couramment appliquée séparément à chaque token, puis suivie de facteurs appris ; elle aide à contrôler les amplitudes au fil des blocs.",
+    "example": "Exemple illustratif : deux phrases de longueurs différentes sont traitées ensemble ; la LayerNorm de chaque token utilise ses propres caractéristiques, sans calculer une moyenne commune sur toutes les phrases du lot.",
+    "misconception": "LayerNorm ne normalise pas les poids et ne fonctionne pas comme BatchNorm : les axes utilisés pour les statistiques et la dépendance au lot diffèrent."
+  },
+  "notion-49": {
+    "explanation": "RMSNorm divise une représentation par une mesure de son amplitude fondée sur la moyenne des carrés de ses composantes, puis applique généralement des facteurs appris. Elle ne soustrait pas la moyenne comme LayerNorm, ce qui simplifie le calcul tout en conservant un contrôle de l’échelle des activations dans les blocs du modèle.",
+    "example": "Exemple illustratif : lors de l’inspection d’un modèle, une équipe constate que la normalisation utilise les carrés des composantes et un facteur appris, mais aucun calcul de centrage par leur moyenne.",
+    "misconception": "RMSNorm ne garantit pas des activations de moyenne nulle ; l’absence de centrage est une différence de fonctionnement, pas seulement une optimisation logicielle de LayerNorm."
+  },
+  "notion-50": {
+    "explanation": "Pre-Norm et Post-Norm décrivent l’emplacement de la normalisation par rapport au sous-bloc et à l’addition résiduelle. En Pre-Norm, le sous-bloc reçoit une entrée normalisée avant d’ajouter sa contribution au flux principal ; en Post-Norm, la normalisation suit cette addition, ce qui modifie notamment le comportement des gradients pendant l’entraînement.",
+    "example": "Exemple illustratif : deux schémas contiennent attention, addition et normalisation, mais dans un ordre différent ; l’équipe identifie cet ordre avant de reproduire les réglages d’entraînement du modèle étudié.",
+    "misconception": "Ces noms ne désignent pas une normalisation réalisée avant ou après l’entraînement entier : ils décrivent l’ordre des opérations à l’intérieur des blocs."
+  },
+  "notion-51": {
+    "explanation": "Softmax exponentie des scores puis divise chaque résultat par leur somme sur l’axe choisi, produisant des poids normalisés. Elle sert notamment à répartir l’attention ou à construire une distribution sur le vocabulaire ; augmenter un score modifie aussi les probabilités relatives des autres candidats, car ils partagent le même dénominateur.",
+    "example": "Exemple illustratif : un système de classement calcule des scores pour plusieurs catégories, puis applique Softmax sur cet ensemble pour obtenir une distribution que l’on peut comparer à l’étiquette attendue.",
+    "misconception": "Des valeurs qui totalisent un ne sont pas automatiquement des probabilités bien calibrées : un modèle peut attribuer une forte probabilité à une prédiction erronée."
+  },
+  "notion-52": {
+    "explanation": "Un logit est un score brut associé à un candidat avant sa transformation en probabilité, généralement par Softmax dans un modèle de langage. Les écarts entre logits déterminent les préférences relatives ; certains réglages de génération modifient ces scores avant le choix du token, plutôt que de changer les poids du modèle.",
+    "example": "Exemple illustratif : en comparant deux continuations possibles, un développeur inspecte leurs logits avant échantillonnage pour comprendre pourquoi une option devient plus probable après application d’une pénalité de répétition.",
+    "misconception": "Un logit ne se lit pas comme un pourcentage : il peut être négatif ou supérieur à un, et sa valeur dépend des autres scores."
+  },
+  "notion-53": {
+    "explanation": "Une Embedding Layer associe chaque identifiant discret à un vecteur appris, généralement en sélectionnant une ligne dans une table. Elle fournit ainsi au réseau une représentation numérique manipulable par les couches suivantes ; cette représentation initiale dépend du token, tandis que le contexte sera intégré par les transformations ultérieures du modèle.",
+    "example": "Exemple illustratif : après tokenisation d’une phrase, le modèle récupère un vecteur pour chaque identifiant et rassemble ces vecteurs dans l’ordre du texte avant de les transmettre aux blocs Transformer.",
+    "misconception": "L’Embedding Layer n’est pas à elle seule un modèle d’embeddings de phrases : une représentation de document demande généralement un traitement contextuel et une agrégation adaptés."
+  },
+  "notion-54": {
+    "explanation": "Le Positional Encoding apporte une information sur l’ordre ou la distance entre les éléments d’une séquence, que leur contenu seul ne suffit pas à exprimer. Selon l’architecture, cette information est ajoutée aux embeddings ou intégrée au calcul d’attention ; le choix influence la façon dont le modèle traite des positions et des longueurs nouvelles.",
+    "example": "Exemple illustratif : deux phrases utilisent les mêmes mots dans des ordres différents ; leur information de position permet au modèle de distinguer qui effectue l’action et qui la reçoit.",
+    "misconception": "L’encodage de position ne correspond pas nécessairement à une numérotation ajoutée au texte : c’est un mécanisme numérique interne, dont plusieurs variantes existent."
+  },
+  "notion-56": {
+    "explanation": "ALiBi introduit la position en ajoutant aux scores d’attention un biais lié à la distance entre les tokens, avec des pentes différentes selon les têtes. Dans sa forme causale, les positions éloignées reçoivent une pénalité plus forte ; cette préférence pour la proximité évite d’avoir besoin d’une table de positions absolues ajoutée aux embeddings.",
+    "example": "Exemple illustratif : pour une même compatibilité entre requête et clé, une tête utilisant ALiBi favorise un token récent plutôt qu’un token plus ancien, selon la pente attribuée à cette tête.",
+    "misconception": "ALiBi ne supprime pas les liens lointains comme un masque de fenêtre : il modifie leurs scores, et l’extrapolation reste à évaluer sur les tâches visées."
+  },
+  "notion-57": {
+    "explanation": "YaRN adapte les rotations de RoPE pour rendre accessibles des positions au-delà de la fenêtre utilisée lors de l’entraînement initial. La méthode combine un traitement différencié des fréquences et un ajustement de l’attention, avec une adaptation du modèle selon le scénario ; elle vise à étendre le contexte en limitant la dégradation des représentations positionnelles.",
+    "example": "Exemple illustratif : une équipe adapte un modèle RoPE à des dossiers plus longs, puis vérifie séparément la qualité sur les requêtes courtes et la récupération d’éléments dispersés dans les nouveaux contextes.",
+    "misconception": "Activer un paramètre YaRN ne garantit pas que chaque longueur annoncée sera exploitable : les réglages, l’entraînement et l’évaluation du modèle restent essentiels."
+  },
+  "notion-58": {
+    "explanation": "Une Attention Head calcule une combinaison d’informations à partir de ses projections de requêtes, clés et valeurs. Plusieurs têtes permettent au bloc de représenter différents types de relations en parallèle ; leurs résultats sont ensuite combinés, mais leur rôle exact est appris et peut varier selon les entrées, les couches et les modèles.",
+    "example": "Exemple illustratif : en analysant une phrase, un chercheur observe que deux têtes répartissent différemment leurs poids entre les tokens, puis teste si leur suppression affecte la prédiction étudiée.",
+    "misconception": "Une tête n’est pas un expert MoE ni une compétence humaine assignée à l’avance ; une carte d’attention seule ne suffit pas à expliquer son rôle causal."
+  },
+  "notion-59": {
+    "explanation": "Une Projection Matrix transforme un vecteur en combinant linéairement ses composantes, éventuellement vers une dimension différente. Dans l’attention, des matrices apprises produisent les requêtes, clés et valeurs à partir des représentations disponibles ; elles construisent les espaces dans lesquels les correspondances sont mesurées et les informations à transmettre sont exprimées.",
+    "example": "Exemple illustratif : un même vecteur de token passe par des matrices distinctes pour produire sa requête et sa clé, qui pourront jouer des rôles différents dans le calcul des correspondances.",
+    "misconception": "Le mot projection ne garantit pas une projection orthogonale au sens géométrique strict : il désigne souvent une transformation linéaire apprise, sans cette contrainte."
+  },
+  "notion-61": {
+    "explanation": "Le Weight Tying réutilise un même ensemble de paramètres dans plusieurs opérations du modèle. Un cas fréquent partage la table des embeddings d’entrée avec la projection vers le vocabulaire en sortie, lorsque les dimensions le permettent ; cela réduit le nombre de paramètres indépendants et couple les mises à jour issues de ces usages.",
+    "example": "Exemple illustratif : dans un petit modèle pédagogique, la ligne associée à un token sert à représenter ce token en entrée et participe aussi au calcul de son score parmi les sorties possibles.",
+    "misconception": "Partager des poids ne signifie pas partager les activations : les opérations reçoivent des entrées différentes et peuvent produire des résultats différents avec les mêmes paramètres."
+  },
+  "notion-62": {
+    "explanation": "La LM Head convertit la représentation finale d’une position en scores associés aux tokens du vocabulaire. Cette projection fournit les logits utilisés pour entraîner la prédiction du prochain token ou pour décoder une réponse ; ses poids peuvent être indépendants de la table d’embeddings ou partagés avec elle selon le modèle.",
+    "example": "Exemple illustratif : après le traitement d’une consigne, la dernière représentation passe dans la LM Head, qui attribue un score à chaque token possible avant l’application des réglages de génération.",
+    "misconception": "La LM Head ne choisit pas nécessairement elle-même le token final : elle produit des scores que la stratégie de décodage transforme ensuite en décision."
+  },
+  "notion-63": {
+    "explanation": "La Mechanistic Interpretability cherche à relier un comportement observé aux calculs internes qui y contribuent. Elle peut analyser des activations, identifier des circuits ou modifier certains composants pour tester une hypothèse causale ; l’objectif est une explication vérifiable du mécanisme étudié, avec un périmètre clairement défini plutôt qu’une lecture générale des pensées du modèle.",
+    "example": "Exemple illustratif : après avoir repéré une activation liée à un type de réponse, un chercheur la remplace dans des expériences contrôlées et mesure si le comportement attendu change effectivement.",
+    "misconception": "Une corrélation entre activation et concept ne prouve pas un mécanisme causal ; une intervention peut aussi perturber d’autres fonctions et doit être interprétée avec prudence."
+  },
+  "notion-64": {
+    "explanation": "Un Sparse Autoencoder apprend à reconstruire des activations du modèle à partir d’un ensemble de caractéristiques dont peu sont actives simultanément. Cette contrainte de parcimonie cherche à séparer des facteurs mélangés dans les représentations d’origine ; les caractéristiques obtenues servent ensuite à l’analyse, tout en conservant une erreur de reconstruction et des choix de paramétrage.",
+    "example": "Exemple illustratif : une équipe entraîne un SAE sur les activations d’une couche, examine les textes qui activent une caractéristique et vérifie si leur point commun résiste à de nouveaux exemples.",
+    "misconception": "Un SAE ne révèle pas automatiquement des concepts uniques et exhaustifs : une caractéristique peut être ambiguë, fragmentée ou liée à un artefact du jeu d’analyse."
+  },
+  "notion-65": {
+    "explanation": "La Superposition décrit l’hypothèse selon laquelle un réseau peut représenter davantage de caractéristiques que son espace ne possède de dimensions, en utilisant des directions qui se recouvrent. Lorsque ces caractéristiques sont rarement actives ensemble, ce partage peut être utile, mais il crée des interférences et complique l’interprétation d’un neurone pris isolément.",
+    "example": "Exemple illustratif : une même composante augmente dans des textes sur des instruments et dans des textes sur des dates ; l’analyse cherche plusieurs directions combinées plutôt qu’une seule signification pour ce neurone.",
+    "misconception": "Superposition n’est pas ici une notion quantique et ne signifie pas qu’un neurone contient plusieurs pensées ; c’est une description géométrique de représentations numériques."
+  },
+  "notion-66": {
+    "explanation": "L’Activation Steering modifie des représentations internes pendant l’inférence pour orienter certains comportements du modèle. Une méthode consiste à ajouter un vecteur obtenu en contrastant des exemples, à une couche et avec une intensité choisies ; l’effet dépend du contexte et doit être évalué avec les changements involontaires qu’il peut produire.",
+    "example": "Exemple illustratif : dans une expérience de style, une équipe ajoute une direction calculée à partir de formulations contrastées, puis mesure si les réponses changent de ton tout en préservant les informations demandées.",
+    "misconception": "Un Steering Vector n’est pas une commande sémantique universelle : son efficacité peut varier entre modèles, couches et requêtes, et une forte intensité peut dégrader les sorties."
+  },
+  "notion-67": {
+    "explanation": "Le Representation Learning consiste à apprendre une manière de représenter les données qui facilite une tâche ou un ensemble de tâches. Au lieu de définir manuellement toutes les caractéristiques, l’entraînement construit des transformations adaptées à son objectif ; la représentation obtenue peut ensuite être réutilisée, mais son utilité dépend des propriétés que cet objectif a favorisées.",
+    "example": "Exemple illustratif : un modèle apprend des représentations de photographies à partir d’un grand ensemble d’images, puis une équipe teste si elles permettent de regrouper les objets de son propre catalogue.",
+    "misconception": "Une représentation apprise n’est pas automatiquement neutre ni universelle : elle peut ignorer une propriété essentielle à une nouvelle tâche ou conserver des corrélations indésirables."
+  }
+}

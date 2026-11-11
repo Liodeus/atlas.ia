@@ -1,0 +1,92 @@
+{
+  "notion-262": [
+    "https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html"
+  ],
+  "notion-264": [
+    "https://learn.microsoft.com/en-us/azure/search/vector-search-ranking"
+  ],
+  "notion-266": [
+    "https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html"
+  ],
+  "notion-267": [
+    "https://www.elastic.co/docs/solutions/search/full-text"
+  ],
+  "notion-268": [
+    "https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables"
+  ],
+  "notion-269": [
+    "https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion"
+  ],
+  "notion-270": [
+    "https://citeseerx.ist.psu.edu/document?doi=83965fb947855d27d9936ed60941c3386cc5728a&repid=rep1&type=pdf"
+  ],
+  "notion-272": [
+    "https://github.com/facebookresearch/faiss/wiki/MetricType-and-distances"
+  ],
+  "notion-273": [
+    "https://github.com/facebookresearch/faiss/wiki/MetricType-and-distances"
+  ],
+  "notion-274": [
+    "https://learn.microsoft.com/en-us/azure/search/vector-search-ranking"
+  ],
+  "notion-276": [
+    "https://arxiv.org/abs/1603.09320"
+  ],
+  "notion-277": [
+    "https://github.com/facebookresearch/faiss/wiki/Faiss-indexes"
+  ],
+  "notion-278": [
+    "https://learn.microsoft.com/en-us/azure/search/vector-search-filters"
+  ],
+  "notion-280": [
+    "https://learn.microsoft.com/en-us/azure/search/vector-search-how-to-chunk-documents"
+  ],
+  "notion-281": [
+    "https://reference.langchain.com/python/langchain-classic/retrievers/parent_document_retriever/ParentDocumentRetriever"
+  ],
+  "notion-283": [
+    "https://arxiv.org/abs/2004.12832"
+  ],
+  "notion-284": [
+    "https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html"
+  ],
+  "notion-285": [
+    "https://arxiv.org/abs/1908.10084"
+  ],
+  "notion-286": [
+    "https://arxiv.org/abs/2305.14283"
+  ],
+  "notion-287": [
+    "https://arxiv.org/abs/2303.07678"
+  ],
+  "notion-288": [
+    "https://reference.langchain.com/python/langchain-classic/retrievers/multi_query/MultiQueryRetriever"
+  ],
+  "notion-289": [
+    "https://arxiv.org/abs/2212.10496"
+  ],
+  "notion-291": [
+    "https://arxiv.org/abs/2305.14627"
+  ],
+  "notion-292": [
+    "https://www.w3.org/TR/rdf11-primer/"
+  ],
+  "notion-293": [
+    "https://arxiv.org/abs/2404.16130"
+  ],
+  "notion-294": [
+    "https://docs.langchain.com/oss/python/langgraph/agentic-rag"
+  ],
+  "notion-295": [
+    "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html"
+  ],
+  "notion-296": [
+    "https://reference.langchain.com/python/langchain-classic/retrievers/contextual_compression/ContextualCompressionRetriever"
+  ],
+  "notion-297": [
+    "https://learn.microsoft.com/en-us/azure/search/search-howto-reindex"
+  ],
+  "notion-298": [
+    "https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/semantic-text-setup-configuration"
+  ]
+}

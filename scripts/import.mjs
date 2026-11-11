@@ -9,4 +9,4 @@ const corrections=JSON.parse(fs.readFileSync(new URL('../src/glossaryCorrections
 const themes=buildGlossary(markdown,existing,corrections);
 fs.writeFileSync(output,JSON.stringify(themes,null,2));
 console.log(`Importé : ${themes.length} thèmes, ${themes.flatMap(t=>t.entries).length} notions ; ${Object.keys(corrections).length} corrections pédagogiques vérifiées.`);
-console.log('Distinctions enrichies, fiches prioritaires et cours conservés. Leurs fichiers src/distinctions.json, src/priorityContent.js et src/courseEditorial*.json sont édités séparément ; la section historique des distinctions du Markdown n’est pas importée.');
+console.log('Distinctions enrichies, fiches prioritaires, approfondissements et cours conservés. Leurs fichiers src/distinctions.json, src/priorityContent.js, src/notionDetails/*.json et src/courseEditorial*.json sont édités séparément ; la section historique des distinctions du Markdown n’est pas importée.');

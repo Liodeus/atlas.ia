@@ -1,0 +1,80 @@
+{
+  "notion-70": [
+    "https://arxiv.org/abs/1706.03762"
+  ],
+  "notion-72": [
+    "https://arxiv.org/abs/2108.12409"
+  ],
+  "notion-74": [
+    "https://arxiv.org/abs/2004.05150"
+  ],
+  "notion-75": [
+    "https://arxiv.org/abs/2309.17453",
+    "https://arxiv.org/abs/2004.05150"
+  ],
+  "notion-76": [
+    "https://arxiv.org/abs/2007.14062"
+  ],
+  "notion-77": [
+    "https://arxiv.org/abs/1904.10509"
+  ],
+  "notion-78": [
+    "https://arxiv.org/abs/1904.10509"
+  ],
+  "notion-79": [
+    "https://arxiv.org/abs/2307.02486"
+  ],
+  "notion-80": [
+    "https://arxiv.org/abs/2003.05997"
+  ],
+  "notion-82": [
+    "https://arxiv.org/abs/1810.04805"
+  ],
+  "notion-83": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.functional.scaled_dot_product_attention.html"
+  ],
+  "notion-84": [
+    "https://arxiv.org/abs/1706.03762"
+  ],
+  "notion-85": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.functional.scaled_dot_product_attention.html",
+    "https://arxiv.org/abs/1706.03762"
+  ],
+  "notion-87": [
+    "https://arxiv.org/abs/1911.02150"
+  ],
+  "notion-90": [
+    "https://arxiv.org/abs/2006.16236"
+  ],
+  "notion-92": [
+    "https://arxiv.org/abs/2309.06180"
+  ],
+  "notion-93": [
+    "https://arxiv.org/abs/2309.17453"
+  ],
+  "notion-94": [
+    "https://arxiv.org/abs/2310.01889"
+  ],
+  "notion-95": [
+    "https://arxiv.org/abs/2307.03172"
+  ],
+  "notion-96": [
+    "https://arxiv.org/abs/2309.00071"
+  ],
+  "notion-97": [
+    "https://arxiv.org/abs/2307.03172",
+    "https://www.trychroma.com/research/context-rot"
+  ],
+  "notion-99": [
+    "https://arxiv.org/abs/2312.00752"
+  ],
+  "notion-100": [
+    "https://arxiv.org/abs/2403.19887"
+  ],
+  "notion-101": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.RNN.html"
+  ],
+  "notion-102": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.LSTM.html"
+  ]
+}

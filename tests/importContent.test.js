@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile,mkdtemp,mkdir,writeFile,copyFile,rm} from 'node:fs/promises';
+import {readFile,mkdtemp,mkdir,writeFile,copyFile,cp,readdir,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {execFileSync} from 'node:child_process';
@@ -45,6 +45,10 @@ test('CLI import preserves authored distinctions byte for byte and fails before 
   const project=join(root,'atlas-ia');
   await mkdir(join(project,'scripts'),{recursive:true});
   await mkdir(join(project,'src'));
+  await cp(new URL('../src/notionDetails',import.meta.url),join(project,'src/notionDetails'),{recursive:true});
+  const supplementalFiles=await readdir(join(project,'src/notionDetails'));
+  const readSupplements=()=>Promise.all(supplementalFiles.map(file=>readFile(join(project,'src/notionDetails',file),'utf8')));
+  const supplementsBefore=await readSupplements();
   for(const file of ['scripts/import.mjs','scripts/import-glossary.mjs','scripts/id-map.mjs','src/glossary.json','src/glossaryCorrections.json','src/distinctions.json','src/priorityContent.js','src/extensionHarness.js','src/extensionFamilies.js'])await copyFile(new URL('../'+file,import.meta.url),join(project,file));
   await writeFile(join(project,'glossaire_ia_llm_exhaustif.md'),md);
   const distinctionPath=join(project,'src/distinctions.json');
@@ -55,6 +59,7 @@ test('CLI import preserves authored distinctions byte for byte and fails before 
   assert.match(output,/distinctions.*conserv/i);
   assert.equal(await readFile(distinctionPath,'utf8'),before);
   assert.equal(await readFile(join(project,'src/priorityContent.js'),'utf8'),priorityBefore);
+  assert.deepEqual(await readSupplements(),supplementsBefore);
   assert.deepEqual(await Promise.all(['extensionHarness.js','extensionFamilies.js'].map(file=>readFile(join(project,'src',file),'utf8'))),extensionsBefore);
   const glossaryBefore=await readFile(join(project,'src/glossary.json'),'utf8');
   await writeFile(join(project,'glossaire_ia_llm_exhaustif.md'),md.replace(corrections['notion-438'].sourceDefinition,'Source changée.'));

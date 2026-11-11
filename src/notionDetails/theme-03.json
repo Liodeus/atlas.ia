@@ -1,0 +1,127 @@
+{
+  "notion-70": {
+    "explanation": "La Cross-Attention calcule des requêtes à partir d’une représentation et les compare à des clés issues d’une autre source, dont elle combine les valeurs. Elle permet ainsi à un décodeur de consulter un texte encodé ou à une modalité d’exploiter une autre, sans confondre ces deux ensembles avec une unique séquence de self-attention.",
+    "example": "Exemple illustratif : pendant une traduction, le décodeur produit les mots de la langue cible en consultant les représentations de la phrase source calculées auparavant par l’encodeur du modèle.",
+    "misconception": "Cross-Attention ne signifie pas obligatoirement attention entre image et texte : elle peut relier deux séquences textuelles, et les échanges ne sont pas nécessairement symétriques."
+  },
+  "notion-72": {
+    "explanation": "La Context Length Extrapolation consiste à utiliser un modèle sur des séquences plus longues que celles de sa plage d’entraînement habituelle. Le modèle rencontre alors de nouvelles configurations de positions et de dépendances ; une méthode positionnelle favorable peut aider, mais il faut mesurer séparément la qualité, le coût et l’accès aux informations éloignées.",
+    "example": "Exemple illustratif : un modèle entraîné sur de courts chapitres reçoit un livre complet ; l’équipe vérifie si des questions portant sur des passages distants restent résolues sans modifier ses poids.",
+    "misconception": "Accepter un tenseur plus long ne prouve pas une extrapolation réussie : le calcul peut s’exécuter alors que les réponses se dégradent fortement."
+  },
+  "notion-74": {
+    "explanation": "La Local Attention limite les connexions directes à un voisinage de chaque position, ce qui réduit le nombre de paires à traiter. Plusieurs couches peuvent transmettre progressivement des informations plus lointaines, mais cette propagation indirecte ne remplace pas toujours un accès direct ; la taille du voisinage constitue donc un compromis entre coût et portée.",
+    "example": "Exemple illustratif : un modèle analyse les segments d’un signal en comparant surtout chaque segment à ses voisins, tout en utilisant plusieurs couches pour intégrer progressivement une structure temporelle plus large.",
+    "misconception": "Local ne signifie pas indépendant du reste de la séquence : des informations peuvent circuler entre couches, même si chaque couche possède une portée directe limitée."
+  },
+  "notion-75": {
+    "explanation": "La Sliding Window Attention fait glisser un voisinage d’attention avec la position traitée, afin de maintenir une quantité limitée de connexions par token. Dans une génération causale, la fenêtre porte sur les positions autorisées du passé ; cette organisation limite le coût local et peut être combinée avec d’autres mécanismes d’accès à l’historique.",
+    "example": "Exemple illustratif : un générateur parcourt un long journal d’événements avec une fenêtre récente ; l’équipe vérifie comment une consigne ancienne reste accessible ou nécessite un mécanisme complémentaire de conservation.",
+    "misconception": "Une fenêtre glissante ne garantit pas la mémorisation intégrale du passé : supprimer des entrées du cache retire leur accès direct lors des étapes suivantes."
+  },
+  "notion-76": {
+    "explanation": "La Global Attention donne à certaines positions, ou parfois à toutes, un accès large à la séquence selon le masque choisi. Dans une architecture sparse, quelques tokens globaux peuvent relier des zones éloignées et servir de points d’échange ; leur sélection dépend alors de la tâche, par exemple une question ou un token de classification.",
+    "example": "Exemple illustratif : dans un modèle de questions-réponses sur document, les tokens de la question disposent de liens globaux pour consulter les passages répartis dans le texte, tandis que les autres utilisent des voisinages locaux.",
+    "misconception": "Global n’impose pas que toutes les paires de tokens soient connectées : une architecture peut réserver ces connexions étendues à quelques positions choisies seulement."
+  },
+  "notion-77": {
+    "explanation": "La Block-Sparse Attention organise les connexions autorisées en blocs de positions, puis ne calcule que les blocs retenus. Cette structure peut mieux correspondre aux opérations efficaces du matériel qu’une sélection arbitraire de paires isolées ; le motif choisi doit néanmoins conserver des chemins utiles entre les informations nécessaires à la tâche.",
+    "example": "Exemple illustratif : une séquence est découpée en groupes contigus ; chaque groupe consulte ses voisins et quelques groupes éloignés, ce qui dessine une matrice d’attention composée de zones calculées et ignorées.",
+    "misconception": "Block-Sparse ne signifie pas que le texte est résumé par blocs : les tokens peuvent rester distincts, seule l’organisation des connexions d’attention est restreinte."
+  },
+  "notion-78": {
+    "explanation": "La Strided Attention relie une position à d’autres positions espacées selon un pas régulier, afin de couvrir des distances plus grandes avec moins de connexions. Elle peut compléter une attention locale, qui conserve les détails proches, tandis que le motif strided assure des liaisons plus étendues dans la séquence.",
+    "example": "Exemple illustratif : dans une séquence découpée en segments réguliers, une tête relie des positions correspondantes d’un segment à l’autre, pendant qu’une autre examine les voisins immédiats de chaque token.",
+    "misconception": "Un pas régulier ne sélectionne pas nécessairement les éléments les plus pertinents : le motif est géométrique et peut manquer une information située entre ses connexions."
+  },
+  "notion-79": {
+    "explanation": "La Dilated Attention espace les positions consultées pour élargir le champ couvert sans ajouter proportionnellement autant de connexions. Certaines architectures combinent plusieurs taux de dilation et plusieurs tailles de segments, conservant ainsi des échanges fins à proximité et des liaisons plus espacées à longue distance ; le motif exact dépend de l’implémentation.",
+    "example": "Exemple illustratif : pour analyser une longue séquence audio, un bloc combine un voisinage dense autour de chaque segment avec des positions de plus en plus espacées pour suivre une structure plus longue.",
+    "misconception": "Dilation et contexte intégral ne sont pas équivalents : atteindre une position éloignée n’implique pas que tous les éléments intermédiaires soient directement accessibles au même bloc."
+  },
+  "notion-80": {
+    "explanation": "La Dynamic Sparse Attention choisit une partie des connexions à partir du contenu ou de scores calculés, plutôt qu’à partir d’un motif entièrement fixe. Le système cherche ainsi à consacrer le calcul aux relations jugées utiles, mais la sélection possède elle-même un coût et peut exclure des informations importantes si elle se trompe.",
+    "example": "Exemple illustratif : un mécanisme regroupe des tokens selon leurs représentations et calcule l’attention dans les groupes pertinents, permettant à deux passages éloignés mais proches dans cet espace d’échanger des informations.",
+    "misconception": "Dynamic ne signifie pas que la sélection est optimale : le routage apprend ou applique une approximation et peut privilégier des ressemblances trompeuses entre contenus."
+  },
+  "notion-82": {
+    "explanation": "La Bidirectional Attention permet à une position d’utiliser des éléments situés avant et après elle dans l’entrée disponible. Elle convient notamment à la représentation d’un texte complet, à la classification ou à la reconstruction de tokens masqués ; son usage doit rester compatible avec ce qui sera réellement connu au moment de l’application.",
+    "example": "Exemple illustratif : pour identifier une entité dans une phrase complète, le modèle utilise aussi les mots qui la suivent afin de distinguer un nom de personne d’un nom d’organisation.",
+    "misconception": "Autoriser les tokens futurs pendant l’entraînement d’un générateur causal provoquerait une fuite d’information ; la bidirectionnalité ne peut pas être ajoutée sans respecter l’objectif."
+  },
+  "notion-83": {
+    "explanation": "Un Attention Mask détermine quelles positions peuvent se consulter pendant le calcul de l’attention. Il peut interdire le futur, ignorer du padding ou délimiter des documents ; selon la bibliothèque, il est représenté par des booléens ou par des valeurs ajoutées aux scores, avec des conventions qu’il faut vérifier avant l’utilisation.",
+    "example": "Exemple illustratif : un lot contient des phrases de longueurs différentes ; le masque empêche le modèle d’accorder du poids aux positions ajoutées uniquement pour rendre les tableaux de même taille.",
+    "misconception": "Un masque d’attention n’efface pas forcément les tokens du tenseur et ne masque pas automatiquement leur contribution à la fonction de perte utilisée pendant l’entraînement."
+  },
+  "notion-84": {
+    "explanation": "Un Attention Score mesure la compatibilité d’une requête avec une clé avant la normalisation des poids d’attention. Il peut être ajusté par une mise à l’échelle, un biais positionnel et un masque ; les scores autorisés sont ensuite comparés entre eux pour décider de la contribution relative des valeurs à la représentation produite.",
+    "example": "Exemple illustratif : un développeur inspecte les scores d’une tête avant Softmax, puis les poids après Softmax, pour distinguer l’effet du contenu de celui du masque et de la normalisation.",
+    "misconception": "Un score brut élevé n’est pas directement une probabilité ni une preuve d’importance sémantique ; seule la comparaison avec les autres scores détermine son poids normalisé."
+  },
+  "notion-85": {
+    "explanation": "La Scaled Dot-Product Attention calcule les produits scalaires entre requêtes et clés, puis les divise par la racine carrée de la dimension des clés. Après les éventuels masques et biais, Softmax fournit les poids qui combinent les valeurs ; la mise à l’échelle limite l’augmentation de l’amplitude des scores quand la dimension grandit.",
+    "example": "Exemple illustratif : une tête compare la requête d’un token aux clés autorisées, transforme les scores en poids, puis produit un nouveau vecteur en additionnant les valeurs selon ces poids.",
+    "misconception": "Le facteur de normalisation porte sur la dimension des clés, pas sur le nombre de tokens ; il ne supprime pas le coût des comparaisons entre positions."
+  },
+  "notion-87": {
+    "explanation": "La Multi-Query Attention conserve plusieurs têtes de requêtes mais partage une même tête de clés et de valeurs entre elles. Ce partage réduit les données à stocker et à relire dans le KV Cache pendant le décodage ; il modifie cependant les possibilités de représentation par rapport à des clés et valeurs indépendantes pour chaque tête.",
+    "example": "Exemple illustratif : un serveur compare deux architectures avec le même nombre de têtes de requêtes et observe que celle en MQA conserve moins de vecteurs de clés et de valeurs par token.",
+    "misconception": "MQA ne signifie pas qu’on traite plusieurs questions d’utilisateurs simultanément : le mot query désigne ici les vecteurs internes des têtes d’attention d’un modèle."
+  },
+  "notion-90": {
+    "explanation": "La Linear Attention reformule le mécanisme d’attention pour éviter de construire toutes les interactions entre positions, souvent grâce à des cartes de caractéristiques et à l’associativité des produits. À dimensions fixées, certaines variantes obtiennent ainsi un coût linéaire en longueur de séquence ou un état récurrent, avec des propriétés différentes de l’attention Softmax classique.",
+    "example": "Exemple illustratif : un modèle met à jour un résumé numérique des clés et valeurs précédentes, puis l’utilise pour traiter chaque nouveau token sans relire explicitement tous les couples de positions.",
+    "misconception": "Linear Attention n’est pas simplement une implémentation plus rapide de la même Softmax exacte : elle change généralement le mécanisme et ses compromis de représentation."
+  },
+  "notion-92": {
+    "explanation": "PagedAttention organise le KV Cache en blocs physiques qui peuvent être placés séparément en mémoire, avec une correspondance vers les positions logiques de chaque requête. Cette gestion réduit le gaspillage lié aux réservations contiguës et facilite certains partages, permettant au serveur d’utiliser plus efficacement sa mémoire disponible pour traiter les générations.",
+    "example": "Exemple illustratif : lorsque deux requêtes s’allongent à des rythmes différents, le serveur leur attribue de nouveaux blocs de cache au besoin au lieu de réserver dès le départ de grandes zones contiguës.",
+    "misconception": "PagedAttention ne résume pas le contexte et ne remplace pas les poids du modèle ; il améliore surtout la gestion mémoire du cache pendant le service."
+  },
+  "notion-93": {
+    "explanation": "Un Attention Sink est une position qui reçoit beaucoup de poids d’attention sans être nécessairement porteuse d’une information sémantique centrale. Ce phénomène apparaît notamment sur des tokens initiaux ; les conserver dans certaines stratégies de cache glissant peut stabiliser le comportement, même si le contenu récent fournit l’essentiel des informations exploitées.",
+    "example": "Exemple illustratif : dans une expérience de génération prolongée, une équipe compare un cache contenant seulement les derniers tokens à un cache qui conserve aussi quelques positions initiales et observe leurs effets.",
+    "misconception": "Un fort poids sur le début du texte ne prouve pas que le modèle raisonne principalement à partir de ces mots ; il peut refléter un rôle structurel."
+  },
+  "notion-94": {
+    "explanation": "Ring Attention répartit les positions d’une longue séquence entre plusieurs appareils et fait circuler des blocs de clés et valeurs selon une organisation en anneau. Chaque appareil accumule les contributions nécessaires à ses requêtes, en cherchant à chevaucher calcul et communication ; cette répartition permet de dépasser la mémoire disponible sur un seul appareil.",
+    "example": "Exemple illustratif : plusieurs accélérateurs conservent chacun une portion d’un document, puis échangent successivement leurs blocs de clés et valeurs pour calculer une attention couvrant la séquence distribuée entière.",
+    "misconception": "Ring Attention n’impose pas de limiter l’attention aux voisins dans l’anneau : l’anneau décrit les communications matérielles, et les blocs peuvent circuler jusqu’à tous les appareils."
+  },
+  "notion-95": {
+    "explanation": "Un Long-Context Model est conçu ou adapté pour recevoir de longues séquences, avec des choix de positionnement, d’attention et d’exécution compatibles. Sa fenêtre annoncée indique une capacité d’entrée, tandis que son utilité réelle dépend de la récupération d’informations, des liens entre passages et de la stabilité des réponses lorsque des éléments distracteurs s’accumulent.",
+    "example": "Exemple illustratif : avant de confier une collection de rapports à un modèle, une équipe teste des questions qui nécessitent un détail local, plusieurs passages éloignés et la comparaison de versions contradictoires.",
+    "misconception": "Une grande fenêtre ne garantit pas une lecture également fiable de toutes les positions ; la quantité de texte acceptée et la qualité d’exploitation sont distinctes."
+  },
+  "notion-96": {
+    "explanation": "La Context Extension regroupe les adaptations qui rendent utilisable une fenêtre plus longue que celle de départ. Elles peuvent modifier le traitement des positions, poursuivre l’entraînement sur de longues séquences ou changer certains mécanismes d’attention ; il faut aussi adapter l’exécution, car le cache et les calculs augmentent avec les entrées prises en charge.",
+    "example": "Exemple illustratif : une équipe étend un modèle à de longues transcriptions, puis contrôle la récupération de références anciennes et la qualité des conversations courtes pour détecter d’éventuels compromis introduits par l’adaptation.",
+    "misconception": "Augmenter seulement une limite dans la configuration ne suffit pas toujours : les représentations positionnelles, l’apprentissage et les ressources peuvent empêcher une utilisation fiable de cette longueur."
+  },
+  "notion-97": {
+    "explanation": "Lost in the Middle désigne une baisse de récupération lorsque l’information utile se trouve au milieu du contexte plutôt qu’à ses extrémités. Context Rot est une expression plus large pour une dégradation liée à l’allongement ou à l’encombrement du contexte ; ces observations invitent à tester la position, les distracteurs et la structure des documents séparément.",
+    "example": "Exemple illustratif : une équipe place le même passage pertinent au début, au milieu puis à la fin d’un dossier inchangé et compare les réponses, avant d’ajouter des documents sans rapport.",
+    "misconception": "Ces effets ne signifient pas que toute information centrale est systématiquement perdue ; leur ampleur dépend du modèle, de la tâche et de la composition du contexte."
+  },
+  "notion-99": {
+    "explanation": "Mamba repose sur un modèle d’espace d’état sélectif dont certains paramètres dépendent de l’entrée, afin de moduler les informations conservées pendant le traitement de la séquence. Son mécanisme récurrent permet d’avancer sans garder un KV Cache couvrant tout le passé, avec des algorithmes adaptés à l’entraînement efficace et des compromis différents de l’attention.",
+    "example": "Exemple illustratif : un système traite une succession de mesures en mettant à jour un état interne à chaque arrivée, plutôt qu’en recalculant des correspondances explicites avec toutes les mesures précédentes.",
+    "misconception": "Un état de taille contrôlée n’est pas une archive parfaite du passé ; certaines tâches demandant un accès précis à un élément ancien peuvent rester difficiles."
+  },
+  "notion-100": {
+    "explanation": "Une Hybrid Architecture combine des familles de blocs pour exploiter leurs propriétés complémentaires, par exemple attention et modèles d’espace d’état. L’ordre, la proportion et les dimensions de ces blocs déterminent les chemins d’information et les coûts ; une combinaison pertinente doit donc être évaluée comme un ensemble, et non comme une simple addition d’avantages théoriques.",
+    "example": "Exemple illustratif : un modèle alterne des blocs récurrents qui maintiennent un état compact et des blocs d’attention qui consultent des positions explicites, puis l’équipe mesure ce mélange sur ses documents.",
+    "misconception": "Hybride ne veut pas automatiquement dire multimodal ou MoE : le terme décrit une combinaison d’architectures, dont il faut préciser les composants et leur articulation."
+  },
+  "notion-101": {
+    "explanation": "Un RNN traite une séquence en mettant à jour un état caché à partir de l’entrée courante et de l’état précédent, avec des paramètres partagés entre les étapes. Cet état transporte une représentation du passé utile à la prédiction suivante ; la dépendance séquentielle influence la parallélisation et l’apprentissage des relations à longue distance.",
+    "example": "Exemple illustratif : un modèle reçoit des relevés successifs de consommation, actualise son état après chaque mesure et utilise cet état pour proposer une estimation de la prochaine valeur à comparer aux observations.",
+    "misconception": "Récurrent ne signifie pas que le réseau réentraîne ses poids à chaque entrée : l’état change pendant l’inférence, tandis que les paramètres peuvent rester fixes."
+  },
+  "notion-102": {
+    "explanation": "Un LSTM est un réseau récurrent qui maintient un état de cellule et utilise des portes apprises pour régler la conservation, l’ajout et la sortie d’informations. Cette organisation facilite certains apprentissages de dépendances longues par rapport à un RNN simple, tout en conservant une capacité limitée et un traitement dépendant des étapes précédentes.",
+    "example": "Exemple illustratif : pour analyser une phrase, un LSTM maintient dans son état une information utile rencontrée plus tôt, tout en modulant l’ajout de nouveaux éléments au fil des mots reçus.",
+    "misconception": "Le nom Long Short-Term Memory ne promet pas une mémoire illimitée : la conservation est apprise et peut échouer sur des dépendances absentes ou rares pendant l’entraînement."
+  }
+}

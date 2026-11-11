@@ -1,0 +1,102 @@
+{
+  "notion-487": {
+    "explanation": "Un modèle fermé est distribué sous le contrôle de son fournisseur, sans donner nécessairement accès à ses poids ou à sa recette d’entraînement. L’utilisateur peut obtenir ses résultats par un service ou un produit, mais ses possibilités d’inspection, de modification et d’hébergement dépendent des accès effectivement accordés et des conditions d’utilisation.",
+    "example": "Exemple illustratif : Une entreprise utilise un modèle à travers une application hébergée. Elle peut régler les consignes et tester les réponses, mais ne dispose pas des fichiers nécessaires pour exécuter ce modèle sur ses propres machines.",
+    "misconception": "Fermé ne signifie ni forcément payant ni forcément plus performant. Le niveau d’accès aux poids, les informations publiées et le mode de facturation sont des dimensions distinctes."
+  },
+  "notion-488": {
+    "explanation": "Une model card documente un modèle : usages prévus, limites, données décrites, conditions d’évaluation et modalités d’accès. Elle aide à décider si une version convient à un besoin et à interpréter ses résultats ; son utilité dépend de la précision des informations, de leur date et de la correspondance avec les poids réellement utilisés.",
+    "example": "Exemple illustratif : Une équipe souhaite classer des messages en français. Elle consulte la fiche du modèle pour connaître les langues évaluées, les catégories prévues et les limites signalées, puis complète cette lecture par ses propres tests.",
+    "misconception": "Une model card est une documentation, pas une certification indépendante. L’absence de limite mentionnée ne prouve pas que cette limite n’existe pas."
+  },
+  "notion-489": {
+    "explanation": "Une dataset card décrit le contenu et le contexte d’un jeu de données : provenance, langues, collecte, annotations, répartitions et limites connues. Elle permet de mieux comprendre ce que le jeu représente et les usages envisagés ; elle aide aussi à repérer des décalages entre les données disponibles et la population ou la tâche visée.",
+    "example": "Exemple illustratif : Avant d’utiliser un corpus de conversations, une équipe vérifie sa fiche. Elle découvre que les échanges proviennent uniquement d’un canal écrit et évite de supposer qu’ils représentent aussi les conversations téléphoniques.",
+    "misconception": "La fiche d’un jeu de données ne décrit pas automatiquement tous les modèles entraînés dessus. Les transformations et les autres corpus utilisés peuvent changer les limites du modèle final."
+  },
+  "notion-490": {
+    "explanation": "Une licence précise les autorisations et les conditions associées à un élément distribué, comme du code, des poids ou des données. Dans un projet d’IA, ces éléments peuvent relever de textes différents ; pour comprendre ce qui est permis, il faut identifier la licence de la version concernée et les obligations qui accompagnent son usage.",
+    "example": "Exemple illustratif : Un dépôt fournit du code et renvoie vers des poids hébergés ailleurs. L’équipe lit les conditions des deux éléments avant de redistribuer son application, car la licence du code ne couvre pas nécessairement les poids.",
+    "misconception": "Pouvoir télécharger un fichier ne signifie pas disposer de tous les droits de réutilisation. Une étiquette de licence résume le texte applicable sans le remplacer."
+  },
+  "notion-491": {
+    "explanation": "L’expression commercial-use license indique qu’un usage commercial est autorisé dans les conditions prévues par une licence. Cette possibilité ne renseigne pas à elle seule sur la redistribution, la modification ou les obligations de l’utilisateur ; les limites éventuelles doivent être lues dans le texte correspondant au modèle, aux données ou au logiciel concerné.",
+    "example": "Exemple illustratif : Une société veut intégrer des poids dans un produit vendu à ses clients. Elle distingue l’autorisation d’utiliser le modèle dans un service de celle de redistribuer les fichiers avec son produit.",
+    "misconception": "Une licence autorisant un usage commercial n’est pas forcément une licence open source, et open source ne signifie pas non commercial. Le prix d’accès constitue encore une autre question."
+  },
+  "notion-492": {
+    "explanation": "Un modèle gated nécessite une démarche d’accès avant le téléchargement de certains fichiers, par exemple accepter des conditions ou obtenir l’accord de l’auteur. Ce contrôle peut être automatique ou manuel selon la plateforme ; une fois l’accès obtenu, les possibilités d’usage restent définies par la licence et les conditions du modèle.",
+    "example": "Exemple illustratif : Une chercheuse demande l’accès à un dépôt, accepte les conditions puis utilise un jeton autorisé pour télécharger les poids. Un collègue peut devoir effectuer sa propre demande avant de les récupérer.",
+    "misconception": "Gated ne signifie pas nécessairement payant, fermé ou accessible seulement par API. C’est un mécanisme de contrôle d’accès, distinct des droits sur les fichiers."
+  },
+  "notion-493": {
+    "explanation": "Un modèle API-only est proposé au travers d’un service programmable sans distribution des poids dans cette offre. L’application envoie ses entrées au fournisseur et exploite la réponse ; elle dépend donc de l’accès réseau, des versions exposées, des limites du service et des paramètres que l’API permet effectivement de régler.",
+    "example": "Exemple illustratif : Un logiciel de résumé appelle un modèle distant par API. Si le fournisseur retire la version utilisée, l’équipe doit adapter et réévaluer son intégration, même si son propre code applicatif n’a pas changé.",
+    "misconception": "Un modèle accessible par API n’est pas toujours API-only : des poids disponibles peuvent aussi être servis par API. L’expression décrit ici la modalité de distribution."
+  },
+  "notion-494": {
+    "explanation": "L’auto-hébergement consiste à exploiter soi-même le service qui exécute le modèle, sur une infrastructure que l’on administre. On-premises précise que cette infrastructure se trouve dans ses propres installations ; l’organisation doit alors gérer les ressources, les mises à jour et l’exploitation, avec un contrôle accru sur la configuration et la circulation des données.",
+    "example": "Exemple illustratif : Une organisation installe un modèle et son moteur d’inférence sur un serveur interne. Elle configure les accès, supervise la mémoire disponible et prévoit comment remplacer les poids sans interrompre les utilisateurs.",
+    "misconception": "Auto-hébergé ne signifie pas forcément installé dans ses locaux : un serveur cloud administré par l’organisation peut l’être. L’hébergement ne garantit pas à lui seul la confidentialité."
+  },
+  "notion-495": {
+    "explanation": "L’Edge AI exécute des traitements près de la source des données, tandis que l’On-Device AI les exécute directement sur l’appareil de l’utilisateur. Ces approches peuvent réduire les transferts et fonctionner avec une connectivité limitée ; elles demandent des modèles et des logiciels adaptés à la mémoire, à la consommation et aux capacités du matériel disponible.",
+    "example": "Exemple illustratif : Une application reconnaît localement une commande vocale pour lancer un minuteur. Le modèle est déjà installé sur le téléphone, ce qui permet cette fonction même lorsque la connexion réseau est coupée.",
+    "misconception": "Un calcul local n’implique pas que toute l’application fonctionne hors ligne. D’autres étapes, mises à jour ou synchronisations peuvent encore utiliser un service distant."
+  },
+  "notion-496": {
+    "explanation": "Un model hub est une plateforme de distribution et de découverte qui rassemble des dépôts de modèles, leurs fichiers et leur documentation. Il facilite le partage, la gestion de versions et la recherche par tâche ; l’utilisateur doit cependant identifier l’auteur et la révision des fichiers pour savoir précisément quel artefact il télécharge.",
+    "example": "Exemple illustratif : Une équipe repère plusieurs modèles de représentation de texte sur un hub. Elle compare leurs fiches puis enregistre la révision exacte du dépôt retenu pour pouvoir reconstruire son index documentaire.",
+    "misconception": "La présence sur un hub n’équivaut pas à une validation universelle du modèle. Le hub héberge les artefacts ; leurs licences, limites et auteurs peuvent varier."
+  },
+  "notion-497": {
+    "explanation": "Un leaderboard classe des systèmes à partir de résultats obtenus avec un protocole et un ensemble de tâches définis. Il permet de repérer des candidats et des tendances, mais son interprétation dépend des métriques, des versions évaluées et des conditions d’exécution ; un classement global peut masquer des différences importantes entre langues ou types de demandes.",
+    "example": "Exemple illustratif : Un modèle arrive devant un autre sur un classement de programmation. Pour un assistant documentaire en français, l’équipe utilise ce résultat comme information complémentaire et évalue aussi la citation des passages fournis.",
+    "misconception": "Le premier d’un leaderboard n’est pas automatiquement le meilleur pour chaque usage. Des scores proches ou des protocoles différents demandent une lecture prudente des écarts."
+  },
+  "notion-498": {
+    "explanation": "AI slop est une expression critique désignant des contenus de faible qualité produits avec l’IA, souvent en grande quantité. Elle attire l’attention sur le manque de vérification, de valeur ajoutée ou de soin éditorial ; ce n’est pas une catégorie technique normalisée, et l’appréciation dépend du contenu et de son usage.",
+    "example": "Exemple illustratif : Un site publie des centaines de guides presque identiques qui répètent les mêmes banalités et contiennent des références inventées. La quantité publiée augmente, mais les lecteurs trouvent peu d’informations utiles et vérifiables.",
+    "misconception": "Tout contenu assisté par IA n’est pas du slop. L’étiquette porte sur la faible qualité perçue et ne constitue pas une méthode fiable pour identifier l’outil utilisé."
+  },
+  "notion-499": {
+    "explanation": "Frontier model désigne généralement un modèle situé parmi les plus avancés selon des capacités et une époque données. Dans certains travaux sur les risques, le terme insiste aussi sur des capacités potentiellement dangereuses ; il faut donc préciser la définition retenue, les évaluations et la date avant de comparer plusieurs modèles sous cette étiquette.",
+    "example": "Exemple illustratif : Un rapport présente un modèle comme étant à la frontière sur des tâches de raisonnement. Le lecteur vérifie les tâches évaluées et la date du rapport avant de transposer ce qualificatif à un usage de traduction.",
+    "misconception": "Frontier n’est pas une architecture ni une certification de fiabilité. Le qualificatif ne démontre pas une intelligence générale et son périmètre varie selon les auteurs."
+  },
+  "notion-500": {
+    "explanation": "Une famille de modèles regroupe des versions reliées par un nom, une filiation ou des choix de conception communs. Elle peut contenir plusieurs tailles, spécialisations et générations ; le nom de famille permet de situer le modèle, mais ne suffit pas à connaître ses entrées acceptées, ses conditions d’utilisation ou son comportement réel.",
+    "example": "Exemple illustratif : Une documentation présente plusieurs modèles Gemma de tailles et de spécialisations différentes. L’équipe sélectionne une variante précise pour ses essais et conserve cet identifiant dans sa configuration de déploiement.",
+    "misconception": "Deux modèles d’une même famille ne partagent pas nécessairement toutes leurs capacités ou leur architecture. Une annonce sur une version ne s’applique pas automatiquement aux autres."
+  },
+  "notion-501": {
+    "explanation": "Une variante précise une déclinaison d’un modèle, par exemple sa taille, sa spécialisation ou son adaptation aux consignes. Le nombre de paramètres donne un repère sur sa structure, mais la mémoire dépend aussi de leur format et des données temporaires ; pour un modèle à experts, paramètres totaux et paramètres actifs décrivent encore des quantités différentes.",
+    "example": "Exemple illustratif : Une équipe compare une petite variante instruct et une plus grande de la même génération sur ses messages de support. Elle mesure la qualité et la latence au lieu de choisir uniquement le plus grand nombre de paramètres.",
+    "misconception": "Une quantification et une nouvelle taille de modèle sont deux changements distincts. Réduire le nombre de bits des poids ne réduit pas nécessairement leur nombre."
+  },
+  "notion-502": {
+    "explanation": "Un article de recherche expose une question, une méthode et les éléments qui soutiennent ses résultats. Un preprint est diffusé avant une publication formelle avec évaluation par les pairs, même si une version ultérieure peut être publiée ; la lecture doit examiner le protocole, les comparaisons, les limites et les ressources disponibles pour vérifier les conclusions.",
+    "example": "Exemple illustratif : Une équipe lit un preprint annonçant une méthode plus efficace. Elle regarde si le gain concerne la mémoire ou le temps de calcul, sur quels modèles il a été mesuré et si le code permet de refaire l’essai.",
+    "misconception": "Un résultat rapporté dans un article ne vaut pas pour toutes les configurations. L’évaluation par les pairs apporte une relecture, sans garantir l’absence d’erreurs."
+  },
+  "notion-503": {
+    "explanation": "arXiv est une plateforme de diffusion d’articles scientifiques qui facilite l’accès rapide aux travaux et à leurs versions successives. Les dépôts y font l’objet d’une modération, distincte d’une évaluation scientifique par les pairs ; un article peut ensuite être révisé ou publié ailleurs, avec des informations complémentaires sur sa page.",
+    "example": "Exemple illustratif : Un lecteur compare la première version d’un article sur arXiv avec une version révisée. Il constate que les auteurs ont corrigé un tableau et cite la version effectivement utilisée dans son analyse.",
+    "misconception": "Être disponible sur arXiv ne signifie pas être accepté dans une conférence ou une revue. Inversement, un article publié peut aussi rester accessible sur arXiv."
+  },
+  "notion-504": {
+    "explanation": "La reproductibilité consiste à pouvoir retrouver un résultat ou des conclusions dans des conditions suffisamment documentées. En apprentissage, les données, le code, les versions logicielles, les paramètres et l’aléatoire influencent l’expérience ; même avec une graine fixée, des différences de matériel ou d’algorithmes peuvent empêcher d’obtenir exactement les mêmes nombres.",
+    "example": "Exemple illustratif : Pour vérifier un score, une équipe conserve le découpage des données, le checkpoint et la configuration d’évaluation. Elle répète ensuite l’expérience et examine si les écarts modifient la conclusion annoncée.",
+    "misconception": "Fixer une graine ne garantit pas une identité bit à bit sur toutes les machines. Une conclusion reproductible peut aussi être évaluée à partir d’une variabilité explicitement mesurée."
+  },
+  "notion-505": {
+    "explanation": "Le coût d’inférence correspond aux ressources consommées pour produire des résultats avec un modèle. Une API peut facturer séparément les tokens d’entrée et de sortie, avec d’autres postes selon le service ; estimer le coût d’une application demande donc de compter les requêtes, les reprises et les traitements annexes sur un usage représentatif.",
+    "example": "Exemple illustratif : Avec des tarifs purement fictifs de 1 € par million de tokens entrants et 4 € par million sortant, une demande de 2 000 tokens produisant 500 tokens coûte 0,004 €, hors autres frais.",
+    "misconception": "Le prix affiché par token n’est pas le coût d’une tâche terminée. Plusieurs appels, des réponses longues ou des outils payants peuvent changer sensiblement ce total."
+  },
+  "notion-506": {
+    "explanation": "Le coût total de possession rassemble les dépenses nécessaires pour exploiter une solution sur une période définie. Pour l’IA, il peut inclure calcul, stockage, exploitation, intégration, évaluation et maintenance ; comparer deux options exige donc le même volume d’usage et des exigences comparables de qualité, de disponibilité et de délai de réponse.",
+    "example": "Exemple illustratif : Une équipe compare un service facturé à l’usage à un serveur auto-hébergé. Elle ajoute au second scénario le temps d’exploitation et la capacité inutilisée, puis estime les deux solutions sur une année fictive.",
+    "misconception": "Des poids téléchargeables gratuitement ne rendent pas leur exploitation gratuite. Un prix d’achat ou un tarif par requête ne représente qu’une partie du coût total."
+  }
+}

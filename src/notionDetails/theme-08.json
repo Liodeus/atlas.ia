@@ -1,0 +1,162 @@
+{
+  "notion-223": {
+    "explanation": "FP32, FP16 et BF16 représentent des nombres en virgule flottante avec des compromis différents entre précision, plage de valeurs et coût de stockage. FP16 et BF16 utilisent moins de bits que FP32 ; BF16 conserve une plage d'exposants comparable à FP32 mais moins de précision relative, ce qui influence les arrondis et la stabilité des calculs.",
+    "example": "Exemple illustratif : une équipe stocke certains tenseurs en BF16 pour réduire leur volume tout en gardant des accumulations sensibles en FP32. Elle vérifie que les sorties restent adaptées à son application.",
+    "misconception": "Deux formats de même taille ne sont pas interchangeables sans vérification. La précision des poids, des activations et des accumulations peut aussi différer dans un même modèle."
+  },
+  "notion-224": {
+    "explanation": "FP8 et FP4 désignent des familles de formats flottants très compacts dont les variantes répartissent différemment les bits entre signe, exposant et mantisse. Leur emploi s'accompagne souvent de facteurs d'échelle pour représenter les valeurs utiles ; le bénéfice dépend des opérations compatibles, du matériel et du maintien de calculs plus précis aux endroits sensibles.",
+    "example": "Exemple illustratif : un moteur utilise un format FP8 pour certaines multiplications matricielles et un format plus précis pour d'autres opérations. L'équipe compare les résultats après calibration et mesure le service complet.",
+    "misconception": "FP4 ne décrit pas à lui seul une recette complète de quantification. Les facteurs d'échelle, les blocs et les noyaux disponibles changent le stockage et le comportement numérique."
+  },
+  "notion-225": {
+    "explanation": "INT8 et INT4 stockent des valeurs entières sur un petit nombre de bits ; dans un modèle quantifié, ces codes représentent des valeurs réelles grâce à des facteurs d'échelle et parfois un décalage. La correspondance peut être définie par tenseur, canal ou groupe, ce qui influence l'erreur de représentation et les métadonnées nécessaires.",
+    "example": "Exemple illustratif : une matrice de poids est divisée en groupes, chacun avec son échelle. Les codes INT4 sont reconvertis ou exploités par un noyau spécialisé pendant les multiplications du modèle.",
+    "misconception": "Un modèle annoncé INT4 ne calcule pas forcément toutes ses opérations en entiers sur quatre bits. Certaines couches, activations et accumulations peuvent rester en précision supérieure."
+  },
+  "notion-226": {
+    "explanation": "La PTQ quantifie un modèle après son entraînement principal sans lui imposer un nouvel apprentissage complet tenant compte des arrondis. Selon la méthode, un échantillon de calibration sert à estimer les échelles, observer les activations ou compenser certaines erreurs ; on vérifie ensuite le modèle converti sur les tâches et longueurs de contexte visées.",
+    "example": "Exemple illustratif : une équipe convertit un modèle existant avec des exemples représentatifs de ses documents. Elle teste ensuite la version compacte sur des entrées différentes de celles utilisées pour calibrer.",
+    "misconception": "Post-training ne signifie pas toujours sans données ni sans calcul supplémentaire. Certaines méthodes de PTQ ont besoin de calibration et peuvent être sensibles à sa représentativité."
+  },
+  "notion-227": {
+    "explanation": "La QAT introduit pendant l'entraînement une simulation des effets de la quantification, notamment l'arrondi et la saturation, pour que les paramètres s'y adaptent. Les valeurs peuvent rester stockées en flottant pendant cette phase ; une conversion ultérieure produit le modèle quantifié destiné au moteur d'Inference, avec une recette cohérente entre simulation et exécution.",
+    "example": "Exemple illustratif : avant de déployer un classifieur compact, une équipe effectue une adaptation avec des opérations de Fake Quantization. Elle convertit ensuite le modèle et compare ses prédictions aux données de validation.",
+    "misconception": "La QAT n'est pas simplement un entraînement en faible précision. Elle prépare un schéma de quantification précis et peut augmenter le coût de la phase d'adaptation."
+  },
+  "notion-228": {
+    "explanation": "AWQ est une méthode de quantification des poids qui utilise les activations observées pour identifier les canaux particulièrement sensibles à l'erreur. Elle recherche des changements d'échelle qui protègent ces contributions avant la quantification, tout en conservant un calcul équivalent avant arrondi ; l'objectif est de réduire la mémoire des poids sans réentraîner intégralement le modèle.",
+    "example": "Exemple illustratif : des textes de calibration révèlent des canaux fortement sollicités. AWQ ajuste leurs échelles avant de produire les poids compacts que chargera un moteur prenant en charge cette représentation.",
+    "misconception": "Activation-aware signifie que les activations guident la quantification des poids. Cela ne signifie pas qu'AWQ quantifie nécessairement les activations ou le KV Cache."
+  },
+  "notion-229": {
+    "explanation": "GPTQ quantifie les poids en exploitant une approximation d'informations de second ordre pour limiter l'erreur sur les sorties des couches. À partir de données de calibration, la méthode compense progressivement une partie de l'erreur introduite par les poids déjà quantifiés ; elle constitue une approche de PTQ adaptée aux grandes matrices des modèles de langage.",
+    "example": "Exemple illustratif : un outil traite les matrices d'un modèle avec un corpus de calibration, puis enregistre les poids quantifiés et leurs paramètres. L'équipe vérifie ensuite la compatibilité du fichier avec son moteur.",
+    "misconception": "GPTQ est une méthode, pas un niveau de qualité garanti. Le nombre de bits, le groupement, la calibration et l'implémentation déterminent le compromis final."
+  },
+  "notion-230": {
+    "explanation": "GGUF est un format de fichier qui rassemble les tenseurs d'un modèle et des métadonnées nécessaires à son chargement, notamment pour les moteurs issus de GGML. Il peut transporter plusieurs représentations numériques, quantifiées ou non ; son rôle est d'organiser le stockage et les informations de configuration, tandis que les algorithmes de quantification déterminent comment les valeurs sont compressées.",
+    "example": "Exemple illustratif : une équipe convertit un modèle vers GGUF pour le charger dans un moteur compatible. Elle examine séparément l'architecture, le tokenizer et le type numérique des tenseurs inclus.",
+    "misconception": "GGUF n'est pas un algorithme de quantification. Deux fichiers GGUF d'un même modèle peuvent employer des précisions différentes et demander des ressources différentes."
+  },
+  "notion-231": {
+    "explanation": "ONNX représente un modèle sous forme de graphe d'opérations, de tenseurs et de types, afin de faciliter les échanges entre outils d'apprentissage et moteurs d'exécution. Les opérations sont décrites par des ensembles versionnés appelés opsets ; exporter un modèle exige que son calcul et ses formes de données soient représentables et pris en charge par le moteur cible.",
+    "example": "Exemple illustratif : un classifieur entraîné dans un framework est exporté en ONNX pour une application disposant d'un autre moteur. L'équipe compare ses sorties avant et après export sur des entrées représentatives.",
+    "misconception": "Un fichier ONNX ne garantit pas une exécution rapide sur tout appareil. Les opérateurs, les dimensions dynamiques et les optimisations dépendent du moteur et de son support matériel."
+  },
+  "notion-233": {
+    "explanation": "Le Prefix Caching réutilise les états déjà calculés pour un début de séquence partagé entre plusieurs requêtes. Avec un Transformer causal, le moteur peut reprendre le Prefill après cette portion commune au lieu de la recalculer ; les tokens, leur ordre et les conditions de calcul doivent correspondre pour que le cache soit réutilisable.",
+    "example": "Exemple illustratif : plusieurs questions commencent par les mêmes consignes et le même manuel. Le moteur réutilise le cache de ce début commun, puis traite la question propre à chaque requête.",
+    "misconception": "Deux introductions de sens proche ne constituent pas nécessairement le même préfixe. Cette optimisation économise du Prefill, sans supprimer le calcul des nouveaux tokens de réponse."
+  },
+  "notion-234": {
+    "explanation": "Le Prompt Caching désigne la réutilisation de calculs associés à des parties stables du contexte transmis au modèle, souvent grâce à un cache de préfixe. Il peut réduire le travail répété lorsqu'une application renvoie les mêmes instructions ou documents ; les règles de correspondance, de durée de conservation et d'invalidation dépendent du service ou du moteur.",
+    "example": "Exemple illustratif : une application soumet un même guide de style avec chaque demande de reformulation. Le contexte stable est placé avant le texte variable afin de permettre sa réutilisation par le cache.",
+    "misconception": "Le Prompt Caching ne signifie pas qu'une réponse précédente est resservie. Il ne constitue pas non plus une mémoire durable du modèle entre toutes les sessions."
+  },
+  "notion-235": {
+    "explanation": "La KV Cache Quantization réduit la précision des clés et valeurs conservées pour l'attention au fil d'une génération. Elle libère de la mémoire pour des contextes plus longs ou davantage de requêtes, avec un coût de conversion et une erreur numérique possibles ; son réglage est indépendant de la quantification des poids du modèle.",
+    "example": "Exemple illustratif : un service de lecture de longs rapports manque de mémoire malgré des poids compacts. L'équipe évalue un cache K/V quantifié sur des questions exigeant de retrouver des éléments éloignés.",
+    "misconception": "Quantifier les poids ne quantifie pas automatiquement le KV Cache. Un cache plus compact peut aussi ralentir certaines configurations à cause des conversions nécessaires."
+  },
+  "notion-236": {
+    "explanation": "Le KV Cache Offloading déplace une partie des états d'attention hors de la mémoire de l'accélérateur, généralement vers la RAM, puis les transfère lorsqu'ils deviennent nécessaires. Il échange donc de la capacité mémoire contre du trafic et de la latence ; anticiper les transferts et limiter les couches déplacées peut réduire ce surcoût.",
+    "example": "Exemple illustratif : pour poursuivre une longue conversation sur un GPU limité, le moteur conserve certains caches en RAM et prépare celui de la couche suivante pendant le calcul courant.",
+    "misconception": "L'Offloading n'efface pas le cache et ne réduit pas forcément sa taille totale. La liaison entre CPU et GPU peut devenir le principal facteur limitant."
+  },
+  "notion-238": {
+    "explanation": "Un Draft Model propose rapidement plusieurs tokens candidats dans une procédure de Speculative Decoding, avant leur vérification par le modèle cible. Son intérêt dépend à la fois de son coût et de la proportion de propositions acceptées ; les méthodes exactes utilisent une règle d'acceptation et de correction conçue pour préserver la distribution du modèle cible.",
+    "example": "Exemple illustratif : un petit modèle propose la suite d'une phrase, puis le modèle principal vérifie le bloc proposé. Les tokens acceptés sont conservés et une divergence déclenche la correction prévue.",
+    "misconception": "Un bon Draft Model n'est pas forcément le plus petit possible. Des propositions peu compatibles avec le modèle cible peuvent annuler le bénéfice de la spéculation."
+  },
+  "notion-240": {
+    "explanation": "Le Dynamic Batching rassemble des requêtes arrivées séparément dans un même lot d'exécution, selon leur compatibilité et l'état de la file d'attente. Le moteur peut attendre brièvement d'autres entrées pour mieux utiliser le matériel ; ce réglage arbitre entre débit global et temps d'attente, avec des contraintes propres aux formes et longueurs des données.",
+    "example": "Exemple illustratif : plusieurs utilisateurs demandent presque simultanément un Embedding. Le serveur regroupe leurs textes compatibles en un lot, effectue le calcul, puis renvoie à chacun le vecteur correspondant.",
+    "misconception": "Dynamic Batching et Continuous Batching ne sont pas synonymes. Le second peut renouveler les séquences actives entre étapes de génération, ce que tout batcher dynamique ne fait pas."
+  },
+  "notion-241": {
+    "explanation": "Le Chunked Prefill découpe le calcul initial d'un long prompt en portions que l'ordonnanceur peut intercaler avec d'autres requêtes. Cela évite qu'un gros Prefill monopolise trop longtemps le moteur pendant que des réponses sont déjà en cours ; la taille des portions influence le délai du premier token, la fluidité du Decode et le débit.",
+    "example": "Exemple illustratif : un utilisateur envoie un volumineux manuel alors que d'autres reçoivent déjà une réponse. Le moteur traite le manuel par portions entre des étapes de génération des conversations actives.",
+    "misconception": "Chunked Prefill ne découpe pas le document en recherches RAG et n'agrandit pas la Context Window. Il change l'ordonnancement du calcul d'un contexte déjà accepté."
+  },
+  "notion-242": {
+    "explanation": "Le Disaggregated Prefill / Decode affecte le traitement initial du contexte et la génération successive des tokens à des ressources distinctes. Chaque phase peut ainsi recevoir un matériel ou un réglage adapté, au prix d'un transfert de l'état nécessaire entre elles ; le dimensionnement dépend du trafic, des longueurs de prompts et des réponses attendues.",
+    "example": "Exemple illustratif : un groupe de serveurs prépare les longs documents reçus, puis transmet les caches nécessaires à un autre groupe chargé de produire les réponses au fil des tokens.",
+    "misconception": "Séparer les phases ne garantit pas un gain : le transfert du cache, les files d'attente et un déséquilibre de charge peuvent dépasser les économies espérées."
+  },
+  "notion-244": {
+    "explanation": "Le TTLT mesure le temps écoulé jusqu'au dernier token d'une réponse, à partir d'un point de départ explicite, souvent l'envoi de la requête. Il reflète alors l'attente, le Prefill et l'ensemble du Decode ; suivre cette mesure aide à évaluer les tâches qui nécessitent le résultat complet, comme un export ou une analyse structurée.",
+    "example": "Exemple illustratif : une application attend un résumé entier avant de produire un document. Elle mesure le délai jusqu'au dernier token, même si les premiers mots auraient pu être affichés plus tôt.",
+    "misconception": "Un premier token rapide n'implique pas un TTLT court. La longueur de sortie et les interruptions pendant la génération peuvent dominer la durée totale."
+  },
+  "notion-246": {
+    "explanation": "Le Throughput mesure la quantité de travail achevée par unité de temps, par exemple des requêtes ou des tokens générés par seconde. Il décrit la capacité globale d'un système sous une charge donnée ; pour comparer des mesures, il faut préciser quels tokens sont comptés, les longueurs des séquences, la concurrence et les éventuelles contraintes de latence.",
+    "example": "Exemple illustratif : un service compare deux réglages sur le même ensemble de requêtes et compte les tokens de sortie produits pendant la mesure. Il contrôle également le temps d'attente subi par les utilisateurs.",
+    "misconception": "Un débit global élevé ne signifie pas une génération rapide pour chaque personne. Il peut provenir de nombreuses requêtes traitées simultanément avec une latence individuelle plus élevée."
+  },
+  "notion-247": {
+    "explanation": "La Latency est le délai entre deux événements définis d'une requête : son envoi et le premier token, deux tokens successifs ou la réponse complète. Elle peut inclure les files d'attente, le réseau et le calcul selon le point de mesure ; nommer précisément ce périmètre permet de relier le chiffre à l'expérience utilisateur.",
+    "example": "Exemple illustratif : un assistant affiche vite son premier mot mais marque ensuite de longues pauses. L'équipe mesure séparément l'arrivée initiale et les intervalles entre tokens pour localiser la gêne.",
+    "misconception": "Une latence sans événement de départ et d'arrivée est ambiguë. Le temps du noyau GPU seul ne représente pas nécessairement le délai observé dans l'application."
+  },
+  "notion-248": {
+    "explanation": "Les percentiles décrivent la distribution des latences : P50 est la médiane, P95 et P99 situent des délais qui ne sont dépassés que par une petite part des requêtes mesurées. Ils rendent visibles les expériences lentes que la moyenne masque ; leur interprétation exige un volume d'observations, une période et une charge suffisamment représentatifs.",
+    "example": "Exemple illustratif : un service présente des temps habituels satisfaisants, mais son P99 se dégrade lors des pointes d'activité. L'équipe examine les requêtes lentes et leurs attentes en file.",
+    "misconception": "Le P99 n'est pas la pire latence possible et reste sensible à l'échantillon. Faire la moyenne des percentiles de plusieurs serveurs ne donne pas le percentile global."
+  },
+  "notion-249": {
+    "explanation": "La Concurrency compte les requêtes simultanément en cours dans un périmètre défini, par exemple chez le client ou dans le moteur. Elle augmente le travail à partager et la mémoire nécessaire, mais toutes ces requêtes ne calculent pas au même instant ; certaines attendent en file tandis que l'ordonnanceur compose les lots actifs.",
+    "example": "Exemple illustratif : un test maintient plusieurs conversations ouvertes et en lance une nouvelle dès qu'une réponse se termine. L'équipe mesure comment les files et la latence évoluent avec ce niveau de concurrence.",
+    "misconception": "Concurrency, débit d'arrivée et Batch Size sont des mesures différentes. Une requête en cours peut être en attente sans appartenir au lot actuellement exécuté."
+  },
+  "notion-250": {
+    "explanation": "La Tail Latency décrit les délais des requêtes situées dans la partie lente de la distribution, souvent suivie par des percentiles élevés. Elle peut être liée à la contention, aux files d'attente, à des entrées longues ou à un composant irrégulier ; dans une chaîne de services, attendre plusieurs résultats peut amplifier son effet sur l'utilisateur.",
+    "example": "Exemple illustratif : une réponse dépend de plusieurs recherches parallèles. Même si chacune est généralement rapide, une seule recherche très lente peut retarder la restitution de l'ensemble du résultat.",
+    "misconception": "Optimiser la moyenne ne suffit pas à corriger la Tail Latency. Il faut examiner les événements rares, leur fréquence et les dépendances qui prolongent les requêtes."
+  },
+  "notion-251": {
+    "explanation": "Le Batch Size à l'Inference détermine combien d'entrées ou de séquences sont calculées ensemble à une étape. Regrouper le travail peut mieux amortir la lecture des poids et utiliser les unités de calcul, mais consomme davantage de mémoire et peut ajouter de l'attente ; en génération continue, la composition du lot varie au fil des terminaisons.",
+    "example": "Exemple illustratif : pour produire des Embeddings hors ligne, une équipe augmente le nombre de textes par lot jusqu'à un réglage compatible avec la mémoire. Elle choisit un autre compromis pour les recherches interactives.",
+    "misconception": "Un grand lot ne garantit pas une latence plus faible. Les longueurs variables, le remplissage et les contraintes de mémoire peuvent limiter le gain obtenu."
+  },
+  "notion-252": {
+    "explanation": "La Memory Bandwidth représente la quantité de données transférable par unité de temps entre la mémoire et les unités qui calculent. Lire les poids et les caches peut limiter la génération même lorsque le processeur possède une grande puissance arithmétique ; le débit réellement atteint dépend aussi de l'organisation des accès et des niveaux de mémoire utilisés.",
+    "example": "Exemple illustratif : pendant le Decode d'une seule séquence, le GPU relit beaucoup de poids pour chaque nouveau token. Réduire les octets transférés peut devenir plus utile que multiplier les unités de calcul.",
+    "misconception": "La bande passante n'est pas la capacité mémoire. Disposer de davantage de mémoire permet de stocker plus de données sans garantir leur lecture plus rapide."
+  },
+  "notion-253": {
+    "explanation": "Un calcul Compute-Bound est surtout limité par les opérations arithmétiques disponibles, tandis qu'un calcul Memory-Bound attend surtout les données nécessaires. Le rapport entre opérations et octets transférés aide à comprendre ce régime ; il dépend des formes, du lot, de la précision et du matériel, et peut changer entre Prefill et Decode.",
+    "example": "Exemple illustratif : une équipe observe que de grandes multiplications en Prefill utilisent bien les unités de calcul, alors que le Decode avec peu de séquences attend davantage les lectures mémoire.",
+    "misconception": "Un modèle n'est pas définitivement Compute-Bound ou Memory-Bound. Différentes couches et différentes charges peuvent avoir des limites distinctes, que le profilage doit confirmer."
+  },
+  "notion-255": {
+    "explanation": "Un Inference Engine charge les paramètres et exécute le calcul du modèle avec des mécanismes adaptés au déploiement. Il peut gérer les noyaux matériels, les caches, l'ordonnancement des requêtes et la quantification ; ces choix influencent la mémoire, le débit et les fonctionnalités disponibles, sans constituer en eux-mêmes un nouvel apprentissage du modèle.",
+    "example": "Exemple illustratif : une équipe sert les mêmes poids avec un moteur capable de Continuous Batching. Celui-ci organise les requêtes actives et réserve le cache nécessaire pendant que les utilisateurs reçoivent leurs réponses.",
+    "misconception": "Le moteur et le modèle sont deux composants distincts. Changer de moteur peut modifier les arrondis ou les options de génération et nécessite de vérifier les résultats."
+  },
+  "notion-256": {
+    "explanation": "La Kernel Fusion regroupe plusieurs opérations dans un même noyau exécuté sur l'accélérateur, afin de réduire les lancements et les écritures de résultats intermédiaires en mémoire. Elle est particulièrement utile pour des suites d'opérations simples ; son intérêt dépend cependant de la pression sur les registres, des formes de tenseurs et des possibilités de parallélisme.",
+    "example": "Exemple illustratif : un moteur combine une addition de biais et une fonction d'activation dans le même noyau. Le résultat intermédiaire reste proche du calcul au lieu d'être écrit puis relu séparément.",
+    "misconception": "Fusionner davantage n'accélère pas toujours le programme. Un noyau trop complexe peut utiliser trop de ressources locales ou empêcher une meilleure organisation du travail."
+  },
+  "notion-257": {
+    "explanation": "Un CUDA Kernel est une fonction exécutée sur un GPU compatible CUDA par de nombreux threads organisés en blocs. Il réalise une opération ou un groupe d'opérations, comme une multiplication matricielle ou une normalisation ; la répartition du travail et l'accès aux différents niveaux de mémoire déterminent une grande partie de son efficacité.",
+    "example": "Exemple illustratif : pour normaliser les activations d'une couche, un noyau répartit les lignes du tenseur entre des blocs. Chaque bloc calcule les statistiques nécessaires avant de produire les valeurs transformées.",
+    "misconception": "Un CUDA Kernel n'est pas un modèle complet ni un algorithme d'apprentissage. Sa compatibilité et ses performances dépendent de l'architecture GPU et du code généré."
+  },
+  "notion-258": {
+    "explanation": "La Compilation et la Graph Optimization transforment la description du calcul pour l'exécuter plus efficacement, par exemple en fusionnant des opérations ou en spécialisant le code pour certaines formes. Ces transformations peuvent réduire les surcoûts de lancement et d'interprétation ; leur bénéfice se mesure après les coûts initiaux de compilation et sur les entrées réellement utilisées.",
+    "example": "Exemple illustratif : un service compile le calcul pour ses dimensions courantes, puis réutilise le code obtenu sur les requêtes suivantes. Il mesure séparément le démarrage et les performances une fois le système préparé.",
+    "misconception": "Compiler ne supprime pas toutes les opérations coûteuses. Des dimensions changeantes, des ruptures de graphe ou des opérations non prises en charge peuvent provoquer recompilations et surcoûts."
+  },
+  "notion-259": {
+    "explanation": "La Weight-Only Quantization compresse les poids tout en laissant les activations dans une précision différente, souvent plus élevée. Elle réduit principalement le stockage et le trafic liés aux paramètres ; les noyaux doivent exploiter ces poids compacts ou les déquantifier efficacement, tandis que le KV Cache et les autres allocations restent des besoins mémoire distincts.",
+    "example": "Exemple illustratif : un modèle charge ses matrices en INT4 et traite ses activations en BF16. Le moteur utilise un noyau adapté pour combiner ces représentations pendant la génération.",
+    "misconception": "Weight-only ne signifie pas mémoire totale divisée dans la même proportion. Les échelles, les activations, les buffers et le cache d'attention continuent à occuper de l'espace."
+  },
+  "notion-260": {
+    "explanation": "L'Offloading place certaines données ou certains états hors de la mémoire rapide de l'accélérateur, généralement en RAM ou sur disque, et les récupère au besoin. Il permet d'exécuter des modèles ou des contextes qui dépasseraient autrement la capacité disponible ; les transferts, leur anticipation et la répartition du calcul déterminent le ralentissement éventuel.",
+    "example": "Exemple illustratif : une station conserve une partie des couches d'un modèle en RAM et les transfère vers le GPU lorsqu'elles doivent calculer. Le modèle devient utilisable malgré une mémoire GPU limitée.",
+    "misconception": "L'Offloading n'est pas une compression et ne rend pas les transferts gratuits. Déplacer les poids, le KV Cache ou les états d'entraînement correspond à des besoins différents."
+  }
+}

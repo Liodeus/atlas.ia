@@ -1,0 +1,91 @@
+{
+  "notion-2": [
+    "https://scikit-learn.org/stable/getting_started.html"
+  ],
+  "notion-3": [
+    "https://www.deeplearningbook.org/contents/mlp.html"
+  ],
+  "notion-5": [
+    "https://arxiv.org/abs/2404.14219"
+  ],
+  "notion-6": [
+    "https://arxiv.org/abs/2311.02462"
+  ],
+  "notion-7": [
+    "https://arxiv.org/abs/2311.02462"
+  ],
+  "notion-8": [
+    "https://arxiv.org/abs/2108.07258"
+  ],
+  "notion-10": [
+    "https://huggingface.co/docs/transformers/tasks/sequence_classification",
+    "https://huggingface.co/docs/transformers/tasks/summarization"
+  ],
+  "notion-11": [
+    "https://arxiv.org/abs/1810.04805"
+  ],
+  "notion-12": [
+    "https://huggingface.co/docs/transformers/tasks/summarization"
+  ],
+  "notion-14": [
+    "https://arxiv.org/abs/2005.14165"
+  ],
+  "notion-15": [
+    "https://arxiv.org/abs/2307.09288"
+  ],
+  "notion-17": [
+    "https://arxiv.org/abs/2307.09288"
+  ],
+  "notion-18": [
+    "https://arxiv.org/abs/2408.03314"
+  ],
+  "notion-19": [
+    "https://arxiv.org/abs/2408.03314"
+  ],
+  "notion-20": [
+    "https://arxiv.org/abs/2110.14168"
+  ],
+  "notion-21": [
+    "https://arxiv.org/abs/2408.03314"
+  ],
+  "notion-22": [
+    "https://arxiv.org/abs/2107.03374"
+  ],
+  "notion-23": [
+    "https://arxiv.org/abs/1908.10084"
+  ],
+  "notion-24": [
+    "https://www.sbert.net/examples/cross_encoder/applications/README.html"
+  ],
+  "notion-25": [
+    "https://arxiv.org/abs/2203.02155"
+  ],
+  "notion-26": [
+    "https://arxiv.org/abs/2304.08485"
+  ],
+  "notion-27": [
+    "https://arxiv.org/abs/2304.08485"
+  ],
+  "notion-28": [
+    "https://arxiv.org/abs/2307.15818"
+  ],
+  "notion-29": [
+    "https://arxiv.org/abs/1803.10122"
+  ],
+  "notion-30": [
+    "https://huggingface.co/docs/transformers/tasks/language_modeling"
+  ],
+  "notion-31": [
+    "https://arxiv.org/abs/1810.04805"
+  ],
+  "notion-32": [
+    "https://huggingface.co/docs/transformers/tasks/language_modeling"
+  ],
+  "notion-33": [
+    "https://arxiv.org/abs/1409.3215",
+    "https://arxiv.org/abs/1706.03762"
+  ],
+  "notion-34": [
+    "https://arxiv.org/abs/2101.03961"
+  ]
+}

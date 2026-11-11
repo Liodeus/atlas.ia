@@ -1,0 +1,132 @@
+{
+  "notion-321": {
+    "explanation": "Un Agentic Workflow combine des étapes organisées par l’application et des décisions confiées à un modèle : rechercher une information, choisir une action, examiner son résultat puis adapter la suite. On l’emploie quand le chemin dépend des observations, tout en conservant des étapes obligatoires, des contrôles et une condition d’arrêt explicite.",
+    "example": "Exemple illustratif : un assistant prépare une visite de musée. Il consulte les horaires, constate une fermeture, recherche une autre date puis soumet un programme cohérent avec les contraintes du visiteur.",
+    "misconception": "Le terme ne garantit pas une autonomie complète : certains workflows suivent un parcours prédéfini et n’utilisent le modèle que pour quelques décisions locales."
+  },
+  "notion-323": {
+    "explanation": "Le résultat d’un outil fournit une observation à l’agent : document retrouvé, valeur calculée, erreur ou confirmation d’une opération. L’application doit conserver son origine et son statut pour que le modèle distingue une réussite, une absence de données et un échec, puis utilise cette observation sans lui attribuer l’autorité des instructions internes.",
+    "example": "Exemple illustratif : une recherche de facture renvoie une erreur d’accès. L’assistant explique cette limite au lieu d’en déduire que la facture n’existe pas ou de présenter un montant imaginé.",
+    "misconception": "Un Tool Output n’est pas nécessairement vrai ou bienveillant. Le texte d’une page renvoyée reste une donnée externe, même lorsque l’outil fonctionne correctement."
+  },
+  "notion-324": {
+    "explanation": "Le Planner transforme un objectif en étapes dont il précise les dépendances, les informations nécessaires et les critères de réussite. Il peut produire un plan initial puis le réviser quand une observation invalide une hypothèse ; son intérêt est de rendre le travail réalisable et contrôlable, sans exécuter lui-même toutes les opérations.",
+    "example": "Exemple illustratif : pour actualiser un catalogue, le Planner prévoit d’identifier les produits modifiés, de vérifier leurs données puis de préparer les corrections. Un produit sans référence devient une étape à clarifier.",
+    "misconception": "Un plan plausible ne prouve pas sa faisabilité. Le Planner doit connaître les outils réellement disponibles et modifier les étapes que les résultats contredisent."
+  },
+  "notion-325": {
+    "explanation": "L’Executor prend en charge les opérations concrètes d’un plan, par exemple appeler une API ou transformer un fichier. Il reçoit un périmètre d’action, vérifie les préconditions nécessaires et rapporte les résultats ou les erreurs, afin que le système décide de poursuivre, de réessayer prudemment ou de revoir le plan.",
+    "example": "Exemple illustratif : un plan prévoit de produire une synthèse de ventes. L’Executor interroge la source autorisée, génère le tableau et signale qu’une période manque, au lieu de compléter les données lui-même.",
+    "misconception": "Le rôle d’Executor ne dispense jamais du contrôle des droits. Une étape inscrite dans un plan n’autorise pas automatiquement l’opération qu’elle décrit."
+  },
+  "notion-326": {
+    "explanation": "L’Orchestrator coordonne les composants d’un système : ordre des étapes, travaux parallèles, circulation des résultats et gestion des erreurs. Il peut être du code déterministe, un agent ou une combinaison des deux ; il sert surtout à maintenir une vue d’ensemble lorsque plusieurs outils ou spécialistes contribuent au même objectif.",
+    "example": "Exemple illustratif : pour préparer un dossier, l’Orchestrator lance séparément la recherche documentaire et l’extraction des chiffres, attend leurs résultats, puis transmet les éléments validés au composant chargé de la rédaction.",
+    "misconception": "Un Orchestrator n’est pas obligatoirement un modèle supplémentaire. Ajouter un coordinateur génératif peut compliquer un enchaînement que quelques règles explicites suffiraient à gérer."
+  },
+  "notion-328": {
+    "explanation": "Dans une Observe–Act Loop, l’agent choisit une action à partir de l’état observé, puis réévalue la situation après son exécution. Cette alternance permet de traiter les changements imprévus, mais exige des critères de progression et d’arrêt pour éviter de répéter une action inefficace ou de tourner indéfiniment.",
+    "example": "Exemple illustratif : un assistant remplit un formulaire, observe qu’un champ obligatoire manque, le complète avec une information disponible puis vérifie la nouvelle page avant de poursuivre la procédure demandée.",
+    "misconception": "Observer ne signifie pas simplement relire son intention. La boucle doit exploiter le résultat réel de l’outil ou de l’interface, y compris les erreurs."
+  },
+  "notion-329": {
+    "explanation": "Un Multi-Agent System répartit une tâche entre plusieurs agents dont les rôles, les contextes ou les outils peuvent différer. Une coordination explicite organise leurs échanges et la synthèse des résultats ; cette architecture aide à séparer des travaux spécialisés, mais ajoute des coûts de communication et des risques de contradictions ou de doublons.",
+    "example": "Exemple illustratif : un agent extrait les exigences d’un cahier des charges, un autre examine les contraintes techniques et un troisième rassemble leurs conclusions en signalant les désaccords à résoudre.",
+    "misconception": "Plusieurs agents ne constituent pas plusieurs preuves indépendantes. S’ils partagent le même modèle, les mêmes sources ou les mêmes hypothèses, leurs erreurs peuvent se renforcer."
+  },
+  "notion-330": {
+    "explanation": "Le Supervisor Agent attribue des sous-tâches, suit leur avancement et décide comment exploiter les résultats des agents spécialisés. Il doit fournir un objectif précis et vérifier les livrables avant de les assembler, car la délégation déplace le travail sans supprimer la responsabilité de produire une réponse cohérente à la demande initiale.",
+    "example": "Exemple illustratif : un superviseur confie la vérification des liens à un agent et la relecture à un autre. Il attend les deux rapports et vérifie les corrections avant de finaliser le document.",
+    "misconception": "Le Supervisor ne doit pas approuver aveuglément chaque rapport. Une réponse assurée d’un sous-agent reste à confronter aux preuves et aux critères de réussite."
+  },
+  "notion-331": {
+    "explanation": "Un Sub-Agent reçoit une mission limitée avec le contexte et les outils nécessaires pour la réaliser. Son exécution peut disposer d’un historique séparé, ce qui réduit la quantité d’informations à gérer par l’agent principal ; les résultats utiles doivent ensuite être transmis explicitement, avec leurs limites et les points restés ouverts.",
+    "example": "Exemple illustratif : l’agent principal demande à un sous-agent d’identifier les doublons d’un catalogue. Celui-ci reçoit uniquement les références concernées et rend une liste justifiée, sans modifier le reste du catalogue.",
+    "misconception": "Un sous-agent n’hérite pas forcément de tout l’historique ni de tous les droits. Ces éléments dépendent de l’application et doivent être définis explicitement."
+  },
+  "notion-332": {
+    "explanation": "Un Handoff transfère la conduite d’une étape à un autre agent ou composant, avec les informations nécessaires pour continuer. Contrairement à une simple consultation, il peut changer l’interlocuteur actif et la responsabilité opérationnelle ; une transmission utile précise l’objectif, les faits établis, les contraintes et les actions déjà effectuées.",
+    "example": "Exemple illustratif : un assistant général recueille le modèle d’un appareil et les symptômes décrits. Il transmet ensuite le dossier à un assistant de dépannage, qui reprend la conversation avec ces éléments.",
+    "misconception": "Transférer le contrôle ne garantit pas que tout le contexte suit. Sans état explicite, le nouvel agent peut redemander des informations ou répéter une action."
+  },
+  "notion-333": {
+    "explanation": "Un Tool Router choisit parmi les capacités disponibles celle qui correspond à la demande et au contexte. Cette sélection peut reposer sur des règles, un classifieur ou un modèle ; elle prépare l’appel, tandis que la validation des arguments et l’autorisation d’exécuter restent des étapes distinctes à appliquer par le système.",
+    "example": "Exemple illustratif : une demande sur une réunion est dirigée vers la recherche de calendrier, tandis qu’une question sur un contrat utilise la recherche documentaire, avec les droits propres à chaque source.",
+    "misconception": "Choisir le bon nom d’outil ne suffit pas. Le Router peut sélectionner une capacité pertinente tout en produisant des paramètres incorrects ou une action non autorisée."
+  },
+  "notion-334": {
+    "explanation": "Un Model Router sélectionne un modèle selon la tâche, les contraintes de coût ou les capacités nécessaires. Un Model Cascading ajoute une logique de succession : une première réponse est évaluée puis, si les critères l’exigent, un autre modèle est consulté ; la qualité de cette décision compte autant que celle des modèles mobilisés.",
+    "example": "Exemple illustratif : une application utilise un modèle léger pour classer des demandes simples. Si le résultat reste ambigu selon un contrôle défini, elle transmet le cas à un modèle plus adapté.",
+    "misconception": "Un modèle plus coûteux n’est pas toujours meilleur pour chaque cas. Une cascade exige un critère d’escalade vérifié, pas seulement la confiance déclarée par le premier modèle."
+  },
+  "notion-335": {
+    "explanation": "A2A organise des échanges entre systèmes d’agents à travers des messages, des tâches suivies et des livrables, sans imposer leur architecture interne. Le protocole décrit aussi la découverte de capacités ; il facilite l’interopérabilité entre applications, à condition que leurs versions et leurs mécanismes d’accès soient compatibles et correctement configurés.",
+    "example": "Exemple illustratif : un agent chargé d’un événement demande à un agent de disponibilité de salles de traiter une recherche. Il suit l’état de cette tâche et récupère les propositions produites.",
+    "misconception": "Toute conversation entre agents n’utilise pas A2A. Le protocole ne remplace ni les permissions métier ni la vérification des résultats transmis par l’autre système."
+  },
+  "notion-336": {
+    "explanation": "Le Computer Use permet à un agent d’agir sur une interface graphique à partir d’observations telles que des captures d’écran. L’application traduit ses décisions en clics, saisies ou déplacements, puis lui fournit un nouvel état visuel ; cette approche aide lorsque le logiciel n’expose pas d’intégration directe pour la tâche visée.",
+    "example": "Exemple illustratif : un assistant ouvre un tableau dans une application, sélectionne une feuille puis exporte le graphique demandé. Après chaque étape importante, il observe l’écran pour vérifier le résultat obtenu.",
+    "misconception": "Un clic proposé n’est pas une réussite confirmée. Une fenêtre déplacée, un chargement lent ou un dialogue inattendu peut changer la cible et nécessiter une nouvelle observation."
+  },
+  "notion-338": {
+    "explanation": "Un Plugin ou Connector relie une application d’AI à un service externe et expose des opérations ou des données utilisables. L’intégration traduit les demandes dans le format du service et gère ses échanges ; son périmètre dépend des capacités implémentées et des autorisations accordées, pas de tout ce que le service sait faire.",
+    "example": "Exemple illustratif : un Connector de calendrier permet de consulter les disponibilités d’une équipe. L’assistant peut proposer un créneau, mais la création de l’événement nécessite une capacité et des droits adaptés.",
+    "misconception": "Les mots Plugin et Connector ne désignent pas une interface universelle. Deux intégrations d’un même service peuvent offrir des fonctions et des garanties très différentes."
+  },
+  "notion-339": {
+    "explanation": "Une Skill rassemble une procédure réutilisable, parfois accompagnée de scripts, de références ou de modèles de documents. L’agent charge les instructions pertinentes pour accomplir une catégorie de tâches avec les conventions attendues ; cela organise le savoir-faire dans son contexte sans nécessairement changer les paramètres du modèle ou ajouter de nouveaux accès.",
+    "example": "Exemple illustratif : une Skill de compte rendu précise les rubriques attendues et fournit un modèle. L’agent l’applique à une réunion donnée en utilisant uniquement les notes et outils disponibles.",
+    "misconception": "Installer une Skill n’entraîne pas automatiquement le modèle. Ses instructions peuvent aussi être inadaptées ou dépassées et ne doivent pas accorder des permissions supplémentaires."
+  },
+  "notion-340": {
+    "explanation": "L’Agent Memory désigne les informations que l’application conserve et réintroduit quand elles deviennent utiles à l’agent. Elle peut contenir un historique, des préférences ou des résultats de travail ; sa conception exige de choisir quoi enregistrer, comment le retrouver et quand le corriger ou l’oublier pour éviter de réutiliser un contexte erroné.",
+    "example": "Exemple illustratif : un assistant de projet retrouve la convention de nommage choisie lors d’une session précédente et l’applique aux nouveaux fichiers après avoir vérifié qu’elle reste valable pour ce projet.",
+    "misconception": "La mémoire d’un agent n’est pas nécessairement contenue dans les poids du modèle. Elle peut être un stockage externe dont seuls certains éléments entrent dans le contexte."
+  },
+  "notion-341": {
+    "explanation": "La Short-Term Memory maintient les éléments utiles à la tâche en cours, comme les échanges récents, les documents ouverts et les résultats intermédiaires. Elle peut être sauvegardée par l’application pour reprendre une session, mais son usage reste lié au fil de travail ; une sélection devient nécessaire lorsque l’historique dépasse le contexte exploitable.",
+    "example": "Exemple illustratif : pendant la préparation d’une lettre, l’assistant conserve le destinataire, le ton demandé et les corrections récentes afin de réviser le même brouillon sans recommencer la collecte d’informations.",
+    "misconception": "Court terme ne veut pas forcément dire stockage uniquement en mémoire vive. Un état de session enregistré en base peut rester une mémoire limitée à ce fil."
+  },
+  "notion-342": {
+    "explanation": "La Long-Term Memory conserve des informations au-delà d’une conversation et permet de les retrouver lors de sessions ultérieures. Elle peut utiliser des fiches structurées ou une recherche documentaire ; pour rester utile, chaque souvenir doit avoir une portée claire, une provenance et un moyen de mise à jour ou de suppression.",
+    "example": "Exemple illustratif : un assistant de rédaction retrouve la préférence de l’utilisateur pour des phrases courtes lors d’un nouveau projet, tout en vérifiant si les consignes de ce document demandent un autre style.",
+    "misconception": "La conservation durable ne garantit ni l’exactitude ni la pertinence future. Une préférence ancienne doit pouvoir être corrigée et ne doit pas supplanter une instruction actuelle."
+  },
+  "notion-343": {
+    "explanation": "L’Episodic Memory conserve le souvenir d’un événement situé : ce qui a été demandé, les actions réalisées et leur résultat. Retrouver un épisode comparable peut aider l’agent à préparer une nouvelle démarche, mais il doit distinguer les circonstances spécifiques du cas passé des éléments réellement réutilisables dans la situation présente.",
+    "example": "Exemple illustratif : un assistant retrouve qu’un import précédent avait échoué à cause d’un séparateur de colonnes. Il vérifie ce point sur le nouveau fichier avant de proposer la même correction.",
+    "misconception": "Un épisode réussi ne constitue pas une règle générale. Copier sa solution sans examiner le nouveau contexte peut reproduire une action devenue inutile ou incorrecte."
+  },
+  "notion-344": {
+    "explanation": "La Semantic Memory conserve des connaissances formulées comme des faits ou des relations, indépendamment du récit détaillé de leur acquisition. Un agent peut y rechercher une information stable, comme une préférence ou une règle d’organisation, mais doit garder les références utiles pour vérifier sa validité et traiter les contradictions lors des mises à jour.",
+    "example": "Exemple illustratif : une mémoire de projet indique que les comptes rendus sont rangés dans un dossier partagé précis. L’assistant retrouve ce fait lorsqu’il doit préparer un nouveau document pour l’équipe.",
+    "misconception": "Semantic Memory ne signifie pas nécessairement base vectorielle. La nature de l’information stockée et le mécanisme utilisé pour la rechercher sont deux choix différents."
+  },
+  "notion-345": {
+    "explanation": "Le Human-in-the-Loop introduit une intervention humaine dans le fonctionnement du système : annotation, correction, supervision ou décision. Le Human Approval en est un cas particulier où une action attend une validation ; pour être utile, cette validation doit présenter l’opération concrète, ses paramètres et ses effets attendus, au moment où une décision reste possible.",
+    "example": "Exemple illustratif : avant de publier une annonce, l’application présente le texte final, le canal et l’horaire au responsable. Sa validation autorise cette publication précise, avec ces paramètres visibles.",
+    "misconception": "Un clic de confirmation vague ne constitue pas une supervision efficace. Multiplier les demandes peut aussi provoquer une validation automatique sans examen réel des actions."
+  },
+  "notion-346": {
+    "explanation": "Une Sandbox réduit les ressources accessibles à un programme ou à un outil exécuté par l’agent. Selon la technologie choisie, elle limite les fichiers, les processus, le réseau ou les capacités système ; elle permet de contenir les effets d’une erreur, à condition que son périmètre corresponde effectivement aux ressources à protéger.",
+    "example": "Exemple illustratif : un assistant analyse un fichier dans un environnement qui peut lire le dossier de travail mais ne peut pas consulter les clés privées ni contacter librement des services externes.",
+    "misconception": "Une Sandbox n’est pas une garantie absolue de sécurité. Des accès trop larges, une mauvaise configuration ou une vulnérabilité de l’environnement peuvent réduire son isolation."
+  },
+  "notion-347": {
+    "explanation": "Une opération idempotente peut être répétée sans multiplier son effet attendu sur l’état du système. Cette propriété aide à gérer les réponses perdues et les nouvelles tentatives ; pour certaines créations, le service utilise une clé qui reconnaît la même intention afin de renvoyer le résultat existant plutôt que produire un doublon.",
+    "example": "Exemple illustratif : après une coupure réseau, un agent renvoie la création d’un ticket avec la même clé d’idempotence. Le service reconnaît la demande et retourne le ticket déjà créé.",
+    "misconception": "Deux requêtes au contenu identique ne représentent pas toujours la même intention. La portée et la durée de conservation des clés d’idempotence dépendent du service."
+  },
+  "notion-348": {
+    "explanation": "Le Workflow State décrit où en est un processus : étapes terminées, données disponibles, erreurs et décisions en attente. L’application le met à jour à mesure que les opérations produisent des résultats ; un état explicite facilite la reprise après interruption et évite de dépendre uniquement d’un récit conversationnel susceptible d’être incomplet.",
+    "example": "Exemple illustratif : pour préparer une inscription, le système enregistre que les informations ont été vérifiées mais que la validation finale reste en attente. Une reprise ne recommence pas les étapes déjà confirmées.",
+    "misconception": "L’état déclaré doit correspondre aux effets réels. Marquer une étape comme terminée avant la confirmation du service externe peut rendre une reprise incohérente."
+  },
+  "notion-349": {
+    "explanation": "Un Rollback restaure un état antérieur lorsqu’une opération ou une séquence d’opérations doit être annulée. Il peut utiliser une transaction, une version sauvegardée ou une action compensatrice ; sa faisabilité dépend des effets produits, car restaurer un fichier local ne retire pas nécessairement un message déjà envoyé à un destinataire externe.",
+    "example": "Exemple illustratif : une mise à jour de catalogue échoue lors de sa validation. Le système restaure la version précédente des fiches et conserve le rapport d’erreur pour examiner les changements proposés.",
+    "misconception": "Revenir à un checkpoint ne défait pas automatiquement les actions externes. Certains effets nécessitent une compensation spécifique, et d’autres ne sont pas réellement réversibles."
+  }
+}

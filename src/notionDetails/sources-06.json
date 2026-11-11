@@ -1,0 +1,101 @@
+{
+  "notion-151": [
+    "https://arxiv.org/abs/2306.01116"
+  ],
+  "notion-152": [
+    "https://arxiv.org/abs/1810.04805"
+  ],
+  "notion-153": [
+    "https://www.deeplearningbook.org/contents/ml.html"
+  ],
+  "notion-154": [
+    "https://scikit-learn.org/stable/modules/clustering.html"
+  ],
+  "notion-155": [
+    "https://spinningup.openai.com/en/latest/spinningup/rl_intro.html"
+  ],
+  "notion-156": [
+    "https://spinningup.openai.com/en/latest/spinningup/rl_intro.html"
+  ],
+  "notion-157": [
+    "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+  ],
+  "notion-158": [
+    "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+  ],
+  "notion-159": [
+    "https://huggingface.co/docs/accelerate/usage_guides/gradient_accumulation"
+  ],
+  "notion-160": [
+    "https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html"
+  ],
+  "notion-162": [
+    "https://www.deeplearningbook.org/contents/optimization.html"
+  ],
+  "notion-163": [
+    "https://huggingface.co/docs/accelerate/usage_guides/gradient_accumulation"
+  ],
+  "notion-164": [
+    "https://docs.pytorch.org/docs/main/optim.html"
+  ],
+  "notion-165": [
+    "https://arxiv.org/abs/1711.05101"
+  ],
+  "notion-167": [
+    "https://huggingface.co/docs/transformers/main_classes/optimizer_schedules"
+  ],
+  "notion-168": [
+    "https://huggingface.co/docs/transformers/main_classes/optimizer_schedules"
+  ],
+  "notion-169": [
+    "https://www.deeplearningbook.org/contents/optimization.html"
+  ],
+  "notion-170": [
+    "https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html"
+  ],
+  "notion-171": [
+    "https://huggingface.co/docs/transformers/perplexity"
+  ],
+  "notion-172": [
+    "https://www.deeplearningbook.org/contents/regularization.html"
+  ],
+  "notion-173": [
+    "https://docs.pytorch.org/docs/stable/generated/torch.nn.Dropout.html"
+  ],
+  "notion-174": [
+    "https://arxiv.org/abs/1711.05101"
+  ],
+  "notion-176": [
+    "https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html"
+  ],
+  "notion-177": [
+    "https://www.deeplearningbook.org/contents/ml.html"
+  ],
+  "notion-178": [
+    "https://scikit-learn.org/stable/modules/cross_validation.html"
+  ],
+  "notion-179": [
+    "https://arxiv.org/abs/2107.06499"
+  ],
+  "notion-180": [
+    "https://arxiv.org/abs/2107.06499"
+  ],
+  "notion-181": [
+    "https://arxiv.org/abs/2306.01116"
+  ],
+  "notion-182": [
+    "https://arxiv.org/abs/2212.10560"
+  ],
+  "notion-183": [
+    "https://arxiv.org/abs/2001.08361"
+  ],
+  "notion-184": [
+    "https://arxiv.org/abs/2203.15556"
+  ],
+  "notion-185": [
+    "https://arxiv.org/abs/2203.15556"
+  ],
+  "notion-186": [
+    "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html"
+  ]
+}

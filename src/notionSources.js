@@ -1,0 +1,20 @@
+import sources01 from './notionDetails/sources-01.json' with {type:'json'};
+import sources02 from './notionDetails/sources-02.json' with {type:'json'};
+import sources03 from './notionDetails/sources-03.json' with {type:'json'};
+import sources04 from './notionDetails/sources-04.json' with {type:'json'};
+import sources05 from './notionDetails/sources-05.json' with {type:'json'};
+import sources06 from './notionDetails/sources-06.json' with {type:'json'};
+import sources07 from './notionDetails/sources-07.json' with {type:'json'};
+import sources08 from './notionDetails/sources-08.json' with {type:'json'};
+import sources09 from './notionDetails/sources-09.json' with {type:'json'};
+import sources10 from './notionDetails/sources-10.json' with {type:'json'};
+import sources11 from './notionDetails/sources-11.json' with {type:'json'};
+import sources12 from './notionDetails/sources-12.json' with {type:'json'};
+import sources13 from './notionDetails/sources-13.json' with {type:'json'};
+import sources14 from './notionDetails/sources-14.json' with {type:'json'};
+import sources15 from './notionDetails/sources-15.json' with {type:'json'};
+import sources16 from './notionDetails/sources-16.json' with {type:'json'};
+import sources17 from './notionDetails/sources-17.json' with {type:'json'};
+import sources18 from './notionDetails/sources-18.json' with {type:'json'};
+
+export const notionContentSources = Object.assign({},sources01,sources02,sources03,sources04,sources05,sources06,sources07,sources08,sources09,sources10,sources11,sources12,sources13,sources14,sources15,sources16,sources17,sources18);

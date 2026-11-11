@@ -1,0 +1,93 @@
+{
+  "notion-36": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Linear.html"
+  ],
+  "notion-37": [
+    "https://www.deeplearningbook.org/contents/mlp.html"
+  ],
+  "notion-38": [
+    "https://huggingface.co/docs/transformers/main_classes/output"
+  ],
+  "notion-39": [
+    "https://arxiv.org/abs/1706.03762",
+    "https://huggingface.co/docs/transformers/main_classes/output"
+  ],
+  "notion-40": [
+    "https://www.deeplearningbook.org/contents/mlp.html"
+  ],
+  "notion-41": [
+    "https://www.deeplearningbook.org/contents/mlp.html"
+  ],
+  "notion-42": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.ReLU.html"
+  ],
+  "notion-43": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.GELU.html"
+  ],
+  "notion-44": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.SiLU.html"
+  ],
+  "notion-45": [
+    "https://arxiv.org/abs/2002.05202"
+  ],
+  "notion-47": [
+    "https://arxiv.org/abs/1512.03385"
+  ],
+  "notion-48": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.LayerNorm.html"
+  ],
+  "notion-49": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.RMSNorm.html"
+  ],
+  "notion-50": [
+    "https://arxiv.org/abs/2002.04745"
+  ],
+  "notion-51": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Softmax.html"
+  ],
+  "notion-52": [
+    "https://huggingface.co/docs/transformers/main_classes/output",
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Softmax.html"
+  ],
+  "notion-53": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Embedding.html"
+  ],
+  "notion-54": [
+    "https://arxiv.org/abs/1706.03762"
+  ],
+  "notion-56": [
+    "https://arxiv.org/abs/2108.12409"
+  ],
+  "notion-57": [
+    "https://arxiv.org/html/2309.00071v3"
+  ],
+  "notion-58": [
+    "https://arxiv.org/abs/1706.03762"
+  ],
+  "notion-59": [
+    "https://docs.pytorch.org/docs/2.15/generated/torch.nn.Linear.html",
+    "https://arxiv.org/abs/1706.03762"
+  ],
+  "notion-61": [
+    "https://arxiv.org/abs/1608.05859"
+  ],
+  "notion-62": [
+    "https://arxiv.org/abs/1608.05859",
+    "https://huggingface.co/docs/transformers/main_classes/output"
+  ],
+  "notion-63": [
+    "https://arxiv.org/abs/2309.08600"
+  ],
+  "notion-64": [
+    "https://arxiv.org/abs/2309.08600"
+  ],
+  "notion-65": [
+    "https://arxiv.org/abs/2209.10652"
+  ],
+  "notion-66": [
+    "https://arxiv.org/abs/2308.10248"
+  ],
+  "notion-67": [
+    "https://arxiv.org/abs/1206.5538"
+  ]
+}

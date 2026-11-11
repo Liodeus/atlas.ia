@@ -14,7 +14,7 @@ const definitions=[
  ['Phi','Famille de Small Language Models de Microsoft, comprenant plusieurs variantes dont certaines visent le raisonnement ou des entrées multimodales.','https://azure.microsoft.com/en-us/products/phi/'],
  ['Granite','Collection de modèles d’IBM comprenant notamment des modèles de langage et des modèles spécialisés pour d’autres tâches.','https://www.ibm.com/granite/docs/'],
  ['Command','Famille de modèles de langage de Cohere. Les variantes documentées peuvent différer par leurs usages, leurs entrées et leurs capacités.','https://docs.cohere.com/docs/models'],
- ['Aya','Famille de modèles multilingues de Cohere For AI, conçue pour élargir la couverture linguistique de l’AI générative. Certaines variantes acceptent des images.','https://docs.cohere.com/docs/models'],
+ ['Aya','Famille de modèles multilingues de Cohere Labs, auparavant Cohere For AI, conçue pour élargir la couverture linguistique de l’AI générative. Certaines variantes acceptent des images.','https://docs.cohere.com/docs/models'],
  ['BGE','Famille de modèles de représentation et de recherche de BAAI. Certaines variantes produisent des Embeddings utiles à la recherche sémantique.','https://huggingface.co/BAAI/bge-m3'],
  ['Whisper','Famille de modèles de reconnaissance et de traitement de la parole d’OpenAI, notamment utilisée pour la transcription et certaines traductions de la parole.','https://github.com/openai/whisper'],
  ['Stable Diffusion','Famille de modèles de Stability AI utilisée pour la génération d’images. Les versions et leurs licences doivent être vérifiées séparément.','https://stability.ai/core-models'],
@@ -90,7 +90,7 @@ export const familyEditorial=[
   sections:[
    {heading:'Génération et couverture linguistique',paragraphs:[
     'Command est une famille de modèles de Cohere comprenant des variantes orientées vers différentes tâches. L’API et la Model Card indiquent les entrées disponibles, le contexte et le statut de chaque version.',
-    'Aya est une famille multilingue de Cohere For AI. Son objectif de couverture linguistique ne garantit pas le même niveau de qualité pour chaque langue : testez les langues et registres importants pour votre usage.'
+    'Aya est une famille multilingue de Cohere Labs, auparavant Cohere For AI. Son objectif de couverture linguistique ne garantit pas le même niveau de qualité pour chaque langue : testez les langues et registres importants pour votre usage.'
    ]},
    {heading:'Recherche et parole demandent des outils adaptés',paragraphs:[
     'BGE comprend notamment des modèles d’Embedding de BAAI. Un modèle BGE peut produire des vecteurs pour la recherche sémantique ; ce rôle diffère de la génération d’une réponse par un LLM.',

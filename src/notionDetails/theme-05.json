@@ -1,0 +1,107 @@
+{
+  "notion-124": {
+    "explanation": "La Tokenization transforme un texte en une suite d’unités puis d’identifiants utilisables par le modèle, selon les règles d’un tokenizer précis. Elle peut inclure une normalisation et des tokens spéciaux ; son résultat détermine notamment la longueur consommée dans le contexte et la manière dont mots, espaces, ponctuation et caractères rares sont représentés.",
+    "example": "Exemple illustratif : avant d’envoyer un document, une application utilise le tokenizer du modèle pour compter ses identifiants, puis vérifie que la consigne et la réponse prévue tiennent aussi dans la fenêtre.",
+    "misconception": "Un token n’est pas toujours un mot : une même expression peut produire des découpages et des nombres de tokens différents selon le tokenizer utilisé."
+  },
+  "notion-125": {
+    "explanation": "La Subword Tokenization utilise des unités intermédiaires entre caractères et mots entiers afin de représenter un vocabulaire ouvert avec une table de taille limitée. Des formes fréquentes peuvent rester en un seul token, tandis que d’autres se décomposent en fragments réutilisables ; la segmentation dépend de l’algorithme et des textes qui ont servi à construire le tokenizer.",
+    "example": "Exemple illustratif : un nom technique absent comme mot entier est décomposé en fragments connus, ce qui permet au modèle de recevoir sa forme écrite sans ajouter immédiatement une nouvelle entrée au vocabulaire.",
+    "misconception": "Les sous-mots ne correspondent pas nécessairement aux racines ou aux syllabes d’une langue : leurs frontières résultent d’un apprentissage statistique et peuvent sembler peu naturelles."
+  },
+  "notion-126": {
+    "explanation": "BPE construit un vocabulaire en fusionnant progressivement des paires d’unités adjacentes fréquentes dans les données d’apprentissage du tokenizer. Les règles apprises servent ensuite à segmenter de nouveaux textes ; les variantes peuvent partir de caractères ou d’octets et ajouter leurs propres étapes de prétraitement, ce qui change le découpage final.",
+    "example": "Exemple illustratif : dans un corpus pédagogique contenant souvent une même terminaison, des fusions successives regroupent ses caractères et créent un fragment qui pourra ensuite être réutilisé dans différents mots.",
+    "misconception": "BPE n’agrandit pas spontanément son vocabulaire à chaque requête : le tokenizer déployé applique les unités et les règles apprises, sauf modification explicite de sa configuration."
+  },
+  "notion-127": {
+    "explanation": "SentencePiece est un outil de construction et d’utilisation de tokenizers qui peut apprendre directement à partir de phrases brutes, sans imposer un découpage préalable en mots. Il prend notamment en charge BPE et Unigram, avec des mécanismes de normalisation et de représentation des espaces ; il faut conserver le modèle de tokenizer correspondant au réseau entraîné.",
+    "example": "Exemple illustratif : pour préparer un corpus multilingue où les espaces ne délimitent pas toujours les mots, une équipe entraîne un tokenizer SentencePiece sur le texte brut et vérifie ses segmentations.",
+    "misconception": "SentencePiece n’est pas un algorithme unique synonyme de BPE : c’est une bibliothèque qui propose plusieurs méthodes, dont les résultats dépendent des réglages retenus."
+  },
+  "notion-128": {
+    "explanation": "Le Vocabulary définit l’ensemble des identifiants que le tokenizer peut produire et que le modèle sait représenter, y compris les éventuels tokens spéciaux. Sa taille influence les tables d’embeddings et les scores de sortie ; un vocabulaire plus large peut raccourcir certaines séquences tout en augmentant ces composants et les besoins d’apprentissage correspondants.",
+    "example": "Exemple illustratif : une équipe compare deux tokenizers sur des documents techniques et mesure la longueur des séquences ainsi que la taille des tables nécessaires, avant de choisir un compromis pour son modèle.",
+    "misconception": "Vocab Size ne mesure pas le nombre de mots ou de concepts connus : une entrée peut être un fragment, un octet ou un marqueur de structure."
+  },
+  "notion-129": {
+    "explanation": "Un Special Token joue un rôle réservé dans le format utilisé par le modèle, par exemple marquer une séparation, une modalité ou une frontière de message. Son identifiant doit être cohérent avec le tokenizer et l’entraînement ; selon l’outil de décodage, ces tokens peuvent être affichés ou retirés du texte présenté à l’utilisateur.",
+    "example": "Exemple illustratif : un modèle multimodal reçoit un marqueur indiquant où se situe une image dans le message, tandis que l’application masque ce marqueur technique dans l’affichage de la conversation.",
+    "misconception": "Ajouter un nom entre chevrons au tokenizer ne lui donne pas automatiquement une fonction comprise par le modèle ; son usage doit être appris ou prévu par le système."
+  },
+  "notion-130": {
+    "explanation": "BOS et EOS signalent des frontières de séquence dans les formats qui les utilisent, et leurs identifiants font partie de la configuration du modèle. Un EOS généré peut déclencher l’arrêt du décodage ; dans les conversations, d’autres marqueurs peuvent aussi distinguer fin de message et fin de tour, selon le template appris.",
+    "example": "Exemple illustratif : lors du branchement d’un modèle local, une équipe contrôle que le tokenizer fournit le marqueur initial attendu et que le générateur reconnaît correctement le marqueur prévu pour terminer une réponse.",
+    "misconception": "Tous les modèles n’utilisent pas les mêmes marqueurs ni les mêmes règles d’ajout ; dupliquer un BOS ou confondre deux types de fin peut perturber la génération."
+  },
+  "notion-131": {
+    "explanation": "Le PAD Token remplit les positions ajoutées pour réunir des séquences de longueurs différentes dans un tableau de taille commune. Ces positions doivent généralement être ignorées par l’attention et par la perte appropriée ; leur placement à gauche ou à droite dépend de l’architecture, du traitement des positions et du moteur de génération utilisé.",
+    "example": "Exemple illustratif : un lot contient une question courte et une question longue ; le système complète la plus courte avec du padding et transmet un masque distinguant ce remplissage du texte réel.",
+    "misconception": "Le padding n’est pas du contenu à apprendre ou à résumer ; utiliser un identifiant PAD sans les masques adaptés peut introduire des calculs et des cibles indésirables."
+  },
+  "notion-132": {
+    "explanation": "Un Chat Template convertit une liste de messages structurés en la séquence exacte attendue par un modèle conversationnel, avec les rôles, séparateurs et marqueurs nécessaires. Ce format fait partie du contrat d’utilisation du modèle ; un template incorrect peut notamment faire poursuivre le message utilisateur au lieu de déclencher une réponse de l’assistant.",
+    "example": "Exemple illustratif : une application conserve ses messages sous forme de rôles et de contenus, puis applique le template fourni avec le modèle avant la tokenisation et le lancement de chaque génération.",
+    "misconception": "Deux modèles issus de la même base peuvent avoir des templates différents ; copier un format de conversation arbitraire peut dégrader le respect des consignes."
+  },
+  "notion-134": {
+    "explanation": "Les Prompt Tokens correspondent aux unités transmises en entrée, tandis que les Completion Tokens désignent celles produites pendant la génération selon la convention du service. Pour estimer un usage, il faut compter le contexte effectivement envoyé, y compris l’historique et la structure des messages, puis vérifier comment le service comptabilise ses éventuelles catégories supplémentaires.",
+    "example": "Exemple illustratif : une interface affiche une courte question, mais la requête contient aussi un document et des échanges précédents ; l’équipe utilise le comptage de la requête complète pour estimer sa consommation.",
+    "misconception": "Le nombre de mots visibles dans la question ou la réponse ne suffit pas à connaître les tokens comptabilisés ; le tokenizer et le format transmis interviennent."
+  },
+  "notion-137": {
+    "explanation": "La Next-Token Prediction apprend une distribution sur le token qui suit un contexte, en comparant les prédictions aux suites présentes dans les données. Pendant la génération, un token est choisi puis ajouté au contexte pour répéter l’opération ; cette mécanique peut soutenir des tâches variées lorsqu’elles sont exprimées sous forme de séquences adaptées.",
+    "example": "Exemple illustratif : un modèle reçoit le début d’une description de produit, calcule plusieurs continuations possibles puis en choisit une, avant de recommencer avec le texte désormais augmenté du token retenu.",
+    "misconception": "Prédire une suite probable ne revient pas à vérifier sa vérité : une formulation fréquente ou plausible peut contenir une information incorrecte pour la situation donnée."
+  },
+  "notion-138": {
+    "explanation": "Une Log Probability exprime le logarithme de la probabilité attribuée à un token dans son contexte. Les logprobs sont pratiques pour additionner les contributions d’une séquence plutôt que multiplier de très petites probabilités ; leur interprétation exige de connaître la tokenisation et de savoir si les scores ont été modifiés par les réglages de génération.",
+    "example": "Exemple illustratif : pour comparer des formulations candidates d’une même étiquette, une équipe additionne les logprobs de leurs tokens et contrôle l’effet de leur longueur avant d’utiliser ces scores pour classer les options.",
+    "misconception": "Une logprob élevée indique une préférence du modèle pour une continuation, pas une probabilité que son contenu soit vrai ou que la réponse soit correctement calibrée."
+  },
+  "notion-140": {
+    "explanation": "Le Top-k Sampling conserve les k tokens les mieux classés à l’étape courante, renormalise leur distribution puis échantillonne parmi eux. Il réduit ainsi la possibilité de choisir des tokens de faible rang, mais utilise un nombre fixe de candidats même lorsque la distribution est très concentrée ou au contraire fortement ambiguë.",
+    "example": "Exemple illustratif : dans une expérience où k vaut cinq, le générateur tire le prochain token uniquement parmi les cinq candidats conservés, puis recalcule entièrement cette sélection à l’étape suivante.",
+    "misconception": "Top-k ne sélectionne pas les k meilleurs textes complets : il filtre les candidats à chaque position et n’assure pas la cohérence de la séquence finale."
+  },
+  "notion-142": {
+    "explanation": "Le Greedy Decoding choisit à chaque étape le token dont le score est le plus élevé après les transformations prévues par le système. Cette stratégie évite le tirage aléatoire, mais n’explore pas d’autres continuations ; un choix localement favorable peut donc conduire à une séquence moins probable ou moins utile qu’une autre trajectoire.",
+    "example": "Exemple illustratif : pour comparer deux versions d’un modèle sur des réponses courtes, une équipe utilise un décodage greedy afin de réduire la variation liée à l’échantillonnage et examine les divergences observées.",
+    "misconception": "Greedy ne garantit ni la meilleure réponse globale ni une reproductibilité absolue entre matériels ; de petites différences numériques peuvent changer un choix entre scores proches."
+  },
+  "notion-143": {
+    "explanation": "Le Beam Search conserve un nombre limité de séquences candidates, développe leurs continuations puis élimine celles dont les scores sont moins favorables. Ce faisceau explore davantage de chemins que greedy, avec des règles de score et d’arrêt qui peuvent corriger certains effets de longueur ; sa taille reste un compromis entre recherche et coût.",
+    "example": "Exemple illustratif : un système de transcription maintient plusieurs débuts de phrase compatibles avec l’audio et les réévalue lorsque les mots suivants apportent de nouveaux indices pour départager ces hypothèses.",
+    "misconception": "Un faisceau plus large ne garantit pas un meilleur texte pour l’utilisateur : maximiser la probabilité du modèle et améliorer la qualité de la tâche sont distincts."
+  },
+  "notion-144": {
+    "explanation": "Une Repetition Penalty modifie les scores de tokens déjà rencontrés afin de décourager leur réutilisation, selon une formule propre au moteur de génération. Elle peut considérer le prompt, la réponse ou un historique défini ; son intensité doit être adaptée, car certaines répétitions sont nécessaires pour conserver les noms, les références et la structure d’un texte.",
+    "example": "Exemple illustratif : après avoir observé une réponse qui répète la même tournure, une équipe ajuste la pénalité puis vérifie qu’un texte technique continue à réutiliser correctement ses termes indispensables.",
+    "misconception": "Une pénalité de répétition ne détecte pas forcément les idées redondantes : elle agit souvent sur des identifiants de tokens et peut pénaliser des fragments utiles."
+  },
+  "notion-145": {
+    "explanation": "Une Frequency Penalty dépend du nombre d’apparitions d’un token, tandis qu’une Presence Penalty dépend de sa présence antérieure dans l’historique considéré. Avec des valeurs positives dans les conventions usuelles, la première accentue progressivement la pénalisation et la seconde applique un effet dès la première occurrence ; leur portée et leurs valeurs autorisées dépendent du service.",
+    "example": "Exemple illustratif : un générateur de descriptions répète souvent le même adjectif ; l’équipe compare une pénalité liée au nombre de répétitions à une pénalité appliquée dès que cet adjectif est apparu.",
+    "misconception": "Ces réglages ne comprennent pas directement la diversité des sujets : ils opèrent sur des tokens, et une forte pénalité peut rendre le texte moins précis."
+  },
+  "notion-146": {
+    "explanation": "Une Stop Sequence définit un motif dont l’apparition demande au moteur d’interrompre la génération. Le système doit reconnaître ce motif même lorsqu’il traverse des frontières de tokens, selon son implémentation ; il faut également vérifier si le texte d’arrêt est inclus dans la sortie et comment cette règle interagit avec les autres limites.",
+    "example": "Exemple illustratif : un outil génère une section délimitée par un marqueur de fin convenu, puis cesse de recevoir du texte lorsque ce marqueur est détecté dans le flux produit.",
+    "misconception": "Une Stop Sequence n’est pas une instruction sémantique fiable : si le motif apparaît dans un exemple ou une citation, il peut interrompre prématurément une réponse valide."
+  },
+  "notion-147": {
+    "explanation": "Le Streaming transmet progressivement les éléments produits par le système pour commencer l’affichage avant la fin de la réponse. Les événements reçus peuvent regrouper des tokens, attendre la formation de mots ou transporter des métadonnées ; le client doit donc reconstruire correctement le texte et distinguer une interruption du signal normal de fin.",
+    "example": "Exemple illustratif : une interface affiche une explication au fil des fragments reçus et garde un indicateur de génération actif jusqu’au message final, plutôt que de considérer chaque fragment comme une réponse complète.",
+    "misconception": "Streaming ne garantit pas un calcul total plus rapide : il réduit surtout l’attente avant les premiers éléments visibles, et un fragment réseau n’équivaut pas forcément à un token."
+  },
+  "notion-148": {
+    "explanation": "Une Seed initialise un générateur pseudo-aléatoire afin de reproduire une suite de tirages dans des conditions contrôlées. La reproductibilité complète exige aussi de stabiliser les entrées, les versions, le matériel et les opérations utilisées ; certaines différences numériques ou d’exécution parallèle peuvent modifier une sortie même lorsque la seed est identique.",
+    "example": "Exemple illustratif : pour comparer deux réglages de génération, une équipe fixe les seeds et conserve les mêmes données, puis enregistre également la version du modèle et l’environnement d’exécution de l’expérience.",
+    "misconception": "Fixer une seed n’est pas une garantie universelle de sortie identique : elle contrôle certains tirages aléatoires, pas toutes les sources de variation du système."
+  },
+  "notion-149": {
+    "explanation": "Le Logit Bias ajoute une modification choisie aux scores de certains identifiants de tokens avant la sélection de sortie. Il permet de favoriser ou de défavoriser des formes précises sans changer les poids du modèle, mais dépend de la tokenisation et de l’ordre d’application des autres filtres ou pénalités du moteur.",
+    "example": "Exemple illustratif : dans une expérimentation de format, une équipe favorise un token séparateur attendu, puis vérifie que ses variantes avec espace et ses différents découpages ne contournent pas le comportement recherché.",
+    "misconception": "Défavoriser un token ne garantit pas l’interdiction d’un concept : celui-ci peut être exprimé avec une autre segmentation, une variante orthographique ou une reformulation."
+  }
+}

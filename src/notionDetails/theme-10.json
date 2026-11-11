@@ -1,0 +1,87 @@
+{
+  "notion-301": {
+    "explanation": "Un System Message fournit un cadre général de comportement dans les interfaces de conversation qui prennent ce rôle en charge. Le rôle est représenté dans le format de messages utilisé par le modèle et sert à distinguer ces instructions des demandes ordinaires ; la répartition entre consignes système et consignes d'application varie selon les fournisseurs et les modèles.",
+    "example": "Exemple illustratif : un assistant documentaire reçoit un cadre général lui demandant de signaler les informations absentes des sources. Les questions des visiteurs sont ensuite transmises dans des messages distincts.",
+    "misconception": "Écrire « system » dans un texte utilisateur ne transforme pas son rôle. Un System Prompt n'est pas non plus une barrière technique garantissant le respect des consignes."
+  },
+  "notion-302": {
+    "explanation": "Un Developer Message porte les instructions de l'application lorsqu'une interface distingue explicitement ce rôle : format attendu, règles de traitement ou conditions d'utilisation des outils. Dans cette hiérarchie, ces consignes sont prioritaires sur les demandes utilisateur en cas de conflit ; elles doivent rester séparées des documents et entrées externes que le modèle reçoit pour travailler.",
+    "example": "Exemple illustratif : une application de classement impose des catégories autorisées dans son Developer Message. Le message utilisateur contient le texte à classer, sans pouvoir redéfinir ces catégories par une consigne contradictoire.",
+    "misconception": "Le rôle developer n'est pas universel et ne remplace pas les contrôles du programme. Une priorité d'instruction ne garantit ni un format valide ni une action autorisée."
+  },
+  "notion-303": {
+    "explanation": "Un User Message apporte la demande courante et les informations fournies pour la traiter, sous le rôle utilisateur du format conversationnel. Il peut contenir du texte ou d'autres contenus selon l'interface ; son interprétation dépend des messages précédents réellement présents et des instructions prioritaires que l'application transmet au modèle pour cette réponse.",
+    "example": "Exemple illustratif : une personne fournit un paragraphe et demande une reformulation plus simple. L'application place cette demande dans un User Message tout en conservant séparément ses règles générales de réponse.",
+    "misconception": "Tout texte présent dans un User Message n'est pas nécessairement une consigne à exécuter. Un document cité peut contenir des instructions qui doivent rester des données à analyser."
+  },
+  "notion-304": {
+    "explanation": "Le Few-Shot Prompting ajoute plusieurs démonstrations d'entrée et de sortie au contexte pour rendre la tâche et le format attendus plus concrets. Le modèle s'appuie sur ces exemples pendant l'Inference sans mise à jour de ses poids ; choisir des cas représentatifs et contrastés aide à montrer les distinctions que la consigne seule explique mal.",
+    "example": "Exemple illustratif : avant de classer un nouveau commentaire, le prompt montre des exemples favorables, défavorables et ambigus avec les catégories attendues. Le modèle applique ensuite le même format au commentaire reçu.",
+    "misconception": "Davantage d'exemples n'assure pas une meilleure réponse. Leur ordre, leurs biais et leur cohérence peuvent orienter excessivement le résultat ou consommer un contexte précieux."
+  },
+  "notion-305": {
+    "explanation": "Le Zero-Shot Prompting demande une tâche sans fournir de démonstration complète de cette tâche dans le prompt. Le modèle utilise la consigne, les informations disponibles et les régularités apprises auparavant ; cette approche convient lorsque le comportement attendu peut être décrit clairement, mais doit être évaluée sur des exemples réels pour repérer les ambiguïtés.",
+    "example": "Exemple illustratif : le prompt demande de résumer une notice en langage courant et précise la longueur souhaitée, sans montrer de résumé modèle. Le système produit directement une proposition à partir du document.",
+    "misconception": "Zero-shot ne signifie pas que le modèle n'a jamais rencontré une tâche semblable pendant son entraînement. Le terme décrit seulement les démonstrations présentes dans le contexte d'utilisation."
+  },
+  "notion-306": {
+    "explanation": "Le One-Shot Prompting fournit une seule démonstration d'entrée et de sortie pour illustrer le comportement attendu avant de présenter le nouveau cas. Cet exemple peut préciser un style, une structure ou une transformation difficile à décrire ; il exerce toutefois une influence importante, puisque le modèle ne voit pas d'autres cas pour distinguer la règle de ses détails particuliers.",
+    "example": "Exemple illustratif : une application montre comment convertir une description d'événement en fiche avec titre, lieu et date. Elle présente ensuite une autre description à convertir selon cette structure.",
+    "misconception": "Un exemple unique peut être imité trop littéralement. Il ne montre pas nécessairement comment traiter les champs manquants, les exceptions ou les formulations inhabituelles."
+  },
+  "notion-307": {
+    "explanation": "L'In-Context Learning désigne l'adaptation du comportement d'un modèle à partir des informations et démonstrations présentes dans son contexte, pendant l'Inference. Le modèle exploite les relations et conventions suggérées par ces éléments sans entraîner ses paramètres ; les effets dépendent du contexte effectivement transmis et peuvent disparaître lorsque les exemples ne sont plus disponibles.",
+    "example": "Exemple illustratif : un prompt définit des abréviations propres à une équipe et montre comment les développer. Le modèle utilise ces conventions pour réécrire un message fourni dans la même requête.",
+    "misconception": "L'ICL n'inscrit pas automatiquement ces conventions dans les poids ni dans une mémoire permanente. Une réussite locale ne prouve pas une acquisition durable de la compétence."
+  },
+  "notion-309": {
+    "explanation": "La Self-Consistency génère plusieurs tentatives de résolution et agrège leurs réponses finales, souvent en retenant la plus fréquente après normalisation. Elle cherche à réduire la dépendance à un chemin unique en exploitant une diversité de propositions ; son coût augmente avec le nombre de tentatives et son intérêt dépend de leur diversité et de la facilité à comparer les réponses.",
+    "example": "Exemple illustratif : un système résout plusieurs fois un exercice de calcul avec des tirages différents. Il rapproche les résultats finaux équivalents, puis sélectionne celui qui recueille le plus de soutien.",
+    "misconception": "Une majorité de réponses identiques peut partager la même erreur. La Self-Consistency n'est pas une vérification externe et convient moins directement aux réponses ouvertes difficiles à regrouper."
+  },
+  "notion-310": {
+    "explanation": "Tree of Thoughts organise une recherche parmi plusieurs étapes de résolution candidates, représentées comme des branches plutôt que comme une seule continuation. Un mécanisme évalue les états intermédiaires, développe les branches prometteuses et peut revenir en arrière ; cette exploration explicite convient aux tâches où les premiers choix influencent fortement les possibilités suivantes.",
+    "example": "Exemple illustratif : pour résoudre une petite grille de mots, un système propose plusieurs remplissages partiels, vérifie leurs contraintes puis abandonne les branches incompatibles avant de poursuivre les autres.",
+    "misconception": "Demander au modèle de « réfléchir en arbre » ne crée pas à lui seul une recherche ToT. L'exploration et l'évaluation doivent être organisées, et peuvent rester coûteuses ou erronées."
+  },
+  "notion-311": {
+    "explanation": "Le Prompt Chaining décompose une tâche en une suite d'appels dont les sorties alimentent les étapes suivantes. Chaque appel reçoit une consigne plus ciblée et des contrôles intermédiaires peuvent interrompre ou corriger le parcours ; cette organisation aide lorsque le travail se décompose clairement, au prix d'appels supplémentaires et d'une propagation possible des erreurs.",
+    "example": "Exemple illustratif : un premier appel extrait les faits d'une notice, un contrôle vérifie les champs requis, puis un second appel rédige une fiche destinée aux débutants à partir de ces faits.",
+    "misconception": "Une chaîne plus longue n'est pas automatiquement plus fiable. Si une étape invente une information, les suivantes peuvent la reprendre comme une donnée établie."
+  },
+  "notion-313": {
+    "explanation": "Un JSON Schema décrit les contraintes qu'une valeur JSON doit respecter, comme les types des champs, les propriétés obligatoires ou les valeurs autorisées. Il permet de valider un objet et peut aussi guider certains moteurs de génération ; les règles exprimables dépendent du dialecte et du sous-ensemble effectivement pris en charge par l'outil utilisé.",
+    "example": "Exemple illustratif : une extraction doit produire un titre textuel, une liste de catégories autorisées et une date facultative. Le programme valide l'objet reçu selon ce schéma avant de l'afficher.",
+    "misconception": "Un JSON conforme au schéma peut contenir des informations fausses. Le schéma contrôle une structure et certaines contraintes de valeurs, pas leur correspondance avec la source."
+  },
+  "notion-314": {
+    "explanation": "Le Constrained Decoding restreint les tokens possibles pendant la génération afin de respecter des contraintes explicites, comme une liste de choix, une expression régulière ou une structure. Le moteur suit l'état de la sortie et écarte les continuations incompatibles ; cette contrainte agit sur le processus de génération, au-delà d'une simple instruction rédigée dans le prompt.",
+    "example": "Exemple illustratif : un classifieur ne peut produire que les noms de catégories autorisés. À chaque étape, le moteur interdit les tokens qui empêcheraient de terminer avec l'une de ces valeurs.",
+    "misconception": "Une sortie autorisée peut être factuellement incorrecte. La garantie dépend aussi des contraintes prises en charge et d'une génération menée à terme, sans interruption ni troncature."
+  },
+  "notion-315": {
+    "explanation": "La Grammar-Constrained Generation utilise une grammaire formelle pour déterminer quelles suites de caractères ou de tokens sont admissibles. Le moteur conserve un état d'analyse et masque les continuations impossibles, ce qui convient à des formats structurés ou des langages restreints ; la grammaire doit être compatible avec la tokenisation et suffisamment précise pour exprimer le format voulu.",
+    "example": "Exemple illustratif : un outil attend une petite expression composée d'opérateurs et de nombres entre parenthèses. Une grammaire empêche le modèle d'ajouter un commentaire ou de produire une expression mal formée.",
+    "misconception": "Une grammaire vérifie principalement la forme. Une expression syntaxiquement valide peut encore contenir une référence inexistante ou violer une règle métier non exprimée."
+  },
+  "notion-316": {
+    "explanation": "Un Tool Schema décrit le contrat d'un outil : son nom, son rôle et les arguments attendus, avec leurs types et contraintes, parfois aussi le format du résultat. Cette description aide le modèle à proposer un appel compréhensible par le programme ; l'application doit ensuite valider les arguments, appliquer les droits et exécuter l'outil pour obtenir un résultat réel.",
+    "example": "Exemple illustratif : un outil de recherche de notices expose un titre facultatif et une langue parmi des valeurs définies. Le modèle prépare les arguments, puis l'application les valide avant d'interroger la base.",
+    "misconception": "Un appel conforme au schéma n'est pas automatiquement pertinent ni autorisé. Le schéma ne remplace pas l'authentification, les contrôles métier ou la gestion des erreurs d'exécution."
+  },
+  "notion-317": {
+    "explanation": "Le Context Engineering organise l'ensemble des informations disponibles pour une génération : instructions, historique, documents, résultats d'outils et état du travail en cours. Il consiste à sélectionner, structurer et actualiser ce contexte dans un budget limité ; la pertinence, la provenance et la séparation des rôles comptent autant que la formulation d'une consigne isolée.",
+    "example": "Exemple illustratif : avant de répondre sur un dossier, une application rassemble les passages utiles, les décisions déjà prises et la question actuelle. Elle retire les résultats périmés et conserve leurs références de provenance.",
+    "misconception": "Remplir la Context Window n'est pas un objectif en soi. Des informations redondantes, contradictoires ou mal placées peuvent rendre la réponse moins fiable malgré un contexte plus riche."
+  },
+  "notion-318": {
+    "explanation": "Un Prompt Template est un modèle de consigne ou de conversation dont certaines parties sont remplacées par des variables avant l'appel au modèle. Il permet de réutiliser une structure cohérente tout en changeant le document, la tâche ou la langue ; versionner le template et contrôler ses entrées aide à comprendre les effets des modifications.",
+    "example": "Exemple illustratif : une fiche de lecture utilise un même template avec des emplacements pour le texte, le public et la longueur souhaitée. L'application remplit ces champs pour chaque document reçu.",
+    "misconception": "Un template ne neutralise pas automatiquement les instructions contenues dans ses variables. Les données externes doivent garder leur rôle de contenu à traiter et être délimitées clairement."
+  },
+  "notion-319": {
+    "explanation": "Un Guardrail est un contrôle ajouté au système pour détecter ou empêcher certains comportements, avant un appel, pendant une action ou après la génération. Il peut prendre la forme de règles déterministes, de validateurs, de classifieurs ou de décisions humaines ; son effet dépend de ce qu'il vérifie et de l'action prévue en cas d'échec.",
+    "example": "Exemple illustratif : avant d'enregistrer une fiche générée, un validateur vérifie ses champs et ses références. Une erreur bloque l'enregistrement et déclenche une correction ciblée ou une revue humaine.",
+    "misconception": "Un Guardrail n'est pas une garantie générale de sûreté. Il peut laisser passer des erreurs ou bloquer des cas légitimes, et doit être évalué dans le parcours réel."
+  }
+}

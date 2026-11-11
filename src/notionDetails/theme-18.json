@@ -1,0 +1,107 @@
+{
+  "notion-600": {
+    "explanation": "GPT désigne une famille de modèles d’OpenAI utilisée notamment pour traiter et générer du contenu. Une intégration sélectionne un modèle précis, avec ses modalités d’entrée, ses limites et ses réglages ; l’application peut ensuite lui associer des documents ou des outils pour répondre à une tâche qui dépasse la simple génération de texte.",
+    "example": "Exemple illustratif : Un outil de rédaction transmet un brouillon à un modèle GPT et demande une version plus courte. L’équipe conserve un jeu de textes de référence pour vérifier le résultat lorsqu’elle change de modèle.",
+    "misconception": "GPT n’est pas synonyme de ChatGPT, qui est un produit. Les fonctions présentes dans une interface ne sont pas automatiquement disponibles dans chaque modèle ou appel API."
+  },
+  "notion-601": {
+    "explanation": "gpt-oss est une famille de modèles d’OpenAI dont les poids sont distribués pour une exécution sur une infrastructure choisie par l’utilisateur. Leur utilisation demande un moteur compatible et le respect du format d’échange attendu ; le déploiement doit dimensionner la mémoire et configurer l’environnement qui exécute éventuellement les appels d’outils proposés par le modèle.",
+    "example": "Exemple illustratif : Une équipe déploie une variante gpt-oss sur son serveur et lui fournit un outil de calcul. Le modèle formule la demande, puis l’application vérifie les arguments et exécute le calcul avant de lui rendre le résultat.",
+    "misconception": "Disposer des poids ne fournit pas automatiquement un assistant complet. Le moteur, les outils, le contrôle des accès et l’interface restent des composants à installer ou à développer."
+  },
+  "notion-602": {
+    "explanation": "Claude est une famille de modèles d’Anthropic comprenant plusieurs gammes et générations. Selon la version, les modèles peuvent interpréter du texte ou des images et participer à des tâches avec outils ; une application doit sélectionner un identifiant précis et évaluer le compromis entre qualité obtenue, temps de réponse et coût sur ses propres demandes.",
+    "example": "Exemple illustratif : Un assistant de support soumet un échange client à une variante Claude pour proposer une réponse. L’équipe évalue séparément les messages courts et les dossiers longs, car leurs contraintes de délai et de lecture diffèrent.",
+    "misconception": "Le nom Claude peut aussi désigner une application. Un outil de recherche ou un accès aux fichiers dépend de l’environnement connecté au modèle, pas simplement de sa famille."
+  },
+  "notion-603": {
+    "explanation": "Gemini regroupe des modèles de Google dont certaines variantes acceptent plusieurs types d’entrées ou produisent plusieurs types de sorties. Pour construire une application, il faut préciser la variante et la tâche, car traiter une image, générer une image ou dialoguer avec de l’audio sont des capacités distinctes exposées selon le modèle et le service.",
+    "example": "Exemple illustratif : Une application transmet une photo de graphique et une question à une variante capable de lire des images. Elle confronte ensuite la réponse aux valeurs visibles pour vérifier que les axes et les unités ont été interprétés correctement.",
+    "misconception": "Gemini désigne aussi des produits destinés aux utilisateurs. Une fonction visible dans l’application Gemini ne décrit pas à elle seule les modalités de chaque modèle de la famille."
+  },
+  "notion-604": {
+    "explanation": "Gemma est une famille de modèles de Google dont des variantes sont distribuées avec leurs poids. Elle permet de choisir des tailles et des spécialisations adaptées à différents environnements, avec des versions préentraînées ou adaptées aux consignes ; les modalités prises en charge et les ressources nécessaires doivent être établies pour la variante effectivement téléchargée.",
+    "example": "Exemple illustratif : Pour un prototype installé sur un ordinateur, une équipe sélectionne une variante Gemma instruct compatible avec sa mémoire. Elle vérifie la reformulation de notes françaises avant d’intégrer le modèle à l’interface.",
+    "misconception": "Gemma n’est pas une simple copie locale de l’application Gemini. Le lien entre les recherches ne rend pas les capacités, les outils ou les conditions d’accès interchangeables."
+  },
+  "notion-605": {
+    "explanation": "Llama est une famille de modèles de Meta proposée en plusieurs générations, tailles et variantes, dont certaines acceptent des images. Des poids sont distribués sous les conditions propres aux versions ; pour les exploiter, il faut associer les bons fichiers, le tokenizer, le format de conversation et un moteur compatible avec l’architecture retenue.",
+    "example": "Exemple illustratif : Une équipe charge une variante Llama adaptée aux consignes dans un service interne. Elle utilise le format de conversation prévu par cette version et teste la différence avec une entrée simplement concaténée en texte brut.",
+    "misconception": "Llama est une famille de modèles, tandis que llama.cpp est un moteur d’inférence distinct. Un format de poids ou un moteur portant un nom proche ne garantit pas la compatibilité."
+  },
+  "notion-606": {
+    "explanation": "Qwen est une famille développée par l’équipe Qwen d’Alibaba, avec des modèles généralistes et des variantes spécialisées pour le code ou différentes modalités. La spécialisation indique un objectif d’entraînement, mais l’identifiant complet reste nécessaire pour connaître les fonctions disponibles ; le choix dépend ensuite des entrées réelles, des langues et de l’environnement d’exécution visé.",
+    "example": "Exemple illustratif : Un outil de lecture de documents compare une variante Qwen multimodale avec une chaîne qui extrait d’abord le texte. Les essais incluent des tableaux et des pages scannées pour évaluer les erreurs propres à chaque solution.",
+    "misconception": "Le suffixe d’une variante n’est pas une garantie universelle de qualité. Une capacité de code ou de vision doit être vérifiée sur les tâches et formats réellement utilisés."
+  },
+  "notion-607": {
+    "explanation": "DeepSeek désigne plusieurs modèles publiés par l’organisation du même nom, avec des objectifs et des architectures qui varient selon la version. Certains modèles utilisent des experts ou privilégient le raisonnement ; leur comparaison doit distinguer le modèle d’origine, ses adaptations et les versions distillées, qui peuvent avoir d’autres architectures et besoins matériels.",
+    "example": "Exemple illustratif : Une équipe étudie un modèle DeepSeek distribué avec ses poids pour une tâche de programmation. Elle relève les paramètres totaux et actifs séparément, puis estime la mémoire nécessaire au déploiement avant de mesurer le débit.",
+    "misconception": "Un petit modèle distillé portant une référence à DeepSeek n’est pas nécessairement une version réduite de la même architecture. Son modèle de base et sa méthode d’adaptation comptent."
+  },
+  "notion-608": {
+    "explanation": "Mistral est le nom de familles de modèles de Mistral AI et apparaît dans un catalogue qui comprend des modèles généralistes et spécialisés. Pour choisir un modèle, on distingue la génération de texte, la lecture de documents, le code ou l’audio ; les entrées, la distribution des poids et les conditions diffèrent selon la référence choisie.",
+    "example": "Exemple illustratif : Une application utilise un modèle spécialisé pour extraire le texte d’une facture, puis un modèle de langage pour reformuler les informations retenues. Chaque étape est évaluée séparément afin de localiser les erreurs.",
+    "misconception": "Mistral AI est l’organisation, et son catalogue peut aussi exposer des modèles tiers. La présence dans un service ne prouve ni une origine commune ni une licence identique."
+  },
+  "notion-609": {
+    "explanation": "Mixtral est une série de modèles de Mistral AI reposant sur un mélange d’experts. Un routeur choisit une partie des réseaux experts pour traiter chaque token, ce qui sépare le nombre total de paramètres du nombre mobilisé par ce calcul ; le service doit néanmoins gérer la mémoire et les transferts liés à l’ensemble des poids nécessaires.",
+    "example": "Exemple illustratif : Pour déployer un Mixtral, une équipe ne multiplie pas seulement les paramètres actifs par leur taille en mémoire. Elle tient compte de tous les poids chargés et du cache des conversations concurrentes.",
+    "misconception": "Les experts ne correspondent pas automatiquement à des métiers ou à des langues nommés. Mixtral ne consiste pas à consulter plusieurs chatbots indépendants puis à faire voter leurs réponses."
+  },
+  "notion-610": {
+    "explanation": "Phi est une famille de modèles de Microsoft mettant notamment l’accent sur des modèles de langage de taille relativement réduite. Elle comprend des variantes aux objectifs différents, dont certaines traitent des entrées multimodales ou le raisonnement ; le qualificatif de petit modèle décrit une taille relative et ne dispense pas de mesurer la mémoire et la qualité pour l’usage envisagé.",
+    "example": "Exemple illustratif : Un prototype utilise une variante Phi pour classer des demandes simples sur une machine limitée. Les cas difficiles sont évalués séparément pour déterminer si cette configuration convient au périmètre prévu.",
+    "misconception": "Small Language Model ne signifie ni fonctionnement garanti sur tout téléphone ni qualité identique à un grand modèle. Le matériel, la variante et la tâche déterminent le résultat."
+  },
+  "notion-611": {
+    "explanation": "Granite est une collection de modèles d’IBM comprenant des modèles de langage et des modèles spécialisés. Dans ses variantes de langage, on trouve notamment des versions préentraînées et adaptées aux consignes, avec des architectures différentes selon la génération ; les usages d’entreprise mis en avant doivent être confrontés aux exigences concrètes de données, de format et d’exploitation.",
+    "example": "Exemple illustratif : Une équipe évalue une variante Granite pour produire une réponse structurée à partir d’un document interne. Elle vérifie à la fois le respect du format demandé et la fidélité des champs au document.",
+    "misconception": "L’orientation entreprise ne garantit pas automatiquement qu’un modèle respecte toutes les règles d’une organisation. Les contrôles d’accès, la validation et l’hébergement restent à configurer."
+  },
+  "notion-612": {
+    "explanation": "Command est une famille de modèles de langage de Cohere, avec des variantes adaptées à des tâches de conversation et à des applications utilisant des documents ou des outils. Dans une chaîne de recherche documentaire, le modèle peut générer une réponse à partir des passages transmis ; la récupération des documents et la vérification des citations restent des étapes distinctes.",
+    "example": "Exemple illustratif : Un assistant reçoit des passages d’une notice et les transmet à une variante Command compatible avec ce fonctionnement. L’équipe contrôle ensuite que chaque citation soutient réellement la phrase à laquelle elle est associée.",
+    "misconception": "Command ne remplace pas automatiquement les modèles Embed ou Rerank de Cohere. Générer une réponse, représenter une requête et reclasser des documents sont des fonctions différentes."
+  },
+  "notion-613": {
+    "explanation": "Aya est une famille de modèles multilingues de Cohere Labs visant une couverture de plusieurs langues dans l’IA générative. Les variantes peuvent différer par leur taille, leurs langues et leurs modalités, notamment l’acceptation d’images ; une évaluation pertinente sépare les langues et les usages plutôt que de résumer toute la famille par un score unique.",
+    "example": "Exemple illustratif : Une association teste une variante Aya pour reformuler des informations dans plusieurs langues. Des lecteurs compétents vérifient pour chacune la conservation du sens et la manière dont les expressions locales sont traitées.",
+    "misconception": "Multilingue ne signifie pas qualité uniforme dans toutes les langues ou tous les dialectes. Une traduction fluide peut aussi modifier une nuance importante du texte d’origine."
+  },
+  "notion-614": {
+    "explanation": "BGE regroupe des modèles de BAAI utilisés pour représenter des textes et améliorer la recherche. Selon la variante, le modèle produit des représentations denses, des signaux de recherche sparse ou des représentations multiples ; dans une chaîne documentaire, ces sorties servent à comparer des requêtes et des passages avant l’éventuelle génération d’une réponse.",
+    "example": "Exemple illustratif : Un moteur encode une question et les passages d’un manuel avec une variante BGE adaptée. Il retrouve des passages proches, puis les transmet à un modèle génératif qui rédige une réponse à partir de ces éléments.",
+    "misconception": "Un modèle d’embeddings BGE n’est pas un chatbot. Ses vecteurs facilitent la recherche sans garantir que le passage trouvé soit exact ou suffisant pour répondre."
+  },
+  "notion-615": {
+    "explanation": "Whisper est une famille de modèles d’OpenAI dédiée à la reconnaissance de la parole, notamment pour transformer un enregistrement en texte. Les modèles et les modes d’utilisation proposent différentes possibilités de transcription ou de traduction ; la qualité dépend entre autres de la langue, du bruit et du contenu audio, qui doivent être évalués sur des exemples représentatifs.",
+    "example": "Exemple illustratif : Une équipe produit une première transcription d’une interview avec Whisper. Elle réécoute les noms propres, les passages peu audibles et les chiffres avant d’utiliser ce texte pour rédiger un compte rendu.",
+    "misconception": "Transcrire la parole ne consiste pas à en certifier le contenu ni à reconnaître automatiquement chaque personne. Whisper n’est pas non plus un modèle de synthèse vocale."
+  },
+  "notion-616": {
+    "explanation": "Stable Diffusion est une famille de modèles de génération d’images liée à Stability AI. Un pipeline transforme notamment une consigne et un état initial en image à travers des étapes de génération ; les versions diffèrent par leur architecture, leurs formats et les contrôles proposés, de sorte que les composants et réglages doivent correspondre au modèle choisi.",
+    "example": "Exemple illustratif : Une graphiste génère plusieurs pistes d’illustration avec une version précise de Stable Diffusion. Elle conserve la consigne, la graine et les réglages du pipeline pour comparer les modifications d’une proposition à l’autre.",
+    "misconception": "Les poids ou adaptateurs prévus pour une version ne sont pas forcément compatibles avec une autre. Le nom de famille ne suffit pas non plus à déterminer les droits d’utilisation."
+  },
+  "notion-617": {
+    "explanation": "FLUX regroupe des modèles de Black Forest Labs, notamment pour créer et modifier des images. La tâche supportée dépend de la génération et de la variante : certaines reçoivent des références visuelles ou une image à transformer, avec des conditions d’accès propres ; il faut donc choisir à la fois une capacité et une distribution adaptées au projet.",
+    "example": "Exemple illustratif : Une équipe transmet une image de référence et une consigne de changement d’arrière-plan à une variante FLUX conçue pour l’édition. Elle compare les résultats pour vérifier que le sujet principal reste cohérent.",
+    "misconception": "Les suffixes de variantes ne correspondent pas tous aux mêmes droits ni au même accès aux poids. Une capacité d’édition ne doit pas être déduite d’un simple nom de famille."
+  },
+  "notion-618": {
+    "explanation": "Kimi est une famille de modèles de Moonshot AI dont certaines variantes sont conçues pour des tâches de langage et des parcours avec outils. Ces modèles peuvent proposer des étapes ou des appels, mais c’est l’application qui gère leur exécution et leur contexte ; les versions peuvent aussi différer par leurs modalités et leur architecture.",
+    "example": "Exemple illustratif : Un assistant utilisant une variante Kimi adaptée aux outils recherche une information dans un catalogue, puis s’appuie sur le résultat pour répondre. Le service enregistre l’appel et limite les opérations disponibles à ce besoin.",
+    "misconception": "Un modèle évalué sur des tâches agentiques n’est pas un agent opérationnel à lui seul. Les outils, les permissions, la gestion d’état et les critères d’arrêt viennent de l’environnement."
+  },
+  "notion-619": {
+    "explanation": "GLM désigne une famille de modèles associée à Z.ai, dont les générations et variantes évoluent en architecture, en post-entraînement et en capacités. Pour les intégrer, on identifie la version complète et les fonctionnalités réellement exposées, notamment pour le code ou les outils ; un résultat obtenu avec une version ne décrit pas automatiquement toute la famille.",
+    "example": "Exemple illustratif : Une équipe compare deux versions GLM sur un ensemble de corrections de programmes. Elle utilise les mêmes dépôts et tests, puis examine les modifications produites et le nombre d’étapes nécessaires pour résoudre chaque cas.",
+    "misconception": "Un changement de version peut venir du post-entraînement sans nouvelle architecture, ou s’accompagner d’une architecture différente. Le numéro seul ne permet pas de déduire ces changements."
+  },
+  "notion-620": {
+    "explanation": "MiniMax-M est une série de modèles de langage de MiniMax comprenant des variantes orientées vers le code et les parcours avec outils. Certaines reposent sur des experts, ce qui impose de distinguer paramètres actifs et paramètres totaux ; pour un usage agentique, la qualité doit être mesurée sur les tâches achevées et les actions effectivement exécutées par l’application.",
+    "example": "Exemple illustratif : Un environnement de développement utilise une variante MiniMax-M pour proposer une modification puis demander l’exécution des tests disponibles. Il conserve les résultats et les différences de code afin qu’un humain puisse vérifier la correction.",
+    "misconception": "La capacité à produire des appels d’outils ne garantit pas que le programme final soit correct. Un résultat de benchmark dépend aussi des outils et du protocole d’évaluation."
+  }
+}

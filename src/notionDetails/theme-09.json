@@ -1,0 +1,152 @@
+{
+  "notion-262": {
+    "explanation": "Le Retrieval sélectionne dans une collection les documents ou passages susceptibles de répondre à une requête. Il peut s'appuyer sur des correspondances lexicales, des vecteurs ou une combinaison de méthodes ; dans un système RAG, cette étape détermine les éléments accessibles au générateur, avant une éventuelle réorganisation ou réduction des résultats.",
+    "example": "Exemple illustratif : à une question sur l'entretien d'un appareil, le moteur retrouve des passages de sa notice et de sa fiche technique. Ces extraits sont ensuite fournis au modèle qui rédige la réponse.",
+    "misconception": "Retrouver un passage proche de la question ne prouve pas qu'il contient la réponse. Une recherche peut manquer une source utile ou remonter un document obsolète."
+  },
+  "notion-264": {
+    "explanation": "L'Embedding Space est l'espace numérique dans lequel un modèle place les représentations des textes, images ou autres objets. Les distances ou similarités y deviennent exploitables parce que l'apprentissage organise certaines relations ; la signification de la proximité dépend du modèle, de son objectif et du traitement appliqué aux entrées, pas seulement du nombre de dimensions.",
+    "example": "Exemple illustratif : un encodeur place des demandes de retour produit près de descriptions de procédures associées. Une requête est encodée dans cet espace pour chercher les documents les plus proches.",
+    "misconception": "Deux vecteurs de même dimension ne sont pas forcément comparables. Des modèles différents peuvent organiser leurs espaces de façon incompatible, même pour les mêmes textes."
+  },
+  "notion-266": {
+    "explanation": "La Semantic Search recherche des contenus selon une proximité de sens estimée, souvent en comparant les Embeddings de la requête et des documents. Elle peut relier des formulations qui partagent peu de mots ; la pertinence dépend néanmoins de l'entraînement de l'encodeur, du domaine et du type de relation recherché entre question et passage.",
+    "example": "Exemple illustratif : une personne cherche « mon colis n'est pas arrivé ». La recherche peut retrouver une page intitulée « suivi des livraisons en retard », malgré une formulation différente.",
+    "misconception": "La proximité sémantique ne garantit ni une réponse exacte ni une bonne correspondance des références. Pour des codes produits ou des noms précis, la recherche lexicale reste souvent complémentaire."
+  },
+  "notion-267": {
+    "explanation": "La Keyword Search exploite les mots ou termes présents dans la requête et les documents, généralement au moyen d'un index inversé. Les traitements linguistiques peuvent normaliser la casse, ramener des variantes à une forme commune ou appliquer des synonymes ; cette recherche est particulièrement utile lorsque des noms, expressions ou identifiants exacts portent l'information recherchée.",
+    "example": "Exemple illustratif : un technicien recherche une référence de pièce accompagnée du mot « montage ». Le moteur retrouve les notices contenant cette référence et classe les passages selon leurs correspondances lexicales.",
+    "misconception": "Recherche lexicale ne signifie pas simple comparaison brute de chaînes. Ses résultats dépendent des analyseurs, des champs indexés et des règles de correspondance choisies."
+  },
+  "notion-268": {
+    "explanation": "BM25 attribue un score aux documents à partir des termes de la requête, en combinant leur rareté dans la collection, leur fréquence dans le document et une normalisation de longueur. La contribution des répétitions finit par saturer, afin qu'un mot répété ne domine pas indéfiniment ; les paramètres règlent notamment cette saturation et l'effet de la longueur.",
+    "example": "Exemple illustratif : une notice courte mentionnant précisément une référence rare peut être mieux classée qu'un catalogue très long où cette référence apparaît parmi de nombreux autres produits.",
+    "misconception": "Un score BM25 n'est pas une probabilité de pertinence. Il dépend de la collection et de l'analyse des termes, et ne se compare pas directement à une similarité vectorielle."
+  },
+  "notion-269": {
+    "explanation": "RRF fusionne plusieurs listes de résultats en attribuant à chaque document une contribution fondée sur son rang dans chacune d'elles. Les contributions décroissent avec la position et sont additionnées, ce qui valorise les documents bien placés par plusieurs recherches ; cette approche évite de comparer directement des scores dont les échelles sont différentes.",
+    "example": "Exemple illustratif : une recherche BM25 et une recherche vectorielle retournent chacune des passages. RRF combine leurs positions pour construire une liste commune, puis le système peut appliquer un reranker.",
+    "misconception": "RRF n'étalonne pas les scores de départ en probabilités comparables. La profondeur des listes et la constante de rang influencent le classement obtenu."
+  },
+  "notion-270": {
+    "explanation": "MMR construit une sélection qui équilibre pertinence pour la requête et différence par rapport aux résultats déjà retenus. À chaque étape, la similarité avec les passages sélectionnés pénalise les candidats redondants ; un coefficient règle le compromis, ce qui aide à couvrir plusieurs aspects d'une question dans un budget de contexte limité.",
+    "example": "Exemple illustratif : une recherche sur un musée retourne de nombreux textes sur les horaires et quelques passages sur l'accès. MMR peut conserver des informations utiles sur les deux aspects au lieu d'accumuler des répétitions.",
+    "misconception": "La diversité mesurée n'est pas une garantie d'exhaustivité ni d'exactitude. Un réglage trop favorable à la nouveauté peut sélectionner des passages moins pertinents."
+  },
+  "notion-272": {
+    "explanation": "La Cosine Similarity compare l'orientation de deux vecteurs en divisant leur produit scalaire par le produit de leurs normes. Elle neutralise ainsi leur amplitude et fournit un score plus élevé lorsque leurs directions se ressemblent ; en recherche vectorielle, cette mesure est pertinente si le modèle a organisé ses représentations pour ce type de comparaison.",
+    "example": "Exemple illustratif : les Embeddings d'une question et de plusieurs notices sont comparés par cosinus. Le moteur classe les notices dont les directions sont les plus proches de celle de la question.",
+    "misconception": "Un cosinus élevé ne démontre pas une équivalence logique. Deux phrases qui se contredisent peuvent partager beaucoup de contexte sémantique et obtenir des représentations proches."
+  },
+  "notion-273": {
+    "explanation": "Le Dot Product multiplie les composantes correspondantes de deux vecteurs puis additionne les résultats pour obtenir un score. Contrairement au cosinus, il dépend aussi de l'amplitude des vecteurs ; il devient équivalent à la Cosine Similarity lorsque les deux vecteurs sont normalisés à une norme unitaire, ce qui doit être cohérent avec l'entraînement de l'encodeur.",
+    "example": "Exemple illustratif : un moteur entraîné pour le produit scalaire compare le vecteur d'une recherche aux vecteurs des documents. Il conserve les scores les plus élevés selon cette métrique précise.",
+    "misconception": "Normaliser automatiquement des vecteurs peut changer un classement prévu pour le Dot Product. La norme peut porter une information que l'entraînement a rendue utile."
+  },
+  "notion-274": {
+    "explanation": "La Nearest Neighbor Search recherche les vecteurs les plus proches d'une requête selon une mesure définie, et k précise combien de voisins retourner. Une recherche exhaustive examine toute la collection et fournit une référence utile ; des index approximatifs évitent une partie de ces comparaisons afin de réduire le temps ou les ressources nécessaires.",
+    "example": "Exemple illustratif : une collection de notices est représentée par des vecteurs. Pour une question, le moteur retourne les voisins les plus proches, puis l'application examine les passages associés.",
+    "misconception": "Les voisins les plus proches ne sont pas forcément pertinents en valeur absolue. Même une recherche exacte retournera des voisins dans une collection qui ne contient aucune réponse."
+  },
+  "notion-276": {
+    "explanation": "HNSW organise les vecteurs en un graphe de voisinage à plusieurs niveaux pour accélérer la recherche approximative. Les niveaux supérieurs permettent des déplacements grossiers, puis la recherche explore plus finement les voisins dans les niveaux détaillés ; le nombre de connexions et l'effort d'exploration règlent le compromis entre mémoire, vitesse et rappel.",
+    "example": "Exemple illustratif : dans un catalogue d'Embeddings, la recherche commence par quelques points du graphe, se rapproche de la zone pertinente, puis explore davantage de candidats autour de cette zone.",
+    "misconception": "HNSW ne garantit pas de retrouver tous les voisins exacts avec n'importe quel réglage. Un bon rappel exige une construction et une exploration adaptées aux données."
+  },
+  "notion-277": {
+    "explanation": "Un index IVF partitionne l'espace vectoriel en cellules et associe les vecteurs à des listes correspondant à ces régions. Lors d'une requête, seules certaines listes proches sont explorées, ce qui réduit les comparaisons ; le nombre de listes visitées règle le compromis de recherche, tandis qu'une compression supplémentaire peut éventuellement réduire le stockage.",
+    "example": "Exemple illustratif : après avoir appris des centres sur un échantillon de vecteurs, le moteur range les documents par cellule. Une question ne déclenche des comparaisons que dans les cellules sélectionnées.",
+    "misconception": "IVF ne désigne pas obligatoirement une compression des vecteurs. Dans une variante IVF Flat, les vecteurs peuvent rester complets même si la sélection des cellules rend la recherche approximative."
+  },
+  "notion-278": {
+    "explanation": "Le Metadata Filtering applique des contraintes sur des champs associés aux documents, comme la langue, la date, le produit ou les droits d'accès. Ces filtres restreignent les candidats avant, pendant ou après la recherche selon le moteur ; leur position influence les performances et le nombre de résultats pertinents effectivement disponibles.",
+    "example": "Exemple illustratif : une personne interroge la documentation d'une version particulière d'un logiciel. Le moteur limite les passages à cette version et à la langue choisie avant de composer le contexte.",
+    "misconception": "Filtrer les résultats uniquement après leur sélection peut en laisser trop peu. Les droits d'accès doivent être appliqués de façon fiable avant toute exposition des contenus."
+  },
+  "notion-280": {
+    "explanation": "Le Chunk Size détermine la quantité de texte regroupée dans un passage, tandis que l'Overlap répète une portion entre passages voisins pour préserver la continuité. De petits fragments peuvent être précis mais perdre des conditions importantes ; de grands fragments conservent davantage de contexte, avec un coût d'encodage et de lecture plus élevé.",
+    "example": "Exemple illustratif : une notice contient une procédure suivie d'une exception. L'équipe ajuste les frontières et un léger recouvrement pour éviter que la recherche retrouve la procédure sans sa condition d'application.",
+    "misconception": "Il n'existe pas de taille universellement optimale. L'Overlap augmente aussi les doublons et le stockage ; il ne remplace pas un découpage respectant la structure du document."
+  },
+  "notion-281": {
+    "explanation": "Le Parent-Child Retrieval indexe des fragments relativement petits pour retrouver précisément un sujet, puis restitue leur parent plus large pour fournir le contexte. Un identifiant relie chaque fragment au passage ou document dont il provient ; cette séparation permet d'adapter la granularité de recherche sans imposer la même granularité au texte envoyé au générateur.",
+    "example": "Exemple illustratif : une recherche trouve une phrase sur les conditions de retour. Le système charge ensuite la section parente contenant les délais, les exceptions et la procédure avant de répondre.",
+    "misconception": "Renvoyer le parent complet peut ajouter beaucoup de texte inutile. La taille du parent, les doublons et le budget de contexte doivent rester maîtrisés."
+  },
+  "notion-283": {
+    "explanation": "La Late Interaction encode séparément requête et document, puis compare plusieurs représentations fines plutôt qu'un seul vecteur global. ColBERT utilise des représentations contextualisées de tokens et agrège notamment les meilleures correspondances pour chaque token de requête ; les représentations documentaires peuvent être précalculées, avec un coût de stockage supérieur à un Embedding unique.",
+    "example": "Exemple illustratif : une recherche combine un type d'appareil et une panne précise. ColBERT compare séparément les représentations des tokens de la question à celles des passages pour évaluer leurs correspondances.",
+    "misconception": "Late Interaction ne signifie pas que le document et la requête traversent ensemble un Cross-Encoder. L'interaction détaillée arrive après leur encodage séparé."
+  },
+  "notion-284": {
+    "explanation": "Un Cross-Encoder reçoit conjointement une requête et un passage, puis calcule un score en laissant leurs tokens interagir dans le réseau. Cette comparaison détaillée peut aider à distinguer des candidats proches, mais exige un calcul pour chaque paire ; on l'emploie donc souvent pour réordonner une sélection produite par une recherche moins coûteuse.",
+    "example": "Exemple illustratif : un premier moteur retrouve plusieurs notices parlant de batterie. Le Cross-Encoder reclasse ces candidates selon qu'elles répondent réellement à une question sur le remplacement plutôt que sur la recharge.",
+    "misconception": "Un Cross-Encoder ne peut pas récupérer un document absent de sa liste de candidats. Son score n'est pas nécessairement une probabilité calibrée de réponse correcte."
+  },
+  "notion-285": {
+    "explanation": "Un Bi-Encoder transforme séparément la requête et le document en représentations comparables, puis utilise une fonction simple pour les rapprocher. Comme l'encodage documentaire ne dépend pas de chaque question, il peut être précalculé et indexé ; cette efficacité s'accompagne d'une interaction moins détaillée que dans un modèle qui traite directement la paire complète.",
+    "example": "Exemple illustratif : une base encode ses notices une fois lors de l'indexation. Chaque nouvelle question ne demande qu'un encodage supplémentaire, suivi d'une recherche parmi les vecteurs déjà stockés.",
+    "misconception": "Bi-Encoder ne signifie pas obligatoirement deux modèles aux poids distincts. Les encodeurs peuvent partager leurs paramètres, tout en traitant requête et document séparément."
+  },
+  "notion-286": {
+    "explanation": "Le Query Rewriting reformule une demande pour produire une requête mieux adaptée au moteur de recherche, sans changer l'information recherchée. Il peut expliciter une référence issue de la conversation, retirer des formulations inutiles ou adopter le vocabulaire du corpus ; conserver la demande originale permet de contrôler que la reformulation n'en modifie pas les contraintes.",
+    "example": "Exemple illustratif : après une question sur un appareil, l'utilisateur demande « et comment le nettoyer ? ». Le système reformule la recherche en mentionnant explicitement le modèle d'appareil discuté.",
+    "misconception": "Une reformulation peut ajouter une hypothèse incorrecte ou perdre une négation. Elle doit préserver l'intention et ne pas inventer les éléments manquants de la demande."
+  },
+  "notion-287": {
+    "explanation": "La Query Expansion enrichit une requête avec des termes, des synonymes ou des formulations associés afin de couvrir davantage de documents pertinents. L'enrichissement peut provenir de règles, d'un lexique, de premiers résultats ou d'un modèle ; l'objectif est de réduire les écarts de vocabulaire sans trop élargir le sens de la recherche.",
+    "example": "Exemple illustratif : pour rechercher des consignes sur un « vélo à assistance électrique », le système ajoute l'abréviation « VAE » présente dans les notices du corpus et compare les résultats obtenus.",
+    "misconception": "Ajouter des termes peut diluer la demande et introduire des résultats hors sujet. Les expansions produites par un modèle ne constituent pas des informations vérifiées."
+  },
+  "notion-288": {
+    "explanation": "Le Multi-Query Retrieval lance plusieurs recherches correspondant à des reformulations ou aspects d'une même demande, puis réunit leurs résultats. La fusion peut dédupliquer les documents et réordonner l'ensemble pour limiter la dépendance à une seule formulation ; cette couverture supplémentaire demande davantage de recherches et un contrôle des variantes produites.",
+    "example": "Exemple illustratif : une question sur l'accès à un musée donne lieu à des recherches sur les transports, les entrées et les conditions d'accessibilité. Les résultats utiles sont réunis avant la synthèse.",
+    "misconception": "Multiplier les requêtes ne garantit pas de nouvelles preuves pertinentes. Des variantes trop proches répètent les mêmes résultats, tandis que des variantes trop larges ajoutent du bruit."
+  },
+  "notion-289": {
+    "explanation": "HyDE génère d'abord un document hypothétique susceptible de répondre à la question, puis encode ce texte pour rechercher des documents réels proches dans l'espace vectoriel. L'hypothèse fournit une représentation au style plus proche des passages recherchés ; les résultats effectifs doivent ensuite servir de preuves, car le document généré peut contenir des détails inventés.",
+    "example": "Exemple illustratif : une question très courte sur une panne produit une description hypothétique de procédure. Son Embedding sert à retrouver des notices existantes, que l'assistant consulte avant de formuler sa réponse.",
+    "misconception": "Le document hypothétique n'est pas une source à citer. Si son contenu part dans une mauvaise direction, il peut orienter la recherche vers des documents inadéquats."
+  },
+  "notion-291": {
+    "explanation": "L'Attribution relie une affirmation aux sources utilisées, tandis que le Citation Grounding exige que le passage cité soutienne effectivement ce qui est avancé. Un système doit conserver les identifiants et extraits pendant la recherche et la rédaction, puis vérifier la correspondance entre affirmation et preuve ; la présence visuelle d'un lien ne suffit pas.",
+    "example": "Exemple illustratif : une réponse indique un horaire et cite le passage exact de la page officielle qui l'établit. Une autre phrase porte sa propre source lorsque le même passage ne la justifie pas.",
+    "misconception": "Une citation existante peut être mal attribuée, partielle ou obsolète. Vérifier le support d'une affirmation reste distinct de vérifier la fiabilité de la source elle-même."
+  },
+  "notion-292": {
+    "explanation": "Un Knowledge Graph représente des entités et les relations explicites qui les relient, éventuellement accompagnées de propriétés, dates et sources. Cette structure permet de suivre des connexions et de répondre à des requêtes relationnelles ; la qualité dépend de l'identification des entités, du sens des relations et de la manière dont les faits ont été obtenus.",
+    "example": "Exemple illustratif : un catalogue relie une œuvre à son artiste, son lieu de conservation et ses expositions. Une recherche peut alors suivre ces relations pour retrouver les œuvres exposées dans un événement précis.",
+    "misconception": "Une relation enregistrée n'est pas automatiquement vraie ni complète. Un Knowledge Graph peut contenir des erreurs d'extraction, des homonymes et des informations qui ne sont plus valables."
+  },
+  "notion-293": {
+    "explanation": "Le GraphRAG utilise une structure de graphe pour sélectionner ou organiser les informations fournies au générateur, par exemple en suivant des relations entre entités. Certaines approches construisent aussi des communautés et leurs résumés pour répondre à des questions globales sur un corpus ; la construction du graphe représente alors un travail supplémentaire d'extraction et de préparation.",
+    "example": "Exemple illustratif : des rapports décrivent des projets, des partenaires et des sites. Le système explore leurs relations et des résumés de groupes pour expliquer les thèmes communs à plusieurs projets.",
+    "misconception": "GraphRAG désigne plusieurs approches, pas une garantie de raisonnement exact. Des relations mal extraites et des résumés incomplets peuvent propager des erreurs dans la réponse."
+  },
+  "notion-294": {
+    "explanation": "L'Agentic RAG laisse un agent décider de certaines étapes de recherche selon la demande et les résultats déjà obtenus : consulter une source, reformuler ou lancer une autre requête. Cette boucle permet d'adapter le parcours, mais demande des règles d'arrêt, un budget et une vérification des preuves pour éviter des recherches répétitives ou inutiles.",
+    "example": "Exemple illustratif : un assistant compare plusieurs versions d'une notice. Il constate qu'une condition manque dans les premiers extraits, lance une recherche ciblée, puis rédige une réponse lorsque les documents nécessaires sont disponibles.",
+    "misconception": "Ajouter un agent ne garantit pas une meilleure réponse qu'un parcours fixe. La sélection des outils et la décision de s'arrêter peuvent elles-mêmes être erronées."
+  },
+  "notion-295": {
+    "explanation": "La Retrieval Precision mesure la part de résultats retrouvés qui sont pertinents, tandis que le Retrieval Recall mesure la part des éléments pertinents que la recherche a retrouvés. Ces mesures nécessitent des jugements de pertinence et un périmètre clair, souvent les premiers résultats ; elles évaluent la recherche séparément de la qualité de rédaction du générateur.",
+    "example": "Exemple illustratif : un jeu de questions possède des passages de référence annotés. L'équipe vérifie quels passages sont retrouvés et combien de résultats supplémentaires sont hors sujet avant de modifier le moteur.",
+    "misconception": "Le rappel documentaire n'est pas le rappel d'un index ANN par rapport aux voisins exacts. Des annotations incomplètes peuvent aussi fausser l'estimation de la pertinence."
+  },
+  "notion-296": {
+    "explanation": "La Contextual Compression réduit le contenu récupéré en fonction de la question avant son envoi au générateur. Elle peut éliminer des passages sans intérêt, extraire les phrases utiles ou produire une version plus courte ; cette étape économise du contexte, mais doit préserver les conditions, les exceptions et les références nécessaires pour interpréter correctement les preuves.",
+    "example": "Exemple illustratif : une recherche retrouve une longue notice dont une seule section concerne l'installation. Un compresseur conserve cette section avec ses avertissements et son identifiant de source pour la réponse.",
+    "misconception": "Compresser le contexte n'est pas compresser les poids du modèle. Une reformulation peut supprimer une nuance ou ajouter une erreur ; les sources originales doivent rester consultables."
+  },
+  "notion-297": {
+    "explanation": "L'Index Freshness décrit l'écart entre l'état des sources et les informations effectivement interrogeables dans l'index. Maintenir cette fraîcheur nécessite de détecter les ajouts, modifications et suppressions, puis de mettre à jour les fragments, vecteurs et métadonnées concernés ; une date d'indexation seule ne prouve pas que le contenu source est récent.",
+    "example": "Exemple illustratif : une bibliothèque modifie ses horaires. Le pipeline doit repérer la nouvelle page, remplacer les anciens fragments et retirer les versions obsolètes avant que l'assistant ne réponde aux visiteurs.",
+    "misconception": "Un moteur rapide peut chercher dans des données périmées. Réindexer régulièrement ne suffit pas si les suppressions ou les erreurs de synchronisation ne sont pas propagées."
+  },
+  "notion-298": {
+    "explanation": "L'Embedding Drift désigne une évolution des représentations ou de leur comportement, par exemple après un changement de modèle, de prétraitement ou de population de documents. On surveille la qualité des recherches et les distributions de scores pour détecter ces écarts ; une migration de modèle demande généralement de régénérer les vecteurs concernés et de vérifier leur compatibilité avec les requêtes.",
+    "example": "Exemple illustratif : une équipe remplace son encodeur mais conserve provisoirement les anciens vecteurs documentaires. Des tests révèlent des classements incohérents ; elle prépare un index cohérent avec le nouvel encodeur.",
+    "misconception": "Les vecteurs déjà stockés ne dérivent pas spontanément. Le terme peut décrire plusieurs changements, et une dimension identique ne garantit pas un espace de représentation compatible."
+  }
+}

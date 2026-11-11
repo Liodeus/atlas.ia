@@ -1,0 +1,147 @@
+{
+  "notion-2": {
+    "explanation": "Un système de Machine Learning ajuste ses paramètres à partir d’exemples pour améliorer un objectif mesurable, comme reconnaître une catégorie ou estimer une valeur. Après cet entraînement, on l’évalue sur des données distinctes afin de vérifier si les régularités apprises restent utiles face à des cas qu’il n’a pas rencontrés.",
+    "example": "Exemple illustratif : une bibliothèque entraîne un classifieur sur des demandes déjà étiquetées, puis lui soumet de nouveaux messages pour proposer un classement entre réservation, prolongation et problème de compte.",
+    "misconception": "Apprendre ne signifie pas mémoriser une règle fiable pour toutes les situations : un changement de population, de vocabulaire ou de données peut dégrader les résultats."
+  },
+  "notion-3": {
+    "explanation": "Le Deep Learning apprend une succession de transformations qui construisent progressivement des représentations utiles à une tâche. Les premières couches et les suivantes sont ajustées ensemble, généralement par rétropropagation, ce qui évite de définir manuellement toutes les caractéristiques à extraire d’une image, d’un son ou d’un texte.",
+    "example": "Exemple illustratif : pour repérer des défauts sur des photographies de pièces, un réseau transforme les pixels en représentations intermédiaires, puis produit un score par type de défaut à examiner.",
+    "misconception": "Ajouter des couches ne garantit pas un meilleur modèle : les données, l’objectif d’apprentissage, l’optimisation et les ressources disponibles comptent également dans le résultat."
+  },
+  "notion-5": {
+    "explanation": "Un SLM cherche un compromis entre capacité, mémoire et coût de calcul en utilisant un modèle de langage relativement compact. Il peut convenir à une tâche bien délimitée ou à une exécution locale, mais son intérêt se mesure avec les contraintes réelles du matériel, la longueur des entrées et la qualité attendue.",
+    "example": "Exemple illustratif : une application hors ligne propose un petit modèle pour reformuler de courtes notes sur un ordinateur portable, après avoir vérifié la fluidité et la fidélité sur des notes représentatives.",
+    "misconception": "SLM n’est pas une catégorie à seuil universel : un nombre de paramètres réduit ne suffit à garantir ni rapidité, ni faible consommation, ni précision."
+  },
+  "notion-6": {
+    "explanation": "L’AGI désigne un objectif de capacités générales, mais les critères retenus varient selon les auteurs : diversité des tâches, niveau de performance, apprentissage ou autonomie. Pour discuter sérieusement d’une revendication d’AGI, il faut donc préciser les domaines évalués, les conditions de réalisation et les situations nouvelles auxquelles le système doit s’adapter.",
+    "example": "Exemple illustratif : un laboratoire qui présente un système comme général doit montrer comment il transfère ses compétences entre des tâches nouvelles, au lieu de s’appuyer uniquement sur un examen de mathématiques.",
+    "misconception": "Une conversation convaincante ou un excellent résultat isolé ne démontre pas une AGI ; la généralité nécessite des critères explicites et ne prouve aucune conscience."
+  },
+  "notion-7": {
+    "explanation": "L’ASI est une catégorie hypothétique de systèmes dont les capacités dépasseraient largement celles des humains dans de nombreux domaines cognitifs. Le terme sert surtout à discuter de scénarios et de critères de comparaison ; il ne décrit pas une architecture précise, une méthode d’entraînement unique ou une étape dont la date serait connue.",
+    "example": "Exemple illustratif : dans une étude prospective, des chercheurs distinguent un logiciel supérieur aux humains aux échecs d’un système hypothétique qui les dépasserait aussi en recherche, planification et invention technique.",
+    "misconception": "Être surhumain dans une spécialité ne suffit pas à être une ASI ; l’ampleur des domaines concernés est essentielle et reste difficile à définir."
+  },
+  "notion-8": {
+    "explanation": "Un Foundation Model est préentraîné sur des données suffisamment larges pour fournir une base réutilisable dans différentes applications. On peut ensuite l’adapter avec des exemples, du fine-tuning ou des composants spécialisés, ce qui mutualise une partie de l’apprentissage mais transmet aussi certaines limites du modèle initial aux systèmes qui en dépendent.",
+    "example": "Exemple illustratif : une équipe part d’un même modèle préentraîné pour construire un outil de classement de documents et un assistant de rédaction, en adaptant séparément leurs données et leurs évaluations.",
+    "misconception": "Foundation Model ne signifie pas modèle universel immédiatement fiable : la réutilisation exige de vérifier la compatibilité avec la tâche, les données et les contraintes visées."
+  },
+  "notion-10": {
+    "explanation": "Le NLP rassemble les méthodes qui traitent les langues humaines sous forme de données, depuis la segmentation du texte jusqu’à la traduction ou l’extraction d’informations. Un projet NLP commence par définir la sortie attendue, car classer un message, retrouver une réponse et rédiger un résumé demandent des objectifs et des évaluations différents.",
+    "example": "Exemple illustratif : un service documentaire combine une détection de langue, une extraction des noms d’organisations et un moteur de recherche pour rendre consultable une collection de courriers multilingues.",
+    "misconception": "Le NLP ne se réduit pas aux chatbots ni aux LLM : des règles, des modèles statistiques et des modèles spécialisés restent utilisables selon la tâche."
+  },
+  "notion-11": {
+    "explanation": "La NLU regroupe les tâches qui cherchent à représenter ou identifier le sens utile d’un énoncé, comme une intention, une entité ou une relation. Le résultat peut être une étiquette ou une structure de données, évaluée sur des exemples annotés, sans que le système produise nécessairement une réponse rédigée.",
+    "example": "Exemple illustratif : à partir de « déplace mon rendez-vous à vendredi », un outil identifie une demande de modification et extrait la nouvelle date avant de préparer une action dans l’agenda.",
+    "misconception": "Le mot compréhension désigne ici une capacité opérationnelle mesurée ; il ne démontre pas une compréhension humaine, et les ambiguïtés du contexte peuvent rester non résolues."
+  },
+  "notion-12": {
+    "explanation": "La NLG transforme des informations ou un contexte en texte destiné à un lecteur. Selon l’application, elle utilise des modèles de phrases, un modèle génératif ou leur combinaison ; sa qualité se juge notamment sur la fidélité aux données, la lisibilité et le respect du format demandé, au-delà de la seule fluidité.",
+    "example": "Exemple illustratif : un tableau de suivi d’expéditions sert à produire un récapitulatif quotidien qui mentionne les colis en attente, leurs destinations et les événements effectivement présents dans les données.",
+    "misconception": "Un texte bien écrit n’est pas nécessairement fidèle à sa source : la génération peut omettre un élément ou ajouter une information non fournie."
+  },
+  "notion-14": {
+    "explanation": "GPT désigne historiquement une approche de Transformer génératif préentraîné, qui apprend à prédire la continuation d’un texte. Cette base peut ensuite être adaptée aux instructions ou au dialogue ; le nom seul ne renseigne donc pas sur les données d’entraînement, les modalités disponibles ni les capacités exactes d’une version particulière.",
+    "example": "Exemple illustratif : une équipe compare un modèle GPT préentraîné et une version adaptée aux instructions en leur demandant une reformulation, puis observe leur respect du format et leur fidélité.",
+    "misconception": "GPT n’est pas synonyme de tout système d’IA ni de tout Transformer : d’autres architectures et objectifs d’apprentissage existent, y compris pour le langage."
+  },
+  "notion-15": {
+    "explanation": "Un Base Model reflète principalement l’objectif de son préentraînement, par exemple continuer une séquence de texte plausible. Il constitue un point de départ pour des adaptations ultérieures, mais une consigne rédigée comme une conversation peut lui sembler simplement être un texte à poursuivre, sans les conventions apprises par un assistant spécialisé.",
+    "example": "Exemple illustratif : devant une question suivie de « Réponse : », un modèle de base poursuit le document ; une équipe ajoute ensuite un entraînement supervisé pour favoriser des réponses qui suivent réellement les consignes.",
+    "misconception": "Un Base Model n’est pas un modèle vide de connaissances ; il possède des régularités apprises, mais n’a pas nécessairement été adapté au comportement attendu d’un assistant."
+  },
+  "notion-17": {
+    "explanation": "Un Chat Model a été adapté à des échanges structurés avec des rôles et des réponses attendues d’un assistant. Lors de son utilisation, l’historique est généralement converti en une séquence suivant un format précis ; la qualité de la réponse dépend aussi des messages réellement transmis et de la fenêtre de contexte disponible.",
+    "example": "Exemple illustratif : dans un outil de révision, l’élève demande un indice puis une explication ; l’application transmet les messages précédents pour permettre au modèle de relier la nouvelle demande à l’exercice.",
+    "misconception": "Le dialogue ne crée pas automatiquement une mémoire persistante : si l’application ne renvoie pas un échange antérieur, le modèle peut ne plus y avoir accès."
+  },
+  "notion-18": {
+    "explanation": "Le Test-Time Compute correspond aux ressources dépensées pour résoudre une demande avec un modèle déjà entraîné. Ce budget peut financer une génération plus longue, plusieurs candidats ou des étapes de vérification, et doit être réparti selon la difficulté de la tâche ainsi que le coût et le délai acceptables.",
+    "example": "Exemple illustratif : pour une énigme logique, un système produit plusieurs propositions et vérifie leurs contraintes avant de choisir une réponse, alors qu’il répond directement à une demande de reformulation simple.",
+    "misconception": "Consommer davantage de calcul ne garantit pas une meilleure réponse : répéter une erreur ou utiliser un vérificateur inadéquat peut seulement augmenter le coût."
+  },
+  "notion-19": {
+    "explanation": "L’Inference-Time Scaling étudie comment la qualité évolue quand on augmente le budget de calcul au moment de l’utilisation. On compare par exemple davantage de tentatives ou une recherche plus poussée, à modèle donné, pour déterminer si le gain observé justifie le temps et les ressources supplémentaires sur la tâche considérée.",
+    "example": "Exemple illustratif : une équipe mesure la réussite d’un solveur avec un budget court puis un budget plus large, tout en comptant les essais et les vérifications nécessaires pour chaque problème.",
+    "misconception": "Une courbe de progrès sur un benchmark n’établit pas une loi universelle : les gains dépendent du modèle, du problème et de la méthode de sélection."
+  },
+  "notion-20": {
+    "explanation": "Un Verifier Model évalue une solution proposée à partir du problème et, éventuellement, de ses étapes intermédiaires. Il peut servir à sélectionner un candidat ou à orienter une recherche, mais sa valeur dépend de sa capacité à distinguer une réponse correcte d’une justification simplement convaincante dans le domaine visé.",
+    "example": "Exemple illustratif : un assistant propose plusieurs résolutions d’un exercice d’algèbre ; un vérificateur examine les transformations et classe les propositions avant qu’une vérification symbolique teste la solution retenue.",
+    "misconception": "Un vérificateur appris n’est pas une preuve formelle : il peut partager les erreurs du générateur et accepter une démonstration plausible mais invalide."
+  },
+  "notion-21": {
+    "explanation": "Un Reasoning Model est entraîné ou adapté pour mieux traiter des problèmes qui demandent plusieurs étapes de résolution. Selon le système, il peut consacrer davantage de calcul à explorer et contrôler des pistes ; l’intérêt se mesure sur la justesse des résultats et leur coût, pas seulement sur la longueur des explications affichées.",
+    "example": "Exemple illustratif : pour organiser des tâches soumises à des dépendances, un modèle examine les contraintes, propose un ordre puis recherche les incompatibilités avant de présenter un planning à vérifier.",
+    "misconception": "Une explication détaillée n’atteste ni la validité du résultat ni un accès fidèle aux calculs internes ; elle peut rationaliser une réponse incorrecte."
+  },
+  "notion-22": {
+    "explanation": "Un Code Model apprend des régularités propres aux programmes, aux commentaires et souvent aux échanges techniques. Il peut compléter une fonction ou proposer une modification, mais son évaluation doit confronter la sortie aux exigences du logiciel, aux tests et aux dépendances réelles plutôt qu’à la simple ressemblance avec du code habituel.",
+    "example": "Exemple illustratif : un développeur fournit la signature d’une fonction de tri et ses contraintes ; le modèle propose une implémentation, que l’équipe exécute sur des entrées vides, répétées et déjà triées.",
+    "misconception": "Un programme syntaxiquement valide peut rester incorrect, lent ou vulnérable ; le modèle ne remplace pas l’exécution des tests ni l’examen du contexte applicatif."
+  },
+  "notion-23": {
+    "explanation": "Un Embedding Model représente une entrée par un vecteur dont la géométrie est apprise pour un objectif particulier. On peut comparer ces vecteurs pour retrouver des documents ou regrouper des contenus, à condition d’utiliser un modèle et une mesure de proximité adaptés au type de relation que l’on veut détecter.",
+    "example": "Exemple illustratif : un moteur encode des questions et des notices techniques pour retrouver la notice sur une batterie déchargée même lorsque l’utilisateur écrit « mon appareil ne s’allume plus ».",
+    "misconception": "La proximité vectorielle n’est pas une preuve d’équivalence ou de vérité : deux phrases opposées peuvent partager assez de vocabulaire et de contexte pour rester proches."
+  },
+  "notion-24": {
+    "explanation": "Un Reranker Model réévalue une liste de candidats déjà trouvés en fonction d’une requête précise. Souvent, il examine conjointement la requête et chaque document, ce qui peut affiner leur ordre mais coûte davantage que la recherche initiale ; on l’applique donc généralement à une sélection de résultats plutôt qu’à toute la collection.",
+    "example": "Exemple illustratif : une recherche sur la réinitialisation d’un routeur retrouve plusieurs notices ; le reranker privilégie le passage qui décrit le bouton et la procédure correspondant exactement au modèle demandé.",
+    "misconception": "Un reranker ne récupère pas un document absent des candidats : si la première recherche manque la bonne source, le reclassement ne peut pas la réintroduire."
+  },
+  "notion-25": {
+    "explanation": "Un Reward Model apprend à attribuer un score à des réponses ou comportements à partir d’exemples d’évaluation, souvent des comparaisons de préférences. Ce score peut guider l’entraînement ou la sélection d’une réponse, mais il représente les critères et les données de supervision utilisés, avec leurs imperfections et leur domaine de validité.",
+    "example": "Exemple illustratif : des évaluateurs comparent des réponses selon leur utilité et leur fidélité ; un modèle apprend ces préférences et sert ensuite à départager des propositions sur des demandes similaires.",
+    "misconception": "Un score de récompense élevé n’est pas une mesure universelle de qualité : optimiser ce score peut exploiter ses failles au lieu d’améliorer l’utilité réelle."
+  },
+  "notion-26": {
+    "explanation": "Un Multimodal Model relie plusieurs types de données grâce à des représentations et à un entraînement qui associent leurs informations. Les modalités prises en entrée et produites en sortie doivent être précisées : exploiter une image pour répondre en texte ne signifie pas nécessairement savoir générer des images, traiter l’audio ou analyser une vidéo.",
+    "example": "Exemple illustratif : un assistant reçoit une photographie d’un appareil accompagnée d’une question écrite et produit une description des commandes visibles, en signalant celles que la résolution ne permet pas de lire.",
+    "misconception": "Multimodal ne signifie pas compétent dans toutes les modalités : les capacités, la précision et les limites dépendent de chaque couple d’entrées et de sorties."
+  },
+  "notion-27": {
+    "explanation": "Un VLM met en relation des représentations visuelles et linguistiques pour associer des images à des descriptions, répondre à des questions ou retrouver un contenu. Une architecture courante relie un encodeur d’images à un modèle de langage ; l’entraînement apprend à utiliser les indices visuels dans la réponse textuelle.",
+    "example": "Exemple illustratif : à partir de la photo d’une étagère, un outil répond à une question sur la position d’un objet en s’appuyant sur les éléments visibles et la consigne formulée.",
+    "misconception": "Un VLM peut manquer un petit détail ou inventer un objet plausible ; une description fluide ne garantit pas une lecture exhaustive et exacte de l’image."
+  },
+  "notion-28": {
+    "explanation": "Un VLA combine des observations visuelles et une instruction linguistique pour produire des actions dans un environnement, notamment robotique. Il apprend à relier perception et commande à partir de données adaptées ; les actions peuvent prendre différentes formes selon le système, comme des tokens encodant des mouvements ou des commandes de contrôle.",
+    "example": "Exemple illustratif : un bras robotisé reçoit l’instruction de placer un objet dans un bac, observe la scène et génère des commandes, tandis qu’un contrôleur vérifie les limites de déplacement autorisées.",
+    "misconception": "Une instruction comprise en texte ne garantit pas une action physique sûre : la calibration, les obstacles et les écarts entre entraînement et environnement restent déterminants."
+  },
+  "notion-29": {
+    "explanation": "Un World Model apprend à prédire certains aspects de l’évolution d’un environnement, parfois dans un espace de représentations compressées. Un agent peut s’en servir pour anticiper des conséquences ou comparer des actions avant de les exécuter, mais l’utilité de ces simulations dépend de leur fidélité aux situations effectivement rencontrées.",
+    "example": "Exemple illustratif : dans un jeu de navigation, un agent simule des trajectoires possibles à partir de son état courant, puis choisit un déplacement dont les conséquences prédites semblent compatibles avec l’objectif.",
+    "misconception": "Un World Model n’est pas une connaissance complète du monde : ses erreurs de prédiction peuvent s’accumuler et conduire une planification à exploiter des situations irréalistes."
+  },
+  "notion-30": {
+    "explanation": "Un modèle autoregressive décompose la génération d’une séquence en prédictions successives, chacune conditionnée par les éléments déjà disponibles. Après avoir choisi un token, il l’ajoute au contexte pour calculer la distribution suivante ; cette dépendance permet des continuations cohérentes mais rend aussi les étapes ultérieures sensibles aux choix précédents.",
+    "example": "Exemple illustratif : un générateur commence une recette par une liste d’ingrédients, puis poursuit les instructions en utilisant les tokens déjà produits, sans avoir nécessairement fixé tout le texte à l’avance.",
+    "misconception": "Autoregressive ne veut pas dire déterministe : chaque distribution peut être exploitée par un choix du maximum ou par un échantillonnage introduisant de la variété."
+  },
+  "notion-31": {
+    "explanation": "Un modèle Encoder-only transforme les éléments d’une entrée en représentations contextualisées, souvent en autorisant chaque position à consulter l’ensemble de cette entrée. On ajoute ensuite une tête adaptée pour classer un texte, extraire des informations ou produire des embeddings, plutôt que d’utiliser nécessairement le modèle pour une génération token après token.",
+    "example": "Exemple illustratif : un outil lit un avis complet et utilise sa représentation pour prédire un sentiment, en tenant compte d’une négation qui apparaît avant le mot exprimant une appréciation.",
+    "misconception": "Encoder-only décrit une architecture, pas une tâche unique ; la représentation obtenue ne devient utile pour une application qu’avec un objectif et une adaptation appropriés."
+  },
+  "notion-32": {
+    "explanation": "Un Transformer Decoder-only utilise une pile de blocs qui calcule la continuation à partir des tokens déjà accessibles. Dans l’usage causal habituel, un masque empêche de consulter les positions futures ; le texte d’entrée et les tokens générés appartiennent ainsi à une même séquence, dont la longueur augmente pendant la réponse.",
+    "example": "Exemple illustratif : un assistant reçoit une consigne suivie d’un début de message et calcule les tokens de la suite, chacun pouvant s’appuyer sur la consigne et les portions déjà générées.",
+    "misconception": "Decoder-only ne signifie pas qu’un encodeur séparé a obligatoirement travaillé avant lui ; le terme vient du vocabulaire Transformer et peut désigner un modèle autonome."
+  },
+  "notion-33": {
+    "explanation": "Une architecture Encoder-Decoder sépare la représentation de l’entrée et la production de la sortie, le décodeur exploitant les informations calculées par l’encodeur. Seq2Seq désigne plus largement le fait de transformer une séquence en une autre ; une traduction relève donc de Seq2Seq sans imposer à elle seule une architecture précise.",
+    "example": "Exemple illustratif : pour résumer un article, un encodeur représente le texte source, puis un décodeur construit un résumé plus court en consultant ces représentations au fil des mots produits.",
+    "misconception": "Encoder-Decoder et Seq2Seq ne sont pas des synonymes stricts : le premier décrit l’organisation du modèle, le second la relation entre entrée et sortie."
+  },
+  "notion-34": {
+    "explanation": "Un Dense Model utilise généralement les mêmes blocs de calcul pour chaque token, au lieu de sélectionner seulement certains experts selon l’entrée. Cette régularité simplifie l’exécution, mais le coût dépend aussi de la longueur de séquence et des opérations utilisées ; le nombre de paramètres ne résume donc pas toute la charge.",
+    "example": "Exemple illustratif : lors du déploiement d’un modèle dense, une équipe estime la mémoire des poids puis mesure séparément le coût des longues requêtes, qui mobilisent aussi des activations et du cache.",
+    "misconception": "Dense ne signifie pas que chaque paramètre stocké est lu à chaque token : les tables d’embeddings, notamment, utilisent les lignes correspondant aux identifiants consultés."
+  }
+}

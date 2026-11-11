@@ -1,0 +1,98 @@
+{
+  "notion-223": [
+    "https://docs.nvidia.com/deeplearning/transformer-engine-releases/release-2.11/user-guide/examples/fp8_primer.html"
+  ],
+  "notion-224": [
+    "https://docs.nvidia.com/deeplearning/transformer-engine-releases/release-2.11/user-guide/examples/fp8_primer.html"
+  ],
+  "notion-225": [
+    "https://huggingface.co/docs/transformers/quantization/concept_guide"
+  ],
+  "notion-226": [
+    "https://huggingface.co/docs/transformers/quantization/concept_guide"
+  ],
+  "notion-227": [
+    "https://pytorch.org/blog/quantization-aware-training/"
+  ],
+  "notion-228": [
+    "https://arxiv.org/abs/2306.00978"
+  ],
+  "notion-229": [
+    "https://arxiv.org/abs/2210.17323"
+  ],
+  "notion-230": [
+    "https://github.com/ggml-org/ggml/blob/master/docs/gguf.md"
+  ],
+  "notion-231": [
+    "https://onnx.ai/onnx/intro/concepts.html"
+  ],
+  "notion-233": [
+    "https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/"
+  ],
+  "notion-234": [
+    "https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/"
+  ],
+  "notion-235": [
+    "https://huggingface.co/docs/transformers/kv_cache"
+  ],
+  "notion-236": [
+    "https://huggingface.co/docs/transformers/kv_cache"
+  ],
+  "notion-238": [
+    "https://arxiv.org/abs/2211.17192"
+  ],
+  "notion-240": [
+    "https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/batcher.html"
+  ],
+  "notion-241": [
+    "https://docs.vllm.ai/en/latest/configuration/optimization/"
+  ],
+  "notion-242": [
+    "https://arxiv.org/abs/2401.09670"
+  ],
+  "notion-244": [
+    "https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/perf_analyzer/genai-perf/README.html"
+  ],
+  "notion-246": [
+    "https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/perf_analyzer/genai-perf/README.html"
+  ],
+  "notion-247": [
+    "https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/perf_analyzer/docs/measurements_metrics.html"
+  ],
+  "notion-248": [
+    "https://research.google/pubs/the-tail-at-scale/"
+  ],
+  "notion-249": [
+    "https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/perf_analyzer/docs/measurements_metrics.html"
+  ],
+  "notion-250": [
+    "https://research.google/pubs/the-tail-at-scale/"
+  ],
+  "notion-251": [
+    "https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/user_guide/batcher.html"
+  ],
+  "notion-252": [
+    "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+  ],
+  "notion-253": [
+    "https://docs.nvidia.com/deeplearning/performance/dl-performance-gpu-background/index.html"
+  ],
+  "notion-255": [
+    "https://docs.vllm.ai/en/latest/configuration/optimization/"
+  ],
+  "notion-256": [
+    "https://docs.pytorch.org/tutorials/recipes/recipes/tuning_guide.html"
+  ],
+  "notion-257": [
+    "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+  ],
+  "notion-258": [
+    "https://docs.pytorch.org/tutorials/intermediate/torch_compile_tutorial.html"
+  ],
+  "notion-259": [
+    "https://arxiv.org/abs/2306.00978"
+  ],
+  "notion-260": [
+    "https://huggingface.co/docs/accelerate/usage_guides/big_modeling"
+  ]
+}

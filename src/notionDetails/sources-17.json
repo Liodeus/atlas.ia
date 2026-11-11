@@ -1,0 +1,74 @@
+{
+  "notion-507": [
+    "https://www.anthropic.com/research/demystifying-evals-for-ai-agents"
+  ],
+  "notion-508": [
+    "https://docs.langchain.com/oss/python/langgraph/workflows-agents"
+  ],
+  "notion-509": [
+    "https://www.anthropic.com/research/building-effective-agents"
+  ],
+  "notion-510": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+  ],
+  "notion-511": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+  ],
+  "notion-512": [
+    "https://www.anthropic.com/research/building-effective-agents"
+  ],
+  "notion-513": [
+    "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"
+  ],
+  "notion-514": [
+    "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"
+  ],
+  "notion-515": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
+  ],
+  "notion-516": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
+  ],
+  "notion-517": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
+  ],
+  "notion-518": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+  ],
+  "notion-519": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/server/resources"
+  ],
+  "notion-520": [
+    "https://modelcontextprotocol.io/specification/2025-11-25/server/prompts"
+  ],
+  "notion-521": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports"
+  ],
+  "notion-522": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
+  ],
+  "notion-523": [
+    "https://www.anthropic.com/research/effective-harnesses-for-long-running-agents"
+  ],
+  "notion-524": [
+    "https://www.anthropic.com/research/effective-harnesses-for-long-running-agents"
+  ],
+  "notion-525": [
+    "https://www.anthropic.com/research/effective-harnesses-for-long-running-agents"
+  ],
+  "notion-526": [
+    "https://docs.langchain.com/oss/python/langgraph/persistence"
+  ],
+  "notion-527": [
+    "https://www.anthropic.com/research/demystifying-evals-for-ai-agents"
+  ],
+  "notion-528": [
+    "https://www.anthropic.com/research/demystifying-evals-for-ai-agents"
+  ],
+  "notion-529": [
+    "https://modelcontextprotocol.io/docs/extensions/apps"
+  ],
+  "notion-530": [
+    "https://www.anthropic.com/engineering/claude-code-sandboxing"
+  ]
+}

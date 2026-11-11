@@ -1,0 +1,147 @@
+{
+  "notion-350": {
+    "explanation": "Une affirmation SOTA situe un résultat par rapport aux méthodes connues sur une tâche et un protocole précis, à une date donnée. Pour l’interpréter, il faut regarder les données, les métriques, les moyens de calcul et les conditions de comparaison ; une avance sur un benchmark ne décrit pas toutes les capacités pratiques du système.",
+    "example": "Exemple illustratif : un article annonce le meilleur score sur un test de traduction. Une équipe vérifie les langues évaluées et le coût d’exécution avant de décider si ce résultat concerne son application.",
+    "misconception": "SOTA ne signifie pas meilleur modèle universel. Un résultat peut être dépassé, limité à un sous-ensemble de tâches ou obtenu avec des ressources difficiles à reproduire."
+  },
+  "notion-353": {
+    "explanation": "La Ground Truth fournit la référence utilisée pour décider si une prédiction ou une réponse est correcte. Elle peut provenir d’une mesure, d’une annotation ou d’une vérification documentaire ; sa qualité dépend du protocole de collecte et des critères retenus, particulièrement lorsque plusieurs réponses sont acceptables ou que le sujet comporte une incertitude.",
+    "example": "Exemple illustratif : pour évaluer l’extraction de dates sur des affiches, des annotateurs vérifient chaque document original et consignent les formats acceptés, ainsi que les cas où la date reste illisible.",
+    "misconception": "La Ground Truth n’est pas une vérité infaillible. Des erreurs d’annotation, des sources périmées ou des désaccords légitimes peuvent rendre la référence elle-même contestable."
+  },
+  "notion-354": {
+    "explanation": "Un Golden Dataset rassemble des cas de référence dont les entrées, les réponses attendues et les critères de jugement ont été soigneusement vérifiés. Il sert de repère stable pour comparer des versions et détecter les régressions ; sa composition doit représenter les usages importants, inclure des cas difficiles et rester séparée des données utilisées pour ajuster le système.",
+    "example": "Exemple illustratif : une équipe conserve des demandes de support anonymisées avec des réponses validées et des critères explicites. Chaque nouvelle version de l’assistant est comparée sur ces mêmes situations.",
+    "misconception": "Un petit jeu parfaitement annoté peut rester peu représentatif. Le qualifier de Golden ne compense ni une couverture insuffisante ni son utilisation répétée pour optimiser directement les réponses."
+  },
+  "notion-355": {
+    "explanation": "Une Hallucination apparaît lorsqu’un système produit une affirmation fausse ou insuffisamment fondée avec une forme convaincante. La génération vise une réponse plausible et ne vérifie pas automatiquement chaque fait ; consulter des sources, séparer ce qui est connu de ce qui manque et contrôler les affirmations importantes aide à réduire ce risque sans le supprimer entièrement.",
+    "example": "Exemple illustratif : un assistant attribue une citation à un ouvrage puis fournit un numéro de page inexistant. La vérification du texte original révèle que la référence précise a été inventée.",
+    "misconception": "Une réponse fluide, détaillée ou accompagnée de références peut halluciner. Une citation affichée doit réellement soutenir l’affirmation, et son existence doit aussi être vérifiée."
+  },
+  "notion-356": {
+    "explanation": "La Factuality évalue si les affirmations correspondent à des faits vérifiables, avec le contexte et la date pertinents. Elle demande de contrôler le contenu énoncé, pas seulement sa ressemblance avec une réponse de référence ; une réponse peut être fidèle à un document fourni tout en reproduisant une erreur présente dans ce document.",
+    "example": "Exemple illustratif : un ancien guide indique qu’un établissement ouvre le lundi, mais sa page officielle actualisée annonce une fermeture ce jour-là. Répéter le guide serait fidèle à cette source, mais factuellement dépassé.",
+    "misconception": "La présence d’une source ne garantit pas la factualité. La fiabilité, la portée et l’actualité des preuves comptent autant que la cohérence du texte avec elles."
+  },
+  "notion-357": {
+    "explanation": "La Faithfulness mesure si une réponse respecte les éléments fournis, sans inventer des détails ni déformer les relations entre eux. Dans un résumé ou un système RAG, on compare les affirmations aux passages disponibles pour vérifier qu’ils les soutiennent ; cette fidélité aux sources constitue une dimension différente de leur exactitude dans le monde réel.",
+    "example": "Exemple illustratif : un compte rendu mentionne qu’une proposition sera étudiée. Un résumé qui annonce son adoption manque de fidélité, même si cette adoption devient effectivement vraie quelques jours plus tard.",
+    "misconception": "Une affirmation vraie peut manquer de Faithfulness si le document ne la soutient pas. Inversement, reproduire fidèlement une source erronée ne garantit pas la Factuality."
+  },
+  "notion-358": {
+    "explanation": "La Helpfulness juge à quel point la réponse permet à l’utilisateur d’avancer vers son objectif dans les contraintes données. Elle tient compte de la pertinence, du niveau de détail et du caractère exploitable des propositions ; une évaluation utile définit la tâche et le public plutôt que de traiter la longueur ou l’assurance comme des signes suffisants d’utilité.",
+    "example": "Exemple illustratif : pour une personne qui découvre un logiciel, une réponse utile décrit les étapes nécessaires et les noms des commandes visibles, en tenant compte de la version qu’elle utilise.",
+    "misconception": "Être serviable ne signifie pas toujours acquiescer. Signaler une information manquante ou corriger une prémisse fausse peut être plus utile qu’une réponse immédiatement satisfaisante mais incorrecte."
+  },
+  "notion-359": {
+    "explanation": "La Robustness mesure la stabilité du comportement lorsque l’entrée ou les conditions changent dans un périmètre défini. On peut tester des reformulations, des fautes, du bruit ou des variations de format ; l’enjeu est de préserver la réponse attendue lorsque le sens reste identique, tout en réagissant correctement aux modifications qui changent réellement la tâche.",
+    "example": "Exemple illustratif : un classifieur de demandes doit reconnaître une demande de remboursement malgré une faute de frappe ou une tournure inhabituelle, sans confondre celle-ci avec une simple question sur les modalités.",
+    "misconception": "Un bon score moyen ne démontre pas la robustesse. Un système peut réussir les exemples standards et échouer systématiquement sur une variation fréquente chez certains utilisateurs."
+  },
+  "notion-360": {
+    "explanation": "La Calibration vérifie si les niveaux de confiance correspondent aux fréquences de réussite observées sur des cas comparables. Dans un exemple fictif, parmi les réponses annoncées avec une confiance de 80 %, environ huit sur dix devraient être correctes ; cette relation s’évalue sur un ensemble de données, et peut changer lorsque la distribution des cas évolue.",
+    "example": "Exemple illustratif : une équipe regroupe les décisions par tranche de confiance et compare leurs taux de réussite réels. Elle découvre qu’un groupe annoncé très sûr contient davantage d’erreurs que prévu.",
+    "misconception": "Un système bien calibré n’est pas nécessairement très performant. Il peut correctement annoncer une faible confiance ; inversement, un modèle souvent juste peut se montrer trop sûr."
+  },
+  "notion-361": {
+    "explanation": "Un Confidence Score attribue un niveau de confiance à une prédiction selon un mécanisme donné : probabilité de classe, mesure auxiliaire ou estimation d’un évaluateur. Il peut aider à orienter les cas vers une vérification humaine, mais sa signification doit être documentée et testée, car tous les scores ne représentent pas une probabilité fiable de correction.",
+    "example": "Exemple illustratif : un outil d’extraction transmet les lignes jugées incertaines à un opérateur. L’équipe vérifie sur des exemples annotés que le score repère effectivement les erreurs pertinentes pour ce travail.",
+    "misconception": "Une phrase comme « je suis certain » n’est pas un Confidence Score validé. Même une valeur numérique peut être mal calibrée ou non comparable entre modèles."
+  },
+  "notion-363": {
+    "explanation": "La Precision répond à la question : parmi les éléments annoncés positifs, combien le sont réellement ? Elle se calcule par TP / (TP + FP) et permet d’évaluer la proportion de résultats pertinents parmi ceux retenus ; le seuil de décision et la manière de combiner plusieurs classes doivent être précisés pour interpréter le score.",
+    "example": "Exemple illustratif : sur un lot fictif de dix courriels signalés comme spam, huit sont réellement indésirables. La Precision vaut alors 80 %, indépendamment des spams que le filtre a laissés passer.",
+    "misconception": "La Precision ne mesure pas tous les cas retrouvés. On peut obtenir une bonne précision en ne signalant que quelques cas évidents et manquer beaucoup de positifs."
+  },
+  "notion-364": {
+    "explanation": "Le Recall mesure la part des éléments réellement positifs que le système retrouve, selon TP / (TP + FN). Il aide à juger la couverture d’une détection ou d’une recherche ; pour le calculer correctement, il faut connaître les positifs présents dans le jeu évalué et préciser les règles de décision et d’agrégation utilisées.",
+    "example": "Exemple illustratif : un dossier fictif contient vingt documents pertinents et le moteur en retrouve quinze. Son Recall vaut 75 %, même si les résultats affichés contiennent aussi des documents inutiles.",
+    "misconception": "Un Recall élevé ne garantit pas des résultats précis. Retourner tous les documents peut retrouver tous les éléments utiles tout en imposant un tri considérable à l’utilisateur."
+  },
+  "notion-366": {
+    "explanation": "Un False Positive est un cas déclaré positif alors que la référence le considère négatif. Identifier ces erreurs aide à comprendre les alertes inutiles et leur coût pour l’utilisateur ; leur fréquence dépend notamment du seuil choisi et de la proportion réelle de positifs, ce qui rend leur analyse complémentaire à celle des cas manqués.",
+    "example": "Exemple illustratif : un filtre classe un message légitime de confirmation de rendez-vous comme spam. Cette alerte erronée constitue un False Positive, car la classe positive correspond ici aux messages indésirables.",
+    "misconception": "Le sens de positif doit être fixé avant de compter les erreurs. Un événement indésirable pour l’utilisateur peut appartenir à la classe négative du problème étudié."
+  },
+  "notion-367": {
+    "explanation": "Un False Negative correspond à un élément réellement positif que le système classe comme négatif ou ne retrouve pas. Il révèle les situations qui échappent à la détection ; les examiner par catégorie permet d’identifier des angles morts et de choisir un seuil adapté au coût des oublis, en considérant aussi les fausses alertes produites.",
+    "example": "Exemple illustratif : un outil de recherche omet un document pourtant pertinent pour la question posée. Ce document manqué constitue un False Negative dans l’évaluation de la récupération documentaire.",
+    "misconception": "Les cas non signalés ne sont pas automatiquement corrects. Sans échantillon de référence couvrant aussi ces cas, on peut sous-estimer fortement le nombre de faux négatifs."
+  },
+  "notion-368": {
+    "explanation": "La Confusion Matrix croise les catégories réelles et les catégories prédites pour montrer où se concentrent les bonnes décisions et les erreurs. Elle permet d’aller au-delà d’un score global, notamment lorsque plusieurs classes se ressemblent ; il faut lire les axes, l’ordre des classes et la normalisation pour interpréter correctement chaque case du tableau.",
+    "example": "Exemple illustratif : un classifieur distingue factures, devis et bons de commande. La matrice révèle qu’il confond surtout les devis avec les factures, ce qui oriente la collecte de nouveaux exemples.",
+    "misconception": "Les axes ne sont pas universels entre outils et graphiques. Une matrice normalisée par ligne ne raconte pas la même chose qu’une matrice normalisée par colonne."
+  },
+  "notion-369": {
+    "explanation": "Pass@k mesure, sur un ensemble de tâches, la probabilité qu’au moins une des k propositions produites satisfasse le critère de réussite. En génération de code, ce critère peut être le passage de tests ; le score décrit un budget de plusieurs essais et dépend du protocole d’échantillonnage, pas seulement de la qualité d’une réponse unique.",
+    "example": "Exemple illustratif : dans un exercice fictif, un modèle propose plusieurs fonctions candidates pour une même spécification. La tâche compte comme réussie pour Pass@k si l’une des k fonctions passe les tests prévus.",
+    "misconception": "Pass@k ne dit pas que l’utilisateur saura choisir la bonne proposition. Il ne correspond ni à la précision moyenne des k réponses ni à Pass@1."
+  },
+  "notion-370": {
+    "explanation": "Exact Match attribue une réussite lorsque la réponse correspond exactement à une référence acceptée, après les éventuelles normalisations définies par le protocole. Cette règle est simple à reproduire pour des réponses courtes ou structurées, mais elle exige de préciser le traitement des espaces, de la casse, de la ponctuation et des différentes formulations admises.",
+    "example": "Exemple illustratif : une extraction doit retourner un identifiant de commande. Exact Match vérifie la chaîne attendue après suppression des espaces périphériques, sans accepter un identifiant proche ou un chiffre modifié.",
+    "misconception": "Une réponse peut être correcte dans son sens et échouer à Exact Match. La métrique devient trop restrictive si plusieurs formulations légitimes ne sont pas représentées."
+  },
+  "notion-371": {
+    "explanation": "BLEU et ROUGE comparent des correspondances lexicales entre un texte produit et des références, avec des variantes de calcul différentes. BLEU privilégie historiquement une précision modifiée des n-grams avec pénalité de brièveté, tandis que plusieurs variantes de ROUGE examinent la couverture ou les séquences communes ; ces mesures aident à comparer des systèmes dans un protocole stable.",
+    "example": "Exemple illustratif : une équipe compare des traductions avec BLEU et des résumés avec une variante de ROUGE documentée. Elle complète ces scores par une vérification du sens et des faits conservés.",
+    "misconception": "Un fort recouvrement de mots ne garantit pas une réponse vraie ou fidèle. Une négation modifiée peut inverser le sens tout en laissant presque tout le vocabulaire identique."
+  },
+  "notion-372": {
+    "explanation": "La Semantic Similarity estime la proximité de sens entre deux contenus, souvent en comparant des représentations vectorielles ou en utilisant un modèle spécialisé. Elle aide à retrouver des paraphrases et des documents proches, mais sa valeur dépend du modèle et de la tâche ; une proximité thématique ne démontre pas que deux propositions sont équivalentes.",
+    "example": "Exemple illustratif : un moteur retrouve « modifier mon adresse » lorsqu’un utilisateur demande « comment mettre à jour mes coordonnées postales ? », même si les deux formulations ne partagent pas tous leurs mots.",
+    "misconception": "Deux phrases contradictoires peuvent rester proches dans l’espace vectoriel parce qu’elles parlent du même sujet. La similarité ne remplace pas une vérification de l’implication ou des faits."
+  },
+  "notion-374": {
+    "explanation": "Une Pairwise Evaluation présente deux réponses à la même demande et demande laquelle satisfait le mieux des critères donnés, avec éventuellement une égalité. Cette comparaison peut être plus facile qu’une note absolue ; l’ordre, l’anonymisation des systèmes et la clarté de la grille doivent être contrôlés pour limiter les préférences induites par la présentation.",
+    "example": "Exemple illustratif : des évaluateurs comparent deux explications anonymes destinées à des débutants. Ils jugent leur exactitude et leur clarté, tandis que l’ordre d’affichage change entre les comparaisons.",
+    "misconception": "Une préférence relative ne démontre pas qu’une réponse est acceptable. Deux sorties peuvent être mauvaises, et le style ou la longueur peuvent influencer le choix."
+  },
+  "notion-375": {
+    "explanation": "La Human Evaluation confie le jugement de réponses à des personnes disposant de consignes et de critères explicites. Elle permet d’examiner des aspects difficiles à automatiser, comme l’utilité ou la qualité d’une justification ; sa fiabilité dépend de la compétence des évaluateurs, de leur formation, de l’échantillonnage et du traitement des désaccords.",
+    "example": "Exemple illustratif : plusieurs relecteurs évaluent des résumés avec une grille commune distinguant exactitude, omissions et clarté. Les cas où leurs jugements divergent sont examinés pour préciser les critères.",
+    "misconception": "L’avis humain n’est pas exempt de biais ou d’erreurs. Une seule note isolée ne fournit pas la même assurance qu’un protocole reproductible avec plusieurs jugements."
+  },
+  "notion-376": {
+    "explanation": "Un A/B Testing compare des variantes auprès de groupes ou de flux distincts, idéalement répartis aléatoirement, pour estimer leur effet dans les conditions d’usage. Les métriques et la durée d’analyse sont définies à l’avance ; il faut aussi surveiller la qualité de la répartition et les effets indésirables pour éviter de conclure sur une variation trompeuse.",
+    "example": "Exemple illustratif : une application compare deux présentations de réponses en répartissant les utilisateurs entre les variantes. Elle mesure la réussite de la tâche et les demandes de clarification, en conservant les mêmes fonctionnalités.",
+    "misconception": "Une hausse des clics ne signifie pas nécessairement une meilleure expérience. Le choix de la métrique et les différences entre groupes peuvent modifier complètement l’interprétation du résultat."
+  },
+  "notion-377": {
+    "explanation": "Le Model Collapse décrit une dégradation possible lorsque des générations successives de modèles apprennent sur des données produites par d’autres modèles dans certaines conditions. Les erreurs et les régions mal représentées peuvent s’amplifier, réduisant la diversité apprise ; la proportion, la qualité et le renouvellement des données réelles comptent donc dans la construction du corpus.",
+    "example": "Exemple illustratif : un corpus de descriptions est remplacé successivement par des descriptions générées à partir de lui. Les formulations rares peuvent disparaître progressivement, même si chaque nouvelle collection semble fluide.",
+    "misconception": "Toute donnée synthétique ne provoque pas un effondrement. Une génération contrôlée, une validation adaptée et la conservation de données diverses peuvent avoir des effets très différents."
+  },
+  "notion-378": {
+    "explanation": "La Data Leakage survient lorsque l’apprentissage ou les choix de développement bénéficient d’informations qui ne seraient pas disponibles au moment de la prédiction. Elle peut venir d’exemples partagés entre jeux, d’un prétraitement calculé sur le test ou d’une variable révélant le résultat ; elle rend alors l’évaluation artificiellement optimiste et peu représentative du déploiement.",
+    "example": "Exemple illustratif : les pages d’un même document sont réparties entre entraînement et test. Le modèle reconnaît des éléments presque identiques et semble mieux généraliser qu’il ne le ferait sur des documents nouveaux.",
+    "misconception": "Retirer les doublons exacts ne suffit pas toujours. Des exemples proches, des personnes partagées ou des informations du futur peuvent aussi faire fuiter le résultat à prédire."
+  },
+  "notion-379": {
+    "explanation": "Un Distribution Shift apparaît lorsque les données rencontrées diffèrent de celles utilisées pour développer ou évaluer le système. Le changement peut toucher le vocabulaire, les sources, les populations ou les relations entre variables ; surveiller ces écarts et réévaluer les cas concernés aide à déterminer si les performances et les seuils restent adaptés.",
+    "example": "Exemple illustratif : un assistant entraîné sur des tickets rédigés par des techniciens reçoit désormais des demandes de particuliers. Le vocabulaire et la quantité d’informations disponibles changent, ce qui nécessite une nouvelle évaluation.",
+    "misconception": "Un changement de distribution ne se limite pas à une panne visible. Le système peut continuer à répondre normalement tout en faisant davantage d’erreurs sur un nouveau groupe."
+  },
+  "notion-380": {
+    "explanation": "Un cas OOD se situe hors de la distribution de référence considérée pour un modèle ou une évaluation. Il peut être une entrée inhabituelle ou relever d’un contexte différent ; identifier ces cas aide à prévoir une abstention ou une vérification supplémentaire, mais la frontière entre familier et nouveau dépend du problème et n’est pas toujours nette.",
+    "example": "Exemple illustratif : un outil conçu pour classer des photographies de produits reçoit un schéma technique. Cette entrée peut être OOD même si le format du fichier reste une image valide.",
+    "misconception": "OOD ne signifie pas nécessairement incompréhensible ou impossible à traiter. Inversement, une entrée qui semble familière à un humain peut sortir du périmètre correctement appris."
+  },
+  "notion-381": {
+    "explanation": "Un Regression Test rejoue des scénarios connus après une modification pour vérifier que des comportements attendus restent corrects. Pour une application d’AI, il peut contrôler les sorties, les actions et l’état obtenu ; des critères stables et des essais adaptés à la variabilité permettent de distinguer une dégradation réelle d’une différence de formulation sans conséquence.",
+    "example": "Exemple illustratif : après avoir changé le prompt d’un assistant, l’équipe rejoue des demandes contenant des informations manquantes et vérifie qu’il continue à demander la précision nécessaire avant de produire le document.",
+    "misconception": "Un Regression Test ne mesure pas toutes les nouvelles capacités. Réussir les cas historiques ne garantit ni une couverture complète ni l’absence d’erreurs sur des situations inédites."
+  },
+  "notion-382": {
+    "explanation": "Une Red Team Evaluation soumet le système à des situations adversariales conçues pour révéler des comportements problématiques dans un périmètre autorisé. Elle peut examiner la confidentialité, le respect des permissions ou la résistance à des instructions malveillantes ; les scénarios, les preuves et les critères de réussite sont documentés pour comparer les protections et reproduire les échecs.",
+    "example": "Exemple illustratif : dans un environnement de test, une équipe place une instruction trompeuse dans un document fictif et vérifie que l’assistant la traite comme une donnée sans élargir ses accès.",
+    "misconception": "L’absence d’échec dans quelques scénarios ne prouve pas une sécurité générale. Une évaluation adversariale explore des risques définis et doit évoluer avec le système et ses usages."
+  },
+  "notion-383": {
+    "explanation": "La Pareto Frontier rassemble les solutions pour lesquelles aucune autre option évaluée n’est au moins aussi bonne sur tous les critères et strictement meilleure sur au moins l’un d’eux. Elle aide à comparer qualité, coût et latence lorsque ces objectifs se concurrencent ; le choix final dépend des contraintes de l’application et de la valeur accordée à chaque compromis.",
+    "example": "Exemple illustratif : une équipe compare plusieurs configurations d’assistant. Certaines sont plus rapides, d’autres plus précises ; elle écarte une configuration à la fois plus lente, plus coûteuse et moins bonne qu’une autre.",
+    "misconception": "Être sur la frontière de Pareto ne désigne pas un vainqueur unique. La frontière dépend des options testées, des métriques retenues et de l’incertitude des mesures."
+  }
+}

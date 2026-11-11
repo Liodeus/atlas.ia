@@ -5,7 +5,7 @@
     "entries": [
       {
         "id": "notion-1",
-        "name": "IA (Artificial Intelligence)",
+        "name": "AI (Artificial Intelligence)",
         "definition": "ensemble de techniques permettant à des systèmes d'accomplir des tâches associées à l'intelligence.",
         "priority": true,
         "theme": 1
@@ -230,7 +230,7 @@
       {
         "id": "notion-33",
         "name": "Encoder-Decoder / Seq2Seq",
-        "definition": "architecture qui encode une entrée puis génère une sortie correspondante.",
+        "definition": "Encoder-Decoder désigne une architecture qui encode l’entrée puis génère une sortie ; Seq2Seq désigne la transformation d’une séquence en une autre, souvent réalisée par cette architecture.",
         "priority": false,
         "theme": 1
       },
@@ -326,8 +326,8 @@
       },
       {
         "id": "notion-46",
-        "name": "FFN / MLP (Feed-Forward Network)",
-        "definition": "sous-réseau traitant les représentations des tokens après l'attention.",
+        "name": "FFN (Feed-Forward Network) / MLP (Multilayer Perceptron)",
+        "definition": "FFN signifie Feed-Forward Network et MLP, Multilayer Perceptron. Dans un Transformer classique, le FFN est généralement un MLP appliqué séparément à chaque position.",
         "priority": true,
         "theme": 2
       },
@@ -355,7 +355,7 @@
       {
         "id": "notion-50",
         "name": "Pre-Norm / Post-Norm",
-        "definition": "position de la normalisation avant ou après un sous-bloc.",
+        "definition": "Pre-Norm place la normalisation avant le sous-bloc ; Post-Norm la place après l’addition du résultat du sous-bloc et du chemin résiduel, dans les schémas usuels.",
         "priority": false,
         "theme": 2
       },
@@ -438,7 +438,7 @@
       },
       {
         "id": "notion-62",
-        "name": "Vocabulary Head / LM Head",
+        "name": "LM Head (Language Modeling Head)",
         "definition": "projection des états internes vers les scores des tokens du vocabulaire.",
         "priority": false,
         "theme": 2
@@ -467,7 +467,7 @@
       {
         "id": "notion-66",
         "name": "Steering Vector / Activation Steering",
-        "definition": "modification contrôlée de certaines activations pour influencer le comportement d'un modèle.",
+        "definition": "Activation Steering modifie des activations pendant le calcul pour orienter le comportement ; un Steering Vector est un vecteur utilisé pour cette intervention.",
         "priority": false,
         "theme": 2
       },
@@ -536,7 +536,7 @@
       {
         "id": "notion-75",
         "name": "Sliding Window Attention (SWA)",
-        "definition": "attention causale limitée à une fenêtre récente glissante.",
+        "definition": "Attention limitée à une fenêtre glissante autour de chaque position ; dans une variante causale, seules les positions autorisées du passé et la position courante sont accessibles.",
         "priority": false,
         "theme": 3
       },
@@ -662,7 +662,7 @@
       {
         "id": "notion-93",
         "name": "Attention Sink",
-        "definition": "positions initiales absorbant souvent une part importante de l'attention, utiles à certaines stratégies de cache.",
+        "definition": "position recevant une part importante de l’Attention, souvent parmi les positions initiales, sans nécessairement porter une information importante pour le sens.",
         "priority": false,
         "theme": 3
       },
@@ -690,14 +690,14 @@
       {
         "id": "notion-97",
         "name": "Context Rot / Lost in the Middle",
-        "definition": "dégradation possible de l'exploitation d'informations dans des contextes longs.",
+        "definition": "Context Rot désigne une dégradation possible des performances lorsque le contexte s’allonge. Lost in the Middle désigne une difficulté particulière à exploiter une information placée au milieu du contexte.",
         "priority": false,
         "theme": 3
       },
       {
         "id": "notion-98",
         "name": "SSM (State Space Model)",
-        "definition": "famille de modèles séquentiels utilisant un état interne plutôt qu'une attention complète classique.",
+        "definition": "modèle décrivant l’évolution d’un état interne ; certaines architectures séquentielles l’utilisent pour transmettre l’information au fil des entrées.",
         "priority": true,
         "theme": 3
       },
@@ -759,7 +759,7 @@
       {
         "id": "notion-106",
         "name": "Expert",
-        "definition": "sous-réseau spécialisé, souvent une couche FFN, sélectionné par le routeur.",
+        "definition": "sous-réseau d’un MoE, souvent un FFN ; il peut être sélectionné par un Router ou utilisé comme Shared Expert, sans spécialité humaine prédéfinie.",
         "priority": false,
         "theme": 4
       },
@@ -898,7 +898,7 @@
       {
         "id": "notion-125",
         "name": "Subword Tokenization",
-        "definition": "découpage en unités plus petites que les mots entiers.",
+        "definition": "découpage utilisant un vocabulaire qui peut contenir des mots entiers et des fragments de mots.",
         "priority": false,
         "theme": 5
       },
@@ -1010,7 +1010,7 @@
       {
         "id": "notion-141",
         "name": "Top-p / Nucleus Sampling",
-        "definition": "tirage parmi le plus petit ensemble de tokens dépassant un seuil de probabilité cumulée.",
+        "definition": "sélection du plus petit ensemble des Tokens les plus probables dont la probabilité cumulée atteint ou dépasse p, puis tirage après renormalisation de leurs probabilités.",
         "priority": true,
         "theme": 5
       },
@@ -1052,14 +1052,14 @@
       {
         "id": "notion-147",
         "name": "Streaming",
-        "definition": "transmission progressive des tokens au lieu d'attendre la sortie entière.",
+        "definition": "transmission progressive de fragments de sortie, qui peuvent regrouper plusieurs Tokens, sans attendre la réponse entière.",
         "priority": false,
         "theme": 5
       },
       {
         "id": "notion-148",
         "name": "Determinism / Seed",
-        "definition": "contrôle partiel de la reproductibilité de la génération ; non garanti entre tous environnements.",
+        "definition": "Determinism désigne la reproduction d’un même résultat dans des conditions fixées ; une Seed initialise un générateur pseudo-aléatoire et ne garantit pas seule cette reproductibilité.",
         "priority": false,
         "theme": 5
       },
@@ -1114,7 +1114,7 @@
       {
         "id": "notion-155",
         "name": "Policy (politique)",
-        "definition": "règle ou modèle donnant une distribution d'actions à choisir dans un état.",
+        "definition": "règle de choix d’une action à partir d’un état ou d’une observation ; elle peut être déterministe ou définir une distribution de probabilités sur les actions.",
         "priority": false,
         "theme": 6
       },
@@ -1128,7 +1128,7 @@
       {
         "id": "notion-157",
         "name": "Epoch",
-        "definition": "passage sur une fois l'ensemble de données considéré.",
+        "definition": "passage complet sur l’ensemble de données considéré.",
         "priority": false,
         "theme": 6
       },
@@ -1358,7 +1358,7 @@
       {
         "id": "notion-189",
         "name": "SFT (Supervised Fine-Tuning)",
-        "definition": "adaptation supervisée sur des exemples de consignes et de bonnes réponses.",
+        "definition": "Fine-tuning supervisé sur des exemples et leurs cibles, souvent des consignes associées à des réponses attendues pour les LLM.",
         "priority": true,
         "theme": 7
       },
@@ -1414,7 +1414,7 @@
       {
         "id": "notion-197",
         "name": "Prompt Tuning / Soft Prompt",
-        "definition": "adaptation via vecteurs de prompt appris, différents d'un prompt texte.",
+        "definition": "Prompt Tuning apprend des vecteurs de Prompt, appelés Soft Prompt, pour adapter le comportement d’un modèle dont les Weights de base restent gelés.",
         "priority": false,
         "theme": 7
       },
@@ -1561,7 +1561,7 @@
       {
         "id": "notion-218",
         "name": "Alignment Tax / Capability Trade-off",
-        "definition": "possible coût de performance associé à certaines contraintes de comportement.",
+        "definition": "Alignment Tax désigne un éventuel coût en capacité lié à l’Alignment ; Capability Trade-off désigne plus généralement un compromis entre capacités ou objectifs.",
         "priority": false,
         "theme": 7
       },
@@ -1784,7 +1784,7 @@
       {
         "id": "notion-249",
         "name": "Concurrency",
-        "definition": "nombre de requêtes pouvant être traitées simultanément.",
+        "definition": "nombre de requêtes simultanément en cours, selon le périmètre mesuré ; la limite de Concurrency fixe le maximum autorisé.",
         "priority": false,
         "theme": 8
       },
@@ -2112,7 +2112,7 @@
       {
         "id": "notion-295",
         "name": "Retrieval Recall / Precision",
-        "definition": "capacité de récupération à trouver les bons documents, avec peu d'intrus.",
+        "definition": "Retrieval Recall mesure la part des documents pertinents retrouvés ; Retrieval Precision mesure la part des résultats récupérés qui sont pertinents.",
         "priority": false,
         "theme": 9
       },
@@ -2126,7 +2126,7 @@
       {
         "id": "notion-297",
         "name": "Index Freshness",
-        "definition": "caractère récent des documents présents dans l'index de recherche.",
+        "definition": "degré de mise à jour de l’index par rapport aux créations, modifications et suppressions du corpus source.",
         "priority": false,
         "theme": 9
       },
@@ -2397,14 +2397,14 @@
       {
         "id": "notion-334",
         "name": "Model Router / Model Cascading",
-        "definition": "sélection du modèle le plus approprié en fonction d'une requête.",
+        "definition": "Un Model Router choisit un modèle pour une requête ; le Model Cascading consulte des modèles successifs selon des critères de poursuite ou d’arrêt.",
         "priority": false,
         "theme": 11
       },
       {
         "id": "notion-335",
-        "name": "A2A (Agent-to-Agent)",
-        "definition": "famille de conventions ou protocoles pour faire communiquer des agents entre eux.",
+        "name": "A2A (Agent2Agent)",
+        "definition": "protocole ouvert de communication et de collaboration entre agents, distinct du concept général de communication agent-to-agent.",
         "priority": false,
         "theme": 11
       },
@@ -2488,7 +2488,7 @@
       {
         "id": "notion-347",
         "name": "Idempotency",
-        "definition": "propriété d'une opération répétée sans effet additionnel indésirable.",
+        "definition": "propriété selon laquelle répéter la même opération produit le même effet attendu sur l’état du système qu’une seule exécution.",
         "priority": false,
         "theme": 11
       },
@@ -2529,7 +2529,7 @@
       {
         "id": "notion-352",
         "name": "Eval / Evaluation Harness",
-        "definition": "protocole ou logiciel qui exécute et mesure des tests de modèles.",
+        "definition": "Un Eval est une évaluation avec des cas et des critères ; un Evaluation Harness est l’infrastructure qui exécute les évaluations, recueille les sorties et calcule les scores.",
         "priority": true,
         "theme": 12
       },
@@ -2676,7 +2676,7 @@
       {
         "id": "notion-373",
         "name": "LLM-as-a-Judge",
-        "definition": "utilisation d'un autre modèle pour noter une réponse ou une interaction.",
+        "definition": "utilisation d’un LLM comme juge pour noter ou comparer des réponses selon des critères définis.",
         "priority": true,
         "theme": 12
       },
@@ -2850,7 +2850,7 @@
       {
         "id": "notion-397",
         "name": "Backdoor / Trigger",
-        "definition": "comportement caché activé par une condition particulière.",
+        "definition": "Une Backdoor est un comportement malveillant implanté dans un modèle ; son Trigger est la condition qui déclenche ce comportement.",
         "priority": false,
         "theme": 13
       },
@@ -3051,8 +3051,8 @@
       },
       {
         "id": "notion-425",
-        "name": "Grounded Vision",
-        "definition": "liaison entre affirmations textuelles et régions ou éléments visuels.",
+        "name": "Visual Grounding",
+        "definition": "association d’une expression textuelle à la région ou à l’élément visuel qu’elle désigne.",
         "priority": false,
         "theme": 14
       },
@@ -3122,7 +3122,7 @@
       {
         "id": "notion-435",
         "name": "Guidance / CFG (Classifier-Free Guidance)",
-        "definition": "technique renforçant l'adhésion d'une génération aux conditions demandées.",
+        "definition": "La Guidance oriente la génération vers des conditions ; la Classifier-Free Guidance combine des prédictions conditionnelles et non conditionnelles sans classifieur séparé.",
         "priority": false,
         "theme": 14
       },
@@ -3422,7 +3422,7 @@
       {
         "id": "notion-477",
         "name": "API (Application Programming Interface)",
-        "definition": "interface logicielle structurée pour appeler un service.",
+        "definition": "interface définissant comment des composants logiciels interagissent, par exemple par des fonctions locales ou des requêtes réseau.",
         "priority": false,
         "theme": 15
       },
@@ -3596,7 +3596,7 @@
       {
         "id": "notion-501",
         "name": "Model Variant / Size",
-        "definition": "déclinaison différant par sa taille, ses capacités ou son mode d'emploi.",
+        "definition": "Une Model Variant est une déclinaison d’un modèle ; la Model Size désigne sa taille, souvent exprimée par son nombre de paramètres.",
         "priority": false,
         "theme": 16
       },
@@ -3609,7 +3609,7 @@
       },
       {
         "id": "notion-503",
-        "name": "ArXiv",
+        "name": "arXiv",
         "definition": "plateforme de diffusion de prépublications scientifiques.",
         "priority": false,
         "theme": 16

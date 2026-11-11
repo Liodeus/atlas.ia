@@ -81,7 +81,7 @@
           "heading": "Coopérer sans perdre l’objectif",
           "paragraphs": [
             "Un Multi-Agent System utilise plusieurs agents. Un Supervisor Agent peut déléguer une recherche à un Sub-Agent spécialisé puis vérifier son résultat. Un Handoff transfère une responsabilité ou le contrôle à un autre agent, avec le contexte utile : le destinataire doit connaître l’objectif, ce qui est déjà établi et ce qui reste incertain.",
-            "A2A, pour Agent-to-Agent, regroupe des conventions ou protocoles de communication entre agents. Communiquer ne suffit pas à travailler utilement ensemble. Deux agents peuvent répéter une erreur commune ou se renvoyer une tâche sans fin. Un résultat de délégation doit donc préciser sa provenance, ses limites et un critère observable de fin."
+            "A2A, pour Agent2Agent, est un protocole ouvert de communication et de collaboration entre agents. Communiquer ne suffit pas à travailler utilement ensemble. Deux agents peuvent répéter une erreur commune ou se renvoyer une tâche sans fin. Un résultat de délégation doit donc préciser sa provenance, ses limites et un critère observable de fin."
           ]
         }
       ],
@@ -142,7 +142,7 @@
         {
           "heading": "Rejouer une étape sans répéter ses effets",
           "paragraphs": [
-            "L’Idempotency permet de répéter une opération sans ajouter un effet indésirable. Une consultation se rejoue généralement plus facilement qu’un envoi de message. Pour une action à effet externe, l’application peut associer un identifiant stable à l’opération afin de reconnaître une nouvelle tentative de la même demande.",
+            "L’Idempotency signifie que répéter la même opération produit le même effet attendu sur l’état du système qu’une seule exécution. Une consultation se rejoue généralement plus facilement qu’un envoi de message. Pour une action à effet externe, l’application peut associer un identifiant stable à l’opération afin de reconnaître une nouvelle tentative de la même demande.",
             "Un Rollback revient à un état antérieur lorsque cela est possible. Restaurer un fichier peut être réalisable ; faire oublier à un destinataire un message reçu ne l’est pas. Il faut donc distinguer les actions réversibles, celles qui exigent une compensation et celles dont l’effet ne peut pas être annulé."
           ]
         }
@@ -192,7 +192,7 @@
           "heading": "Commencer par une tâche observable",
           "paragraphs": [
             "« Répondre correctement » est trop vague pour évaluer un assistant. Précisez ce qu’il reçoit, ce qu’il doit produire et ce qui constituerait un échec. Pour un assistant documentaire, la tâche peut être : répondre à une question de livraison à partir des conditions fournies et signaler une information absente.",
-            "Un Benchmark propose un ensemble d’épreuves permettant des comparaisons. Un Eval ou Evaluation Harness organise leur exécution : versions, entrées, critères et collecte des résultats. Le logiciel de test ne choisit pas à votre place ce qui mérite d’être considéré comme une bonne réponse."
+            "Un Benchmark propose un ensemble d’épreuves permettant des comparaisons. Un Eval est une évaluation définie par des cas et des critères de réussite. Un Evaluation Harness est l’infrastructure qui exécute ces évaluations, collecte les sorties et calcule les scores. Le logiciel de test ne choisit pas à votre place ce qui mérite d’être considéré comme une bonne réponse."
           ]
         },
         {
@@ -577,7 +577,7 @@
           "heading": "Lire, décrire et répondre ne sont pas la même tâche",
           "paragraphs": [
             "L’OCR, Optical Character Recognition, cherche à extraire le texte présent dans une image. L’Image Captioning produit une description. Le Visual Question Answering, ou VQA, répond à une question sur l’image. Un système peut réussir à reconnaître une scène tout en se trompant sur un chiffre minuscule imprimé dans cette scène.",
-            "La Grounded Vision relie les affirmations à des régions ou éléments visuels. Pour une facture photographiée, il ne suffit pas de produire un montant plausible : il faut vérifier que le montant correspond à la zone attendue, par exemple le total et non une ligne de taxe. Le lien entre une réponse et son appui visuel compte autant que la fluidité de la phrase."
+            "Le Visual Grounding relie une expression textuelle à la région ou à l’élément visuel qu’elle désigne. Pour une facture photographiée, il ne suffit pas de produire un montant plausible : il faut vérifier que le montant correspond à la zone attendue, par exemple le total et non une ligne de taxe. Le lien entre une réponse et son appui visuel compte autant que la fluidité de la phrase."
           ]
         },
         {
@@ -600,7 +600,7 @@
         {
           "heading": "Cas guidé : lire une affiche photographiée",
           "paragraphs": [
-            "L’exercice repose sur une description fictive : une affiche présente le titre « Atelier vélo », la date « 21 juin » au centre et le lieu « Maison des associations » en bas. Préparez trois demandes destinées à un système visuel : décrire l’affiche, transcrire la date et localiser le lieu. Elles correspondent respectivement à Image Captioning, OCR et Grounded Vision ; un même produit peut combiner ces capacités.",
+            "L’exercice repose sur une description fictive : une affiche présente le titre « Atelier vélo », la date « 21 juin » au centre et le lieu « Maison des associations » en bas. Préparez trois demandes destinées à un système visuel : décrire l’affiche, transcrire la date et localiser le lieu. Elles correspondent respectivement à Image Captioning, OCR et Visual Grounding ; un même produit peut combiner ces capacités.",
             "Voici un retour fictif à examiner : « L’affiche annonce un atelier vélo ; la date semble être le 27 juin ; le lieu figure en bas. » Par rapport à la description fournie, le thème et la localisation sont cohérents, mais la date est incorrecte. Le mot « semble » signale une hésitation ; il ne corrige pas l’erreur. Décrivez ce qu’il faudrait vérifier sur une image réelle avant de publier cette date.",
             "On vous donne ensuite un second résultat fictif, obtenu après recadrage : « Date lue : 21 juin ». Ce changement est compatible avec une difficulté de lecture du détail initial, sans démontrer à lui seul sa cause ni la fiabilité générale du système. Le contrôle pertinent serait de comparer la sortie au segment source. Dans cet exercice textuel, vous pouvez analyser les résultats fournis, mais pas mesurer réellement la qualité visuelle du modèle."
           ]
@@ -1013,7 +1013,7 @@
         {
           "heading": "Distinguer description de recherche et preuve de résultat",
           "paragraphs": [
-            "Un Research Paper présente une méthode, des expériences et leurs conclusions. Un Preprint est un manuscrit diffusé avant un éventuel examen formel par les pairs. ArXiv est une plateforme de diffusion de prépublications ; le dépôt d’un texte n’équivaut pas à une certification de ses conclusions.",
+            "Un Research Paper présente une méthode, des expériences et leurs conclusions. Un Preprint est un manuscrit diffusé avant un éventuel examen formel par les pairs. arXiv est une plateforme de diffusion de prépublications ; le dépôt d’un texte n’équivaut pas à une certification de ses conclusions.",
             "Pour lire une annonce de performance, cherchez la tâche exacte, les données, les conditions de comparaison et les limites signalées. Une méthode prometteuse dans un article peut demander un matériel ou un réglage différent de celui disponible dans votre application."
           ]
         },
@@ -1064,7 +1064,7 @@
         {
           "heading": "Comparer la variante réellement utilisable",
           "paragraphs": [
-            "Une Model Family rassemble des variantes apparentées. Une Model Variant ou Size peut changer la taille, les capacités, le contexte accepté ou le mode d’emploi. Deux modèles portant une partie du même nom ne se substituent pas automatiquement l’un à l’autre dans une application.",
+            "Une Model Family rassemble des variantes apparentées. Une Model Variant est une déclinaison qui peut différer par ses capacités, son contexte accepté ou son mode d’emploi. La Model Size, souvent exprimée en nombre de paramètres, est une de ses caractéristiques ; elle ne décrit pas à elle seule la variante. Deux modèles portant une partie du même nom ne se substituent pas automatiquement l’un à l’autre dans une application.",
             "Frontier Model est un terme informel pour des modèles situés à la pointe de certaines capacités disponibles. Un Leaderboard classe des résultats obtenus selon des évaluations précises. Ces étiquettes et classements aident à repérer des candidats, mais ne remplacent pas un test sur les entrées, les sorties et les contraintes de votre usage."
           ]
         },

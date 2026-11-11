@@ -1,0 +1,92 @@
+{
+  "notion-350": [
+    "https://arxiv.org/abs/2211.09110"
+  ],
+  "notion-353": [
+    "https://www.anthropic.com/research/demystifying-evals-for-ai-agents"
+  ],
+  "notion-354": [
+    "https://www.anthropic.com/research/demystifying-evals-for-ai-agents"
+  ],
+  "notion-355": [
+    "https://aclanthology.org/2020.acl-main.173.pdf"
+  ],
+  "notion-356": [
+    "https://arxiv.org/abs/2109.07958"
+  ],
+  "notion-357": [
+    "https://arxiv.org/abs/2309.15217"
+  ],
+  "notion-358": [
+    "https://arxiv.org/abs/2306.05685"
+  ],
+  "notion-359": [
+    "https://arxiv.org/abs/2211.09110"
+  ],
+  "notion-360": [
+    "https://scikit-learn.org/stable/modules/calibration.html"
+  ],
+  "notion-361": [
+    "https://scikit-learn.org/stable/modules/calibration.html"
+  ],
+  "notion-363": [
+    "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html"
+  ],
+  "notion-364": [
+    "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html"
+  ],
+  "notion-366": [
+    "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html"
+  ],
+  "notion-367": [
+    "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html"
+  ],
+  "notion-368": [
+    "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html"
+  ],
+  "notion-369": [
+    "https://arxiv.org/abs/2107.03374",
+    "https://github.com/openai/human-eval"
+  ],
+  "notion-370": [
+    "https://huggingface.co/spaces/evaluate-metric/exact_match/blob/main/README.md"
+  ],
+  "notion-371": [
+    "https://aclanthology.org/P02-1040.pdf",
+    "https://aclanthology.org/W04-1013.pdf"
+  ],
+  "notion-372": [
+    "https://arxiv.org/abs/1908.10084"
+  ],
+  "notion-374": [
+    "https://arxiv.org/abs/2306.05685"
+  ],
+  "notion-375": [
+    "https://aclanthology.org/2020.acl-main.173.pdf"
+  ],
+  "notion-376": [
+    "https://www.microsoft.com/en-us/research/publication/online-experimentation-at-microsoft/"
+  ],
+  "notion-377": [
+    "https://arxiv.org/abs/2305.17493"
+  ],
+  "notion-378": [
+    "https://scikit-learn.org/stable/common_pitfalls.html"
+  ],
+  "notion-379": [
+    "https://arxiv.org/abs/2012.07421"
+  ],
+  "notion-380": [
+    "https://arxiv.org/abs/2012.07421"
+  ],
+  "notion-381": [
+    "https://www.anthropic.com/research/demystifying-evals-for-ai-agents"
+  ],
+  "notion-382": [
+    "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+  ],
+  "notion-383": [
+    "https://arxiv.org/abs/2211.09110",
+    "https://github.com/MOEAFramework/MOEAFramework/blob/master/docs/intro.md"
+  ]
+}

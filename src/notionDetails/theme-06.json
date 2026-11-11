@@ -1,0 +1,167 @@
+{
+  "notion-151": {
+    "explanation": "Le Training Dataset fournit les observations dont le modèle extrait ses régularités pendant l'apprentissage. Sa composition détermine les langues, situations et styles rencontrés ; les documents sont généralement nettoyés, transformés en exemples puis mélangés selon une stratégie explicite, car une source surreprésentée influence davantage les mises à jour.",
+    "example": "Exemple illustratif : pour préparer un assistant de bibliothèque, une équipe rassemble des notices, des descriptions de collections et des questions documentaires, puis conserve la provenance et la version de chaque source.",
+    "misconception": "Un corpus volumineux n'est pas nécessairement représentatif ni utilisable tel quel. Les doublons, erreurs, droits d'utilisation et déséquilibres de domaines doivent être examinés séparément."
+  },
+  "notion-152": {
+    "explanation": "Le Self-Supervised Learning fabrique une tâche d'apprentissage à partir des données elles-mêmes : prédire un token masqué, le token suivant ou une autre vue d'une observation. Le système dispose ainsi de cibles sans annoter chaque exemple manuellement, et apprend des représentations réutilisables pour d'autres tâches après adaptation.",
+    "example": "Exemple illustratif : dans des notices techniques, certains mots sont masqués. Le modèle apprend à les retrouver grâce au reste de la phrase, sans qu'une personne rédige une réponse pour chaque notice.",
+    "misconception": "Auto-supervisé ne signifie pas sans objectif ni sans intervention humaine : le choix des données, du masquage et de la fonction de perte encadre l'apprentissage."
+  },
+  "notion-153": {
+    "explanation": "Le Supervised Learning associe chaque entrée à une cible attendue et ajuste le modèle pour réduire l'écart entre sa prédiction et cette cible. Les annotations indiquent directement le comportement recherché, qu'il s'agisse de classer un message, estimer une valeur ou produire une réponse rédigée à partir d'une consigne.",
+    "example": "Exemple illustratif : des demandes d'assistance sont étiquetées « facturation », « livraison » ou « compte ». Le modèle apprend cette correspondance, puis propose une catégorie pour les nouveaux messages reçus.",
+    "misconception": "Une étiquette fournit un signal d'entraînement, pas une vérité garantie. Des annotations incohérentes ou un changement de population peuvent dégrader les décisions après déploiement."
+  },
+  "notion-154": {
+    "explanation": "Le Unsupervised Learning recherche des structures dans des observations sans recevoir, pour chaque exemple, la réponse finale souhaitée. Des méthodes de regroupement rapprochent les observations similaires, tandis que d'autres réduisent leurs dimensions ou modélisent leur distribution ; le résultat doit ensuite être interprété en fonction de l'usage et des caractéristiques retenues.",
+    "example": "Exemple illustratif : un musée regroupe automatiquement ses descriptions d'objets selon leurs caractéristiques textuelles. Une documentaliste examine ensuite les groupes pour comprendre s'ils reflètent des matériaux, des périodes ou des usages.",
+    "misconception": "Un groupe découvert automatiquement n'est pas une catégorie naturelle prouvée. Il dépend de la représentation, de la mesure de proximité et des paramètres choisis."
+  },
+  "notion-155": {
+    "explanation": "Une Policy transforme l'information disponible sur une situation en action, ou en probabilités sur les actions possibles. Dans le Reinforcement Learning, c'est son comportement que l'on cherche à améliorer à partir des récompenses ; pour un modèle de langage, choisir le prochain token peut être considéré comme une action dépendant du contexte.",
+    "example": "Exemple illustratif : un agent de jeu reçoit la position des pièces et attribue une probabilité à chaque déplacement autorisé. L'entraînement modifie ces probabilités selon les conséquences des parties jouées.",
+    "misconception": "La Policy n'est ni la récompense ni une règle de sécurité. Elle décrit comment choisir une action, sans garantir que cette action sera pertinente ou autorisée."
+  },
+  "notion-156": {
+    "explanation": "Le Reinforcement Learning apprend à choisir des actions en fonction des récompenses obtenues et de leurs conséquences futures. L'agent collecte des expériences, estime quels comportements favorisent son objectif et modifie sa Policy ; cette logique convient aux décisions séquentielles, où une action utile peut ne produire son bénéfice qu'après plusieurs étapes.",
+    "example": "Exemple illustratif : dans un simulateur d'entrepôt, un robot choisit ses déplacements et reçoit un signal lorsqu'une livraison aboutit. Il apprend progressivement à tenir compte des détours et des impasses.",
+    "misconception": "Une récompense élevée ne prouve pas que l'objectif réel est atteint. L'agent peut exploiter les défauts du simulateur ou une mesure incomplète de la réussite."
+  },
+  "notion-157": {
+    "explanation": "Une Epoch correspond à un parcours complet du jeu d'entraînement, généralement découpé en plusieurs lots. Répéter ces parcours permet au modèle de revoir les exemples avec des paramètres modifiés ; pour les très grands corpus ou les flux continus, on suit aussi le nombre de tokens traités et de mises à jour, parfois plus informatif.",
+    "example": "Exemple illustratif : un classifieur parcourt toutes les images de sa collection d'apprentissage, puis recommence avec un ordre différent. Chaque parcours complet compte comme une Epoch, indépendamment du découpage en lots.",
+    "misconception": "Une Epoch n'est pas une mise à jour des poids. Elle en contient généralement plusieurs, et revoir les mêmes données trop souvent peut favoriser leur mémorisation."
+  },
+  "notion-158": {
+    "explanation": "Un Batch réunit des exemples que le matériel traite ensemble afin de mutualiser les calculs. En entraînement, leur contribution à la Loss sert à calculer des gradients ; un Mini-batch ne couvre qu'une partie du dataset et fournit une estimation moins coûteuse que le calcul sur l'ensemble des données à chaque mise à jour.",
+    "example": "Exemple illustratif : un modèle de classification reçoit un petit groupe de courriels en une seule passe. Leurs erreurs sont agrégées avant de calculer les gradients utilisés par l'Optimizer.",
+    "misconception": "Les exemples d'un Batch ne deviennent pas une seule conversation. Leur traitement conjoint exige de préserver les masques et les frontières propres à chaque séquence."
+  },
+  "notion-159": {
+    "explanation": "Le Batch Size règle combien d'exemples contribuent à un lot et influence la mémoire nécessaire, l'efficacité matérielle et la variabilité du gradient. Il faut distinguer le lot traité par un appareil du lot effectif utilisé pour une mise à jour, qui peut réunir plusieurs appareils et plusieurs étapes de Gradient Accumulation.",
+    "example": "Exemple illustratif : une équipe réduit le lot local lorsque des textes plus longs saturent la mémoire. Elle accumule ensuite plusieurs micro-lots pour conserver une quantité comparable de données par mise à jour.",
+    "misconception": "Augmenter le Batch Size ne garantit pas un meilleur modèle. Cela change la dynamique d'apprentissage et peut nécessiter d'adapter le Learning Rate ou le calendrier d'entraînement."
+  },
+  "notion-160": {
+    "explanation": "Le Gradient rassemble les dérivées de la Loss par rapport aux paramètres : il décrit comment de petites variations locales influencent cette Loss. La Backpropagation permet de le calculer efficacement dans un réseau, puis l'Optimizer s'en sert pour choisir une mise à jour ; le gradient seul ne contient ni pas d'apprentissage ni mémoire des étapes passées.",
+    "example": "Exemple illustratif : un classifieur attribue trop peu de probabilité à la bonne catégorie. Le calcul du gradient indique comment chaque poids contribue localement à cette erreur avant la mise à jour.",
+    "misconception": "Le Gradient indique une tendance locale, pas le meilleur chemin global. Des gradients instables, presque nuls ou mal normalisés peuvent rendre l'apprentissage difficile."
+  },
+  "notion-162": {
+    "explanation": "La Gradient Descent modifie les paramètres dans la direction opposée au gradient de la fonction à minimiser, avec une amplitude fixée par le Learning Rate. Dans sa variante stochastique, les gradients proviennent de lots plutôt que du dataset complet, ce qui rend les mises à jour moins coûteuses mais plus variables.",
+    "example": "Exemple illustratif : une régression ajuste progressivement ses coefficients pour réduire l'erreur sur des estimations de consommation. Chaque étape utilise la pente locale de cette erreur pour déplacer les coefficients.",
+    "misconception": "Descendre selon le gradient ne garantit pas que chaque étape réduira la Loss mesurée. Un pas trop grand ou un lot atypique peut produire l'effet inverse."
+  },
+  "notion-163": {
+    "explanation": "La Gradient Accumulation additionne les contributions de plusieurs micro-lots avant d'effectuer une seule mise à jour des paramètres. Elle permet d'atteindre un Batch Size effectif plus grand sans conserver simultanément toutes les activations ; la normalisation des pertes, notamment pour des séquences de longueurs différentes, doit respecter la pondération souhaitée des exemples ou tokens.",
+    "example": "Exemple illustratif : un GPU ne peut traiter qu'un petit lot de longs documents. L'équipe effectue plusieurs passes avant l'appel à l'Optimizer, puis remet les gradients accumulés à zéro.",
+    "misconception": "L'accumulation n'augmente pas la mémoire disponible et ne reproduit pas toujours exactement un grand lot : certaines couches, les arrondis et les normalisations peuvent modifier le résultat."
+  },
+  "notion-164": {
+    "explanation": "L'Optimizer transforme les gradients en modifications concrètes des paramètres en appliquant une règle de mise à jour. Selon l'algorithme, il conserve un historique, adapte l'amplitude par paramètre ou applique une Weight Decay ; son état fait donc partie des éléments à sauvegarder lorsqu'on souhaite reprendre fidèlement un entraînement interrompu.",
+    "example": "Exemple illustratif : après chaque calcul de gradients, un script appelle AdamW pour modifier les poids. Le fichier de reprise conserve aussi les moyennes internes utilisées par cet Optimizer.",
+    "misconception": "L'Optimizer ne choisit pas les exemples ni l'objectif métier. Un algorithme sophistiqué ne compense pas automatiquement une mauvaise Loss ou des données incorrectes."
+  },
+  "notion-165": {
+    "explanation": "Adam adapte les mises à jour à partir de moyennes mobiles des gradients et de leurs carrés, ce qui ajuste l'échelle de déplacement selon les paramètres. AdamW sépare explicitement la décroissance des poids de ce mécanisme adaptatif ; cette distinction rend le réglage de la régularisation différent d'une simple pénalité ajoutée au gradient d'Adam.",
+    "example": "Exemple illustratif : pendant l'adaptation d'un Transformer, AdamW suit l'historique des gradients et applique séparément une légère décroissance aux poids sélectionnés. Les biais peuvent recevoir une configuration de régularisation différente.",
+    "misconception": "AdamW n'est pas Adam avec un autre nom. Ajouter une pénalité L2 à Adam n'est généralement pas équivalent à appliquer une Weight Decay découplée."
+  },
+  "notion-167": {
+    "explanation": "Un Learning Rate Schedule définit comment le pas d'apprentissage évolue au cours de l'entraînement, par exemple avec une baisse progressive ou des paliers. Il peut suivre les mises à jour, les epochs ou un indicateur de validation ; son rôle est de concilier déplacements utiles au début et ajustements plus fins ensuite.",
+    "example": "Exemple illustratif : une équipe prévoit une montée initiale du Learning Rate, puis une décroissance jusqu'à la fin de son budget de tokens. Elle journalise la valeur réellement utilisée à chaque mise à jour.",
+    "misconception": "Un Schedule doit être lié à la bonne unité de progression. Le faire avancer à chaque micro-lot plutôt qu'à chaque mise à jour peut raccourcir involontairement l'entraînement prévu."
+  },
+  "notion-168": {
+    "explanation": "Le Warmup augmente progressivement le Learning Rate pendant les premières étapes, au lieu d'appliquer immédiatement sa valeur cible. Cette phase peut limiter les mises à jour brusques lorsque les paramètres et les statistiques de l'Optimizer ne sont pas encore stabilisés ; elle est souvent suivie d'un autre Schedule pour le reste de l'entraînement.",
+    "example": "Exemple illustratif : au démarrage d'un entraînement, le pas est faible puis augmente sur une période définie. Une fois cette phase terminée, le script commence la décroissance prévue.",
+    "misconception": "Le Warmup n'est pas un apprentissage séparé ni une garantie de stabilité. Sa durée et son amplitude restent à adapter au modèle et au Batch Size."
+  },
+  "notion-169": {
+    "explanation": "La Loss Function convertit la qualité des prédictions en une quantité que l'entraînement cherche à minimiser. Elle doit fournir un signal exploitable pour modifier les paramètres et refléter les erreurs jugées importantes ; des pondérations ou plusieurs termes peuvent orienter l'apprentissage vers certains exemples, tokens ou contraintes particulières.",
+    "example": "Exemple illustratif : pour extraire des catégories de documents, une équipe utilise une Loss de classification et augmente la contribution des catégories rares afin qu'elles influencent davantage les gradients.",
+    "misconception": "La Loss est un objectif d'optimisation, pas automatiquement une mesure de valeur pour l'utilisateur. Une baisse peut coexister avec des réponses moins utiles sur certaines situations."
+  },
+  "notion-170": {
+    "explanation": "La Cross-Entropy Loss pénalise la probabilité attribuée aux mauvaises réponses et, pour une cible catégorielle unique, revient à prendre le logarithme négatif de sa probabilité. Pour un modèle de langage, elle s'agrège sur les tokens ciblés ; les masques déterminent quelles positions, comme le remplissage ou certaines instructions, participent effectivement à l'apprentissage.",
+    "example": "Exemple illustratif : après « le soleil se », le token attendu est « lève ». La Loss est plus faible lorsque le modèle attribue davantage de probabilité à ce token dans ce contexte.",
+    "misconception": "La Cross-Entropy compare des distributions ou des cibles probabilistes. Elle n'évalue pas directement si une réponse entière est vraie, bien argumentée ou adaptée au besoin."
+  },
+  "notion-171": {
+    "explanation": "La Perplexity exponentie la moyenne des logarithmes négatifs des probabilités attribuées aux tokens observés. Elle résume donc la surprise du modèle face à un corpus : une valeur plus basse indique une meilleure prédiction de ces tokens, à condition de conserver le même protocole, la même tokenisation et des conditions de contexte comparables.",
+    "example": "Exemple illustratif : une équipe compare deux versions d'un même modèle sur des articles réservés à l'évaluation. Elle conserve le tokenizer et la méthode de découpage pour rendre les Perplexities interprétables.",
+    "misconception": "Comparer des Perplexities issues de tokenizers différents peut être trompeur. Cette métrique ne mesure pas directement la fiabilité factuelle, le suivi d'instructions ou l'utilité d'un assistant."
+  },
+  "notion-172": {
+    "explanation": "La Regularization modifie l'apprentissage pour favoriser des solutions qui fonctionnent au-delà des exemples déjà vus. Elle peut agir sur les paramètres, les activations ou la durée d'entraînement ; elle accepte parfois une moins bonne adaptation au corpus d'apprentissage afin de réduire la mémorisation de détails peu utiles sur de nouvelles données.",
+    "example": "Exemple illustratif : un classifieur devient excellent sur ses exemples d'apprentissage mais se dégrade en validation. L'équipe expérimente une pénalisation des poids et sélectionne le réglage à partir de données séparées.",
+    "misconception": "Plus de régularisation n'est pas toujours mieux. Une contrainte excessive peut empêcher le modèle d'apprendre les régularités utiles et provoquer du Underfitting."
+  },
+  "notion-173": {
+    "explanation": "Le Dropout masque aléatoirement certaines activations pendant l'entraînement afin que le réseau ne dépende pas toujours des mêmes chemins de calcul. Avec le Dropout classique dit inversé, les activations conservées sont redimensionnées pendant l'apprentissage et le masquage est désactivé à l'évaluation ; il s'agit d'une stratégie de régularisation, pas d'une suppression définitive de neurones.",
+    "example": "Exemple illustratif : un réseau de classification reçoit plusieurs fois des variantes d'un même exemple avec des activations temporairement masquées. Il doit distribuer les indices utiles entre plusieurs chemins internes.",
+    "misconception": "Laisser le Dropout actif par erreur à l'évaluation rend les sorties aléatoires. Les usages qui le conservent pour étudier l'incertitude nécessitent un protocole spécifique."
+  },
+  "notion-174": {
+    "explanation": "La Weight Decay réduit progressivement l'amplitude des poids au cours des mises à jour et constitue une forme de régularisation. Elle peut être appliquée directement aux paramètres, séparément du gradient de la Loss ; son effet dépend du coefficient choisi, du Learning Rate, de l'Optimizer et des groupes de paramètres concernés.",
+    "example": "Exemple illustratif : une équipe applique la Weight Decay aux matrices d'un Transformer tout en excluant certains paramètres de normalisation. Elle compare ensuite l'effet de cette configuration sur son jeu de validation.",
+    "misconception": "Weight Decay et pénalité L2 peuvent coïncider dans certains réglages de SGD, mais pas en général avec les Optimizers adaptatifs comme Adam."
+  },
+  "notion-176": {
+    "explanation": "Le Underfitting apparaît lorsque le modèle ne parvient pas à représenter suffisamment bien les régularités utiles, y compris sur ses données d'apprentissage. Une capacité trop limitée, des caractéristiques inadéquates, une régularisation excessive ou une optimisation inachevée peuvent y contribuer ; comparer les erreurs d'entraînement et de validation aide à orienter le diagnostic.",
+    "example": "Exemple illustratif : une relation fortement courbée est approximée par une simple droite et reste mal prédite sur les exemples connus. L'équipe examine une représentation plus adaptée avant de collecter davantage de données.",
+    "misconception": "Une mauvaise performance en production ne suffit pas à diagnostiquer du Underfitting. Elle peut aussi provenir d'un changement de données ou d'un problème de traitement."
+  },
+  "notion-177": {
+    "explanation": "La Generalization est la capacité à réutiliser les régularités apprises sur des exemples qui n'ont pas servi à ajuster le modèle. On l'estime avec des données séparées et représentatives de l'usage visé ; sa portée dépend donc du découpage, de la diversité des situations et de la distance entre entraînement et utilisation réelle.",
+    "example": "Exemple illustratif : un modèle apprend à classer des messages de plusieurs agences. Une évaluation sur une agence tenue à l'écart vérifie s'il reconnaît les besoins sans dépendre des formulations locales.",
+    "misconception": "Réussir sur un test ne garantit pas la réussite dans tous les contextes. Une nouvelle langue, une autre période ou un changement de public peut modifier les résultats."
+  },
+  "notion-178": {
+    "explanation": "Le Train Split sert à ajuster les paramètres, le Validation Split à choisir les réglages et le Test Split à estimer le résultat final sur des exemples préservés. La séparation doit respecter la structure du problème : documents liés, mêmes personnes ou données futures peuvent exiger un découpage par groupe ou par période.",
+    "example": "Exemple illustratif : pour classer des conversations d'assistance, une équipe place tous les messages d'un même échange dans un seul ensemble. Le test final contient des échanges jamais utilisés pour régler le modèle.",
+    "misconception": "Un tirage aléatoire ne suffit pas toujours à éviter les fuites. Ajuster répétitivement ses choix en regardant le test le transforme progressivement en jeu de validation."
+  },
+  "notion-179": {
+    "explanation": "La Data Deduplication repère et retire les répétitions exactes ou quasi identiques d'un corpus, à l'échelle de documents ou de fragments. Elle évite de surpondérer certains contenus et aide à limiter la mémorisation ; appliquée entre ensembles, elle réduit aussi les chevauchements qui faussent l'évaluation de la Generalization.",
+    "example": "Exemple illustratif : une collecte contient un article original et ses nombreuses republications. Une comparaison des textes normalisés permet de regrouper les copies avant de décider lesquelles conserver dans le corpus.",
+    "misconception": "Deux textes similaires ne sont pas forcément des doublons inutiles. Un seuil trop agressif peut effacer des variantes significatives, notamment des corrections ou des différences de contexte."
+  },
+  "notion-180": {
+    "explanation": "La Data Contamination survient lorsque des éléments d'évaluation ont déjà influencé l'apprentissage, l'adaptation ou le choix du modèle. Les résultats peuvent alors refléter une exposition antérieure plutôt que la capacité attendue sur du nouveau contenu ; examiner la provenance, les ressemblances et les dates aide à repérer cette fuite sans toujours pouvoir l'exclure totalement.",
+    "example": "Exemple illustratif : des exercices réservés au test réapparaissent dans une page web collectée pour entraîner le modèle. L'équipe identifie ce chevauchement et réévalue avec un ensemble indépendant.",
+    "misconception": "L'absence de copie exacte ne prouve pas l'absence de contamination. Des paraphrases, traductions ou corrigés équivalents peuvent également donner accès au contenu évalué."
+  },
+  "notion-181": {
+    "explanation": "La Data Curation organise les choix qui rendent un corpus utilisable : provenance, sélection des sources, nettoyage, filtrage, déduplication et équilibre entre catégories. Ces opérations incorporent des critères éditoriaux et techniques qui influencent ce que le modèle pourra apprendre ; documenter les exclusions permet de comprendre leurs effets et de reproduire la préparation.",
+    "example": "Exemple illustratif : avant d'entraîner un modèle documentaire, une équipe retire les pages illisibles, distingue les langues et conserve les métadonnées de collecte. Elle inspecte aussi des échantillons rejetés pour vérifier ses filtres.",
+    "misconception": "Un filtre automatique de qualité peut écarter des styles ou dialectes légitimes. La curation ne doit pas être réduite à garder les textes qui ressemblent aux préférences du filtre."
+  },
+  "notion-182": {
+    "explanation": "Les Synthetic Data sont des exemples produits artificiellement, par simulation, règles ou modèles génératifs, puis utilisés comme données d'apprentissage ou d'évaluation. Leur intérêt est de couvrir des situations difficiles à collecter et de contrôler certains attributs ; leur utilité dépend toutefois de la validité des cibles et de leur proximité avec les cas réellement rencontrés.",
+    "example": "Exemple illustratif : un modèle propose des variantes de demandes de rendez-vous à partir de scénarios définis. Des règles et une relecture vérifient les dates et intentions avant l'intégration au jeu d'entraînement.",
+    "misconception": "Générer davantage d'exemples ne crée pas automatiquement de nouvelles connaissances fiables. Les erreurs et les biais du générateur peuvent se répéter et se renforcer."
+  },
+  "notion-183": {
+    "explanation": "Les Scaling Laws ajustent des relations empiriques entre la Loss, la taille du modèle, la quantité de données et le calcul utilisé. Elles servent à extrapoler des tendances à partir d'expériences contrôlées et à planifier des entraînements, sous réserve que les nouvelles configurations restent suffisamment proches des hypothèses et du domaine observés.",
+    "example": "Exemple illustratif : une équipe entraîne plusieurs petites configurations avec des budgets variés, puis ajuste une courbe pour orienter le choix d'un entraînement plus coûteux sur un corpus comparable.",
+    "misconception": "Une Scaling Law n'est pas une loi universelle garantissant toutes les capacités. Changer les données, l'architecture ou la métrique peut rendre l'extrapolation inadéquate."
+  },
+  "notion-184": {
+    "explanation": "Le Compute-Optimal Training cherche la répartition du budget de calcul entre taille du modèle et quantité de données qui minimise un objectif donné. Les travaux sur ce compromis montrent qu'agrandir uniquement le modèle peut gaspiller le budget si l'entraînement reste trop court ; l'optimum dépend des données, de la recette et de la fonction évaluée.",
+    "example": "Exemple illustratif : avec un budget d'entraînement fixé, une équipe compare un modèle plus grand exposé à moins de tokens et un modèle plus petit entraîné plus longtemps avant de choisir sa configuration.",
+    "misconception": "L'optimum pour l'entraînement n'est pas forcément celui du coût total d'un service. Le nombre de requêtes futures, la mémoire et les contraintes d'Inference changent le compromis."
+  },
+  "notion-185": {
+    "explanation": "Un FLOP désigne une opération en virgule flottante ; les FLOPs servent à compter le travail arithmétique d'un calcul. Cette mesure permet de comparer des budgets théoriques, mais elle ne décrit pas les transferts mémoire, les communications ni l'efficacité réelle du matériel ; il faut aussi préciser les conventions de comptage et la précision numérique.",
+    "example": "Exemple illustratif : une équipe estime le nombre d'opérations des multiplications matricielles d'un entraînement pour comparer deux architectures, puis mesure séparément la durée obtenue sur ses accélérateurs.",
+    "misconception": "FLOPs et FLOP/s ne mesurent pas la même chose : les premiers comptent des opérations, les seconds un débit. Un pic théorique n'est pas un débit soutenu garanti."
+  },
+  "notion-186": {
+    "explanation": "Un Checkpoint conserve un état du modèle à un moment donné pour l'évaluer, le distribuer ou reprendre son entraînement. Pour une reprise fidèle, les poids seuls peuvent être insuffisants : l'état de l'Optimizer, le Schedule, la progression dans les données et les générateurs aléatoires contribuent aussi à déterminer les mises à jour suivantes.",
+    "example": "Exemple illustratif : après une interruption du serveur, une équipe recharge le dernier Checkpoint avec les poids, les moyennes d'AdamW et le compteur de progression, puis reprend le traitement des données.",
+    "misconception": "Un fichier de poids destiné à l'Inference n'est pas nécessairement un Checkpoint complet de reprise. La compatibilité du code et de la configuration reste à vérifier."
+  }
+}

@@ -80,7 +80,7 @@
         {
           "heading": "Trois organisations du traitement",
           "paragraphs": [
-            "Un Encoder-only Model transforme l’entrée en représentations, utiles notamment à la classification ou à la recherche. Un Decoder-only Model autorégressif prolonge un préfixe. Un Encoder-Decoder, aussi appelé Seq2Seq, encode une entrée puis produit une sortie en s’appuyant sur cette représentation : la traduction est un exemple classique.",
+            "Un Encoder-only Model transforme l’entrée en représentations, utiles notamment à la classification ou à la recherche. Un Decoder-only Model autorégressif prolonge un préfixe. Une architecture Encoder-Decoder encode une entrée puis produit une sortie en s’appuyant sur cette représentation. Elle est souvent utilisée pour le Seq2Seq (Sequence-to-Sequence), qui transforme une séquence en une autre, par exemple pour traduire un texte.",
             "Enfin, Dense Model décrit une organisation où les composants concernés sont utilisés pour chaque Token, à la différence d’un routage qui en sélectionne seulement une partie. Dense n’oppose pas compréhension et génération. Pour lire une fiche, séparez donc quatre questions : quelle architecture, quelle adaptation, quel mode de génération et quels composants actifs ?"
           ]
         }
@@ -203,7 +203,7 @@
         {
           "heading": "Passer d’une représentation à des candidats",
           "paragraphs": [
-            "À la sortie d’un modèle génératif, la Vocabulary Head, ou LM Head, projette le Hidden State vers des scores de Tokens candidats. Chaque score brut est un Logit. Softmax transforme un ensemble de scores en une distribution de probabilités normalisées. Une règle de sélection choisit ensuite un Token ; une probabilité élevée n’est pas une mesure de vérité factuelle.",
+            "À la sortie d’un modèle de langage génératif classique, la LM Head (Language Modeling Head) projette le Hidden State vers des scores pour les Tokens du vocabulaire. Chaque score brut est un Logit. Softmax transforme un ensemble de scores en une distribution de probabilités normalisées. Une règle de sélection choisit ensuite un Token ; une probabilité élevée n’est pas une mesure de vérité factuelle.",
             "Weight Tying consiste à partager certains Parameters compatibles, notamment entre l’Embedding Layer d’entrée et la projection de sortie. Partager cette matrice évite deux ensembles indépendants de Weights ; cela ne supprime ni le calcul de sortie ni les Tokens du vocabulaire. Le chemin à retenir est : identifiant, représentation, transformations, scores, sélection."
           ]
         }
@@ -220,7 +220,7 @@
           "heading": "Cas guidé : lire une trace simplifiée",
           "paragraphs": [
             "Une trace fictive affiche successivement un Token ID, un vecteur en entrée, plusieurs vecteurs intermédiaires et une liste de scores. Classez ces objets avant de lire la suite. Le Token ID est un identifiant ; les vecteurs sont des représentations ; les derniers scores sont des Logits. Les Weights sont les valeurs utilisées par les transformations, pas tous les nombres qui apparaissent dans la trace.",
-            "Le service change ensuite la question mais garde le même fichier de modèle. Qu’est-ce qui peut changer ? Les IDs, les Activations, les Hidden States et les Logits. Qu’est-ce qui reste fixe dans cette hypothèse ? Les Parameters. Enfin, si une matrice d’entrée est aussi utilisée à la sortie, concluez à un partage compatible de Weights, pas à une disparition du calcul de la Vocabulary Head."
+            "Le service change ensuite la question mais garde le même fichier de modèle. Qu’est-ce qui peut changer ? Les IDs, les Activations, les Hidden States et les Logits. Qu’est-ce qui reste fixe dans cette hypothèse ? Les Parameters. Enfin, si une matrice d’entrée est aussi utilisée à la sortie, concluez à un partage compatible de Weights, pas à une disparition du calcul de la LM Head."
           ]
         }
       ],
@@ -676,7 +676,7 @@
         {
           "heading": "Dire précisément ce qui est Sparse",
           "paragraphs": [
-            "Sparsity désigne des valeurs, connexions ou activations nulles ou non utilisées, selon l’objet considéré. Dans Sparse MoE, certains Experts ne sont pas exécutés pour un Token. Dans Sparse Attention, certaines connexions entre positions sont absentes. Des Weights clairsemés constituent encore un autre cas. Le mot seul ne décrit ni le calcul ni le gain matériel.",
+            "Sparsity désigne des valeurs, connexions ou activations nulles ou non utilisées, selon l’objet considéré. Dans Sparse MoE, certains Experts ne sont pas exécutés pour un Token. Dans Sparse Attention, certaines connexions entre positions sont absentes. Des matrices de Weights contenant de nombreuses valeurs nulles constituent encore un autre cas. Le mot seul ne décrit ni le calcul ni le gain matériel.",
             "Pruning retire ou neutralise des Parameters, connexions ou structures jugés peu utiles. C’est différent du routage : un Expert non choisi pour cette entrée peut servir à l’entrée suivante, alors qu’une structure retirée par Pruning n’est plus disponible de la même façon. Le gain du Pruning dépend notamment du caractère exploitable de la structure restante par le moteur."
           ]
         },

@@ -11,3 +11,12 @@ test('other established English terms and acronyms are preserved',()=>{
  assert.equal(conceptName(byId('notion-88')),'Grouped-Query Attention (GQA)');
  assert.equal(conceptName(byId('notion-4')),'LLM (Large Language Model)');
 });
+test('reviewed canonical names retain their original notion identifiers',()=>{
+ for(const [id,name] of [
+  ['notion-46','FFN (Feed-Forward Network) / MLP (Multilayer Perceptron)'],
+  ['notion-62','LM Head (Language Modeling Head)'],
+  ['notion-335','A2A (Agent2Agent)'],
+  ['notion-425','Visual Grounding'],
+  ['notion-503','arXiv']
+ ])assert.equal(conceptName(byId(id)),name,id);
+});

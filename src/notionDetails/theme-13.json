@@ -1,0 +1,152 @@
+{
+  "notion-385": {
+    "explanation": "Une Direct Prompt Injection introduit dans le message adressé au système des instructions qui cherchent à détourner le comportement attendu de l’application. Le risque apparaît lorsque le modèle traite ces demandes comme capables de modifier ses règles ou ses accès ; les protections associent séparation des instructions, permissions limitées et contrôle des actions en dehors du modèle.",
+    "example": "Exemple illustratif : dans un test autorisé, un utilisateur demande à l’assistant d’ignorer les règles du catalogue et de modifier une référence inaccessible. L’application doit refuser cette opération au niveau du service.",
+    "misconception": "Une demande formulée directement par un utilisateur n’a pas tous les droits. Le modèle ne doit pas pouvoir transformer une instruction persuasive en autorisation technique."
+  },
+  "notion-387": {
+    "explanation": "Un Jailbreak cherche à faire produire au modèle un comportement que ses protections étaient censées empêcher, souvent en jouant sur la formulation ou le contexte de la demande. Il concerne le contournement des restrictions du modèle ; son impact réel dépend aussi des capacités de l’application, dont les permissions et validations doivent rester appliquées séparément.",
+    "example": "Exemple illustratif : une équipe de sécurité utilise des scénarios fictifs pour vérifier qu’un changement de mise en scène ne fait pas disparaître les limites prévues pour les réponses de son assistant.",
+    "misconception": "Un Jailbreak et une Prompt Injection ne sont pas synonymes. Le premier vise surtout les restrictions du modèle ; la seconde cherche à détourner les instructions d’une application."
+  },
+  "notion-388": {
+    "explanation": "La System Prompt Leakage désigne la divulgation d’instructions internes ou d’informations qui y figurent. Elle peut révéler la configuration de l’application, mais le risque majeur apparaît lorsque des secrets ou des contrôles de sécurité reposent sur ce texte ; les identifiants et la gestion des permissions doivent donc rester dans des composants adaptés, hors du prompt.",
+    "example": "Exemple illustratif : une application place par erreur une clé de service dans ses instructions internes. Une revue retire cette clé du contexte du modèle et la confie au composant qui effectue les appels autorisés.",
+    "misconception": "Cacher le System Prompt ne suffit pas à sécuriser l’application. Une règle de permission doit être appliquée par le système même si son principe devient connu."
+  },
+  "notion-389": {
+    "explanation": "La Data Exfiltration correspond à la sortie non autorisée de données vers un destinataire ou un emplacement extérieur au périmètre prévu. Dans une application d’AI, elle peut passer par une réponse, un fichier ou un appel d’outil ; limiter les accès, contrôler les destinations et vérifier les transmissions réduit les chemins possibles de fuite.",
+    "example": "Exemple illustratif : un assistant lit un document confidentiel pour le résumer. Une instruction présente dans ce document lui demande aussi de le transmettre ailleurs ; le contrôle des destinations bloque cette action étrangère à la tâche.",
+    "misconception": "Une fuite ne nécessite pas le téléchargement d’un fichier complet. Des fragments insérés dans une réponse ou dans les paramètres d’un appel peuvent aussi exposer des informations."
+  },
+  "notion-391": {
+    "explanation": "Une Trust Boundary sépare des composants ou des données auxquels l’application n’accorde pas le même niveau d’autorité. Lorsqu’une information traverse cette frontière, le système doit appliquer les vérifications adaptées ; dans un agent, un document externe peut informer une réponse, mais ne doit pas devenir une instruction qui élargit les permissions ou modifie les règles internes.",
+    "example": "Exemple illustratif : un assistant consulte une page publique contenant du texte et des consignes. L’application conserve le statut de source externe de ce contenu avant de décider quels éléments peuvent alimenter la synthèse.",
+    "misconception": "Une frontière de confiance n’est pas forcément une frontière réseau. Deux champs du même message peuvent avoir des rôles différents, et un service interne peut contenir des données non fiables."
+  },
+  "notion-392": {
+    "explanation": "Un Untrusted Input est une donnée dont l’application ne peut pas supposer l’exactitude, l’innocuité ou l’autorité. Il peut venir d’un utilisateur, d’un fichier ou d’un outil ; le traiter ainsi signifie vérifier son format et son usage, conserver son origine et empêcher qu’il commande directement des actions au-delà du périmètre autorisé.",
+    "example": "Exemple illustratif : un assistant reçoit un tableur externe dont certaines cellules contiennent des instructions. Il utilise les valeurs pertinentes pour l’analyse, sans laisser ces cellules décider de l’envoi de documents.",
+    "misconception": "Non fiable ne veut pas dire forcément malveillant ou inutile. C’est un statut de traitement qui évite de donner une autorité excessive à un contenu non vérifié."
+  },
+  "notion-393": {
+    "explanation": "Une Tool Output Injection insère des instructions trompeuses dans le résultat d’un outil pour influencer les décisions suivantes de l’agent. L’outil peut avoir fonctionné normalement en récupérant un contenu compromis ; protéger le système demande donc de distinguer les observations des consignes, puis de contrôler les appels et les accès indépendamment du texte reçu.",
+    "example": "Exemple illustratif : une recherche retourne une page qui prétend imposer une nouvelle procédure de connexion. L’assistant doit traiter cette affirmation comme un contenu à vérifier, sans transmettre les identifiants demandés.",
+    "misconception": "Faire confiance à l’outil ne revient pas à faire confiance à chaque donnée qu’il rapporte. Un outil de recherche fiable peut parfaitement restituer une page malveillante."
+  },
+  "notion-394": {
+    "explanation": "Le RAG Poisoning vise à introduire ou modifier des contenus dans les sources qu’un système récupère pour répondre. Ces passages peuvent orienter les faits présentés ou contenir une injection d’instructions, sans modifier les poids du modèle ; le contrôle des écritures, la provenance des documents et la validation du corpus sont donc des protections essentielles.",
+    "example": "Exemple illustratif : une base documentaire contient soudain une procédure modifiée par un compte non autorisé. Le suivi des versions permet d’identifier le changement et d’écarter ce document des réponses en attendant sa validation.",
+    "misconception": "Une réponse appuyée sur des passages récupérés peut rester manipulée. Le RAG améliore l’accès aux sources, mais n’assure pas que ces sources sont intègres ou correctes."
+  },
+  "notion-395": {
+    "explanation": "Le Data Poisoning altère volontairement des données utilisées pour apprendre ou adapter un système afin d’influencer son comportement futur. Il peut viser des étiquettes, des exemples ou leur distribution ; suivre la provenance, restreindre les modifications et examiner les anomalies aide à protéger le corpus avant que ses effets ne soient incorporés dans le modèle.",
+    "example": "Exemple illustratif : lors de la préparation d’un classifieur, une revue détecte qu’un lot de documents a reçu des étiquettes incohérentes avec le protocole. Le lot est isolé et vérifié avant l’entraînement.",
+    "misconception": "Toutes les mauvaises données ne sont pas un empoisonnement intentionnel. Les erreurs accidentelles exigent aussi des contrôles, mais l’attribution d’une manipulation demande des éléments supplémentaires."
+  },
+  "notion-396": {
+    "explanation": "Le Model Poisoning compromet le comportement d’un modèle en altérant ses paramètres, ses mises à jour ou un artefact utilisé dans sa construction. L’effet peut être général ou ciblé sur certaines entrées ; vérifier la provenance des modèles, contrôler leur chaîne de distribution et les évaluer avant intégration aide à réduire ce risque.",
+    "example": "Exemple illustratif : une équipe reçoit une nouvelle version de modèle depuis un dépôt externe. Elle vérifie l’origine de l’artefact et son intégrité, puis compare son comportement à des cas de référence avant adoption.",
+    "misconception": "Un fichier de modèle compatible avec le bon format n’est pas nécessairement digne de confiance. L’intégrité technique du téléchargement ne prouve pas l’absence de comportement malveillant appris."
+  },
+  "notion-397": {
+    "explanation": "Une Backdoor est un comportement implanté qui se manifeste dans des circonstances particulières, alors que le modèle peut sembler normal sur les autres entrées. Le Trigger est la condition qui l’active, par exemple un motif ou une combinaison de caractéristiques ; la distinction permet de séparer le mécanisme caché de l’élément observable qui le déclenche.",
+    "example": "Exemple illustratif : dans une évaluation contrôlée, un classifieur fonctionne sur les images habituelles mais change systématiquement de catégorie en présence d’un motif artificiel précis. L’équipe examine alors l’origine du modèle et des données.",
+    "misconception": "Une erreur isolée n’établit pas l’existence d’une Backdoor. Il faut démontrer un comportement conditionnel reproductible et distinguer ce mécanisme d’une faiblesse ordinaire de généralisation."
+  },
+  "notion-398": {
+    "explanation": "La Model Extraction cherche à reproduire les fonctions d’un modèle à partir des informations accessibles, notamment ses réponses à des requêtes. Elle peut aboutir à un substitut qui imite certains comportements sans retrouver exactement les poids ; limiter les accès excessifs, surveiller les usages et réduire les informations inutiles exposées fait partie des protections possibles.",
+    "example": "Exemple illustratif : un service observe un usage automatisé inhabituel de son interface de prédiction. Il examine les journaux et applique les quotas prévus pour limiter la collecte massive de réponses.",
+    "misconception": "Extraire un comportement n’est pas toujours récupérer le modèle original. Un substitut peut bien imiter une tâche précise tout en différant fortement sur d’autres entrées."
+  },
+  "notion-399": {
+    "explanation": "La Model Inversion exploite les informations révélées par un modèle pour inférer des caractéristiques de données liées à son apprentissage. Selon le contexte, elle peut viser des attributs sensibles ou des représentations plausibles ; évaluer les sorties exposées, les données d’entraînement et les protections de confidentialité aide à comprendre la portée réelle de ce risque.",
+    "example": "Exemple illustratif : une équipe examine si les scores détaillés d’un modèle permettraient de déduire un attribut sensible d’un dossier fictif. Elle compare ce risque aux informations strictement nécessaires à l’usage prévu.",
+    "misconception": "Une reconstruction plausible ne prouve pas la récupération exacte d’un exemple d’entraînement. Les résultats peuvent refléter des propriétés générales d’une catégorie plutôt que les données d’une personne précise."
+  },
+  "notion-400": {
+    "explanation": "La Membership Inference cherche à estimer si un exemple particulier a fait partie des données d’entraînement d’un modèle. Elle exploite des différences de comportement entre exemples vus et nouveaux, lorsque ces différences existent ; évaluer la mémorisation, limiter les informations exposées et utiliser des méthodes de confidentialité adaptées aide à réduire les indices disponibles.",
+    "example": "Exemple illustratif : un audit compare les réponses du modèle sur des dossiers fictifs présents et absents de l’entraînement pour mesurer si l’appartenance au corpus peut être distinguée au-delà du hasard.",
+    "misconception": "Cette inférence reste une estimation susceptible de faux positifs et de faux négatifs. Elle ne démontre pas automatiquement qu’un document a été copié ou mémorisé intégralement."
+  },
+  "notion-401": {
+    "explanation": "Une Sensitive Information Disclosure expose une information à une personne qui ne devrait pas y accéder, par exemple un secret, une donnée personnelle ou un document interne. Dans un système d’AI, la fuite peut venir du contexte, des outils, des journaux ou de la génération ; les contrôles doivent couvrir ces différents chemins et limiter les données disponibles au strict nécessaire.",
+    "example": "Exemple illustratif : un assistant de support reçoit un document interne contenant des coordonnées privées. Le contrôle d’accès et la sélection des passages évitent que ces coordonnées apparaissent dans une réponse destinée au public.",
+    "misconception": "La confidentialité ne concerne pas uniquement l’entraînement du modèle. Une application peut divulguer des données simplement parce qu’elle a récupéré trop d’informations pour la requête courante."
+  },
+  "notion-402": {
+    "explanation": "Les PII sont des informations qui permettent d’identifier une personne directement ou par rapprochement avec d’autres éléments. Leur caractère identifiant dépend du contexte : un nom évident n’est pas le seul cas ; minimiser la collecte et examiner les combinaisons de champs aide à comprendre quelles informations doivent être protégées dans un traitement d’AI.",
+    "example": "Exemple illustratif : un tableau sans noms conserve une fonction rare, un lieu précis et une date d’événement. Leur combinaison peut suffire à reconnaître une personne au sein d’une petite équipe.",
+    "misconception": "Retirer les noms ne rend pas automatiquement un jeu anonyme. Des identifiants indirects et des informations recoupables peuvent conserver un risque d’identification dans le contexte réel."
+  },
+  "notion-403": {
+    "explanation": "Le Secret Management organise la création, le stockage, l’accès, la rotation et la révocation des identifiants sensibles comme les clés d’API. Pour un agent, l’objectif est que le composant autorisé utilise le secret sans l’exposer inutilement au modèle, aux documents ou aux journaux, avec des droits et une durée de validité adaptés à l’opération.",
+    "example": "Exemple illustratif : un outil de lecture de catalogue récupère son jeton depuis un coffre de secrets au moment de l’appel. L’assistant voit le résultat de la recherche, sans recevoir le jeton lui-même.",
+    "misconception": "Une variable d’environnement n’est pas une protection complète si l’agent peut la lire ou l’afficher. Le secret doit rester hors des surfaces accessibles sans nécessité."
+  },
+  "notion-405": {
+    "explanation": "L’Improper Output Handling apparaît lorsqu’une application utilise une sortie du modèle comme du code, une requête ou un contenu actif sans contrôles adaptés. La génération peut refléter des données manipulées ; il faut donc valider la structure, appliquer les permissions et utiliser l’échappement ou les interfaces paramétrées appropriées au composant qui reçoit cette sortie.",
+    "example": "Exemple illustratif : un assistant produit du texte pour une page web. L’application l’affiche avec un rendu adapté au texte attendu, au lieu d’interpréter automatiquement toute la sortie comme du HTML actif.",
+    "misconception": "Une réponse générée par le modèle n’est pas une entrée de confiance. Même une sortie conforme au prompt peut être dangereuse lorsqu’un autre composant l’interprète."
+  },
+  "notion-406": {
+    "explanation": "L’Output Validation vérifie une réponse avant qu’elle soit affichée, enregistrée ou utilisée pour agir. Elle peut contrôler le schéma, les types, les valeurs et les règles métier ; pour une action, ces vérifications doivent aussi confronter les paramètres aux droits accordés, car un JSON syntaxiquement correct peut désigner une ressource inaccessible ou une opération incohérente.",
+    "example": "Exemple illustratif : un assistant prépare une réservation structurée. L’application vérifie le format des dates, leur ordre chronologique, la disponibilité annoncée et les droits du compte avant de créer quoi que ce soit.",
+    "misconception": "Valider le format ne suffit pas à valider le sens. Un identifiant bien formé peut être inexistant, appartenir à un autre utilisateur ou viser une action interdite."
+  },
+  "notion-407": {
+    "explanation": "Le Content Filtering analyse des entrées ou des sorties pour repérer des catégories définies et appliquer une décision, comme laisser passer, masquer ou demander une revue. Il peut utiliser des règles ou des modèles ; ses seuils doivent être évalués sur les usages réels pour comprendre les contenus indésirables manqués et les messages légitimes bloqués.",
+    "example": "Exemple illustratif : une application examine les commentaires proposés avant publication et dirige les cas ambigus vers une revue humaine, en utilisant des catégories et des seuils documentés pour ce service.",
+    "misconception": "Un filtre de contenu ne constitue pas un contrôle d’autorisation. Il peut reconnaître une catégorie de texte sans vérifier si un outil a le droit de transmettre un document."
+  },
+  "notion-408": {
+    "explanation": "La Moderation est le processus qui applique une politique de contenu à travers la détection, la décision et le traitement des cas signalés. Elle peut combiner filtres automatiques, examen humain et recours ; distinguer ces étapes aide à adapter la réponse au contexte et à corriger les erreurs plutôt que considérer chaque score comme une décision définitive.",
+    "example": "Exemple illustratif : une plateforme reçoit un signalement sur un message. Un modérateur examine le contexte de la conversation et la règle applicable avant de confirmer ou de corriger la décision automatique.",
+    "misconception": "La Moderation n’est pas seulement la suppression de contenus. Elle peut inclure des avertissements, des restrictions de visibilité, une revue ou une possibilité de contester la décision."
+  },
+  "notion-409": {
+    "explanation": "Le Rate Limiting limite la fréquence ou la quantité de requêtes admises selon une règle, par exemple par compte, session ou service. Il aide à contenir les abus et à répartir les ressources ; pour les applications d’AI, la règle doit aussi tenir compte du poids variable des requêtes, de leur concurrence et des ressources réellement consommées.",
+    "example": "Exemple illustratif : un service autorise une activité normale mais ralentit une série excessive de requêtes simultanées du même compte. Il fournit un délai de reprise au client pour éviter les relances immédiates.",
+    "misconception": "Limiter uniquement le nombre de requêtes peut être insuffisant. Une seule demande très longue ou un agent qui enchaîne de nombreux outils peut consommer beaucoup de ressources."
+  },
+  "notion-410": {
+    "explanation": "Un Denial of Service rend un service indisponible ou fortement dégradé en épuisant une ressource ou en provoquant un blocage. Dans une application d’AI, le calcul, la mémoire, les files d’attente et les dépendances externes peuvent être concernés ; quotas, délais maximaux et isolation des tâches contribuent à préserver l’accès des autres utilisateurs.",
+    "example": "Exemple illustratif : un traitement de document anormalement coûteux occupe les ressources d’un assistant. L’application interrompt ce travail selon ses limites et conserve de la capacité pour les autres demandes en attente.",
+    "misconception": "Un DoS ne nécessite pas toujours un trafic massif. Une opération particulièrement coûteuse ou une dépendance bloquée peut suffire dans un système mal isolé."
+  },
+  "notion-411": {
+    "explanation": "L’Unbounded Consumption survient lorsqu’un système laisse une tâche consommer des ressources sans limites adéquates, qu’il s’agisse d’inférences, de tokens, d’outils ou de durée. Elle peut résulter d’un abus ou d’une boucle mal conçue ; budgets, quotas, suivi des coûts et conditions d’arrêt permettent de contenir les effets avant une indisponibilité ou une dépense excessive.",
+    "example": "Exemple illustratif : un agent recherche sans cesse une information absente et relance les mêmes outils. Un budget d’exécution arrête la boucle et restitue un état incomplet avec les éléments déjà établis.",
+    "misconception": "La consommation excessive n’est pas toujours une attaque. Un objectif ambigu, une erreur de reprise ou l’absence de détection des doublons peut produire le même problème."
+  },
+  "notion-412": {
+    "explanation": "Un Adversarial Example est une entrée conçue pour provoquer une erreur du modèle, parfois avec une modification discrète qui laisse le sens apparent inchangé pour un humain. Il met en évidence un écart entre les caractéristiques exploitées par le modèle et les invariances attendues ; les évaluations de robustesse doivent définir les transformations et les contraintes étudiées.",
+    "example": "Exemple illustratif : dans un laboratoire, une image de test est légèrement modifiée tout en restant reconnaissable. Le classifieur change pourtant sa prédiction, ce qui permet d’étudier une faiblesse de robustesse.",
+    "misconception": "Toute image bruitée n’est pas un Adversarial Example construit. Le caractère adversarial tient à l’objectif de provoquer une erreur, pas seulement à une apparence inhabituelle."
+  },
+  "notion-413": {
+    "explanation": "Le Red Teaming organise une recherche adversariale de défaillances sur un système et un périmètre autorisés. L’équipe explore les capacités réelles, les interfaces et les conséquences possibles, puis documente les preuves et les protections à améliorer ; pour l’AI, cela inclut le modèle mais aussi ses outils, ses données et l’application qui l’entoure.",
+    "example": "Exemple illustratif : avant l’ouverture d’un assistant interne, une équipe utilise des comptes et documents de test pour examiner si les frontières entre espaces de travail restent respectées dans différents parcours.",
+    "misconception": "Le Red Teaming n’est pas uniquement un concours de prompts. Un bon résultat dépend de la compréhension du produit, des droits disponibles et de l’impact observable."
+  },
+  "notion-414": {
+    "explanation": "La Defense in Depth combine plusieurs protections qui couvrent des points de défaillance différents : permissions, isolation, validation, surveillance et intervention humaine adaptée. L’objectif est qu’une erreur du modèle ou un filtre contourné ne suffise pas à provoquer un dommage ; les couches doivent être vérifiées ensemble pour éviter qu’elles partagent toutes la même faiblesse.",
+    "example": "Exemple illustratif : un assistant lit des documents avec un compte limité, exécute ses traitements dans un environnement isolé et fait contrôler les destinations des envois. Une instruction trompeuse ne peut pas élargir ces droits.",
+    "misconception": "Accumuler plusieurs filtres similaires ne crée pas forcément une défense indépendante. Si tous font confiance au même texte ou au même jugement, une seule défaillance peut les traverser."
+  },
+  "notion-415": {
+    "explanation": "Un Audit Log enregistre des événements utiles à la traçabilité, tandis qu’une Trace relie les étapes d’une exécution pour comprendre leur déroulement. Dans un agent, on peut suivre les appels, les décisions d’accès et les résultats ; la collecte doit protéger les journaux, limiter les données sensibles et permettre de relier une action à son contexte.",
+    "example": "Exemple illustratif : après une erreur de classement, l’équipe retrouve quel outil a déplacé un document, avec quels paramètres et quel résultat. Elle examine les métadonnées sans avoir besoin d’enregistrer toutes les données confidentielles.",
+    "misconception": "Tout journaliser n’est pas automatiquement préférable. Des traces trop détaillées peuvent devenir une nouvelle source de fuite, et une absence d’événement ne prouve pas qu’aucune action n’a eu lieu."
+  },
+  "notion-416": {
+    "explanation": "La Provenance documente l’origine d’une donnée et les transformations qu’elle a subies, ainsi que les acteurs ou systèmes impliqués. Elle permet de remonter d’une réponse à ses sources, d’examiner une version et d’identifier une étape problématique ; cette traçabilité aide à évaluer la confiance, sans remplacer la vérification du contenu lui-même.",
+    "example": "Exemple illustratif : un chiffre dans un rapport est relié au tableau d’origine, à sa date et au calcul utilisé. Un relecteur peut ainsi reproduire l’agrégation et vérifier la version des données.",
+    "misconception": "Une provenance complète ne garantit pas la vérité. Elle peut établir précisément qu’une information vient d’une source erronée ou qu’une transformation documentée comporte un mauvais calcul."
+  },
+  "notion-417": {
+    "explanation": "La PII Redaction repère puis masque ou remplace les informations identifiantes avant un usage qui ne nécessite pas leur présence. Elle combine parfois règles, reconnaissance d’entités et examen humain ; il faut contrôler le texte, les images et les métadonnées concernés, puis vérifier que le résultat conserve l’utilité nécessaire sans exposer indirectement les personnes.",
+    "example": "Exemple illustratif : avant de partager des tickets de support pour une évaluation, l’équipe remplace les coordonnées par des marqueurs et inspecte les pièces jointes pour retirer les identifiants encore visibles.",
+    "misconception": "Un détecteur automatique peut manquer des PII ou masquer des éléments utiles. Le caviardage ne garantit pas à lui seul l’anonymat, surtout si le contexte permet une réidentification."
+  }
+}

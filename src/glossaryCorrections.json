@@ -58,5 +58,251 @@
     "name": "Speaker Diarization",
     "sourceDefinition": "identification de « qui parle quand » dans un enregistrement.",
     "definition": "attribution des segments de parole à des locuteurs distincts, sans nécessairement connaître leur identité réelle."
+  },
+  "notion-334": {
+    "name": "Model Router / Model Cascading",
+    "sourceDefinition": "sélection du modèle le plus approprié en fonction d'une requête.",
+    "definition": "Un Model Router choisit un modèle pour une requête ; le Model Cascading consulte des modèles successifs selon des critères de poursuite ou d’arrêt.",
+    "sources": [
+      "https://www.anthropic.com/research/building-effective-agents",
+      "https://arxiv.org/abs/2305.05176"
+    ]
+  },
+  "notion-335": {
+    "name": "A2A (Agent2Agent)",
+    "sourceDefinition": "famille de conventions ou protocoles pour faire communiquer des agents entre eux.",
+    "definition": "protocole ouvert de communication et de collaboration entre agents, distinct du concept général de communication agent-to-agent.",
+    "sources": [
+      "https://a2a-protocol.org/latest/"
+    ]
+  },
+  "notion-347": {
+    "name": "Idempotency",
+    "sourceDefinition": "propriété d'une opération répétée sans effet additionnel indésirable.",
+    "definition": "propriété selon laquelle répéter la même opération produit le même effet attendu sur l’état du système qu’une seule exécution.",
+    "sources": [
+      "https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods"
+    ]
+  },
+  "notion-352": {
+    "name": "Eval / Evaluation Harness",
+    "sourceDefinition": "protocole ou logiciel qui exécute et mesure des tests de modèles.",
+    "definition": "Un Eval est une évaluation avec des cas et des critères ; un Evaluation Harness est l’infrastructure qui exécute les évaluations, recueille les sorties et calcule les scores.",
+    "sources": [
+      "https://www.anthropic.com/research/demystifying-evals-for-ai-agents"
+    ]
+  },
+  "notion-373": {
+    "name": "LLM-as-a-Judge",
+    "sourceDefinition": "utilisation d'un autre modèle pour noter une réponse ou une interaction.",
+    "definition": "utilisation d’un LLM comme juge pour noter ou comparer des réponses selon des critères définis.",
+    "sources": [
+      "https://www.anthropic.com/research/demystifying-evals-for-ai-agents"
+    ]
+  },
+  "notion-397": {
+    "name": "Backdoor / Trigger",
+    "sourceDefinition": "comportement caché activé par une condition particulière.",
+    "definition": "Une Backdoor est un comportement malveillant implanté dans un modèle ; son Trigger est la condition qui déclenche ce comportement.",
+    "sources": [
+      "https://pages.nist.gov/trojai/docs/about.html"
+    ]
+  },
+  "notion-425": {
+    "name": "Visual Grounding",
+    "sourceDefinition": "liaison entre affirmations textuelles et régions ou éléments visuels.",
+    "definition": "association d’une expression textuelle à la région ou à l’élément visuel qu’elle désigne.",
+    "sources": [
+      "https://openaccess.thecvf.com/content/ICCV2021/html/Deng_TransVG_End-to-End_Visual_Grounding_With_Transformers_ICCV_2021_paper.html"
+    ]
+  },
+  "notion-435": {
+    "name": "Guidance / CFG (Classifier-Free Guidance)",
+    "sourceDefinition": "technique renforçant l'adhésion d'une génération aux conditions demandées.",
+    "definition": "La Guidance oriente la génération vers des conditions ; la Classifier-Free Guidance combine des prédictions conditionnelles et non conditionnelles sans classifieur séparé.",
+    "sources": [
+      "https://arxiv.org/abs/2207.12598"
+    ]
+  },
+  "notion-477": {
+    "name": "API (Application Programming Interface)",
+    "sourceDefinition": "interface logicielle structurée pour appeler un service.",
+    "definition": "interface définissant comment des composants logiciels interagissent, par exemple par des fonctions locales ou des requêtes réseau.",
+    "sources": [
+      "https://developer.mozilla.org/en-US/docs/Glossary/API"
+    ]
+  },
+  "notion-501": {
+    "name": "Model Variant / Size",
+    "sourceDefinition": "déclinaison différant par sa taille, ses capacités ou son mode d'emploi.",
+    "definition": "Une Model Variant est une déclinaison d’un modèle ; la Model Size désigne sa taille, souvent exprimée par son nombre de paramètres.",
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-oss-20b"
+    ]
+  },
+  "notion-33": {
+    "name": "Encoder-Decoder / Seq2Seq",
+    "sourceDefinition": "architecture qui encode une entrée puis génère une sortie correspondante.",
+    "definition": "Encoder-Decoder désigne une architecture qui encode l’entrée puis génère une sortie ; Seq2Seq désigne la transformation d’une séquence en une autre, souvent réalisée par cette architecture.",
+    "sources": [
+      "https://arxiv.org/abs/1409.3215"
+    ]
+  },
+  "notion-46": {
+    "name": "FFN (Feed-Forward Network) / MLP (Multilayer Perceptron)",
+    "sourceDefinition": "sous-réseau traitant les représentations des tokens après l'attention.",
+    "definition": "FFN signifie Feed-Forward Network et MLP, Multilayer Perceptron. Dans un Transformer classique, le FFN est généralement un MLP appliqué séparément à chaque position.",
+    "sources": [
+      "https://scikit-learn.org/stable/modules/neural_networks_supervised.html",
+      "https://arxiv.org/abs/1706.03762"
+    ]
+  },
+  "notion-50": {
+    "name": "Pre-Norm / Post-Norm",
+    "sourceDefinition": "position de la normalisation avant ou après un sous-bloc.",
+    "definition": "Pre-Norm place la normalisation avant le sous-bloc ; Post-Norm la place après l’addition du résultat du sous-bloc et du chemin résiduel, dans les schémas usuels.",
+    "sources": [
+      "https://arxiv.org/abs/2002.04745"
+    ]
+  },
+  "notion-66": {
+    "name": "Steering Vector / Activation Steering",
+    "sourceDefinition": "modification contrôlée de certaines activations pour influencer le comportement d'un modèle.",
+    "definition": "Activation Steering modifie des activations pendant le calcul pour orienter le comportement ; un Steering Vector est un vecteur utilisé pour cette intervention.",
+    "sources": [
+      "https://arxiv.org/abs/2308.10248"
+    ]
+  },
+  "notion-97": {
+    "name": "Context Rot / Lost in the Middle",
+    "sourceDefinition": "dégradation possible de l'exploitation d'informations dans des contextes longs.",
+    "definition": "Context Rot désigne une dégradation possible des performances lorsque le contexte s’allonge. Lost in the Middle désigne une difficulté particulière à exploiter une information placée au milieu du contexte.",
+    "sources": [
+      "https://www.trychroma.com/research/context-rot",
+      "https://arxiv.org/abs/2307.03172"
+    ]
+  },
+  "notion-98": {
+    "name": "SSM (State Space Model)",
+    "sourceDefinition": "famille de modèles séquentiels utilisant un état interne plutôt qu'une attention complète classique.",
+    "definition": "modèle décrivant l’évolution d’un état interne ; certaines architectures séquentielles l’utilisent pour transmettre l’information au fil des entrées.",
+    "sources": [
+      "https://arxiv.org/abs/2312.00752"
+    ]
+  },
+  "notion-106": {
+    "name": "Expert",
+    "sourceDefinition": "sous-réseau spécialisé, souvent une couche FFN, sélectionné par le routeur.",
+    "definition": "sous-réseau d’un MoE, souvent un FFN ; il peut être sélectionné par un Router ou utilisé comme Shared Expert, sans spécialité humaine prédéfinie.",
+    "sources": [
+      "https://arxiv.org/html/2401.06066v1"
+    ]
+  },
+  "notion-125": {
+    "name": "Subword Tokenization",
+    "sourceDefinition": "découpage en unités plus petites que les mots entiers.",
+    "definition": "découpage utilisant un vocabulaire qui peut contenir des mots entiers et des fragments de mots.",
+    "sources": [
+      "https://huggingface.co/docs/transformers/en/tokenizer_summary"
+    ]
+  },
+  "notion-141": {
+    "name": "Top-p / Nucleus Sampling",
+    "sourceDefinition": "tirage parmi le plus petit ensemble de tokens dépassant un seuil de probabilité cumulée.",
+    "definition": "sélection du plus petit ensemble des Tokens les plus probables dont la probabilité cumulée atteint ou dépasse p, puis tirage après renormalisation de leurs probabilités.",
+    "sources": [
+      "https://arxiv.org/html/1904.09751v2"
+    ]
+  },
+  "notion-147": {
+    "name": "Streaming",
+    "sourceDefinition": "transmission progressive des tokens au lieu d'attendre la sortie entière.",
+    "definition": "transmission progressive de fragments de sortie, qui peuvent regrouper plusieurs Tokens, sans attendre la réponse entière.",
+    "sources": []
+  },
+  "notion-148": {
+    "name": "Determinism / Seed",
+    "sourceDefinition": "contrôle partiel de la reproductibilité de la génération ; non garanti entre tous environnements.",
+    "definition": "Determinism désigne la reproduction d’un même résultat dans des conditions fixées ; une Seed initialise un générateur pseudo-aléatoire et ne garantit pas seule cette reproductibilité.",
+    "sources": [
+      "https://docs.pytorch.org/docs/2.15/notes/randomness.html"
+    ]
+  },
+  "notion-157": {
+    "name": "Epoch",
+    "sourceDefinition": "passage sur une fois l'ensemble de données considéré.",
+    "definition": "passage complet sur l’ensemble de données considéré.",
+    "sources": []
+  },
+  "notion-189": {
+    "name": "SFT (Supervised Fine-Tuning)",
+    "sourceDefinition": "adaptation supervisée sur des exemples de consignes et de bonnes réponses.",
+    "definition": "Fine-tuning supervisé sur des exemples et leurs cibles, souvent des consignes associées à des réponses attendues pour les LLM.",
+    "sources": [
+      "https://arxiv.org/html/2203.02155v1"
+    ]
+  },
+  "notion-197": {
+    "name": "Prompt Tuning / Soft Prompt",
+    "sourceDefinition": "adaptation via vecteurs de prompt appris, différents d'un prompt texte.",
+    "definition": "Prompt Tuning apprend des vecteurs de Prompt, appelés Soft Prompt, pour adapter le comportement d’un modèle dont les Weights de base restent gelés.",
+    "sources": [
+      "https://arxiv.org/abs/2104.08691"
+    ]
+  },
+  "notion-218": {
+    "name": "Alignment Tax / Capability Trade-off",
+    "sourceDefinition": "possible coût de performance associé à certaines contraintes de comportement.",
+    "definition": "Alignment Tax désigne un éventuel coût en capacité lié à l’Alignment ; Capability Trade-off désigne plus généralement un compromis entre capacités ou objectifs.",
+    "sources": [
+      "https://arxiv.org/html/2203.02155v1"
+    ]
+  },
+  "notion-249": {
+    "name": "Concurrency",
+    "sourceDefinition": "nombre de requêtes pouvant être traitées simultanément.",
+    "definition": "nombre de requêtes simultanément en cours, selon le périmètre mesuré ; la limite de Concurrency fixe le maximum autorisé.",
+    "sources": []
+  },
+  "notion-295": {
+    "name": "Retrieval Recall / Precision",
+    "sourceDefinition": "capacité de récupération à trouver les bons documents, avec peu d'intrus.",
+    "definition": "Retrieval Recall mesure la part des documents pertinents retrouvés ; Retrieval Precision mesure la part des résultats récupérés qui sont pertinents.",
+    "sources": [
+      "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html",
+      "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html"
+    ]
+  },
+  "notion-297": {
+    "name": "Index Freshness",
+    "sourceDefinition": "caractère récent des documents présents dans l'index de recherche.",
+    "definition": "degré de mise à jour de l’index par rapport aux créations, modifications et suppressions du corpus source.",
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/search/search-howto-reindex"
+    ]
+  },
+  "notion-93": {
+    "name": "Attention Sink",
+    "sourceDefinition": "positions initiales absorbant souvent une part importante de l'attention, utiles à certaines stratégies de cache.",
+    "definition": "position recevant une part importante de l’Attention, souvent parmi les positions initiales, sans nécessairement porter une information importante pour le sens.",
+    "sources": [
+      "https://arxiv.org/abs/2309.17453"
+    ]
+  },
+  "notion-155": {
+    "name": "Policy (politique)",
+    "sourceDefinition": "règle ou modèle donnant une distribution d'actions à choisir dans un état.",
+    "definition": "règle de choix d’une action à partir d’un état ou d’une observation ; elle peut être déterministe ou définir une distribution de probabilités sur les actions.",
+    "sources": [
+      "https://spinningup.openai.com/en/latest/spinningup/rl_intro.html#policies"
+    ]
+  },
+  "notion-75": {
+    "name": "Sliding Window Attention (SWA)",
+    "sourceDefinition": "attention causale limitée à une fenêtre récente glissante.",
+    "definition": "Attention limitée à une fenêtre glissante autour de chaque position ; dans une variante causale, seules les positions autorisées du passé et la position courante sont accessibles.",
+    "sources": [
+      "https://arxiv.org/html/2004.05150v2"
+    ]
   }
 }

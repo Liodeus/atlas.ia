@@ -26,6 +26,8 @@ after(async()=>{await browser?.close();await new Promise(r=>server?.close(r))});
 test('project homepage loads with assets from the Pages subpath',async()=>{
  await page.goto(origin+base);
  await page.getByRole('heading',{level:1}).waitFor();assert.match(await page.title(),/Atlas IA/);
+ const resources=await page.evaluate(()=>performance.getEntriesByType('resource').map(r=>r.name));
+ assert.equal(resources.some(name=>/notionContent-|notionSources-/.test(name)),false);
 });
 test('a direct lesson link and refresh retain path and query',async()=>{
  await page.goto(origin+base+'cours/1?etape=2');
@@ -64,16 +66,16 @@ test('glossary loads quiz data only when a level filter is selected',async()=>{
  await fresh.goto(origin+base+'glossaire');await fresh.getByLabel('Rechercher une notion').waitFor();
  const resources=()=>fresh.evaluate(()=>performance.getEntriesByType('resource').map(r=>r.name));
  assert.equal((await resources()).some(name=>/allQuestions-/.test(name)),false);
- await fresh.getByRole('combobox',{name:'Niveau des questions associées'}).click();
+ await fresh.locator('.glossary-options>summary').click();await fresh.getByRole('combobox',{name:'Niveau des questions associées'}).click();
  await fresh.getByRole('option',{name:'Débutant',exact:true}).click();
- await fresh.getByText('Le filtre de niveau indique le niveau des questions associées, pas nécessairement celui de la notion.').waitFor();
+ await fresh.getByText('Le niveau concerne les questions associées, pas la difficulté de la notion.').waitFor();
  await fresh.waitForFunction(()=>performance.getEntriesByType('resource').some(r=>/allQuestions-/.test(r.name)));
  await context.close();
 });
 test('glossary offers recovery when loading level data fails',async()=>{
  const context=await browser.newContext();const fresh=await context.newPage();let blocked=true;
  await fresh.route('**/allQuestions-*.js',route=>blocked?route.abort():route.continue());
- await fresh.goto(origin+base+'glossaire');await fresh.getByRole('combobox',{name:'Niveau des questions associées'}).click();await fresh.getByRole('option',{name:'Débutant',exact:true}).click();
+ await fresh.goto(origin+base+'glossaire');await fresh.locator('.glossary-options>summary').click();await fresh.getByRole('combobox',{name:'Niveau des questions associées'}).click();await fresh.getByRole('option',{name:'Débutant',exact:true}).click();
  await fresh.getByText('Impossible de charger les niveaux.',{exact:false}).waitFor();
  await fresh.getByLabel('Rechercher une notion').fill('token');
  await fresh.waitForFunction(()=>history.state?.atlasGlossary?.q==='token'&&history.state?.atlasGlossary?.glossLevel==='debutant');
@@ -81,4 +83,10 @@ test('glossary offers recovery when loading level data fails',async()=>{
  await fresh.waitForFunction(()=>{const node=document.querySelector('.results-count');return node&&/NOTIONS? TROUVÉES?/.test(node.textContent)});
  assert.equal(await fresh.getByLabel('Rechercher une notion').inputValue(),'token');
  await context.close();
+});
+test('the diagram gallery loads and refreshes from a direct Pages link',async()=>{
+ await page.goto(origin+base+'schemas');await page.getByRole('heading',{level:1,name:'Tous les schémas.'}).waitFor();
+ assert.equal(await page.locator('.gallery-item').count(),39);
+ await page.reload();await page.locator('[data-catalog-id="qkv"]>summary').click();
+ await page.locator('[data-diagram="qkv"]').waitFor();
 });

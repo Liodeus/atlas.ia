@@ -6,7 +6,7 @@
         {
           "heading": "Apprendre une tâche commence par définir un signal",
           "paragraphs": [
-            "Le Pretraining est la première grande phase d’apprentissage d’un modèle. Un Training Dataset, aussi appelé corpus, fournit les exemples à partir desquels ses Parameters sont ajustés. Pour un modèle de langage, l’objectif peut être de prédire la suite d’un texte. Ce travail apprend des régularités utiles, mais le corpus n’est pas conservé comme une bibliothèque de fiches consultées une à une.",
+            "Le Pretraining est la première grande phase d’apprentissage d’un modèle. Un Training Dataset fournit les exemples à partir desquels ses Parameters sont ajustés ; pour des textes, cet ensemble forme un corpus. Pour un modèle de langage, l’objectif peut être de prédire la suite d’un texte. Ce travail apprend des régularités utiles, mais le corpus n’est pas conservé comme une bibliothèque de fiches consultées une à une.",
             "La manière de construire la cible distingue plusieurs approches. En Supervised Learning, chaque exemple possède une réponse ou un Label de référence. En Self-Supervised Learning, la cible vient des données elles-mêmes : cacher une partie du texte ou décaler les Tokens fournit une question et sa réponse attendue. Unsupervised Learning désigne plus largement la recherche de structures sans Labels explicites ; selon les classifications, le Self-Supervised Learning en constitue une famille particulière."
           ]
         },
@@ -209,7 +209,7 @@
         {
           "heading": "Une adaptation doit aussi préserver ce qui fonctionnait",
           "paragraphs": [
-            "Le Catastrophic Forgetting est une perte de compétences antérieures après un apprentissage sur de nouvelles données. Une adaptation très spécialisée peut améliorer le vocabulaire du support tout en dégradant d’autres tâches. L’Alignment Tax, ou Capability Trade-off, désigne plus généralement un coût possible en capacité associé à certaines contraintes de comportement. Ce compromis doit être mesuré, et non supposé identique pour tous les modèles.",
+            "Le Catastrophic Forgetting est une perte de compétences antérieures après un apprentissage sur de nouvelles données. Une adaptation très spécialisée peut améliorer le vocabulaire du support tout en dégradant d’autres tâches. L’Alignment Tax désigne un coût éventuel en capacité lié à une adaptation visant l’Alignment. Un Capability Trade-off est un compromis plus général entre capacités ou objectifs. Ces effets doivent être mesurés, et non supposés identiques pour tous les modèles.",
             "Machine Unlearning vise à réduire ou retirer l’influence de certaines données apprises. Un refus obtenu par une nouvelle consigne ne démontre pas que cette influence a disparu des Weights. Adapter un style, faire respecter une règle et oublier une information sont trois objectifs différents. Les exemples d’entraînement et les critères de vérification doivent correspondre à l’objectif réellement recherché."
           ]
         }

@@ -1,0 +1,122 @@
+{
+  "notion-507": {
+    "explanation": "L’Agent Harness rassemble les composants qui transforment les propositions d’un modèle en un travail suivi : contexte, outils, état, contrôles et conditions d’arrêt. Il définit la manière dont l’agent interagit avec son environnement ; deux applications utilisant le même modèle peuvent donc avoir des comportements très différents selon leur Harness et les capacités qu’il expose.",
+    "example": "Exemple illustratif : un assistant de maintenance reçoit un objectif, consulte des fichiers autorisés, prépare une correction et vérifie son résultat. Le Harness organise ces étapes et conserve l’avancement entre les appels.",
+    "misconception": "Le Harness n’est pas un autre nom pour le modèle. Une amélioration du modèle ne corrige pas automatiquement une mauvaise gestion des outils, de l’état ou des permissions."
+  },
+  "notion-508": {
+    "explanation": "L’Agent Runtime fait fonctionner l’agent dans le temps : il lance les appels au modèle, traite les demandes d’outils et transmet leurs résultats à l’étape suivante. Il gère aussi les interruptions et les erreurs selon l’architecture choisie ; ce rôle opérationnel complète les règles et les composants qui constituent le Harness.",
+    "example": "Exemple illustratif : lorsqu’une recherche documentaire répond, le Runtime récupère le résultat et relance le modèle avec ces passages. Si l’appel échoue, il transmet un état d’erreur exploitable.",
+    "misconception": "Le mot Runtime n’impose aucune architecture unique. Selon les produits, l’exécution peut être locale, distante ou répartie, avec des responsabilités différentes pour la persistance et les contrôles."
+  },
+  "notion-509": {
+    "explanation": "Une Agent Loop répète la préparation du contexte, l’appel au modèle, l’éventuelle exécution d’une action et l’intégration de son résultat. L’application décide de poursuivre ou de s’arrêter selon l’objectif, les erreurs et les limites prévues ; cette boucle rend possible un travail adaptatif dont toutes les étapes ne sont pas connues à l’avance.",
+    "example": "Exemple illustratif : un agent cherche une référence bibliographique, constate que le premier résultat ne correspond pas, reformule sa recherche puis s’arrête lorsqu’il dispose d’une source vérifiée répondant à la demande.",
+    "misconception": "Répéter les appels ne garantit pas une progression. La boucle doit détecter les blocages et disposer de limites, même si le modèle continue à proposer des actions."
+  },
+  "notion-510": {
+    "explanation": "Le Tool Registry décrit les outils disponibles, leurs paramètres attendus et leur usage, afin que l’agent puisse identifier une capacité adaptée. Ce catalogue peut évoluer selon la session ou les droits accordés ; il aide à la découverte, mais ne remplace pas les vérifications effectuées lorsque l’application reçoit un appel concret.",
+    "example": "Exemple illustratif : un registre propose une recherche de documents et une création de brouillon avec des schémas distincts. L’agent découvre ainsi les champs requis avant de préparer son appel.",
+    "misconception": "La présence d’un outil dans un catalogue ne prouve pas que chaque opération est permise. Les droits sur la ressource visée doivent encore être contrôlés."
+  },
+  "notion-511": {
+    "explanation": "Le Tool Dispatcher reçoit une proposition d’appel structurée et l’achemine vers l’implémentation correspondante, puis restitue un résultat ou une erreur. Dans une application bien conçue, cette exécution s’accompagne de contrôles sur le nom de l’outil, les arguments et les droits, pour qu’une proposition du modèle ne devienne pas directement une action arbitraire.",
+    "example": "Exemple illustratif : le modèle demande de lire un document identifié. Le Dispatcher sélectionne le service approprié, fait appliquer le contrôle d’accès et renvoie soit le contenu, soit un refus explicite.",
+    "misconception": "Acheminer un appel n’est pas forcément l’autoriser. Certaines architectures séparent ces responsabilités ; il faut vérifier où les contrôles sont réellement appliqués et ne pas les supposer implicites."
+  },
+  "notion-512": {
+    "explanation": "Un Execution Budget fixe une limite globale au travail d’un agent, par exemple en durée, en étapes ou en dépenses de calcul. Le Runtime suit la consommation et interrompt ou réoriente le processus avant de dépasser cette limite ; cela rend une tâche ouverte plus prévisible et aide à détecter les boucles sans progrès.",
+    "example": "Exemple illustratif : une recherche complexe reçoit un budget de temps défini. À son expiration, l’assistant restitue les sources déjà vérifiées et indique les points restants au lieu de prolonger indéfiniment la recherche.",
+    "misconception": "Un budget global ne remplace pas le Timeout de chaque appel. Une seule opération bloquée peut consommer toute la durée disponible sans réaliser d’étape utile."
+  },
+  "notion-513": {
+    "explanation": "Un Timeout définit la durée maximale pendant laquelle l’application attend une opération avant de la considérer comme expirée. Il permet de réagir à une dépendance lente ou inaccessible, mais son déclenchement décrit d’abord une attente interrompue : une action distante peut avoir continué ou réussi sans que sa réponse soit parvenue.",
+    "example": "Exemple illustratif : la création d’un dossier expire après une coupure réseau. L’agent vérifie si le dossier existe déjà avant de décider si une nouvelle tentative est nécessaire et sûre.",
+    "misconception": "Un Timeout ne prouve pas que rien ne s’est passé. Annuler l’attente côté client et annuler effectivement l’opération côté serveur sont deux événements différents."
+  },
+  "notion-514": {
+    "explanation": "Une Retry Policy précise quelles erreurs justifient une nouvelle tentative, combien de fois et avec quel délai. Elle distingue les problèmes temporaires des refus ou paramètres invalides, puis utilise éventuellement un espacement progressif et aléatoire ; pour les opérations à effet externe, elle doit aussi tenir compte de l’idempotence et de l’état réel du service.",
+    "example": "Exemple illustratif : une lecture de catalogue temporairement indisponible est retentée après un délai. En revanche, une erreur de permission est remontée immédiatement, car répéter le même appel ne résoudrait pas le refus.",
+    "misconception": "Réessayer systématiquement peut aggraver une surcharge ou créer des doublons. Une politique de reprise doit limiter les tentatives et connaître les effets possibles de l’opération."
+  },
+  "notion-515": {
+    "explanation": "Le MCP Host est l’application qui accueille les connexions aux serveurs MCP et organise leur utilisation avec le modèle. Il crée les Clients nécessaires, sélectionne le contexte et applique ses règles de sécurité ; le Host décide ainsi quelles capacités sont proposées dans l’expérience utilisateur, sans déléguer toute la conversation à chaque serveur connecté.",
+    "example": "Exemple illustratif : un assistant de bureau connecte un serveur documentaire et un serveur de calendrier. Le Host rassemble les résultats utiles tout en contrôlant les données et actions accessibles dans la session.",
+    "misconception": "Le Host et le Server sont des rôles distincts. Connecter un serveur n’implique pas qu’il puisse consulter automatiquement tout l’historique ou toutes les autres intégrations."
+  },
+  "notion-516": {
+    "explanation": "Le MCP Client est le composant du Host chargé d’échanger les messages du protocole avec un serveur donné. Il transmet les demandes, reçoit les réponses et gère les capacités prises en charge ; une application peut utiliser plusieurs Clients pour relier des serveurs différents tout en conservant leurs frontières d’accès et de contexte.",
+    "example": "Exemple illustratif : dans un assistant connecté à deux services, le Client documentaire demande une recherche au serveur de documents, tandis qu’un autre Client traite les échanges avec le serveur de calendrier.",
+    "misconception": "Le MCP Client n’est pas forcément l’application visible par l’utilisateur. Il peut être une bibliothèque interne au Host ; ses échanges doivent respecter la version de protocole utilisée."
+  },
+  "notion-517": {
+    "explanation": "Un MCP Server expose des capacités accessibles par le protocole, comme des Tools, des Resources ou des Prompts, selon ce qu’il implémente. Il peut s’exécuter localement ou à distance et adapter un service existant ; il doit vérifier les accès aux données et opérations proposées, indépendamment de la confiance accordée au modèle par le Host.",
+    "example": "Exemple illustratif : un serveur documentaire expose une recherche et des guides identifiés par URI. L’assistant peut les consulter si les autorisations du compte permettent d’accéder à ces documents précis.",
+    "misconception": "Un MCP Server n’est pas nécessairement un modèle ou un agent autonome. C’est un rôle d’intégration, qui peut simplement exposer des fonctions déterministes et des données."
+  },
+  "notion-518": {
+    "explanation": "Un MCP Tool décrit une opération avec un nom et un schéma d’arguments que le Client peut demander au Server d’exécuter. Le résultat rejoint ensuite le contexte ou l’interface de l’application ; l’appel effectif reste soumis aux permissions et aux contrôles du système, même lorsque le modèle a choisi lui-même l’outil pertinent.",
+    "example": "Exemple illustratif : un outil de recherche reçoit une expression et un périmètre documentaire. Le serveur vérifie l’accès, effectue la recherche puis renvoie les passages trouvés avec les informations utiles à leur identification.",
+    "misconception": "Un Tool peut lire, calculer ou modifier des données. Son nom et ses annotations ne remplacent pas une vérification des effets réels et des droits nécessaires."
+  },
+  "notion-519": {
+    "explanation": "Une MCP Resource expose un contenu identifié par une URI, afin qu’un Client puisse le lire et l’utiliser comme contexte. Il peut s’agir d’un fichier, d’un schéma ou d’une information applicative ; le Host choisit comment découvrir et intégrer cette ressource, en fonction des capacités du serveur et des accès disponibles.",
+    "example": "Exemple illustratif : un serveur fournit le guide de rédaction d’une équipe comme Resource. L’application lit son contenu et le joint au contexte lorsque l’utilisateur prépare un document qui doit suivre ce guide.",
+    "misconception": "Une Resource ne se confond pas avec un Tool qui effectue une opération. Son URI identifie un contenu ; elle ne garantit ni sa fiabilité ni son accessibilité universelle."
+  },
+  "notion-520": {
+    "explanation": "Un MCP Prompt expose un modèle de messages réutilisable, que le Client peut récupérer avec des arguments pour une tâche donnée. Il fournit une structure de travail plutôt qu’une opération déjà exécutée ; le Host détermine comment l’utilisateur le choisit et comment les messages obtenus sont intégrés à l’interaction avec le modèle.",
+    "example": "Exemple illustratif : un serveur propose un Prompt de revue documentaire avec un argument indiquant le public visé. L’utilisateur le sélectionne, puis l’application récupère les messages préparés pour guider la revue.",
+    "misconception": "Un MCP Prompt ne remplace pas automatiquement les instructions prioritaires du Host. Le récupérer n’accorde pas non plus le droit d’exécuter les actions éventuellement mentionnées dans son texte."
+  },
+  "notion-521": {
+    "explanation": "Streamable HTTP transporte les messages MCP entre un Client et un Server à travers HTTP, avec des réponses pouvant notamment être reçues sous forme de JSON ou de flux SSE. Il convient aux échanges avec des services accessibles par HTTP ; les détails de connexion, de métadonnées et de compatibilité doivent être vérifiés dans la version réellement utilisée.",
+    "example": "Exemple illustratif : un assistant communique avec un serveur documentaire distant via un endpoint HTTP. Le serveur peut transmettre des informations au fil de la réponse selon les fonctionnalités prises en charge.",
+    "misconception": "Streamable HTTP ne signifie pas que tout devient du texte généré en continu. C’est un transport du protocole, distinct des capacités métier et de leur autorisation."
+  },
+  "notion-522": {
+    "explanation": "MCP Authorization encadre l’accès d’un Client aux ressources protégées d’un Server, notamment avec des mécanismes OAuth pour les déploiements HTTP concernés. Le serveur vérifie les justificatifs et leur portée ; ces mécanismes s’ajoutent aux règles métier et aux décisions du Host sur les actions qu’il permet à l’agent de demander.",
+    "example": "Exemple illustratif : un utilisateur accorde la consultation d’un calendrier. Le Client obtient un accès correspondant, mais une demande de modification doit encore satisfaire les droits du service et la politique de l’application.",
+    "misconception": "Un jeton valide ne rend pas toutes les actions autorisées ni tous les résultats fiables. Authentification, portée d’accès, permissions métier et confiance dans le contenu restent distinctes."
+  },
+  "notion-523": {
+    "explanation": "La Context Compaction réduit le contexte transmis au modèle en résumant, sélectionnant ou regroupant les éléments de l’historique. Elle permet de poursuivre une tâche longue avec moins de tokens, à condition de conserver les contraintes, les décisions, les références et les résultats indispensables ; les détails écartés doivent pouvoir être retrouvés lorsque leur précision compte.",
+    "example": "Exemple illustratif : après une longue analyse, l’application conserve le but, les fichiers modifiés, les vérifications réussies et les problèmes ouverts. La session continue à partir de cette synthèse et des fichiers disponibles.",
+    "misconception": "Une compaction n’est pas une compression parfaitement réversible. Une nuance ou une condition peut disparaître, même si le résumé semble clair et complet à la lecture."
+  },
+  "notion-524": {
+    "explanation": "Un Context Reset démarre une interaction avec un contexte neuf, puis y réintroduit les informations choisies pour la suite. Il peut réduire l’encombrement ou permettre un relais entre sessions, mais exige une reprise explicite de l’objectif, des contraintes et de l’état du travail ; ce qui reste stocké ailleurs ne revient pas automatiquement au modèle.",
+    "example": "Exemple illustratif : un agent reprend un projet avec un nouveau contexte et lit le document de suivi ainsi que les fichiers concernés avant de choisir la prochaine étape encore nécessaire.",
+    "misconception": "Réinitialiser le contexte ne supprime pas nécessairement les fichiers, souvenirs persistants ou actions externes. Le contexte du modèle et l’état de l’application sont des éléments différents."
+  },
+  "notion-525": {
+    "explanation": "Un Session Handoff Artifact est un document ou un état structuré préparé pour qu’une autre session puisse reprendre une tâche. Il rassemble le but, les décisions établies, les livrables, les validations et les points ouverts avec leurs références ; sa valeur vient de sa précision opérationnelle, pas d’une transcription exhaustive de tous les échanges.",
+    "example": "Exemple illustratif : avant un relais, un agent consigne les fichiers déjà corrigés, les tests exécutés et la dernière erreur observée. La session suivante peut poursuivre à partir de preuves accessibles.",
+    "misconception": "Un compte rendu affirmant simplement que le travail avance ne suffit pas. Le relais doit distinguer ce qui a été proposé, effectivement exécuté et réellement vérifié."
+  },
+  "notion-526": {
+    "explanation": "Un Agent Checkpoint enregistre l’état d’une exécution à un instant donné, afin de permettre une reprise ou une inspection selon les capacités du Runtime. Il peut contenir les messages, variables et étapes en attente ; reprendre cet état exige aussi de considérer les actions externes déjà effectuées pour éviter de les déclencher une seconde fois.",
+    "example": "Exemple illustratif : un processus attend une validation humaine après avoir préparé un brouillon. Le checkpoint conserve cet état, puis le Runtime reprend l’étape suivante lorsque la décision attendue est disponible.",
+    "misconception": "Un Agent Checkpoint ne sauvegarde pas les poids du modèle comme un Model Checkpoint. Il ne restaure pas non plus automatiquement l’état des services externes."
+  },
+  "notion-527": {
+    "explanation": "Une Agent Trajectory retrace le déroulement observé d’une exécution : demandes, actions, réponses des outils et résultats intermédiaires. Elle permet d’examiner comment l’agent est arrivé à un résultat, d’identifier une erreur de parcours et de mesurer certains comportements ; son utilité dépend de la qualité des événements enregistrés et de leur lien avec l’état final.",
+    "example": "Exemple illustratif : un rapport erroné est examiné à partir de sa trajectoire. Les traces montrent que l’agent a reçu un refus d’accès puis a néanmoins présenté la recherche comme complète.",
+    "misconception": "Une trajectoire enregistrée ne révèle pas nécessairement le raisonnement interne du modèle. Elle documente les événements disponibles et peut rester incomplète si l’instrumentation omet certaines actions."
+  },
+  "notion-528": {
+    "explanation": "Les Agent Evals évaluent un système composé du modèle, de son Harness et de ses outils sur des tâches définies. Elles examinent le résultat effectif et, lorsque nécessaire, le parcours suivi, les permissions respectées et les ressources consommées ; plusieurs essais peuvent être utiles pour distinguer une réussite stable d’un résultat occasionnel.",
+    "example": "Exemple illustratif : pour tester un agent de classement, l’évaluation vérifie que les fichiers attendus se trouvent dans les bons dossiers et que les documents exclus n’ont pas été déplacés.",
+    "misconception": "La déclaration finale de l’agent ne prouve pas la réussite. Une évaluation doit vérifier l’état obtenu, et pas seulement la qualité du texte annonçant l’achèvement."
+  },
+  "notion-529": {
+    "explanation": "MCP Apps étend MCP pour associer des résultats d’outils à une interface interactive affichée dans un Host compatible. Un serveur fournit une ressource d’interface, puis le Host organise son affichage et ses échanges ; cette intégration permet de manipuler un formulaire ou une visualisation dans la conversation avec des restrictions adaptées aux capacités demandées.",
+    "example": "Exemple illustratif : une recherche de voyages renvoie une carte interactive. L’utilisateur sélectionne une proposition dans la conversation et l’application transmet ce choix à travers les échanges permis par le Host.",
+    "misconception": "Une MCP App n’est pas automatiquement prise en charge par tout Client MCP. L’isolation de l’interface et l’autorisation de ses appels restent des responsabilités explicites de l’intégration."
+  },
+  "notion-530": {
+    "explanation": "Une Tool Permission Policy définit quelles opérations un agent peut effectuer, sur quelles ressources et dans quelles conditions. Elle s’applique à l’exécution, en tenant compte du contexte et des droits accordés ; séparer lecture, modification et transmission de données aide à ajuster l’autonomie sans donner un accès global à tous les outils disponibles.",
+    "example": "Exemple illustratif : un assistant peut lire les documents d’un projet et préparer des modifications, mais l’envoi à un destinataire externe exige que la demande autorise précisément cette transmission et son contenu.",
+    "misconception": "Une consigne textuelle demandant d’être prudent ne suffit pas comme contrôle d’accès. La politique doit être appliquée par le système, même si le modèle propose autre chose."
+  }
+}

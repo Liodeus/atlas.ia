@@ -1,0 +1,132 @@
+{
+  "notion-188": {
+    "explanation": "Le Full Fine-tuning autorise la mise à jour de l'ensemble des paramètres du modèle préentraîné pour l'adapter à de nouvelles données. Cette liberté permet de modifier largement ses représentations, mais impose de conserver les gradients et l'état de l'Optimizer pour tous les poids entraînés, avec des besoins mémoire importants et un risque d'altérer des capacités antérieures.",
+    "example": "Exemple illustratif : une équipe adapte entièrement un modèle de classification à des descriptions de pièces industrielles. Elle évalue à la fois les nouvelles catégories et celles déjà maîtrisées avant l'adaptation.",
+    "misconception": "Full décrit les paramètres modifiables, pas la qualité des données ni la réussite de l'adaptation. Entraîner davantage de poids peut aussi accentuer le surapprentissage."
+  },
+  "notion-190": {
+    "explanation": "L'Instruction Tuning entraîne le modèle sur des exemples associant une consigne à une réponse attendue, souvent pour des tâches variées. Il transforme le comportement de continuation du texte en comportement de réponse à une demande ; la diversité des formulations, des formats et des tâches influence sa capacité à suivre des instructions nouvelles.",
+    "example": "Exemple illustratif : le corpus alterne des consignes de résumé, de reformulation et de classification, chacune accompagnée d'une réponse soignée. Le modèle apprend à reconnaître le travail demandé dans différentes formulations.",
+    "misconception": "L'Instruction Tuning modifie les paramètres pendant l'apprentissage. Ajouter quelques exemples dans un prompt relève de l'In-Context Learning et ne réalise pas cette mise à jour."
+  },
+  "notion-191": {
+    "explanation": "Le Continued Pretraining reprend l'objectif de préentraînement d'un modèle existant sur un corpus supplémentaire, par exemple la prédiction de tokens dans des documents spécialisés. Il permet de renforcer l'exposition à un vocabulaire ou à des structures particulières avant une adaptation aux consignes ; la sélection du corpus et le mélange avec d'anciennes données influencent les capacités conservées.",
+    "example": "Exemple illustratif : un modèle généraliste poursuit son apprentissage sur des manuels de maintenance. Une phase ultérieure utilise des questions et réponses pour lui apprendre à exploiter ce domaine dans un dialogue.",
+    "misconception": "Continuer le préentraînement ne suffit pas à apprendre un format de réponse ou à garantir une restitution exacte. L'exposition à un document n'en fait pas une base consultable."
+  },
+  "notion-192": {
+    "explanation": "La Domain Adaptation vise à rendre un modèle utile sur une distribution différente de celle qui a servi à son apprentissage initial. Elle peut employer un préentraînement complémentaire, des exemples annotés du domaine ou des réglages ciblés ; l'évaluation doit représenter les usages nouveaux et vérifier si les connaissances transférées restent pertinentes.",
+    "example": "Exemple illustratif : un classifieur entraîné sur des avis de produits est adapté aux retours de visiteurs d'un musée. Des exemples du nouveau domaine l'aident à interpréter un vocabulaire et des attentes différents.",
+    "misconception": "Changer de domaine ne se limite pas à ajouter des mots spécialisés. Le sens des catégories, les situations et les habitudes rédactionnelles peuvent également changer."
+  },
+  "notion-196": {
+    "explanation": "Un Adapter introduit un petit ensemble de paramètres entraînables dans un modèle dont la majorité des poids reste figée. Dans les architectures à modules additionnels, ces transformations modifient les activations entre couches ; on peut ainsi conserver un socle partagé et stocker séparément plusieurs spécialisations, selon le mécanisme d'adaptation et sa compatibilité avec le modèle.",
+    "example": "Exemple illustratif : un même modèle de base sert à classer des tickets et des descriptions de produits. Chaque tâche charge son Adapter dédié, entraîné sur ses exemples sans remplacer tout le socle.",
+    "misconception": "Adapter désigne une famille de mécanismes. Tous ne se fusionnent pas dans les poids et tous n'ont pas le même coût pendant l'Inference."
+  },
+  "notion-197": {
+    "explanation": "Le Prompt Tuning apprend des vecteurs continus ajoutés aux représentations d'entrée tout en gardant les poids du modèle figés. Ces Soft Prompts sont ajustés par gradients pour orienter une tâche et peuvent être stockés séparément ; contrairement à une consigne rédigée, ils n'ont pas nécessairement de traduction lisible en mots.",
+    "example": "Exemple illustratif : une organisation apprend un Soft Prompt pour classer ses demandes internes. À l'Inference, ces vecteurs précèdent chaque entrée, tandis que le modèle de base reste commun aux autres tâches.",
+    "misconception": "Un Soft Prompt n'est pas un texte optimisé manuellement. Ses vecteurs dépendent du modèle et ne se transfèrent pas automatiquement vers une autre architecture."
+  },
+  "notion-198": {
+    "explanation": "Le Prefix Tuning apprend un préfixe continu qui influence plusieurs couches du réseau, souvent via des états de clés et valeurs utilisés par l'attention. Les poids du modèle restent figés, tandis que les tokens générés peuvent consulter ces états appris ; cette injection interne distingue le mécanisme d'un simple texte placé au début du prompt.",
+    "example": "Exemple illustratif : un préfixe entraîné pour produire des notices à partir de tableaux fournit des états supplémentaires aux couches d'attention. Le modèle combine ces états avec les données du tableau reçu.",
+    "misconception": "Prefix Tuning et Prompt Tuning sont proches mais ne placent pas nécessairement les paramètres appris au même endroit. Un préfixe continu n'est pas un cache de texte ordinaire."
+  },
+  "notion-199": {
+    "explanation": "Le Model Merging combine des paramètres ou des différences de paramètres issus de plusieurs modèles pour produire un seul ensemble de poids. Il peut rapprocher des spécialisations construites depuis une base commune, sans exécuter tous les modèles à chaque requête ; les correspondances entre architectures et les conflits entre modifications déterminent largement la faisabilité de la fusion.",
+    "example": "Exemple illustratif : deux versions adaptées depuis le même modèle privilégient respectivement le résumé et la classification. Une équipe expérimente une fusion de leurs modifications et teste chaque tâche sur des exemples réservés.",
+    "misconception": "Une moyenne de poids ne garantit pas l'addition des compétences. Des modèles de formes compatibles peuvent néanmoins avoir des représentations ou des adaptations incompatibles."
+  },
+  "notion-201": {
+    "explanation": "Dans une relation Teacher / Student, le Teacher fournit des cibles, des distributions ou des exemples qui guident l'apprentissage du Student. Ce transfert peut réduire le coût d'utilisation ou spécialiser un modèle ; le Student apprend à partir des signaux observables du Teacher, sans nécessairement reproduire son architecture ni l'ensemble de ses connaissances.",
+    "example": "Exemple illustratif : un modèle coûteux annote des descriptions de produits et fournit ses probabilités sur les catégories. Un modèle plus léger apprend ensuite à reproduire ces distinctions pour traiter les demandes courantes.",
+    "misconception": "Teacher et Student décrivent des rôles d'apprentissage, pas des tailles imposées. Le Student peut hériter des erreurs du Teacher et doit être évalué indépendamment."
+  },
+  "notion-202": {
+    "explanation": "L'Alignment cherche à rapprocher le comportement d'un système des intentions, contraintes et préférences définies pour son usage. On peut agir sur les données, les objectifs d'apprentissage, les évaluations et les contrôles de déploiement ; préciser de quelles personnes et de quels contextes proviennent les attentes est indispensable pour interpréter le résultat.",
+    "example": "Exemple illustratif : un assistant documentaire apprend à reconnaître une source insuffisante et à demander une précision. Son évaluation examine l'utilité de la réponse autant que sa conformité aux consignes de l'application.",
+    "misconception": "Un modèle dit aligné n'est pas garanti correct ni universellement acceptable. Des attentes contradictoires ou un contexte inédit peuvent révéler des limites du comportement appris."
+  },
+  "notion-204": {
+    "explanation": "Le RLAIF utilise des évaluations produites par une AI pour fournir le signal de préférence ou de récompense d'un apprentissage par renforcement. Un modèle évaluateur peut comparer des réponses selon des critères explicites, puis ces jugements servent à entraîner ou orienter le modèle cible ; la qualité des critères et du juge reste déterminante.",
+    "example": "Exemple illustratif : un évaluateur compare deux réponses selon leur clarté et leur respect des documents fournis. Les préférences retenues alimentent un Reward Model utilisé pour adapter l'assistant.",
+    "misconception": "RLAIF ne supprime pas les choix humains : les critères, les données et le juge sont sélectionnés. Des biais du juge peuvent devenir des comportements appris."
+  },
+  "notion-205": {
+    "explanation": "Le RLVR entraîne un modèle avec des récompenses issues de vérifications automatisables, comme l'exécution de tests ou la comparaison à une solution mathématique. Il réduit la dépendance à un jugement subjectif pour ces tâches, mais suppose un vérificateur pertinent et suffisamment robuste ; le modèle optimise ce que ce vérificateur mesure effectivement.",
+    "example": "Exemple illustratif : un modèle propose une fonction de tri et reçoit une récompense lorsque les tests réservés réussissent. Les propositions suivantes sont orientées par ces résultats pendant l'entraînement.",
+    "misconception": "Réussir un vérificateur ne prouve pas une correction générale. Des tests incomplets, une réponse codée en dur ou un vérificateur défaillant peuvent produire des récompenses trompeuses."
+  },
+  "notion-206": {
+    "explanation": "Un Process Reward Model évalue des étapes intermédiaires d'une solution au lieu de fournir uniquement un jugement final. Ses scores peuvent servir à sélectionner des chemins de résolution ou à construire un signal d'entraînement plus local ; il doit apprendre à distinguer une progression valide d'une étape plausible qui compromet la suite.",
+    "example": "Exemple illustratif : plusieurs solutions d'un problème sont découpées en étapes. Le PRM attribue un mauvais score à une transformation algébrique invalide, même lorsque le texte qui l'accompagne paraît convaincant.",
+    "misconception": "Un PRM n'est pas un vérificateur formel. Des étapes bien notées peuvent rester incorrectes, et le score ne démontre pas le raisonnement interne réel du modèle."
+  },
+  "notion-207": {
+    "explanation": "Un Outcome Reward Model attribue un score à la réponse ou au résultat final d'une tentative. Ce signal permet de classer des propositions ou d'orienter l'apprentissage sans annoter chaque étape, mais il ne précise pas directement où une solution s'est trompée ; son utilité dépend des critères finaux qu'il a appris à reconnaître.",
+    "example": "Exemple illustratif : un système génère plusieurs réponses à un exercice et l'ORM les classe d'après leur résultat final. Une solution erronée reçoit un score faible sans indication de l'étape responsable.",
+    "misconception": "Un ORM appris peut confondre qualité de présentation et réussite. Une récompense finale n'est pas automatiquement une vérification exacte ni une validation de toutes les étapes."
+  },
+  "notion-209": {
+    "explanation": "PPO améliore une Policy à partir de trajectoires échantillonnées et d'estimations de leur avantage par rapport à une référence attendue. Sa variante PPO-Clip limite dans l'objectif l'intérêt de changements trop importants des probabilités d'action, afin de réutiliser les expériences sur plusieurs mises à jour ; une fonction de valeur aide généralement à estimer cet avantage.",
+    "example": "Exemple illustratif : un assistant produit des réponses évaluées par un Reward Model. PPO renforce certaines réponses mieux notées tout en décourageant, via son objectif, des changements trop brusques de comportement.",
+    "misconception": "Le clipping de PPO n'impose pas une borne stricte à toutes les variations de la Policy. Il ne garantit ni stabilité parfaite ni absence de Reward Hacking."
+  },
+  "notion-210": {
+    "explanation": "GRPO compare plusieurs sorties produites pour une même question afin d'estimer leur avantage relatif à partir des récompenses du groupe. Dans sa formulation initiale, ce calcul remplace un modèle de valeur séparé et s'intègre à un objectif proche de PPO ; il réduit certains besoins mémoire, tout en exigeant la génération et l'évaluation de plusieurs propositions.",
+    "example": "Exemple illustratif : un modèle propose plusieurs solutions au même exercice. Les récompenses sont comparées à celles du groupe pour favoriser les propositions relativement meilleures lors de la mise à jour.",
+    "misconception": "GRPO ne définit pas ce qui mérite une récompense. Si toutes les sorties d'un groupe reçoivent le même score, le signal relatif peut être peu informatif."
+  },
+  "notion-211": {
+    "explanation": "ORPO combine un objectif supervisé sur les réponses préférées avec un terme qui favorise leur probabilité relative face aux réponses rejetées, à partir d'un rapport de cotes. Cette approche réalise l'adaptation aux préférences dans une même phase, sans conserver un modèle de référence distinct ; elle utilise néanmoins un dataset de comparaisons soigneusement construit.",
+    "example": "Exemple illustratif : pour une demande de résumé, le corpus fournit une réponse fidèle et une réponse qui ajoute des faits. ORPO apprend la première tout en la favorisant relativement à la seconde.",
+    "misconception": "Sans modèle de référence ne signifie pas sans données de préférence ni sans objectif supervisé. ORPO ne vérifie pas lui-même la justesse des préférences fournies."
+  },
+  "notion-212": {
+    "explanation": "Un Preference Dataset associe à un même contexte plusieurs réponses et un jugement indiquant lesquelles sont préférées, parfois avec des scores ou des classements. Ces données servent à apprendre un Reward Model ou à adapter directement une Policy ; les consignes d'annotation précisent si le choix porte sur l'exactitude, l'utilité, le style ou d'autres critères.",
+    "example": "Exemple illustratif : des annotateurs comparent deux explications d'une notice technique. Ils choisissent celle qui respecte la source et consignent les cas où la réponse la plus fluide contient une erreur.",
+    "misconception": "Une préférence n'est pas une mesure absolue de qualité. Le choix peut varier selon les annotateurs, l'ordre d'affichage ou un attrait pour des réponses longues."
+  },
+  "notion-213": {
+    "explanation": "Le Reward Hacking apparaît lorsque l'optimisation augmente la récompense mesurée sans améliorer l'objectif réellement recherché, voire en le dégradant. Le système exploite alors un défaut de la mesure ou du dispositif d'évaluation ; confronter le score à des observations indépendantes aide à détecter cet écart au cours de l'entraînement.",
+    "example": "Exemple illustratif : un assistant récompensé pour la présence de références insère des identifiants plausibles mais inexistants. Le score automatique augmente alors que la possibilité de vérifier ses réponses diminue.",
+    "misconception": "Le Reward Hacking n'implique pas une intention consciente de tricher. Il peut résulter simplement d'un apprentissage efficace sur une récompense mal spécifiée."
+  },
+  "notion-214": {
+    "explanation": "Le Reward Shaping ajoute ou transforme des signaux de récompense pour guider plus facilement l'apprentissage, notamment lorsque la réussite finale est rare. Ces signaux intermédiaires peuvent faciliter l'exploration, mais aussi modifier les comportements recherchés ; certaines constructions fondées sur un potentiel préservent la Policy optimale sous des hypothèses mathématiques précises.",
+    "example": "Exemple illustratif : dans un labyrinthe simulé, une récompense intermédiaire reflète la progression vers la sortie. L'équipe vérifie que l'agent ne peut pas gagner indéfiniment des points en effectuant des allers-retours.",
+    "misconception": "Ajouter des récompenses locales n'est pas neutre. Sans construction adaptée, l'agent peut privilégier ces points intermédiaires et abandonner la tâche finale attendue."
+  },
+  "notion-215": {
+    "explanation": "La Constitutional AI utilise un ensemble explicite de principes pour guider des critiques, des révisions et des jugements produits par des modèles. Dans la méthode initiale, des réponses révisées servent à une adaptation supervisée, puis des préférences générées selon ces principes alimentent une phase de renforcement ; les principes structurent ainsi le signal d'apprentissage.",
+    "example": "Exemple illustratif : un principe demande de reconnaître les informations insuffisantes. Un modèle critique une réponse trop affirmative, en rédige une version nuancée, puis ces révisions contribuent au corpus d'adaptation.",
+    "misconception": "Une constitution de principes n'est pas une preuve de conformité systématique. Leur formulation, leurs conflits et leur interprétation par le modèle peuvent produire des résultats différents."
+  },
+  "notion-216": {
+    "explanation": "Le Human-in-the-Loop place une intervention humaine à un endroit précis du fonctionnement ou de l'amélioration d'un système : annotation, correction, arbitrage ou validation d'une action. La boucle est utile lorsque le jugement humain apporte une information absente des signaux automatiques ; elle doit préciser les cas transmis et la manière dont la décision est prise en compte.",
+    "example": "Exemple illustratif : un outil propose une catégorie pour un dossier ambigu et demande à une personne de la confirmer. Les corrections sont conservées pour une revue du modèle et des règles de traitement.",
+    "misconception": "Afficher un bouton de validation ne garantit pas une supervision utile. La personne doit disposer du contexte, du temps et de la possibilité réelle de corriger."
+  },
+  "notion-217": {
+    "explanation": "Le Post-training regroupe les étapes d'apprentissage réalisées après le préentraînement pour adapter un modèle à ses usages : suivi d'instructions, préférences, raisonnement ou emploi d'outils. Plusieurs méthodes peuvent être combinées et répétées, avec des jeux de données et objectifs différents ; le terme décrit une place dans le cycle de développement, pas une recette unique.",
+    "example": "Exemple illustratif : un modèle de base reçoit d'abord des démonstrations de réponses, puis des comparaisons de qualité et des exercices vérifiables. Chaque phase est évaluée avant de préparer la version distribuée.",
+    "misconception": "Post-training ne désigne pas la génération au moment d'une requête. Il modifie le modèle par apprentissage, et son déroulement varie selon les projets."
+  },
+  "notion-218": {
+    "explanation": "L'Alignment Tax désigne une éventuelle dégradation de certaines performances après une adaptation du comportement, tandis que le Capability Trade-off décrit plus largement des compromis entre objectifs. Pour les mesurer, on compare des modèles et des protocoles cohérents : une baisse de score peut provenir d'une compétence moins accessible, d'un format modifié ou d'un refus accru.",
+    "example": "Exemple illustratif : après adaptation, un assistant suit mieux les contraintes mais répond moins souvent à certaines questions de test. L'équipe sépare les refus, les erreurs de format et les réponses effectivement incorrectes.",
+    "misconception": "Ce compromis n'est pas une taxe inévitable ni un nombre universel. Une adaptation peut améliorer plusieurs objectifs simultanément, et le résultat dépend des évaluations retenues."
+  },
+  "notion-219": {
+    "explanation": "Le Machine Unlearning cherche à retirer l'influence de données ou comportements ciblés d'un modèle déjà entraîné. Selon la méthode, on réentraîne certaines parties ou on applique une approximation de l'effet qu'aurait eu l'absence des données ; l'évaluation doit examiner à la fois l'oubli demandé et la préservation des capacités qui doivent rester disponibles.",
+    "example": "Exemple illustratif : des exemples ont été intégrés par erreur à un dataset. Une équipe compare une procédure d'Unlearning à un réentraînement sans ces exemples et recherche des traces persistantes de leur influence.",
+    "misconception": "Refuser une question ou supprimer un fichier source ne démontre pas que son influence a disparu des poids. Les garanties d'oubli dépendent fortement de la méthode."
+  },
+  "notion-220": {
+    "explanation": "Le Catastrophic Forgetting correspond à une perte marquée de performances sur des tâches antérieures lorsque le modèle apprend de nouvelles données. Les mises à jour utiles au nouveau domaine peuvent modifier des paramètres importants pour l'ancien ; rejouer certains exemples, contraindre les changements ou isoler des adaptations peut limiter cet effet selon le contexte.",
+    "example": "Exemple illustratif : après une adaptation intensive aux notices industrielles, un modèle classe moins bien les messages courants. L'équipe mesure cette régression sur un jeu conservé et expérimente un mélange de domaines.",
+    "misconception": "Toute baisse après adaptation n'est pas automatiquement un oubli catastrophique. Un changement de prompt, de format ou de protocole peut également expliquer une régression apparente."
+  }
+}

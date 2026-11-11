@@ -1,0 +1,90 @@
+{
+  "notion-453": [
+    "https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm"
+  ],
+  "notion-454": [
+    "https://learn.microsoft.com/windows/ai/npu-devices"
+  ],
+  "notion-455": [
+    "https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm",
+    "https://docs.nvidia.com/deeplearning/performance/dl-performance-gpu-background/index.html"
+  ],
+  "notion-456": [
+    "https://docs.pytorch.org/tutorials/beginner/basics/tensorqs_tutorial.html"
+  ],
+  "notion-457": [
+    "https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/"
+  ],
+  "notion-458": [
+    "https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/"
+  ],
+  "notion-459": [
+    "https://docs.nvidia.com/cuda/cuda-programming-guide/index.html"
+  ],
+  "notion-460": [
+    "https://rocm.docs.amd.com/"
+  ],
+  "notion-461": [
+    "https://docs.pytorch.org/tutorials/beginner/basics/intro.html"
+  ],
+  "notion-462": [
+    "https://docs.jax.dev/en/latest/101/transformations.html"
+  ],
+  "notion-463": [
+    "https://huggingface.co/docs/hub/en/transformers"
+  ],
+  "notion-465": [
+    "https://github.com/ggml-org/llama.cpp"
+  ],
+  "notion-466": [
+    "https://docs.nvidia.com/tensorrt-llm/index.html"
+  ],
+  "notion-467": [
+    "https://triton-lang.org/main/index.html"
+  ],
+  "notion-470": [
+    "https://docs.pytorch.org/docs/stable/distributed.pipelining.html"
+  ],
+  "notion-471": [
+    "https://docs.pytorch.org/docs/stable/distributed.pipelining.html"
+  ],
+  "notion-472": [
+    "https://docs.pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html"
+  ],
+  "notion-473": [
+    "https://docs.pytorch.org/docs/stable/checkpoint"
+  ],
+  "notion-474": [
+    "https://www.deepspeed.ai/tutorials/zero/"
+  ],
+  "notion-475": [
+    "https://docs.pytorch.org/docs/stable/distributed.checkpoint.html"
+  ],
+  "notion-476": [
+    "https://huggingface.co/docs/inference-endpoints/index"
+  ],
+  "notion-477": [
+    "https://developer.mozilla.org/en-US/docs/Glossary/API"
+  ],
+  "notion-478": [
+    "https://sre.google/sre-book/service-level-objectives/"
+  ],
+  "notion-479": [
+    "https://opentelemetry.io/docs/concepts/observability-primer/"
+  ],
+  "notion-480": [
+    "https://mlflow.org/docs/latest/registry/"
+  ],
+  "notion-481": [
+    "https://mlflow.org/docs/latest/ml/tracking"
+  ],
+  "notion-482": [
+    "https://docs.cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning"
+  ],
+  "notion-483": [
+    "https://kubernetes.io/docs/tutorials/stateless-application/canary-deployment/"
+  ],
+  "notion-484": [
+    "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+  ]
+}

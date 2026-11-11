@@ -27,12 +27,12 @@
 .course-mode-panel .course-depth{margin:0}
 .lesson-objective{padding:18px 20px;border-left:4px solid var(--accent);border-radius:8px;background:var(--soft)}
 .lesson-content .lesson-objective p{margin:6px 0 0;color:var(--ink);font-size:15px;line-height:1.65}
-.course-page .lesson-lead{max-width:85ch;margin-top:22px}
+.course-page .lesson-lead{margin-top:22px}
 .course-section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0}
 .course-section-grid>.course-explanation:last-child:nth-child(odd){grid-column:1/-1}
 .course-explanation{min-width:0;padding:20px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
 .lesson-content .course-explanation h2{margin:0 0 12px;color:var(--ink);font-size:22px;line-height:1.25}
-.lesson-content .course-explanation p{max-width:90ch;margin:0 0 12px;color:var(--ink);font-size:14px;line-height:1.75}
+.lesson-content .course-explanation p{margin:0 0 12px;color:var(--ink);font-size:14px;line-height:1.75}
 .lesson-content .course-explanation p:last-child{margin-bottom:0}
 .course-deep-dive{margin:20px 0 0}
 .lesson-content .course-deep-dive>h2{margin:8px 0 0}

@@ -1,0 +1,147 @@
+{
+  "notion-453": {
+    "explanation": "Un TPU est un accélérateur conçu par Google pour les calculs de réseaux neuronaux, notamment les multiplications de matrices. Son intérêt dépend du modèle, des formats numériques et de la manière dont le programme utilise ses unités de calcul, sa mémoire et ses interconnexions ; le logiciel doit donc être adapté à cette architecture.",
+    "example": "Exemple illustratif : Une équipe porte son entraînement sur des TPU, puis mesure le temps passé à calculer et à alimenter les puces. Des accélérateurs supplémentaires n’aident guère si le chargement des données les laisse inactifs.",
+    "misconception": "TPU n’est pas un nom générique pour tous les accélérateurs d’IA. Une application prévue pour CUDA ne fonctionne pas automatiquement sur un TPU."
+  },
+  "notion-454": {
+    "explanation": "Un NPU est un processeur spécialisé dans les opérations courantes des réseaux neuronaux. Souvent intégré à un téléphone ou un ordinateur, il permet d’exécuter certaines inférences avec une consommation adaptée à un usage local ; ses possibilités dépendent des opérateurs, des formats de modèles et des bibliothèques pris en charge.",
+    "example": "Exemple illustratif : Une application de visioconférence utilise le NPU pour traiter l’arrière-plan de l’image. Si une opération du modèle n’est pas compatible, une partie du traitement peut devoir revenir au CPU ou au GPU.",
+    "misconception": "La présence d’un NPU ne signifie pas que tous les modèles y tourneront. Un chiffre de puissance annoncé ne suffit pas à prévoir la vitesse d’une application."
+  },
+  "notion-455": {
+    "explanation": "La VRAM désigne couramment la mémoire accessible au GPU pour conserver poids, activations et autres données de calcul. La HBM est une technologie de mémoire à forte bande passante utilisée par certains accélérateurs : la capacité indique ce qui peut tenir en mémoire, tandis que la bande passante indique à quelle vitesse les données peuvent circuler.",
+    "example": "Exemple illustratif : Un modèle tient en mémoire avec une seule conversation, mais plusieurs longs dialogues remplissent le cache et provoquent un manque de mémoire. Réduire le nombre de requêtes simultanées peut alors permettre de poursuivre l’inférence.",
+    "misconception": "VRAM et HBM ne sont pas deux unités de capacité. Davantage de gigaoctets résout certains problèmes de place, sans garantir une bande passante supérieure."
+  },
+  "notion-456": {
+    "explanation": "Dans les bibliothèques d’apprentissage, un tenseur est un tableau de nombres organisé selon plusieurs axes. Sa forme décrit la taille de ces axes, son type indique comment les nombres sont représentés, et son emplacement précise le matériel qui les stocke ; les calculs doivent respecter ces propriétés pour combiner correctement les données.",
+    "example": "Exemple illustratif : Un lot fictif de huit images couleur de 32 pixels sur 32 peut être représenté par un tenseur de forme 8 × 3 × 32 × 32. Chaque axe correspond ici au lot, aux canaux, à la hauteur ou à la largeur.",
+    "misconception": "Un axe de tenseur n’est pas forcément une dimension spatiale. Permuter deux axes peut conserver les mêmes nombres tout en changeant le sens du calcul."
+  },
+  "notion-457": {
+    "explanation": "La multiplication matricielle combine les lignes d’une matrice avec les colonnes d’une autre en additionnant des produits. Dans un réseau, elle permet notamment de transformer simultanément de nombreux vecteurs par les mêmes poids ; les dimensions intérieures doivent correspondre, et l’ordre des matrices détermine généralement un résultat différent.",
+    "example": "Exemple illustratif : Un lot fictif de cinq représentations à quatre composantes forme une matrice 5 × 4. La multiplier par des poids de forme 4 × 3 produit cinq représentations à trois composantes, soit une matrice 5 × 3.",
+    "misconception": "MatMul ne désigne pas une multiplication élément par élément. Ces deux opérations n’ont ni les mêmes contraintes de forme ni le même rôle dans le réseau."
+  },
+  "notion-458": {
+    "explanation": "Les Tensor Cores sont des unités de calcul spécialisées de certains GPU NVIDIA qui accélèrent des opérations matricielles avec accumulation. Les formats acceptés et les conditions d’efficacité dépendent de la génération matérielle et des bibliothèques ; un programme doit utiliser des opérations compatibles pour bénéficier de ces unités dans ses calculs.",
+    "example": "Exemple illustratif : Une couche dense utilise une bibliothèque qui choisit un calcul matriciel adapté aux Tensor Cores. L’équipe compare ensuite les résultats numériques et le temps d’exécution avec sa configuration de référence, sur les mêmes entrées.",
+    "misconception": "Un Tensor Core ne stocke pas un tenseur et n’accélère pas automatiquement chaque instruction. Son nom ne doit pas être confondu avec celui d’un cœur CPU."
+  },
+  "notion-459": {
+    "explanation": "CUDA est la plateforme de calcul parallèle de NVIDIA, avec un modèle de programmation et un ensemble d’outils et de bibliothèques. Elle permet au programme hôte de lancer des calculs sur le GPU et d’en gérer les données ; les bibliothèques d’apprentissage peuvent l’utiliser sans que leur utilisateur écrive directement du code GPU.",
+    "example": "Exemple illustratif : Un développeur place un modèle PyTorch et ses entrées sur un GPU compatible. Les opérations s’appuient alors sur l’environnement CUDA installé, même si le script d’entraînement reste rédigé en Python.",
+    "misconception": "CUDA n’est ni le GPU lui-même ni un modèle d’IA. Une installation doit aussi respecter la compatibilité entre matériel, pilote et bibliothèques utilisées."
+  },
+  "notion-460": {
+    "explanation": "ROCm est l’environnement logiciel d’AMD pour le calcul accéléré, avec des compilateurs, des bibliothèques et des outils d’exécution. Il permet notamment à des frameworks d’apprentissage d’utiliser du matériel compatible ; porter une application demande de vérifier ses opérations et ses dépendances, pas seulement de remplacer la carte dans l’ordinateur.",
+    "example": "Exemple illustratif : Une équipe déploie un modèle sur un GPU AMD pris en charge. Elle utilise une version du framework compatible avec ROCm et vérifie qu’une extension de calcul spécialisée possède elle aussi un backend adapté.",
+    "misconception": "ROCm n’est pas un pilote universel qui rend toute extension CUDA immédiatement portable. La prise en charge dépend du matériel et des versions logicielles."
+  },
+  "notion-461": {
+    "explanation": "PyTorch est un framework qui fournit des tenseurs, la différentiation automatique et des composants pour construire et entraîner des réseaux. Le programme définit les calculs, puis PyTorch aide à calculer les gradients et à exécuter les opérations sur les appareils compatibles ; le modèle appris reste un objet distinct de cette bibliothèque.",
+    "example": "Exemple illustratif : Pour classer des vêtements, un script PyTorch charge des images, calcule des prédictions, mesure la perte puis met à jour les poids. Une fois entraîné, le réseau est enregistré pour être évalué sur d’autres images.",
+    "misconception": "Installer PyTorch n’installe pas un modèle déjà compétent. Le framework fournit des outils ; les poids, les données et la procédure d’entraînement déterminent le comportement obtenu."
+  },
+  "notion-462": {
+    "explanation": "JAX fournit des tableaux numériques et des transformations de fonctions Python, notamment pour calculer des gradients, vectoriser un calcul et le compiler. Ces transformations se composent pour exprimer un entraînement ou un autre calcul scientifique ; leur utilisation demande de tenir compte du traçage et des contraintes de programmation imposées par la compilation.",
+    "example": "Exemple illustratif : Une chercheuse écrit une fonction de perte pour un seul exemple, obtient ses gradients puis vectorise le traitement sur un lot. Elle compile ensuite la fonction pour réutiliser efficacement ce calcul sur des entrées compatibles.",
+    "misconception": "JAX n’est pas un modèle ni une simple accélération de tout code Python. Les effets de bord et certains contrôles de flux exigent une attention particulière."
+  },
+  "notion-463": {
+    "explanation": "Transformers est une bibliothèque de Hugging Face qui fournit des implémentations de modèles préentraînés et les outils associés, comme les tokenizers et les processeurs d’entrées. Elle simplifie leur chargement et leur utilisation pour différentes tâches, tout en nécessitant des poids compatibles, un backend de calcul et une préparation des données adaptée au modèle.",
+    "example": "Exemple illustratif : Une application charge un tokenizer et un modèle de classification depuis le même dépôt. Elle transforme ensuite les phrases en entrées numériques et récupère les scores des catégories attendues par ce modèle.",
+    "misconception": "La bibliothèque Transformers ne se confond ni avec l’architecture Transformer ni avec le Hub qui héberge les fichiers. Un dépôt peut aussi nécessiter une autre bibliothèque."
+  },
+  "notion-465": {
+    "explanation": "llama.cpp est un moteur d’inférence en C et C++ conçu pour exécuter des modèles compatibles sur différents matériels, en local comme sur serveur. Il propose notamment des chemins de calcul pour CPU et accélérateurs et utilise couramment le format GGUF ; la faisabilité dépend des poids chargés, de leur représentation et de la mémoire disponible.",
+    "example": "Exemple illustratif : Un ordinateur exécute un modèle compatible quantifié avec llama.cpp pour reformuler des notes hors ligne. L’utilisateur mesure la latence sur ses documents et ajuste la longueur de contexte pour rester dans la mémoire disponible.",
+    "misconception": "Malgré son nom, llama.cpp ne se limite pas à la famille Llama. Le moteur ne fournit pas à lui seul les poids ni la licence du modèle."
+  },
+  "notion-466": {
+    "explanation": "TensorRT-LLM est un ensemble d’outils NVIDIA destiné à optimiser et exécuter l’inférence de grands modèles de langage sur ses GPU. Il combine des chemins de calcul spécialisés et des techniques de service, comme le regroupement des requêtes et la gestion du cache ; les possibilités dépendent de l’architecture du modèle et de la configuration matérielle.",
+    "example": "Exemple illustratif : Une équipe prépare le déploiement d’un modèle pris en charge, puis compare plusieurs réglages de service sur des conversations représentatives. Elle suit le débit, le délai de première réponse et l’utilisation mémoire.",
+    "misconception": "TensorRT-LLM n’entraîne pas automatiquement un meilleur modèle. Une optimisation d’inférence doit être vérifiée pour la qualité numérique aussi bien que pour les performances."
+  },
+  "notion-467": {
+    "explanation": "Dans le contexte des calculs GPU, Triton désigne un langage et un compilateur permettant d’écrire des kernels, c’est-à-dire des opérations exécutées sur l’accélérateur. Son approche par blocs facilite l’expression de certains calculs parallèles et de leurs accès mémoire ; elle reste un outil de programmation bas niveau par rapport à l’utilisation d’un modèle préentraîné.",
+    "example": "Exemple illustratif : Une équipe écrit un kernel Triton qui combine plusieurs opérations sur une activation afin de réduire les lectures et écritures intermédiaires. Elle vérifie d’abord les sorties, puis mesure le gain réel sur ses tailles de tenseurs.",
+    "misconception": "Triton, le langage de kernels, est distinct de NVIDIA Triton Inference Server, qui sert des modèles. Le contexte est nécessaire pour savoir lequel est évoqué."
+  },
+  "notion-470": {
+    "explanation": "Le parallélisme de pipeline répartit des étapes successives du modèle sur plusieurs appareils. Des micro-lots circulent entre ces étapes afin que plusieurs appareils puissent travailler en même temps ; le planning doit toutefois gérer les dépendances, les transferts et les périodes où une étape attend une entrée ou un gradient.",
+    "example": "Exemple illustratif : Le début d’un réseau est placé sur un premier GPU et la fin sur un second. Pendant que le second traite un micro-lot, le premier peut commencer le suivant, selon le planning d’exécution choisi.",
+    "misconception": "Découper le modèle en étapes ne garantit pas une utilisation continue des GPU. Une étape plus lente ou des micro-lots trop peu nombreux créent des temps d’attente."
+  },
+  "notion-471": {
+    "explanation": "Le parallélisme de modèle répartit le calcul ou les paramètres d’un même modèle entre plusieurs appareils. Il regroupe différentes stratégies, comme la séparation des couches ou le partage des opérations matricielles, pour dépasser les limites d’un seul appareil ; cette répartition ajoute des communications qui influencent la mémoire nécessaire et la vitesse obtenue.",
+    "example": "Exemple illustratif : Un réseau trop volumineux pour une seule carte est réparti entre plusieurs GPU. Certaines couches restent sur une carte, tandis que d’autres calculs peuvent être partagés, suivant les contraintes du matériel.",
+    "misconception": "Le parallélisme de modèle se distingue du parallélisme de données classique, qui réplique le modèle. Plusieurs stratégies peuvent néanmoins être combinées dans un même entraînement."
+  },
+  "notion-472": {
+    "explanation": "L’entraînement distribué coordonne plusieurs processus, appareils ou machines pour ajuster un modèle. La répartition peut porter sur les exemples, les paramètres ou les étapes de calcul ; elle nécessite de synchroniser les informations utiles à l’optimisation et de maîtriser les effets du réseau, du chargement des données et des défaillances de machines.",
+    "example": "Exemple illustratif : Des processus lisent des portions différentes d’un jeu de données puis échangent leurs gradients avant la mise à jour commune. Si l’un ralentit, les autres peuvent attendre lors de la synchronisation.",
+    "misconception": "Distribuer l’entraînement ne revient pas à entraîner indépendamment plusieurs modèles puis à choisir le meilleur. La coordination fait partie de l’algorithme et de son coût."
+  },
+  "notion-473": {
+    "explanation": "L’activation checkpointing économise de la mémoire pendant l’entraînement en ne conservant pas toutes les activations intermédiaires. Certaines sont recalculées au moment de la rétropropagation à partir de points sauvegardés ; on échange ainsi du calcul supplémentaire contre une réduction de mémoire, avec un découpage à choisir selon le modèle et les contraintes matérielles.",
+    "example": "Exemple illustratif : Une longue séquence fait dépasser la mémoire disponible pendant l’entraînement. L’équipe active le recalcul de plusieurs blocs : la séquence peut alors tenir, mais chaque étape demande davantage d’opérations.",
+    "misconception": "Ce checkpointing ne désigne pas la sauvegarde du modèle sur disque pour reprendre après une panne. Il concerne principalement les activations nécessaires au calcul des gradients."
+  },
+  "notion-474": {
+    "explanation": "ZeRO réduit la duplication des états d’entraînement entre les processus qui travaillent en parallèle sur les données. Ses niveaux répartissent progressivement les états de l’optimiseur, les gradients puis les paramètres ; les informations nécessaires sont échangées au moment du calcul, ce qui diminue certaines consommations mémoire au prix de communications supplémentaires.",
+    "example": "Exemple illustratif : Avec ZeRO de niveau 1, chaque processus conserve une partie des états de l’optimiseur. Au niveau 3, les paramètres sont également répartis et doivent être rassemblés selon les besoins des opérations.",
+    "misconception": "ZeRO ne signifie pas absence de mémoire ou de communication. Le niveau choisi change ce qui est réparti ; il ne correspond pas à une réduction du nombre de paramètres appris."
+  },
+  "notion-475": {
+    "explanation": "Le sharding consiste à découper un ensemble en fragments distribués ou stockés séparément. En apprentissage, il peut concerner les données, les poids, les gradients ou les états de l’optimiseur ; savoir quel objet est partagé et à quel moment il est rassemblé est essentiel pour comprendre le gain de mémoire et le coût des échanges.",
+    "example": "Exemple illustratif : Un checkpoint est enregistré dans plusieurs fichiers parce que ses poids sont volumineux. Lors du chargement, le logiciel lit ces fragments et les place sur un ou plusieurs appareils selon sa configuration.",
+    "misconception": "Des fichiers de poids découpés ne prouvent pas que le calcul est distribué. Le sharding du stockage et celui de l’exécution sont deux décisions distinctes."
+  },
+  "notion-476": {
+    "explanation": "Un endpoint d’inférence est un point d’accès par lequel une application soumet des entrées à un service qui exécute un modèle. Il définit un format de requête et de réponse et s’accompagne souvent d’authentification, de limites et d’une gestion de capacité ; plusieurs instances du modèle peuvent se trouver derrière la même adresse.",
+    "example": "Exemple illustratif : Un service client envoie un message à un endpoint de classification et reçoit une catégorie. Il doit aussi traiter les délais dépassés et les erreurs si le service est momentanément indisponible.",
+    "misconception": "L’adresse de l’endpoint ne désigne pas nécessairement une machine ni une version immuable du modèle. Ces garanties dépendent de la configuration et du contrat du service."
+  },
+  "notion-477": {
+    "explanation": "Une API définit comment un logiciel peut demander une opération à un autre composant et recevoir son résultat. Dans une application d’IA, elle peut servir à demander une génération, charger un modèle ou consulter un état ; elle décrit les entrées, les sorties et les erreurs attendues, sans exposer nécessairement l’implémentation interne.",
+    "example": "Exemple illustratif : Une application appelle une API avec un texte et une langue cible, puis exploite la traduction renvoyée. Elle vérifie le format de la réponse avant de l’afficher dans son interface.",
+    "misconception": "Une API n’est pas forcément un service Internet : une bibliothèque locale en possède aussi. Une API d’IA n’implique pas l’accès aux poids du modèle."
+  },
+  "notion-478": {
+    "explanation": "Un SLO est un objectif mesurable de qualité de service, établi à partir d’un indicateur et d’une période d’observation. Un SLA formalise des engagements de service et les conséquences prévues si les conditions convenues ne sont pas respectées ; pour une application d’IA, il faut préciser si l’on parle de disponibilité, de latence ou d’un autre critère.",
+    "example": "Exemple illustratif : Dans un scénario fictif, une équipe vise une première réponse en moins de deux secondes pour 95 % des requêtes. Elle définit le périmètre et la période de mesure avant d’évaluer cet objectif.",
+    "misconception": "Un objectif de disponibilité ne garantit pas la justesse des réponses du modèle. SLO et SLA ne doivent pas être utilisés comme des synonymes sans examiner l’engagement associé."
+  },
+  "notion-479": {
+    "explanation": "L’observabilité permet de comprendre le comportement d’un système à partir des signaux qu’il produit, comme les métriques, les journaux et les traces d’exécution. Pour une application d’IA, relier une demande aux étapes de recherche, d’appel au modèle et d’utilisation d’outils aide à localiser une lenteur ou une erreur et à comparer les versions.",
+    "example": "Exemple illustratif : Une réponse est lente : sa trace montre que la recherche documentaire a pris l’essentiel du temps. L’équipe peut alors travailler sur cette étape au lieu de changer le modèle sans diagnostic.",
+    "misconception": "Accumuler des journaux ne suffit pas à rendre un système observable. Les signaux doivent être reliés et exploitables ; enregistrer tout le contenu utilisateur n’est pas nécessaire."
+  },
+  "notion-480": {
+    "explanation": "Un registre de modèles organise des versions identifiées et leurs métadonnées, afin de retrouver quel artefact a été évalué et utilisé. Il relie les fichiers du modèle à sa provenance, ses résultats et ses références de déploiement ; il aide ainsi une équipe à promouvoir une version ou à revenir vers une version connue.",
+    "example": "Exemple illustratif : Après validation, une version reçoit l’alias utilisé par le service de production. L’équipe conserve l’identifiant exact de la version précédente et les évaluations qui ont motivé ce changement.",
+    "misconception": "Un registre ne prouve pas à lui seul qu’un modèle est fiable. Il conserve les artefacts et les informations de suivi ; les critères d’acceptation restent à définir."
+  },
+  "notion-481": {
+    "explanation": "Le suivi d’expériences enregistre les paramètres, les mesures et les artefacts produits par chaque essai. MLflow fournit notamment ce type d’outillage pour comparer les essais et relier un résultat à sa configuration ; une expérience utilement documentée inclut aussi les versions du code, des données et de l’environnement qui influencent les résultats.",
+    "example": "Exemple illustratif : Deux entraînements utilisent des taux d’apprentissage différents. Le suivi conserve leur perte de validation, leur configuration et leurs modèles enregistrés, afin de comprendre lequel a été retenu et pourquoi.",
+    "misconception": "Un tableau de scores ne suffit pas à reproduire une expérience. Si les données ou le code ont changé sans être identifiés, la comparaison peut être trompeuse."
+  },
+  "notion-482": {
+    "explanation": "Le MLOps organise la construction, l’évaluation, le déploiement et la surveillance des systèmes d’apprentissage. Le LLMOps applique ces pratiques aux applications de modèles de langage, où les prompts, les corpus de recherche et les outils évoluent aussi ; il vise à rendre les changements traçables et vérifiables pendant toute la vie du service.",
+    "example": "Exemple illustratif : Une modification du découpage documentaire passe par des évaluations avant d’être déployée avec le nouvel index. Le suivi relie cette version aux réponses observées et permet de restaurer la configuration précédente.",
+    "misconception": "MLOps et LLMOps ne sont pas seulement des outils de déploiement. Les données, les évaluations et l’organisation des changements comptent autant que le lancement du serveur."
+  },
+  "notion-483": {
+    "explanation": "Un déploiement canari expose d’abord une petite partie du trafic à une nouvelle version pour en observer le comportement. La montée en charge dépend de critères définis à l’avance, comme les erreurs, la latence ou la qualité des réponses ; cette observation sur un périmètre réduit complète les évaluations réalisées avant la mise en production.",
+    "example": "Exemple illustratif : Dans un scénario fictif, 5 % des demandes utilisent un nouveau modèle tandis que le reste conserve la version précédente. Une hausse d’erreurs interrompt l’extension du déploiement et déclenche l’analyse.",
+    "misconception": "Un canari n’est pas automatiquement un test A/B visant une conclusion statistique. Son premier rôle est de limiter l’exposition pendant la vérification d’une nouvelle version."
+  },
+  "notion-484": {
+    "explanation": "Un rollback remet en service une version antérieure lorsqu’un changement dégrade le fonctionnement. Dans une application d’IA, cette version peut inclure le modèle, le prompt, l’index et leur configuration compatible ; le retour doit donc être préparé et testé, avec les artefacts nécessaires encore disponibles et un moyen de réorienter les requêtes.",
+    "example": "Exemple illustratif : Un nouveau prompt provoque des réponses mal formatées. L’équipe restaure la version précédente du prompt et du parseur associé, puis vérifie que les nouvelles requêtes retrouvent le comportement attendu.",
+    "misconception": "Un rollback ne supprime pas les actions déjà exécutées ni les données déjà modifiées. Restaurer un service et réparer ses effets passés sont deux opérations différentes."
+  }
+}

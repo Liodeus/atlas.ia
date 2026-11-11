@@ -1,0 +1,162 @@
+{
+  "notion-419": {
+    "explanation": "Un Image Encoder transforme les pixels en représentations numériques qui capturent des caractéristiques utiles à une tâche visuelle. Selon son architecture et son entraînement, il produit un vecteur global ou plusieurs représentations de régions ; ces sorties peuvent alimenter une classification, une recherche d’images ou un modèle multimodal qui les combine à des informations textuelles.",
+    "example": "Exemple illustratif : un moteur de recherche encode les photographies d’un catalogue, puis compare leurs représentations pour retrouver des articles visuellement proches de l’image fournie par un utilisateur.",
+    "misconception": "Un Image Encoder ne produit pas nécessairement une description en langage naturel. Les informations qu’il conserve dépendent de son objectif d’apprentissage et peuvent omettre certains détails visibles."
+  },
+  "notion-420": {
+    "explanation": "Un Vision Transformer traite une image comme une séquence de représentations de patches, auxquelles sont ajoutées des informations de position. Les couches d’attention apprennent les relations entre ces éléments pour construire des caractéristiques utiles ; cette architecture peut servir à la classification ou devenir un composant visuel d’un système plus large, selon son entraînement et sa tête de sortie.",
+    "example": "Exemple illustratif : pour reconnaître une scène de cuisine, un ViT met en relation des patches contenant un plan de travail, un évier et des ustensiles plutôt que d’analyser chaque zone indépendamment.",
+    "misconception": "Découper une image en patches ne la transforme pas en mots. Les tokens visuels restent des représentations de pixels, dont la résolution influence les détails accessibles."
+  },
+  "notion-421": {
+    "explanation": "Le Patch Embedding convertit une petite région d’image en un vecteur de taille choisie, afin de former les tokens d’un modèle visuel. Dans un ViT classique, les patches sont projetés puis associés à une information de position ; leur taille détermine en partie le nombre de tokens et le compromis entre détail spatial et coût de calcul.",
+    "example": "Exemple illustratif : une image est découpée en petites zones avant analyse. Une région contenant une lettre devient un vecteur, mais une lettre trop petite à cette résolution peut rester difficile à distinguer.",
+    "misconception": "Un patch n’est pas forcément un objet ou une partie sémantique cohérente. Il peut traverser plusieurs objets, et son embedding ne garantit pas une interprétation lisible par un humain."
+  },
+  "notion-422": {
+    "explanation": "L’OCR transforme le texte visible dans une image en caractères exploitables par un logiciel. Le processus peut inclure détection des zones, segmentation et reconnaissance ; la résolution, l’orientation, le contraste et la mise en page influencent le résultat, ce qui rend nécessaire une vérification des champs sensibles avant d’utiliser le texte extrait dans une autre tâche.",
+    "example": "Exemple illustratif : une application lit une affiche photographiée pour extraire la date et le lieu d’un événement. Elle présente les champs reconnus avec l’image afin qu’un utilisateur puisse corriger les erreurs.",
+    "misconception": "L’OCR ne comprend pas automatiquement la structure d’un document. Une reconnaissance correcte des caractères peut encore mélanger l’ordre des colonnes ou associer une valeur au mauvais libellé."
+  },
+  "notion-423": {
+    "explanation": "L’Image Captioning produit une description textuelle à partir d’une image, en combinant des représentations visuelles avec un mécanisme de génération de langage. Il peut servir à indexer des collections ou proposer une description initiale ; le système sélectionne des éléments saillants, mais peut omettre des détails ou ajouter des objets plausibles qui ne sont pas réellement visibles.",
+    "example": "Exemple illustratif : une photothèque génère des légendes initiales pour aider au classement. Un relecteur vérifie que les objets mentionnés sont présents avant d’utiliser ces légendes comme description publique.",
+    "misconception": "Une légende fluide n’est pas un inventaire exhaustif ni une preuve visuelle. Le modèle peut privilégier une scène probable plutôt que les détails exacts de l’image."
+  },
+  "notion-424": {
+    "explanation": "Le Visual Question Answering répond à une question en utilisant une image et le texte de la demande. La question oriente l’analyse vers les éléments nécessaires, comme un objet, une relation spatiale ou une quantité ; la réponse doit rester fondée sur les informations visibles et signaler quand la résolution ou le cadrage ne permettent pas de conclure.",
+    "example": "Exemple illustratif : devant la photographie d’une étagère, un utilisateur demande quel objet se trouve à gauche de la tasse. Le système doit examiner cette relation précise au lieu de décrire toute la scène.",
+    "misconception": "Le VQA peut réussir grâce à des régularités textuelles sans exploiter correctement l’image. Des évaluations doivent vérifier que changer l’image pertinente change effectivement la réponse."
+  },
+  "notion-425": {
+    "explanation": "Le Visual Grounding relie une expression à une région, un objet ou un ensemble d’éléments dans une image. Le système combine les indices linguistiques et visuels pour localiser la référence, parfois sous forme de boîte ou de masque ; cette association est utile pour sélectionner un objet, expliquer une réponse ou préparer une manipulation ciblée.",
+    "example": "Exemple illustratif : un utilisateur indique « le sac rouge près de la porte ». Le système identifie la région correspondante afin de la mettre en évidence parmi plusieurs sacs présents dans l’image.",
+    "misconception": "Nommer correctement un objet ne signifie pas l’avoir localisé. Le Grounding exige une correspondance spatiale, et plusieurs objets similaires peuvent rendre l’expression ambiguë."
+  },
+  "notion-426": {
+    "explanation": "Le Text-to-Image conditionne un modèle génératif par une description textuelle afin de produire une image compatible avec la demande. Le texte est représenté numériquement et guide la génération selon l’architecture utilisée ; le résultat combine des régularités apprises avec l’aléa du processus, ce qui permet des variations sans garantir le respect exact de chaque relation ou détail.",
+    "example": "Exemple illustratif : un graphiste demande une illustration de serre au crépuscule avec des plantes au premier plan. Il compare plusieurs propositions puis vérifie leur composition avant de choisir une base de travail.",
+    "misconception": "Une image plausible ne confirme pas que tous les éléments demandés sont présents. Les comptages, textes et relations spatiales peuvent rester incorrects malgré une apparence convaincante."
+  },
+  "notion-427": {
+    "explanation": "L’Image-to-Image utilise une image comme point de départ ou condition d’une nouvelle génération, souvent avec une instruction textuelle supplémentaire. Dans certains pipelines de diffusion, le niveau de bruit ajouté règle l’écart possible avec l’original ; cette approche permet des variations de style ou de contenu, mais les détails conservés dépendent du modèle et des paramètres.",
+    "example": "Exemple illustratif : un designer transforme un croquis de fauteuil en proposition illustrée. Il ajuste l’intensité de transformation pour explorer des matières tout en vérifiant que la silhouette souhaitée reste reconnaissable.",
+    "misconception": "Une image de référence n’assure pas une conservation parfaite de la géométrie. Même un changement demandé uniquement sur le style peut modifier des objets ou des détails."
+  },
+  "notion-428": {
+    "explanation": "Le Text-to-Video génère une séquence visuelle conditionnée par une description, en apprenant aussi des relations temporelles entre les images. Le modèle doit maintenir des objets et des mouvements cohérents au fil du temps ; cette contrainte rend la tâche différente d’une simple succession d’images indépendantes et exige une vérification des transitions et de la continuité.",
+    "example": "Exemple illustratif : pour préparer un storyboard animé, une équipe demande une caméra qui avance dans un jardin. Elle examine si les plantes, les chemins et le mouvement restent cohérents entre les plans.",
+    "misconception": "Une vidéo visuellement réaliste ne simule pas nécessairement les lois physiques. Les objets peuvent changer de forme, disparaître ou suivre des mouvements impossibles au cours de la séquence."
+  },
+  "notion-430": {
+    "explanation": "Le Denoising estime comment réduire une corruption dans une donnée, selon un modèle appris et un niveau de bruit. Dans la génération par diffusion, cette estimation est appliquée au fil d’un processus qui transforme un état bruité en échantillon ; il ne s’agit donc pas nécessairement de retrouver une photographie originale cachée derrière le bruit initial.",
+    "example": "Exemple illustratif : un générateur commence avec un état aléatoire et applique successivement les prédictions du réseau. Des formes cohérentes apparaissent progressivement, guidées par la description de l’utilisateur et les paramètres du processus.",
+    "misconception": "Le réseau peut prédire le bruit, une donnée propre ou une autre quantité équivalente selon la formulation. Denoising ne signifie pas toujours soustraire directement du bruit aux pixels."
+  },
+  "notion-431": {
+    "explanation": "La Latent Diffusion effectue le processus génératif dans une représentation latente apprise, puis utilise un décodeur pour obtenir l’image. Travailler dans cet espace plutôt que directement sur tous les pixels réduit généralement la quantité de calcul à traiter ; la qualité dépend toutefois aussi de l’encodage et du décodage, qui peuvent perdre ou transformer certains détails.",
+    "example": "Exemple illustratif : un générateur élabore une scène dans un espace compact, puis la décode en image visible. Une inscription minuscule peut être altérée même si la composition globale est bien conservée.",
+    "misconception": "Latent Diffusion ne veut pas dire génération sans pixels à l’arrivée. Elle déplace une partie du calcul, mais dépend encore d’un décodeur pour produire l’image finale."
+  },
+  "notion-432": {
+    "explanation": "Un Diffusion Transformer utilise un Transformer comme réseau principal d’un modèle de diffusion, plutôt qu’un backbone tel qu’un U-Net. Dans le DiT initial, il traite des patches de représentations latentes et reçoit notamment l’étape du processus et le conditionnement ; l’architecture du réseau reste distincte du choix du sampler et des réglages de génération.",
+    "example": "Exemple illustratif : un système de génération découpe son état latent en tokens que le Transformer met en relation. À chaque étape, sa prédiction aide le processus à construire l’image demandée.",
+    "misconception": "DiT décrit une famille d’architectures, pas une promesse universelle de qualité ou de vitesse. Les données, l’entraînement, la taille du modèle et l’échantillonnage restent déterminants."
+  },
+  "notion-433": {
+    "explanation": "Le Flow Matching entraîne un modèle à prédire un champ de vecteurs qui transporte une distribution simple, comme du bruit, vers celle des données. À la génération, un solveur suit ce champ pour produire un échantillon ; le cadre accepte différents chemins de probabilité, dont certains liés à la diffusion et d’autres conçus autrement.",
+    "example": "Exemple illustratif : pour générer une image, un système fait évoluer une représentation bruitée selon des directions prédites à plusieurs instants. Le solveur transforme progressivement cet état initial en un résultat décodable.",
+    "misconception": "Le Flow Matching n’est pas simplement un autre nom du Denoising classique. Les formulations peuvent être reliées, mais l’objectif appris et le chemin de transformation doivent être distingués."
+  },
+  "notion-434": {
+    "explanation": "Le Sampler détermine comment suivre les prédictions du modèle pour construire un échantillon, tandis que le Scheduler organise notamment les niveaux de bruit ou les instants utilisés. Les bibliothèques regroupent parfois ces fonctions sous le même nom ; le choix influe sur le nombre d’étapes, la stabilité et le rendu, et doit rester compatible avec l’entraînement du modèle.",
+    "example": "Exemple illustratif : une équipe compare deux stratégies d’échantillonnage sur les mêmes prompts et le même modèle. Elle examine les artefacts et le temps nécessaire avant de retenir un réglage pour son usage.",
+    "misconception": "Augmenter le nombre d’étapes n’améliore pas indéfiniment l’image. Certains modèles et schémas sont conçus pour des réglages spécifiques, et un mauvais choix peut dégrader le résultat."
+  },
+  "notion-435": {
+    "explanation": "La Classifier-Free Guidance combine une prédiction conditionnelle et une prédiction sans ce conditionnement afin d’accentuer l’influence de la consigne. Elle évite l’emploi d’un classifieur séparé pour guider la génération, mais suppose un modèle entraîné à fournir ces prédictions ; le niveau de guidance règle un compromis entre adhérence au conditionnement, diversité et qualité visuelle.",
+    "example": "Exemple illustratif : sur un générateur compatible, un illustrateur augmente modérément la guidance pour renforcer le style demandé. Il vérifie aussi que cette modification ne crée pas de couleurs excessives ou d’artefacts.",
+    "misconception": "Une guidance plus forte ne garantit pas une meilleure image ni un respect parfait du prompt. Le paramètre et son effet peuvent différer entre modèles et implémentations."
+  },
+  "notion-436": {
+    "explanation": "Un VAE apprend un modèle probabiliste avec des variables latentes : l’encodeur estime une distribution associée à une entrée, et le décodeur apprend à la reconstruire à partir d’un échantillon latent. L’objectif équilibre reconstruction et régularisation vers une distribution de référence, afin d’obtenir un espace utilisable pour représenter les données et, selon le modèle, en générer.",
+    "example": "Exemple illustratif : un VAE apprend à représenter des dessins simples dans un espace latent. On peut décoder des points de cet espace pour explorer de nouvelles formes proches des variations apprises.",
+    "misconception": "Un VAE ne se résume pas à compresser puis décompresser. Sa formulation probabiliste et sa régularisation le distinguent d’un autoencoder déterministe entraîné seulement à reconstruire."
+  },
+  "notion-437": {
+    "explanation": "Un GAN fait apprendre conjointement un générateur, qui produit des échantillons, et un discriminateur, qui cherche à distinguer les données réelles des productions du générateur. Leur confrontation fournit un signal d’entraînement au générateur ; cette approche peut produire des résultats réalistes, mais l’équilibre entre les deux réseaux et la diversité des sorties restent des difficultés importantes.",
+    "example": "Exemple illustratif : un GAN est entraîné sur des textures de matériaux. Le générateur propose des textures synthétiques, tandis que le discriminateur fournit un signal qui l’aide à améliorer leur ressemblance avec les exemples.",
+    "misconception": "Des sorties réalistes ne garantissent pas une bonne diversité. Le générateur peut se concentrer sur quelques motifs convaincants et négliger une partie des variations présentes dans les données."
+  },
+  "notion-438": {
+    "explanation": "Un Autoencoder apprend à reconstruire une entrée après l’avoir transformée en une représentation interne. Pour que cette représentation soit utile, l’entraînement impose une contrainte, comme une dimension réduite, de la parcimonie ou une corruption à corriger ; sans contrainte adaptée, le réseau peut simplement recopier les données sans apprendre les caractéristiques recherchées.",
+    "example": "Exemple illustratif : un autoencoder reçoit des images partiellement bruitées et apprend à reconstruire leurs versions propres. Sa représentation interne doit conserver les structures utiles tout en limitant l’effet du bruit ajouté.",
+    "misconception": "L’espace interne n’est pas nécessairement plus petit que l’entrée. Les autoencoders surcomplets existent ; ce sont alors d’autres contraintes qui empêchent une simple copie sans intérêt."
+  },
+  "notion-439": {
+    "explanation": "Un Latent Space est un espace de représentations appris ou défini pour décrire des données par des variables intermédiaires. Des opérations comme la recherche de voisins, l’interpolation ou la génération y deviennent possibles selon le modèle ; les directions et distances n’ont toutefois de sens que relativement à l’entraînement et au décodeur ou à la tâche associés.",
+    "example": "Exemple illustratif : dans un modèle de formes, deux représentations de silhouettes proches peuvent être interpolées puis décodées pour explorer une transition. Le résultat doit être examiné pour vérifier sa cohérence visuelle.",
+    "misconception": "Les axes latents ne correspondent pas automatiquement à des concepts simples comme la taille ou la couleur. Une distance courte n’assure pas non plus une proximité pertinente pour chaque usage."
+  },
+  "notion-440": {
+    "explanation": "L’ASR transforme un signal de parole en texte en combinant des indices acoustiques avec des régularités de langage apprises. Il sert à transcrire des réunions ou des messages vocaux ; la qualité dépend du son, des accents, du vocabulaire et des chevauchements de voix, ce qui impose de vérifier les passages incertains et les informations importantes.",
+    "example": "Exemple illustratif : un service transcrit une note vocale pour préparer un compte rendu. Les noms propres et les références de produit sont comparés à l’audio avant d’être repris dans le document final.",
+    "misconception": "Une transcription grammaticalement correcte peut déformer ce qui a été dit. L’ASR ne remplace pas l’écoute de contrôle, particulièrement en présence de bruit ou de termes rares."
+  },
+  "notion-441": {
+    "explanation": "Le TTS produit un signal de parole à partir d’un texte, en déterminant notamment les sons, le rythme et l’intonation. Selon l’architecture, il peut passer par une représentation acoustique puis un vocoder ; il rend les contenus écoutables, mais la prononciation des noms, des sigles et des nombres nécessite parfois des indications supplémentaires.",
+    "example": "Exemple illustratif : une application lit un article à voix haute. Elle développe certains sigles et vérifie la prononciation des noms cités pour que l’audio reste compréhensible sans voir le texte.",
+    "misconception": "Une voix naturelle ne garantit pas une lecture fidèle. Une ponctuation ambiguë, un nombre ou une abréviation peuvent être interprétés différemment de ce que l’auteur attend."
+  },
+  "notion-442": {
+    "explanation": "Le Speech-to-Speech transforme une entrée vocale en sortie vocale, par exemple pour traduire ou dialoguer. Le système peut utiliser une chaîne de transcription, traitement et synthèse, ou apprendre des échanges audio plus directs ; cette architecture influence la latence et les indices conservés, notamment le rythme, la prosodie et les informations non verbales.",
+    "example": "Exemple illustratif : un outil reçoit une question parlée et répond oralement dans une autre langue. L’évaluation examine séparément le sens transmis, l’intelligibilité de la voix et le délai de réponse.",
+    "misconception": "Speech-to-Speech ne signifie pas forcément absence de texte intermédiaire. Le terme décrit les entrées et sorties, tandis que les étapes internes dépendent du système utilisé."
+  },
+  "notion-443": {
+    "explanation": "La Voice Activity Detection identifie les portions d’un signal audio qui contiennent de la parole, sans nécessairement reconnaître les mots. Elle peut réduire le traitement des silences et aider à découper les tours de parole ; les seuils et délais doivent être adaptés au bruit ambiant et aux pauses pour éviter de couper une phrase trop tôt.",
+    "example": "Exemple illustratif : un assistant vocal attend la fin d’une intervention avant de répondre. La VAD repère une pause, mais l’application garde une marge pour ne pas interrompre une personne qui hésite.",
+    "misconception": "Détecter de la parole ne permet ni de la transcrire ni d’identifier son auteur. Musique, bruits et voix lointaines peuvent aussi compliquer la décision."
+  },
+  "notion-444": {
+    "explanation": "La Speaker Diarization découpe un enregistrement en segments associés à des locuteurs, afin de répondre à la question de qui parle quand. Elle peut combiner détection de parole et regroupement de caractéristiques vocales ; les étiquettes produites sont souvent anonymes, et les voix qui se chevauchent ou changent de conditions acoustiques rendent l’attribution plus difficile.",
+    "example": "Exemple illustratif : une réunion est segmentée en interventions « locuteur A » et « locuteur B ». Ces segments sont ensuite alignés avec la transcription pour rendre les échanges plus faciles à suivre.",
+    "misconception": "Diariser n’est pas reconnaître une identité réelle. Une étiquette de locuteur distingue des voix dans un enregistrement sans établir à elle seule le nom de la personne."
+  },
+  "notion-445": {
+    "explanation": "L’Audio Tokenization transforme un signal sonore en unités utilisables par un modèle, parfois sous forme de codes discrets issus d’un codec neuronal. Ces tokens représentent des caractéristiques acoustiques plutôt que nécessairement des mots ; un décodeur peut les reconvertir en son, avec un compromis entre quantité d’information conservée, débit et qualité de reconstruction.",
+    "example": "Exemple illustratif : un modèle de parole prédit une suite de codes audio que le décodeur convertit en onde sonore. Ces codes peuvent conserver des indices de voix et d’intonation absents d’une transcription.",
+    "misconception": "Un Codec Token ne correspond pas forcément à un phonème ou à une syllabe. Plusieurs codes peuvent décrire un même instant, et leur signification dépend du codec."
+  },
+  "notion-446": {
+    "explanation": "Le Streaming ASR transcrit la parole à mesure que les fragments audio arrivent, sans attendre la fin de l’enregistrement. Il peut afficher des hypothèses provisoires puis les réviser avec le contexte acoustique suivant ; l’application doit distinguer ces résultats partiels des segments finalisés pour concilier réactivité et stabilité de la transcription présentée.",
+    "example": "Exemple illustratif : des sous-titres apparaissent pendant une visioconférence. Un mot provisoire est corrigé lorsque la fin de la phrase apporte assez de contexte, puis le segment est marqué comme finalisé.",
+    "misconception": "Un résultat finalisé n’est pas nécessairement exact : il signifie surtout que le service ne prévoit plus de le réviser dans ce flux. La stabilité et la correction sont distinctes."
+  },
+  "notion-447": {
+    "explanation": "Le Real-Time Multimodal traite plusieurs types de signaux avec un délai compatible avec une interaction continue, par exemple parole, texte et images. Cela demande de coordonner capture, transport, inférence et restitution, ainsi que les interruptions ; le délai perçu dépend de toute la chaîne, et pas seulement de la vitesse du modèle pris isolément.",
+    "example": "Exemple illustratif : un assistant suit une démonstration filmée et répond à une question orale sur l’objet montré. Il doit relier la parole au bon moment de la vidéo pour éviter une réponse décalée.",
+    "misconception": "Temps réel ne signifie pas absence de latence ni garantie de synchronisation parfaite. Un réseau lent ou une mauvaise gestion des tours de parole peut rendre l’échange difficile."
+  },
+  "notion-448": {
+    "explanation": "Un Action Token représente une action dans le vocabulaire utilisé par un modèle, par exemple une commande ou une valeur discrétisée de mouvement. Ce format permet d’apprendre des séquences reliant observations et actions ; un composant d’exécution traduit ensuite les tokens en opérations concrètes et applique les contrôles nécessaires sur les limites et l’environnement.",
+    "example": "Exemple illustratif : un robot de démonstration produit des tokens correspondant à un déplacement de pince et à son ouverture. Le contrôleur les interprète et vérifie les contraintes du mouvement avant exécution.",
+    "misconception": "Un Action Token n’est pas l’action physique elle-même. La discrétisation, le contrôleur et les limites du matériel influencent le résultat, même si la séquence prédite semble correcte."
+  },
+  "notion-449": {
+    "explanation": "Une JEPA apprend en prédisant la représentation d’une partie des données à partir d’une autre, plutôt qu’en reconstruisant directement tous les pixels ou échantillons manquants. Dans I-JEPA, un contexte visuel sert à prédire les représentations de régions cibles ; ce choix cherche à apprendre des caractéristiques utiles sans devoir reproduire chaque détail de surface.",
+    "example": "Exemple illustratif : à partir de zones visibles d’une image, un modèle prédit les représentations de zones masquées. Les caractéristiques apprises sont ensuite évaluées sur une tâche de reconnaissance d’objets.",
+    "misconception": "JEPA ne désigne pas automatiquement un modèle capable de générer une image ou un agent complet. L’objectif de représentation et les capacités de l’application doivent être évalués séparément."
+  },
+  "notion-450": {
+    "explanation": "Le Contrastive Learning apprend des représentations en rapprochant des exemples associés et en les distinguant d’autres exemples selon un objectif défini. Les associations peuvent venir de deux transformations d’une image ou d’un couple image-texte ; le choix de ces paires façonne les ressemblances que le modèle apprend à privilégier et les différences qu’il doit ignorer.",
+    "example": "Exemple illustratif : deux recadrages d’une même photographie sont traités comme une paire positive. Le modèle apprend à conserver des caractéristiques communes malgré le cadrage, tout en les distinguant d’images différentes.",
+    "misconception": "Les paires dites positives ne garantissent pas toujours le même sens. Un recadrage peut supprimer l’objet principal, et deux exemples négatifs peuvent en réalité décrire un contenu proche."
+  },
+  "notion-451": {
+    "explanation": "CLIP apprend à rapprocher les représentations d’images et de textes associés grâce à un objectif contrastif. Une fois entraîné, il peut comparer une image à plusieurs descriptions ou rechercher des images par texte ; les résultats reflètent les associations apprises et dépendent notamment des formulations choisies, des données et du domaine d’utilisation.",
+    "example": "Exemple illustratif : une photothèque compare une image aux descriptions « une rue enneigée » et « une plage ensoleillée ». Le score de proximité aide à choisir une étiquette parmi ces propositions.",
+    "misconception": "CLIP n’est pas, à lui seul, un générateur d’images ni un rédacteur de légendes. Un score de similarité ne constitue pas une probabilité universelle que la description soit vraie."
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "notion-105": {
+    "explanation": "Dans un Dense MoE, les sorties de tous les experts peuvent contribuer au résultat, avec des coefficients calculés par une porte. Cette combinaison permet de répartir les rôles entre sous-modèles sans imposer une sélection sparse, mais elle conserve le coût d’évaluation de l’ensemble des experts pour chaque entrée traitée par la couche.",
+    "example": "Exemple illustratif : un système de prévision combine les sorties de plusieurs sous-modèles avec des poids dépendant des observations, tout en exécutant chaque sous-modèle pour construire la prédiction finale.",
+    "misconception": "MoE n’implique pas automatiquement une économie de calcul par routage : cette économie dépend du fait que des experts non sélectionnés ne soient effectivement pas exécutés."
+  },
+  "notion-106": {
+    "explanation": "Un expert est un sous-réseau doté de ses propres paramètres au sein d’une architecture MoE, souvent un bloc feed-forward dans un Transformer. Il transforme les représentations qui lui sont adressées et sa sortie contribue au résultat de la couche ; ses régularités de spécialisation émergent de l’entraînement et du routage des données.",
+    "example": "Exemple illustratif : en examinant un modèle MoE, une équipe suit quels tokens arrivent à un expert et teste sa contribution sur différentes entrées avant de lui attribuer une éventuelle spécialisation.",
+    "misconception": "Un expert n’est pas nécessairement un spécialiste humain identifiable, comme un mathématicien ou un traducteur ; plusieurs experts peuvent partager ou mélanger des fonctions."
+  },
+  "notion-108": {
+    "explanation": "Le Top-k Routing attribue un score aux experts puis retient les k mieux classés pour une entrée, généralement un token dans les LLM MoE. Leurs sorties sont combinées selon des coefficients de porte ; le choix de k détermine une partie du calcul actif, tout en interagissant avec l’équilibrage et les capacités d’accueil des experts.",
+    "example": "Exemple illustratif : dans une configuration pédagogique où k vaut deux, le routeur sélectionne deux experts pour un token et en choisit éventuellement deux autres pour le token suivant selon leurs représentations.",
+    "misconception": "Le Top-k Routing sélectionne des experts internes, tandis que le Top-k Sampling filtre des tokens de sortie ; ces réglages agissent à des étapes différentes."
+  },
+  "notion-109": {
+    "explanation": "Top-1 Routing confie une entrée à un seul expert routé, tandis que Top-2 en mobilise deux et combine leurs contributions. À experts comparables, cette différence modifie le calcul et les échanges nécessaires ; le résultat dépend toutefois aussi du dimensionnement, de l’entraînement et des éventuels experts partagés présents dans l’architecture.",
+    "example": "Exemple illustratif : une équipe compare deux couches MoE identiques sauf pour le nombre d’experts sélectionnés par token, puis mesure la qualité, les communications et la répartition de charge de chacune.",
+    "misconception": "Top-2 ne garantit pas une meilleure qualité que Top-1 ; comparer des modèles différents exige de tenir compte de leur budget et de leur entraînement."
+  },
+  "notion-110": {
+    "explanation": "Un Shared Expert est exécuté pour les tokens de la couche indépendamment de la sélection des experts routés, dans les architectures qui utilisent cette distinction. Il fournit une voie commune et cherche à réduire la nécessité de dupliquer certaines transformations dans plusieurs experts ; sa contribution s’ajoute aux sorties sélectionnées conditionnellement.",
+    "example": "Exemple illustratif : deux tokens sont envoyés à des experts routés différents, mais passent tous deux par un expert partagé dont la sortie entre aussi dans leur représentation finale à cette couche.",
+    "misconception": "Shared ne signifie pas que ses poids sont ceux de tous les autres experts : il s’agit d’un sous-réseau communément exécuté, pas nécessairement d’un Weight Tying."
+  },
+  "notion-111": {
+    "explanation": "Un Routed Expert n’est exécuté pour une entrée que lorsque le routeur le sélectionne selon sa règle de décision. Ses paramètres restent disponibles dans le modèle même lorsqu’un token ne l’utilise pas ; d’autres tokens du même lot peuvent le solliciter, ce qui rend la charge variable entre experts et entre requêtes.",
+    "example": "Exemple illustratif : un serveur regroupe les représentations de tokens destinées à un même expert, les fait traiter ensemble puis replace leurs résultats dans l’ordre d’origine de chaque séquence.",
+    "misconception": "Un expert inactif pour un token n’est pas supprimé du modèle ; il peut être nécessaire pour le token suivant et continuer à occuper de la mémoire."
+  },
+  "notion-112": {
+    "explanation": "L’Expert Parallelism répartit les experts d’une couche MoE entre plusieurs appareils, afin que chacun n’ait à héberger qu’une partie de leurs paramètres. Les représentations des tokens doivent être envoyées aux appareils possédant les experts sélectionnés puis leurs résultats rassemblés ; la bande passante et l’équilibre de charge deviennent donc des facteurs de performance.",
+    "example": "Exemple illustratif : dans un groupe d’accélérateurs, chaque appareil possède certains experts ; les tokens sont redistribués après routage, calculés localement puis renvoyés vers leur séquence pour la suite du modèle.",
+    "misconception": "Répartir les experts ne suffit pas à multiplier la vitesse : des échanges coûteux ou un expert surchargé peuvent devenir le goulot d’étranglement de l’ensemble."
+  },
+  "notion-113": {
+    "explanation": "Une Load Balancing Loss ajoute à l’objectif principal un terme qui pénalise certaines répartitions trop déséquilibrées entre experts. Elle peut utiliser les probabilités du routeur et les affectations observées dans un lot pour encourager une meilleure utilisation des capacités ; son poids doit préserver le compromis entre équilibre technique et qualité de la tâche.",
+    "example": "Exemple illustratif : pendant l’entraînement, une équipe constate que quelques experts reçoivent l’essentiel des tokens et ajuste le terme d’équilibrage tout en suivant la perte principale et les débordements.",
+    "misconception": "Un équilibre parfait des nombres de tokens n’est pas l’objectif final du modèle ; forcer excessivement l’uniformité peut contrarier des affectations utiles à la tâche."
+  },
+  "notion-114": {
+    "explanation": "L’Expert Collapse désigne ici une concentration durable du routage vers un petit sous-ensemble d’experts, qui laisse les autres insuffisamment entraînés ou utilisés. Cette dynamique réduit l’intérêt de la capacité disponible et peut créer des surcharges ; on la surveille notamment avec les fréquences de sélection et la distribution des scores du routeur.",
+    "example": "Exemple illustratif : malgré des lots variés, les journaux d’entraînement montrent que les mêmes experts reçoivent presque toutes les affectations, tandis que les autres accumulent très peu de mises à jour.",
+    "misconception": "Toute spécialisation inégale n’est pas un collapse : il faut distinguer une répartition adaptée aux données d’une concentration persistante qui empêche l’utilisation de la capacité disponible."
+  },
+  "notion-115": {
+    "explanation": "Le Capacity Factor règle la marge d’accueil allouée aux experts dans certaines implémentations MoE, par rapport à une charge de référence calculée sur le lot. Une marge plus grande absorbe davantage de déséquilibre mais peut réserver des emplacements inutilisés ; une marge plus faible réduit ce gaspillage au risque de provoquer des débordements.",
+    "example": "Exemple illustratif : un lot concentre de nombreux tokens sur un expert ; l’équipe augmente sa marge de capacité dans la configuration et vérifie la diminution des débordements ainsi que la mémoire supplémentaire consommée.",
+    "misconception": "Le Capacity Factor n’augmente pas le nombre de paramètres de l’expert ; il concerne le nombre de tokens qu’une exécution lui permet de traiter."
+  },
+  "notion-116": {
+    "explanation": "Le Token Dropping peut se produire lorsqu’un expert ne peut pas accueillir tous les tokens que le routeur lui adresse. Dans certaines architectures, le calcul expert des tokens excédentaires est ignoré et leur représentation poursuit le réseau par la connexion résiduelle ; le comportement exact dépend de la stratégie retenue pour gérer les débordements.",
+    "example": "Exemple illustratif : un expert atteint sa capacité sur un lot et certaines représentations contournent sa transformation ; l’équipe suit ces événements pour vérifier qu’ils ne dégradent pas excessivement l’entraînement.",
+    "misconception": "Le token n’est pas nécessairement retiré du texte ou de la séquence : dropping peut désigner uniquement l’absence de contribution de l’expert dans une couche."
+  },
+  "notion-117": {
+    "explanation": "Les Active Parameters désignent les paramètres mobilisés pour une unité de calcul définie, souvent un token dans un modèle MoE. Ils comprennent les parties communes et les experts sélectionnés selon la convention de comptage ; cette valeur aide à comparer le calcul potentiel, mais ne décrit pas à elle seule la mémoire ou les communications nécessaires.",
+    "example": "Exemple illustratif : une équipe lit une fiche MoE en séparant les poids des blocs communs de ceux des experts activés par token, puis mesure le coût réel avec son moteur d’inférence.",
+    "misconception": "Peu de paramètres actifs par token ne signifie pas que le modèle entier tient dans une petite mémoire : les experts non sélectionnés doivent rester accessibles."
+  },
+  "notion-118": {
+    "explanation": "Les Total Parameters comptent l’ensemble des paramètres du modèle, y compris les experts qui ne participent pas à chaque token dans un MoE. Ce total aide à estimer le stockage des poids à une précision donnée, mais la mémoire d’exécution ajoute notamment les activations, le cache et, pendant l’entraînement, les états d’optimisation.",
+    "example": "Exemple illustratif : pour préparer un déploiement, une équipe part du nombre total de paramètres et de leur format numérique, puis ajoute une marge fondée sur les besoins de cache et d’exécution mesurés.",
+    "misconception": "Le total de paramètres ne donne pas directement la vitesse ni la qualité ; deux architectures de même taille peuvent avoir des calculs actifs et des comportements très différents."
+  },
+  "notion-119": {
+    "explanation": "La Conditional Computation fait dépendre une partie des opérations exécutées du contenu de l’entrée ou d’une décision intermédiaire. Le routage MoE en est un exemple, mais la sélection peut aussi concerner des branches ou des étapes ; l’économie réelle suppose que le moteur d’exécution exploite ces choix sans ajouter trop de coordination.",
+    "example": "Exemple illustratif : un système dirige une représentation vers certaines branches spécialisées et ignore les autres, puis combine les résultats disponibles pour poursuivre le calcul de la sortie demandée par l’application.",
+    "misconception": "Un calcul conditionnel n’est pas automatiquement moins cher : les décisions, les transferts de données et les petits lots peuvent absorber une partie des gains attendus."
+  },
+  "notion-120": {
+    "explanation": "La Sparsity décrit la présence de nombreux éléments nuls ou non utilisés dans des poids, des activations ou des connexions de calcul. Ces formes ne sont pas interchangeables : un MoE peut avoir des poids denses tout en activant peu d’experts, et un modèle élagué peut posséder des poids nuls dans des couches toujours exécutées.",
+    "example": "Exemple illustratif : une équipe compare une matrice contenant de nombreux zéros à une couche qui sélectionne quelques experts et précise, pour chaque cas, ce qui est réellement évité par le matériel.",
+    "misconception": "Un pourcentage élevé de zéros ne garantit pas une accélération : les formats de stockage, la structure des zéros et les opérations disponibles conditionnent leur exploitation."
+  },
+  "notion-121": {
+    "explanation": "Le Pruning supprime ou masque des éléments d’un réseau selon un critère choisi, comme la magnitude de poids ou l’importance estimée de structures entières. Il peut agir sur des connexions isolées, des neurones ou des canaux, puis être suivi d’une adaptation ; la réduction obtenue doit être vérifiée avec la qualité et l’exécution réelles.",
+    "example": "Exemple illustratif : une équipe retire progressivement des canaux d’un réseau d’images, réajuste le modèle et compare sa précision ainsi que son temps d’exécution sur l’appareil prévu pour le déploiement.",
+    "misconception": "Mettre des poids à zéro ne réduit pas forcément la taille du fichier ni le temps de calcul : il faut une représentation et une exécution adaptées."
+  }
+}

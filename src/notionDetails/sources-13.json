@@ -1,0 +1,92 @@
+{
+  "notion-385": [
+    "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+  ],
+  "notion-387": [
+    "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+  ],
+  "notion-388": [
+    "https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/"
+  ],
+  "notion-389": [
+    "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html"
+  ],
+  "notion-391": [
+    "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html"
+  ],
+  "notion-392": [
+    "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+  ],
+  "notion-393": [
+    "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html"
+  ],
+  "notion-394": [
+    "https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/"
+  ],
+  "notion-395": [
+    "https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/"
+  ],
+  "notion-396": [
+    "https://arxiv.org/abs/1708.06733"
+  ],
+  "notion-397": [
+    "https://arxiv.org/abs/1708.06733"
+  ],
+  "notion-398": [
+    "https://arxiv.org/abs/1609.02943"
+  ],
+  "notion-399": [
+    "https://www.cs.toronto.edu/~ristenpart/papers/mi-ccs.pdf"
+  ],
+  "notion-400": [
+    "https://arxiv.org/abs/1610.05820"
+  ],
+  "notion-401": [
+    "https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/"
+  ],
+  "notion-402": [
+    "https://data-privacy-stack.github.io/presidio/"
+  ],
+  "notion-403": [
+    "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"
+  ],
+  "notion-405": [
+    "https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/"
+  ],
+  "notion-406": [
+    "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+  ],
+  "notion-407": [
+    "https://learn.microsoft.com/en-us/azure/ai-services/content-safety/overview"
+  ],
+  "notion-408": [
+    "https://learn.microsoft.com/en-us/azure/ai-services/content-safety/overview"
+  ],
+  "notion-409": [
+    "https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/"
+  ],
+  "notion-410": [
+    "https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/"
+  ],
+  "notion-411": [
+    "https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/"
+  ],
+  "notion-412": [
+    "https://arxiv.org/abs/1412.6572"
+  ],
+  "notion-413": [
+    "https://arxiv.org/abs/2501.07238"
+  ],
+  "notion-414": [
+    "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html"
+  ],
+  "notion-415": [
+    "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html"
+  ],
+  "notion-416": [
+    "https://www.w3.org/TR/prov-overview/"
+  ],
+  "notion-417": [
+    "https://data-privacy-stack.github.io/presidio/"
+  ]
+}

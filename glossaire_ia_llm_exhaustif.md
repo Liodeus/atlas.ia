@@ -4,7 +4,7 @@
 
 ## 1. Fondamentaux et familles de modèles
 
-- **⭐ IA (Artificial Intelligence)** — ensemble de techniques permettant à des systèmes d'accomplir des tâches associées à l'intelligence.
+- **⭐ AI (Artificial Intelligence)** — ensemble de techniques permettant à des systèmes d'accomplir des tâches associées à l'intelligence.
 - **Machine Learning (ML)** — apprentissage de régularités à partir de données plutôt que de règles écrites à la main.
 - **Deep Learning (DL)** — apprentissage automatique reposant sur des réseaux de neurones profonds.
 - **⭐ LLM (Large Language Model)** — grand modèle conçu pour traiter et générer du langage.
@@ -52,7 +52,7 @@
 - **GELU** — fonction d'activation lisse très utilisée dans les Transformers.
 - **SiLU / Swish** — autre fonction d'activation présente dans de nombreux modèles.
 - **SwiGLU** — mécanisme de couche feed-forward utilisant des portes et une activation de type Swish.
-- **⭐ FFN / MLP (Feed-Forward Network)** — sous-réseau traitant les représentations des tokens après l'attention.
+- **⭐ FFN (Feed-Forward Network) / MLP (Multilayer Perceptron)** — sous-réseau traitant les représentations des tokens après l'attention.
 - **Residual Connection / Skip Connection** — chemin qui additionne l'entrée d'un bloc à sa sortie.
 - **LayerNorm** — normalisation des activations au sein d'une couche.
 - **RMSNorm** — variante de normalisation fondée sur la moyenne quadratique.
@@ -68,7 +68,7 @@
 - **Projection Matrix** — matrice qui transforme les représentations vers d'autres espaces, par exemple Q, K ou V.
 - **⭐ Q / K / V (Query, Key, Value)** — trois projections utilisées pour calculer et agréger l'attention.
 - **Weight Tying** — partage de certains poids, notamment entre embeddings d'entrée et sortie.
-- **Vocabulary Head / LM Head** — projection des états internes vers les scores des tokens du vocabulaire.
+- **LM Head (Language Modeling Head)** — projection des états internes vers les scores des tokens du vocabulaire.
 - **Mechanistic Interpretability** — recherche visant à comprendre les mécanismes internes responsables des comportements d'un modèle.
 - **Sparse Autoencoder (SAE)** — autoencodeur encourageant une représentation clairsemée, utilisé notamment pour analyser les activations internes.
 - **Superposition** — encodage de plusieurs caractéristiques dans des directions qui se chevauchent dans les représentations.
@@ -368,7 +368,7 @@
 - **Handoff** — transfert de responsabilité ou de contexte vers un autre agent.
 - **Tool Router** — composant déterminant quel outil doit recevoir une requête.
 - **Model Router / Model Cascading** — sélection du modèle le plus approprié en fonction d'une requête.
-- **A2A (Agent-to-Agent)** — famille de conventions ou protocoles pour faire communiquer des agents entre eux.
+- **A2A (Agent2Agent)** — famille de conventions ou protocoles pour faire communiquer des agents entre eux.
 - **Computer Use** — capacité d'un agent à interagir avec une interface graphique en cliquant et en saisissant du texte.
 - **⭐ MCP (Model Context Protocol)** — protocole pour connecter des applications d'IA à des outils et sources de contexte.
 - **Plugin / Connector** — intégration donnant accès à une application ou un système externe.
@@ -467,7 +467,7 @@
 - **OCR (Optical Character Recognition)** — extraction de texte à partir d'images.
 - **Image Captioning** — production d'une description textuelle d'une image.
 - **Visual Question Answering (VQA)** — réponse à une question fondée sur une image.
-- **Grounded Vision** — liaison entre affirmations textuelles et régions ou éléments visuels.
+- **Visual Grounding** — liaison entre affirmations textuelles et régions ou éléments visuels.
 - **Text-to-Image** — génération d'image à partir d'une description textuelle.
 - **Image-to-Image** — transformation d'une image guidée par des instructions ou une autre référence.
 - **Text-to-Video** — génération de vidéo à partir d'une description.
@@ -551,7 +551,7 @@
 - **Model Family** — ensemble de variantes apparentées d'un modèle.
 - **Model Variant / Size** — déclinaison différant par sa taille, ses capacités ou son mode d'emploi.
 - **Research Paper / Preprint** — publication scientifique / manuscrit diffusé avant examen formel éventuel.
-- **ArXiv** — plateforme de diffusion de prépublications scientifiques.
+- **arXiv** — plateforme de diffusion de prépublications scientifiques.
 - **Reproducibility** — capacité à reproduire un résultat avec des conditions et procédures documentées.
 - **Inference Cost / Token Pricing** — coût de traitement des entrées et sorties, souvent tarifé au token.
 - **TCO (Total Cost of Ownership)** — coût total d'exploitation, intégrant matériel, hébergement et maintenance.

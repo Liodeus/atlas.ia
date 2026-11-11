@@ -18,7 +18,7 @@ e('Pour générer une phrase de gauche à droite, un masque causal empêche une 
 e('Deux systèmes acceptent le même document long. Ils peuvent malgré tout retrouver l’information avec des qualités différentes selon la tâche et leur architecture.','Un contexte plus long garantit-il une meilleure réponse ?','Non. Il faut évaluer la capacité à utiliser les informations pertinentes.')
 ],
 [
-e('Dans une illustration à quatre experts, un routeur peut en sélectionner deux pour traiter un token. Les autres experts ne sont pas appelés pour cette étape.','Tous les experts doivent-ils traiter chaque token dans un MoE clairsemé ?','Non. Le routage sélectionne seulement une partie des experts.'),
+e('Dans une illustration à quatre experts, un routeur peut en sélectionner deux pour traiter un token. Les autres experts ne sont pas appelés pour cette étape.','Tous les experts doivent-ils traiter chaque token dans un Sparse MoE ?','Non. Le routage sélectionne seulement une partie des experts.'),
 e('Si le réglage top-k vaut deux dans un exemple, le routeur choisit deux experts parmi les candidats disponibles pour chaque élément concerné.','Les paramètres totaux sont-ils toujours égaux aux paramètres actifs ?','Non. Les paramètres totaux incluent les experts non sélectionnés.'),
 e('Un modèle peut avoir de nombreux paramètres totaux mais n’en activer qu’une partie par token. Les échanges entre appareils peuvent néanmoins coûter du temps.','Le seul nombre de paramètres totaux permet-il de prédire la vitesse ?','Non. La vitesse dépend aussi du matériel, du routage et des communications.')
 ],

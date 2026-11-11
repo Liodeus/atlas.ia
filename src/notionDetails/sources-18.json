@@ -1,0 +1,66 @@
+{
+  "notion-600": [
+    "https://developers.openai.com/api/docs/models"
+  ],
+  "notion-601": [
+    "https://developers.openai.com/api/docs/models/gpt-oss-20b"
+  ],
+  "notion-602": [
+    "https://platform.claude.com/docs/en/models/overview"
+  ],
+  "notion-603": [
+    "https://ai.google.dev/gemini-api/docs/models"
+  ],
+  "notion-604": [
+    "https://ai.google.dev/gemma/docs/get_started"
+  ],
+  "notion-605": [
+    "https://github.com/meta-llama/llama-models"
+  ],
+  "notion-606": [
+    "https://qwenlm.github.io/about/"
+  ],
+  "notion-607": [
+    "https://github.com/deepseek-ai/DeepSeek-V3",
+    "https://github.com/deepseek-ai/DeepSeek-R1"
+  ],
+  "notion-608": [
+    "https://docs.mistral.ai/models"
+  ],
+  "notion-609": [
+    "https://mistral.ai/news/mixtral-of-experts"
+  ],
+  "notion-610": [
+    "https://azure.microsoft.com/en-us/products/phi/"
+  ],
+  "notion-611": [
+    "https://github.com/ibm-granite/granite-4.0-language-models"
+  ],
+  "notion-612": [
+    "https://docs.cohere.com/docs/models"
+  ],
+  "notion-613": [
+    "https://docs.cohere.com/docs/models"
+  ],
+  "notion-614": [
+    "https://huggingface.co/BAAI/bge-m3"
+  ],
+  "notion-615": [
+    "https://developers.openai.com/api/docs/guides/speech-to-text"
+  ],
+  "notion-616": [
+    "https://stability.ai/core-models"
+  ],
+  "notion-617": [
+    "https://help.bfl.ai/articles/7655484417-what-flux-models-are-available"
+  ],
+  "notion-618": [
+    "https://github.com/MoonshotAI/Kimi-K2"
+  ],
+  "notion-619": [
+    "https://github.com/zai-org/GLM-5"
+  ],
+  "notion-620": [
+    "https://github.com/MiniMax-AI/MiniMax-M2"
+  ]
+}

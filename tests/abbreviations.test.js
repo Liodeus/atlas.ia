@@ -20,3 +20,19 @@ test('repeated expansion preserves case, brand exclusions and punctuation',()=>{
  const expected='Mistral AI explique le TTFT (Time To First Token) ; une API (Application Programming Interface) mesure le TTFT.';
  for(let i=0;i<4;i++)assert.equal(expandAbbreviations(input),expected);
 });
+test('established compound terms stay contiguous while isolated acronyms remain explained',()=>{
+ for(const term of ['JSON Schema','KV Cache','KV Cache Quantization','AI Agent','AI Slop','MCP Client','MCP Resource','RAG Poisoning','Sparse MoE'])assert.equal(expandAbbreviations(term),term);
+ assert.equal(expandAbbreviations('JSON Schema formalise le format JSON.'),'JSON Schema formalise le format JSON (JavaScript Object Notation).');
+ assert.equal(expandAbbreviations('Un MCP Client communique via MCP.'),'Un MCP Client communique via MCP (Model Context Protocol).');
+ assert.equal(expandAbbreviations('Generative AI (GenAI) produit du contenu.'),'Generative AI (GenAI) produit du contenu.');
+});
+test('existing parenthetical explanations are not doubled',()=>{
+ assert.equal(expandAbbreviations('LLM (Large Language Model) et API (Application Programming Interface).'),'LLM (Large Language Model) et API (Application Programming Interface).');
+ const input='Le KV Cache et JSON Schema ont des rôles distincts.';
+ assert.equal(expandAbbreviations(expandAbbreviations(input)),input);
+});
+test('distinct acronyms keep their own established expansions',()=>{
+ assert.equal(expandAbbreviations('FFN et MLP ont des noms distincts.'),'FFN (Feed-Forward Network) et MLP (Multilayer Perceptron) ont des noms distincts.');
+ assert.equal(expandAbbreviations('Le protocole A2A relie des agents.'),'Le protocole A2A (Agent2Agent) relie des agents.');
+ assert.equal(expandAbbreviations('LM Head (Language Modeling Head) produit des scores.'),'LM Head (Language Modeling Head) produit des scores.');
+});

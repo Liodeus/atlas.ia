@@ -1,11 +1,36 @@
 import React,{useState} from 'react';
 import {attentionAllowed,contextBudget,routeExperts,ragScenario,visibleRagPassages,decodedTokens} from './diagramModels.js';
 
+function ResidualBlock({name,detail,active,residualActive}){
+ return <div className="res-unit"><div className={'res-block'+(residualActive?' res-highlight':'')}>
+  <div className="res-bypass" aria-hidden="true"><span>Entrée conservée</span><i/></div>
+  <div className="res-main">
+   <div className="res-input">Entrée x</div><span className="res-arrow" aria-hidden="true">↓</span>
+   <div className={'diagram-unit'+(active?' active':'')}><b>{name}</b><small>{detail}</small></div>
+   <span className="res-arrow" aria-hidden="true">↓</span><div className="res-add"><span aria-hidden="true">＋</span></div>
+  </div>
+ </div><div className="res-formula">Addition : x + {name}(x)</div></div>;
+}
 export function TransformerDiagram({choice}){return <div className="diagram-stack" aria-label="Bloc Transformer simplifié avec chemins résiduels">
- <div className="diagram-entry">Représentation en entrée</div><span className="diagram-arrow">↓</span>
- <div className={'diagram-unit '+(choice===0?'active':'')}><b>Attention</b><small>Échanges entre positions autorisées</small><div className={'residual-path '+(choice===2?'active':'')}>↳ Residual Connection : entrée du sous-bloc → addition avec sa sortie</div></div><span className="diagram-arrow">↓</span>
- <div className={'diagram-unit '+(choice===1?'active':'')}><b>FFN</b><small>Transformation séparée de chaque position</small><div className={'residual-path '+(choice===2?'active':'')}>↳ Residual Connection : entrée du sous-bloc → addition avec sa sortie</div></div><span className="diagram-arrow">↓</span><div className="diagram-entry">Représentation en sortie</div>
- <p className="diagram-note">Schéma d’un bloc simplifié. Les normalisations et certains détails varient selon l’architecture et ne sont pas représentés.</p></div>}
+ <ResidualBlock name="Attention" detail="Échanges entre positions autorisées" active={choice===0} residualActive={choice===2}/>
+ <span className="diagram-arrow" aria-hidden="true">↓</span>
+ <ResidualBlock name="FFN" detail="Transformation séparée de chaque position" active={choice===1} residualActive={choice===2}/>
+ <div className="diagram-entry">Représentation en sortie</div>
+ <p className="diagram-note">Chaque branche conserve l’entrée du sous-bloc et l’ajoute à sa sortie. Normalisations et Dropout omis pour isoler ce mécanisme ; les détails dépendent de l’architecture.</p>
+ </div>}
+
+export function FineTuningDiagram({choice}){const full=choice===0,quantized=choice===2;
+ return <div className="finetuning-diagram">
+  <div className="ft-entry">Représentation en entrée x</div>
+  <div className={'ft-branches'+(full?' ft-full':'')}>
+   <div><span className="res-arrow" aria-hidden="true">↓</span><div className={'ft-weights '+(full?'ft-trained':'ft-frozen')}><b>Poids de base W</b><strong>{full?'Entraînés':'Gelés'}</strong><small>{quantized?'Stockage quantifié en 4 bits dans QLoRA d’origine':'Précision de la base selon la configuration'}</small></div></div>
+   {!full&&<div><span className="res-arrow" aria-hidden="true">↓</span><div className="ft-weights ft-trained"><b>Correction LoRA ΔW = BA</b><strong>Matrices A et B entraînées</strong><small>Faible rang : moins de Parameters à adapter</small></div></div>}
+  </div>
+  <span className="res-arrow" aria-hidden="true">↓</span><div className="ft-output">{full?'Sortie : Wx':'Addition des branches : Wx + ΔWx'}</div>
+  <p className="diagram-note">Une transformation linéaire simplifiée, sans biais ni facteur d’échelle LoRA représentés. {quantized?'La quantification concerne le stockage de la base gelée ; elle ne signifie pas que tous les calculs ou les adaptateurs sont en 4 bits.':'Les paramètres effectivement entraînés dépendent de la configuration.'}</p>
+  {quantized&&<a className="diagram-source" href="https://arxiv.org/abs/2305.14314" target="_blank" rel="noreferrer">Référence : QLoRA ↗</a>}
+ </div>
+}
 
 export function AttentionDiagram({choice}){const [row,setRow]=useState(3);const mode=['causal','bidirectional','local'][choice];return <div className="matrix-diagram"><p>Choisissez la position qui consulte le contexte :</p><div className="matrix-row-buttons">{Array.from({length:6},(_,i)=><button key={i} type="button" aria-pressed={row===i} className={row===i?'selected':''} onClick={()=>setRow(i)}>T{i+1}</button>)}</div><div className="matrix-scroll"><table><caption>Connexions directes autorisées dans cette couche</caption><thead><tr><th scope="col">Observe ↓ / vers →</th>{Array.from({length:6},(_,i)=><th scope="col" key={i}>T{i+1}</th>)}</tr></thead><tbody>{Array.from({length:6},(_,r)=><tr key={r} className={r===row?'active-row':''}><th scope="row">T{r+1}</th>{Array.from({length:6},(_,c)=>{const allowed=attentionAllowed(mode,r,c);return <td key={c} className={allowed?'allowed':'masked'} aria-label={'T'+(r+1)+' vers T'+(c+1)+' : '+(allowed?'autorisé':'masqué')}>{allowed?'●':'×'}</td>})}</tr>)}</tbody></table></div><p className="diagram-note">● autorisé, × masqué. Une connexion autorisée n’implique pas un poids élevé. La fenêtre locale montre les connexions directes d’une seule couche.</p></div>}
 
