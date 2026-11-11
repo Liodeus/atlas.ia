@@ -1,7 +1,7 @@
 import {extendedTitles,extendedPrerequisites} from './extensionLayout.js';
 // Indexation par identifiant de thème moins un ; les identifiants restent stables.
 export const courseTitles=[
- ['Distinguer AI, Machine Learning, Deep Learning et LLM','Foundation Model, Base Model et Instruct Model','Choisir un type de modèle pour une tâche'],
+ ['Distinguer IA, Machine Learning, Deep Learning et LLM','Foundation Model, Base Model et Instruct Model','Choisir un type de modèle pour une tâche'],
  ['Tokens, représentations et Parameters','Attention, FFN et Residual Connections','Q/K/V et information de position'],
  ['Ce que combine l’Attention','Causal Mask, Sliding Window et Sparse Attention','Long Context : capacité et limites'],
  ['Experts et Router','Top-k Routing et Active Parameters','Sparse MoE : mémoire et communication'],
@@ -20,7 +20,7 @@ export const courseTitles=[
 ];
 
 // Conseils de lecture uniquement : aucune condition de déverrouillage.
-// Même indexation que courseTitles. Chaque lien vise /cours/:theme?etape=:step.
+// Même indexation que courseTitles. Chaque lien vise /cours/:theme/lecons/:step.
 export const coursePrerequisites=[
  [],
  [{theme:5,step:1,reason:'Comprendre les Tokens avant de suivre leurs représentations dans un Transformer.'}],

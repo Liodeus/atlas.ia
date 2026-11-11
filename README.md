@@ -4,11 +4,13 @@ Site pédagogique en français sur l’IA, les LLM et les agents : 551 notions, 
 
 ## Utilisation
 
+L’accueil, les thèmes, les parcours, le glossaire, les notions, les schémas et les distinctions utilisent la largeur disponible avec des marges latérales communes.
+
 L’interface privilégie le parcours et la lecture : les pages de thème affichent les trois leçons avant les ressources complémentaires, les cours suivent une colonne de lecture et les distinctions s’ouvrent à la demande. Le glossaire garde la recherche et le thème visibles ; « Plus de filtres » regroupe le niveau, le tri et les notions essentielles, avec un rappel des choix actifs. Les filtres et la page sont conservés lors du retour depuis une fiche.
 
 - Le glossaire permet de chercher dans les 551 notions, avec 24 fiches affichées par page pour garder une navigation fluide. Les 551 notions disposent d’une explication, d’un exemple illustratif et d’un point de vigilance. Les 82 notions prioritaires gardent leur statut. Dans les cours en mode « Approfondi », chaque notion propose son approfondissement repliable ; le mode « Essentiel » conserve les définitions courtes.
 - Les 18 thèmes suivent un ordre conseillé et restent accessibles librement. Leurs 54 leçons abordent les 551 notions du glossaire, réparties entre les étapes de chaque thème.
-- Chaque leçon propose deux profondeurs : « Essentiel » (5 à 10 minutes indicatives) et « Approfondi » (10 à 20 minutes indicatives). Les deux présentent les mêmes notions ; la version approfondie ajoute des explications, des cas guidés et des exemples. Le choix est conservé dans le navigateur.
+- Chaque leçon propose deux formats : « Essentiel » pour comprendre les mécanismes, « Approfondi » pour les analyses supplémentaires, les cas travaillés et un exercice corrigé. Les durées sont calculées par leçon à partir du texte affiché (160–220 mots/min), avec 1–2 minutes de réflexion et le temps prévu pour l’exercice approfondi. Les fiches repliées et l’exploration libre des démonstrations restent facultatives. Chaque leçon cite ses références primaires.
 - L’entrée « Schémas » du menu rassemble les 22 schémas et les 17 démonstrations interactives dans une galerie par thème, avec recherche, filtre et accès à la leçon correspondante.
 - Les cours intègrent 22 schémas aux passages concernés : représentations, entraînement, cache, recherche, métriques, MCP et autres mécanismes. Le partage des têtes d’attention apparaît dans le parcours approfondi. Les exemples fictifs et les limites de simplification sont signalés ; les figures restent lisibles en modes clair et sombre. Plusieurs sont aussi réutilisées dans les fiches et quatre distinctions.
 - Les fiches du glossaire servent de référence et pointent vers la leçon correspondante. Une fiche ouverte depuis un cours permet de revenir à cette leçon.
@@ -17,6 +19,12 @@ L’interface privilégie le parcours et la lecture : les pages de thème affich
 - Les quiz proposent 278 questions rédigées, filtrables par thème et niveau. Il est possible de revenir à une réponse, de la modifier et de recalculer le score, même après le résultat. En mode Évaluation, les corrections restent masquées jusqu’au résultat ; si le quiz est rouvert ensuite, le site indique que les corrections ont déjà été affichées.
 - Les flashcards reprennent les 551 notions, dans les deux sens ou en mélangeant les sens dans une même session ; le sens de chaque carte reste stable après reprise. Des filtres permettent de choisir un thème, les favoris ou les cartes à revoir. Chaque repère « Je connais » ou « À revoir » peut être modifié ; la session et les repères sont enregistrés localement et inclus dans les exports de progression. Les flèches permettent de naviguer entre les cartes et la touche Espace retourne la carte lorsqu’elle est focalisée.
 - Les noms des concepts techniques sont présentés en anglais et les explications sont en français.
+
+L’entrée « Parcours » de « Votre espace » ouvre 18 parcours par objectif, répartis entre cinq familles : prendre ses repères, comprendre les modèles, concevoir une application, évaluer et protéger, préparer l’exploitation. Aux parcours généraux s’ajoutent des parcours ciblés sur les contextes longs, les modèles à experts, la recherche documentaire, MCP, la mémoire des agents, l’évaluation, la sécurité, la confidentialité et l’usage local. Le catalogue affiche le niveau, le nombre de leçons et la progression. Sa recherche porte sur les objectifs et les titres des leçons ; elle se combine avec un filtre par famille. Les filtres sont conservés dans l’URL et lors du retour depuis un parcours. Chaque parcours précise ses prérequis et les compétences visées. Les cours restent accessibles librement ; les leçons terminées comptent dans tous les parcours qui les proposent. Les boutons de continuation et les flèches du clavier suivent le parcours choisi, conservé lors du retour depuis une fiche. L’accueil et le catalogue permettent de reprendre le parcours commencé. « Apprendre » donne accès aux parcours. L’entrée « Distinctions » du menu « Votre espace », placée sous « Schémas », donne accès aux comparaisons entre notions.
+
+La recherche accepte plusieurs mots dans n’importe quel ordre, ignore les accents et tolère une faute simple ou une inversion de lettres sur les mots assez longs. Les sigles courts restent exacts. Les résultats privilégient les titres ; les cours associés sont recherchés dans leurs titres et leur contenu et apparaissent dans une liste compacte. Le filtre de thème s’applique aux fiches et aux cours ; les autres filtres concernent les fiches.
+
+Les mises en pratique proposent « Retrouver les passages utiles » : des liens vers les sections de la même leçon qui expliquent les méthodes nécessaires. Un lien permet de revenir à l’exercice, sans ouvrir le corrigé. Les références sont définies dans `practice.support` (`part` et titre exact de section) et vérifiées avec les autres contenus.
 
 ## Développement
 
@@ -35,7 +43,7 @@ Le site compilé se trouve dans `dist`. Tous les contenus utilisés par le site 
 
 Les définitions des 16 thèmes initiaux sont éditées directement dans `src/glossary.json`. Les deux thèmes complémentaires sont définis dans `src/extensionHarness.js` et `src/extensionFamilies.js`. Conserver les identifiants des notions : les cours, les liens et les sauvegardes des utilisateurs en dépendent.
 
-Les approfondissements sont dans `src/priorityContent.js` et `src/notionDetails/theme-*.json`, avec leurs références dans `src/notionDetails/sources-*.json` (consultées le 11 novembre 2026). Les leçons utilisent `src/courseEditorial*.json` et les deux modules complémentaires ; les comparaisons sont dans `src/distinctions.json`.
+Les approfondissements sont dans `src/priorityContent.js` et `src/notionDetails/theme-*.json`, avec leurs références dans `src/notionDetails/sources-*.json` (consultées le 11 novembre 2026). Les 54 leçons utilisent les quatre fichiers `src/courseEditorial*.json` ; les comparaisons sont dans `src/distinctions.json`.
 
 Les schémas sont définis dans `src/LearningDiagrams.jsx`, leur présentation dans `src/learning-diagrams.css` et leurs associations aux cours dans `src/learningDiagrams.js`. Lorsqu’une section ou une notion change, actualiser également ses liens et vérifier la couverture avec `npm test`.
 
@@ -60,6 +68,12 @@ docker compose -f compose.production.yaml up --build -d
 Caddy obtient et renouvelle le certificat HTTPS. Les volumes Docker conservent ses données et sa configuration. Pour consulter les journaux : `docker compose -f compose.production.yaml logs -f`. Après mise à jour des fichiers, relancer la même commande pour reconstruire. Si un serveur occupe déjà les ports 80 ou 443, utiliser le mode local et configurer son reverse proxy vers `127.0.0.1:8080`.
 
 ## Hébergement statique
+
+Chaque leçon possède une URL `/cours/:theme/lecons/:etape`. Les anciens liens `/cours/:theme?etape=:etape` restent compatibles et redirigent vers cette adresse.
+
+Le build génère des fichiers HTML pour les fiches, les leçons, les thèmes et les parcours, avec du contenu lisible sans JavaScript, un titre, une description, une URL canonique et les métadonnées Open Graph/Twitter. L’aperçu utilise `public/social-card.png`, dont le dessin source est `public/social-card.svg`. Les métadonnées se mettent aussi à jour lors de la navigation dans l’application. `sitemap.xml` répertorie les pages publiques ; Progression est exclue et marquée `noindex`. Un `robots.txt` est fourni lorsque le site est construit à la racine d’un domaine.
+
+Pour un autre domaine, définir l’URL publique complète avant de construire, par exemple `VITE_SITE_URL=https://atlas.example.com/ npm run build`. La valeur par défaut est `https://liodeus.github.io/atlas.ia/`. Le workflow Pages accepte la variable de dépôt `ATLAS_SITE_URL` ; Compose en production utilise automatiquement `ATLAS_DOMAIN`. Cette URL doit inclure le sous-chemin public éventuel et rester cohérente avec `VITE_BASE_PATH`.
 
 Copier le contenu de `dist` dans la racine web. Le serveur doit servir `index.html` pour les routes de l’application et conserver une vraie erreur 404 pour les fichiers sous `/assets/`. Exemple Nginx :
 
@@ -135,8 +149,8 @@ npm run check:budget
 npm run test:pages
 ```
 
-Les liens directs et les rechargements utilisent une page `404.html` de secours qui redirige vers l’application en conservant le chemin, les paramètres et le fragment. La requête initiale d’un lien profond reçoit donc une réponse HTTP 404 avant la redirection ; JavaScript doit être activé. La progression reste locale au navigateur : un export est nécessaire pour la transférer ou la sauvegarder. Ne pas placer de secrets ou de sauvegardes personnelles dans un dépôt public.
+Les liens directs des fiches, leçons, thèmes et parcours sont servis par leurs fichiers HTML, sans détour par une erreur 404. Les anciennes adresses et les chemins non générés utilisent encore une page `404.html` de secours qui conserve le chemin, les paramètres et le fragment ; cette compatibilité nécessite JavaScript. La progression reste locale au navigateur : un export est nécessaire pour la transférer ou la sauvegarder. Ne pas placer de secrets ou de sauvegardes personnelles dans un dépôt public.
 
 `VITE_BASE_PATH` permet de construire pour un autre chemin de déploiement, par exemple `VITE_BASE_PATH=/nom-du-depot/ npm run build`. Pour un domaine personnalisé servi à la racine, configurer le domaine dans les paramètres GitHub Pages et créer la variable de dépôt **Settings → Secrets and variables → Actions → Variables → New repository variable** : `ATLAS_BASE_PATH` avec la valeur `/`. Relancer ensuite le workflow Pages. Sans cette variable, le workflow utilise le sous-chemin du dépôt.
 
-Dans les cours et fiches, les abréviations reconnues sont développées à leur première occurrence dans un passage, par exemple « TTFT (Time To First Token) ». Les réponses des flashcards inversées ne sont pas développées à l’avance afin de ne pas dévoiler la notion.
+Les titres des cours et de leurs sections restent courts. Dans le texte des cours et fiches, les abréviations reconnues sont développées à leur première occurrence dans un passage, par exemple « TTFT (Time To First Token) ». Les réponses des flashcards inversées ne sont pas développées à l’avance afin de ne pas dévoiler la notion.

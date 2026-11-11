@@ -22,7 +22,7 @@
 .flashcard-face:hover{border-color:var(--accent)}
 .flashcard-face.is-revealed{border-color:var(--diagram-blue-border)}
 .flashcard-kicker{display:block;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.1em}
-.flashcard-front{max-width:85ch;color:var(--ink);font:normal clamp(24px,2.5vw,36px)/1.3 'DM Serif Display',Georgia,serif;overflow-wrap:anywhere}
+.flashcard-front{max-width:85ch;color:var(--ink);font:normal clamp(24px,2.5vw,36px)/1.3 'DM Serif Display',Georgia,serif;overflow-wrap:break-word}
 .flashcard-answer{width:100%;display:flex;flex-direction:column;gap:9px;margin-top:4px;padding:18px;border-radius:9px;background:var(--soft);color:var(--ink);font-size:16px;line-height:1.7}
 .flashcard-answer[hidden]{display:none}
 .flashcard-flip{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:8px;color:var(--forest);font-size:13px;font-weight:700}

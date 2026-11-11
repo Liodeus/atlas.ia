@@ -23,7 +23,7 @@ test('every notion links to its assigned lesson, with verbatim common-course exc
   const lesson=courseEditorial[course.theme][course.step-1];
   assert.equal(course.theme,theme.id);
   assert.ok(lesson.concepts.includes(entry.id),entry.id);
-  assert.equal(course.path,`/cours/${course.theme}?etape=${course.step}`);
+  assert.equal(course.path,`/cours/${course.theme}/lecons/${course.step}`);
   assert.ok(excerpts.length<=2,entry.id);
   assert.ok(excerpts.length>0,entry.id);
   for(const excerpt of excerpts){
@@ -53,7 +53,8 @@ test('distinctions are linked by exact concept IDs, never by names',()=>{
 
 test('Tensor Cores and cache optimizations do not replace the underlying concept',()=>{
  const tensor=getNotionLearningLinks('notion-456');
- assert.equal(tensor.excerpts.length,1);
+ assert.ok(tensor.excerpts.length>=1&&tensor.excerpts.length<=2);
+ assert.ok(tensor.excerpts.every(excerpt=>/\bTensors?\b(?!\s+Cores?\b)/.test(excerpt.text)));
  assert.ok(tensor.excerpts[0].text.startsWith('Un Tensor est un tableau'));
  const cache=getNotionLearningLinks('notion-232');
  assert.deepEqual([cache.excerpts[0].sectionIndex,cache.excerpts[0].paragraphIndex],[0,0]);

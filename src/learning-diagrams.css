@@ -1,6 +1,6 @@
 /* Illustrations pédagogiques : couleurs partagées avec les démonstrations,
    ordre de lecture explicite et réorganisation selon la largeur du composant. */
-.learning-diagram{container-type:inline-size;box-sizing:border-box;max-width:1000px;margin:24px auto 4px;padding:20px;border:1px solid var(--diagram-blue-border);border-radius:12px;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.learning-diagram{container-type:inline-size;box-sizing:border-box;max-width:1000px;margin:24px auto 4px;padding:20px;border:1px solid var(--diagram-blue-border);border-radius:12px;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;overflow-wrap:break-word}
 .learning-diagram figcaption{display:grid;gap:6px;margin-bottom:20px}
 .learning-diagram figcaption>span{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted)}
 .learning-diagram figcaption>strong{font-size:18px;line-height:1.35;color:var(--ink)}
@@ -93,6 +93,14 @@
 .notion-diagram{grid-column:1/-1;min-width:0}
 .notion-diagram .learning-diagram{margin-top:0}
 .distinction-card>.learning-diagram{margin-top:20px}
+/* Keep whole labels readable when a diagram is nested in a narrow card. */
+@container(max-width:300px){
+ .sd-head-groups{flex-wrap:wrap}
+ .sd-head-group{flex-basis:calc(50% - 4px)}
+ .sd-token-columns{grid-template-columns:minmax(0,1fr)}
+ .sd-token-columns>div{display:grid;grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr);gap:6px;align-items:center}
+ .sd-token-columns>div>.sd-arrow{transform:rotate(-90deg);margin:0}
+}
 @container(min-width:480px){.sd-pair{grid-template-columns:repeat(2,minmax(0,1fr))}.sd-cache-row{grid-template-columns:repeat(4,minmax(0,1fr))}.sd-measure{flex-direction:row;gap:16px}.sd-measure>b{min-width:125px}.sd-embedding{grid-template-columns:1fr 1fr;align-items:center}}
 @container(min-width:600px){.sd-triple{grid-template-columns:repeat(3,minmax(0,1fr))}.sd-flow:not(.sd-flow-long){grid-template-columns:repeat(var(--sd-columns,3),minmax(0,1fr));gap:28px}.sd-flow:not(.sd-flow-long)>li>.sd-node{height:100%}.sd-flow:not(.sd-flow-long)>li>.sd-arrow{position:absolute;left:-26px;top:50%;margin:-12px 0 0;transform:rotate(-90deg)}.sd-bar-row{grid-template-columns:14px minmax(20px,1fr) 51px 44px}.sd-bar-status{grid-column:auto}.sd-mcp-topology{grid-template-columns:1fr 1fr;align-items:end}.sd-mcp-servers{padding-bottom:14px}}
 @media(max-width:600px){.learning-diagram{padding:14px;margin-top:18px}.learning-diagram figcaption>strong{font-size:17px}.sd-nesting>div,.sd-nesting>div>div,.sd-nesting>div>div>div{padding:10px}.sd-confusion{font-size:12px;border-spacing:3px}.sd-confusion th,.sd-confusion td{padding:8px 2px}.sd-labeled-box{padding:10px}}

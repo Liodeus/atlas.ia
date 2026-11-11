@@ -77,9 +77,8 @@ html[data-theme=dark] .card-link{color:#b7cfff}
  .course-page .lesson-content>.example-card{grid-column:1;margin:26px 0}
  .course-page .lesson-content>.knowledge-check{grid-column:2;margin:26px 0}
  .quiz-question .choices-choice{grid-template-columns:repeat(2,minmax(0,1fr))}
- .starter-page .lesson-list,.distinctions-page .lesson-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;overflow:visible;border:0;background:transparent}
- .starter-page .lesson-row,.starter-page .lesson-row:last-child,.distinctions-page .lesson-row,.distinctions-page .lesson-row:last-child{border:1px solid var(--line);border-radius:10px;background:var(--surface)}
- .starter-page .lesson-row:hover{background:var(--soft)}
+ .distinctions-page .lesson-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;overflow:visible;border:0;background:transparent}
+ .distinctions-page .lesson-row,.distinctions-page .lesson-row:last-child{border:1px solid var(--line);border-radius:10px;background:var(--surface)}
  .progress-page .progress-list{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}
 }
 @media(min-width:1600px){.glossary-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -89,10 +88,10 @@ html[data-theme=dark] .card-link{color:#b7cfff}
 .distinction-card{min-width:0;padding:22px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 .distinction-heading{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .distinction-heading .lesson-number{flex:none;color:var(--forest)}
-.distinction-heading h2{margin:0;color:var(--ink);font-size:17px;line-height:1.4;overflow-wrap:anywhere}
+.distinction-heading h2{margin:0;color:var(--ink);font-size:17px;line-height:1.4;overflow-wrap:break-word}
 .distinction-sides{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .distinction-side{min-width:0;display:flex;flex-direction:column;align-items:flex-start;padding:16px;border-radius:9px;background:var(--soft)}
-.distinction-side h3{margin:0 0 8px;color:var(--ink);font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+.distinction-side h3{margin:0 0 8px;color:var(--ink);font-size:14px;line-height:1.4;overflow-wrap:break-word}
 .distinction-side p,.distinction-difference p,.distinction-example{margin:0;color:var(--ink);font-size:13px;line-height:1.65}
 .distinction-side .text-link{margin-top:auto;padding-top:12px}
 .distinction-difference{margin-top:16px}

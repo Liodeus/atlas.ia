@@ -1,6 +1,9 @@
 services:
   atlas:
-    build: .
+    build:
+      context: .
+      args:
+        VITE_SITE_URL: https://${ATLAS_DOMAIN:?Indiquez ATLAS_DOMAIN dans le fichier .env}/
     restart: unless-stopped
     ports:
       - "80:80"

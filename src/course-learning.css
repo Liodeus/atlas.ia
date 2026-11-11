@@ -47,7 +47,7 @@
 .lesson-content .course-dense-note{margin:14px 0 0;padding:11px 13px;border-left:3px solid var(--accent);border-radius:5px;background:var(--soft);color:var(--ink);font-size:13px;line-height:1.6}
 .course-terms-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:12px;margin-top:18px}
 .course-term{min-width:0;padding:17px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
-.course-term h3{margin:0 0 8px;color:var(--ink);font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+.course-term h3{margin:0 0 8px;color:var(--ink);font-size:14px;line-height:1.4;overflow-wrap:break-word}
 .lesson-content .course-term p{margin:0 0 9px;color:var(--ink);font-size:13px;line-height:1.65}
 .course-term-detail{padding-top:9px;border-top:1px solid var(--line)}
 .course-term-detail summary{min-height:40px;display:flex;align-items:center;gap:7px;cursor:pointer;color:var(--forest);font-size:12px;font-weight:700;line-height:1.4;list-style:none}

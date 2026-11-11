@@ -27,4 +27,4 @@ export function shouldHandleLessonArrow(event){
  if(typeof target?.closest==='function'&&target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="combobox"], [role="slider"], [role="dialog"], .demo'))return false;
  return true;
 }
-export const lessonPath=lesson=>`/cours/${lesson.theme}?etape=${lesson.step}`;
+export const lessonPath=lesson=>`/cours/${lesson.theme}/lecons/${lesson.step}`;

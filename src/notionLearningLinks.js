@@ -1,3 +1,4 @@
+import {lessonPath} from './lessonNavigation.js';
 import themes from './themes.js';
 import comparisons from './distinctions.json' with {type:'json'};
 import {courseEditorial} from './courseCurriculum.js';
@@ -118,7 +119,7 @@ export function buildNotionLearningLinks(themeData,editorial,distinctions,titles
    if(paragraph.length<=650)candidates.push({text:paragraph,paragraph,heading:section.heading,sectionIndex,paragraphIndex,matchedAlias,score});
   }
   result[entry.id]={
-   course:{theme:theme.id,step:step+1,title:titles[theme.id-1]?.[step]||'',path:`/cours/${theme.id}?etape=${step+1}`},
+   course:{theme:theme.id,step:step+1,title:titles[theme.id-1]?.[step]||'',path:lessonPath({theme:theme.id,step:step+1})},
    excerpts:candidates.sort((a,b)=>b.score-a.score).slice(0,2).map(({score,...excerpt})=>excerpt),
    distinctions:distinctions.flatMap((comparison,index)=>['left','right'].filter(side=>comparison[side]?.concept===entry.id).map(side=>({index,title:comparison.title,side,counterpartConcept:comparison[side==='left'?'right':'left']?.concept||null})))
   };

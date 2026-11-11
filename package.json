@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "vite build && node scripts/static-pages.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.js",
     "test:browser": "node --test tests/browser/*.test.js",
     "check:budget": "node scripts/check-budget.mjs",
-    "build:pages": "VITE_BASE_PATH=/atlas.ia/ vite build",
+    "build:pages": "VITE_BASE_PATH=/atlas.ia/ npm run build",
     "test:pages": "node --test tests/pages/*.test.js"
   },
   "dependencies": {

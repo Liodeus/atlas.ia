@@ -5,6 +5,10 @@ import {chromium} from 'playwright';
 import {notionContent} from '../../src/notionContent.js';
 import {notionContentSources} from '../../src/notionSources.js';
 import {expandAbbreviations} from '../../src/abbreviations.js';
+import {courseEditorial} from '../../src/courseCurriculum.js';
+import {lessonTiming,formatDuration} from '../../src/courseTiming.js';
+import {practiceSupport,lessonSectionId,lessonPracticeId} from '../../src/practiceSupport.js';
+import {learningPaths} from '../../src/learningPaths.js';
 
 let server, browser, page; const pageErrors=[];
 before(async()=>{
@@ -14,6 +18,234 @@ before(async()=>{
  page=await browser.newPage({viewport:{width:390,height:844}}); page.setDefaultTimeout(10000); page.on('pageerror',error=>pageErrors.push(error.message));
 });
 after(async()=>{await browser?.close();server?.kill();assert.deepEqual(pageErrors,[])});
+test('path filters survive reload and a detail visit, and empty results can be reset',async()=>{
+ const context=await browser.newContext({viewport:{width:1280,height:900}}),fresh=await context.newPage();
+ try{
+  await fresh.goto('http://127.0.0.1:5199/parcours');
+  await fresh.getByLabel('Famille de parcours',{exact:true}).selectOption('fiabilite');
+  await fresh.getByRole('status').filter({hasText:'3 parcours disponibles'}).waitFor();
+  assert.equal(await fresh.locator('.path-card').count(),3);
+  await fresh.getByLabel('Rechercher un parcours',{exact:true}).fill('securite');
+  await fresh.getByRole('link',{name:'Sécuriser une application avec LLM',exact:true}).click();
+  await fresh.getByRole('heading',{name:'Sécuriser une application avec LLM',exact:true}).waitFor();
+  await fresh.getByRole('link',{name:'Tous les parcours',exact:true}).click();
+  assert.equal(await fresh.getByLabel('Rechercher un parcours',{exact:true}).inputValue(),'securite');
+  assert.equal(await fresh.getByLabel('Famille de parcours',{exact:true}).inputValue(),'fiabilite');
+  await fresh.reload();await fresh.locator('.paths-page').waitFor();
+  assert.equal(await fresh.getByLabel('Rechercher un parcours',{exact:true}).inputValue(),'securite');
+  assert.equal(new URL(fresh.url()).searchParams.get('famille'),'fiabilite');
+  await fresh.getByLabel('Rechercher un parcours',{exact:true}).fill('zzzintrouvable');
+  await fresh.getByRole('heading',{name:'Aucun parcours ne correspond',exact:true}).waitFor();
+  assert.equal(await fresh.locator('.path-card').count(),0);
+  await fresh.getByRole('button',{name:'Réinitialiser les filtres',exact:true}).click();
+  await fresh.getByRole('status').filter({hasText:learningPaths.length+' parcours disponibles'}).waitFor();
+  assert.equal(await fresh.locator('.path-card').count(),learningPaths.length);
+  assert.equal(new URL(fresh.url()).search,'');
+ }finally{await context.close()}
+});
+test('the sidebar catalog opens every curated path with its objectives and existing lessons',async()=>{
+ const context=await browser.newContext({viewport:{width:1440,height:900}}),fresh=await context.newPage();
+ try{
+  await fresh.goto('http://127.0.0.1:5199/');
+  await fresh.locator('.sidebar').getByRole('link',{name:'Parcours',exact:true}).click();
+  await fresh.locator('.path-card').first().waitFor();
+  assert.equal(await fresh.locator('.path-card').count(),learningPaths.length);
+  for(const path of learningPaths){
+   await fresh.getByRole('link',{name:path.title,exact:true}).click();
+   await fresh.getByRole('heading',{level:1,name:path.title,exact:true}).waitFor();
+   assert.equal(await fresh.locator('.sidebar').getByRole('link',{name:'Parcours',exact:true}).getAttribute('aria-current'),'page');
+   assert.equal(await fresh.locator('.goal-page .lesson-row').count(),path.lessons.length);
+   assert.equal(await fresh.locator('.goal-outcomes').evaluate(el=>el.open),false);
+   await fresh.getByText('Ce que vous saurez faire',{exact:true}).click();
+   assert.equal(await fresh.locator('.goal-outcomes li').count(),3);
+   await fresh.getByRole('link',{name:'Tous les parcours',exact:true}).click();
+  }
+  assert.equal(await fresh.locator('a[href="/essentiels"]').count(),0);
+  await fresh.goto('http://127.0.0.1:5199/apprendre');await fresh.locator('.learn-page').waitFor();
+  assert.equal(await fresh.locator('a[href="/essentiels"]').count(),0);
+  await fresh.getByRole('link',{name:'Choisir un parcours par objectif',exact:true}).waitFor();
+  assert.equal(await fresh.locator('.learn-page a[href="/distinctions"]').count(),0);
+  const links=await fresh.locator('.sidebar nav a').allTextContents();
+  assert.equal(links[links.indexOf('Schémas')+1],'Distinctions');
+  await fresh.locator('.sidebar').getByRole('link',{name:'Distinctions',exact:true}).click();
+  await fresh.locator('.distinctions-page').waitFor();
+  await fresh.goto('http://127.0.0.1:5199/essentiels');await fresh.waitForURL('**/glossaire');
+  await fresh.getByLabel('Rechercher une notion ou un cours').waitFor();
+ }finally{await context.close()}
+});
+test('a new path retains its goal through a notion visit, completion, reload and resume',async()=>{
+ const context=await browser.newContext({viewport:{width:1280,height:900}}),fresh=await context.newPage();
+ try{
+  await fresh.goto('http://127.0.0.1:5199/parcours/prompts');
+  await fresh.getByRole('link',{name:'Commencer ce parcours',exact:true}).click();
+  await fresh.waitForURL('**/cours/5/lecons/2?parcours=prompts');
+  await fresh.locator('.course-term a').first().click();
+  await fresh.getByRole('link',{name:'Retour à la leçon',exact:true}).click();
+  await fresh.waitForURL('**/cours/5/lecons/2?parcours=prompts');
+  await fresh.getByRole('button',{name:'Terminer et continuer',exact:true}).click();
+  await fresh.waitForURL('**/cours/5/lecons/3?parcours=prompts');
+  await fresh.reload();await fresh.getByRole('heading',{level:1}).waitFor();
+  await fresh.goto('http://127.0.0.1:5199/parcours');
+  await fresh.locator('.path-resume').waitFor();
+  assert.match(await fresh.getByRole('link',{name:'Mieux utiliser un LLM',exact:true}).innerText(),/1\/7 leçons terminées/);
+  await fresh.getByRole('link',{name:'Reprendre ce parcours',exact:true}).click();
+  await fresh.waitForURL('**/cours/5/lecons/3?parcours=prompts');
+  await fresh.goto('http://127.0.0.1:5199/cours/12/lecons/1?parcours=prompts');
+  await fresh.getByRole('button',{name:'Terminer et voir le parcours',exact:true}).click();
+  await fresh.waitForURL('**/parcours/prompts');
+  assert.match(await fresh.locator('.goal-start').innerText(),/2\/7 leçons terminées/);
+ }finally{await context.close()}
+});
+test('the mobile navigation exposes paths and closes after choosing the catalog',async()=>{
+ const context=await browser.newContext({viewport:{width:390,height:844}}),fresh=await context.newPage();
+ try{
+  await fresh.goto('http://127.0.0.1:5199/');
+  await fresh.getByRole('button',{name:'Ouvrir le menu',exact:true}).click();
+  await fresh.getByRole('dialog',{name:'Navigation principale'}).getByRole('link',{name:'Parcours',exact:true}).click();
+  await fresh.locator('.paths-page').waitFor();
+  assert.equal(await fresh.getByRole('button',{name:'Ouvrir le menu',exact:true}).getAttribute('aria-expanded'),'false');
+  await fresh.getByRole('link',{name:'Optimiser et déployer un modèle',exact:true}).click();
+  await fresh.getByRole('heading',{level:1,name:'Optimiser et déployer un modèle',exact:true}).waitFor();
+  assert.ok(await fresh.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+ }finally{await context.close()}
+});
+test('exercise reminders lead to the right lesson passage and back without opening the answer',async()=>{
+ const context=await browser.newContext(),fresh=await context.newPage();
+ try{
+  for(const [theme,step,width,goal] of [[1,1,1280,'bases'],[8,3,320,null],[18,3,390,null]]){
+   await fresh.setViewportSize({width,height:900});
+   const query=goal?'?parcours='+goal:'';
+   await fresh.goto(`http://127.0.0.1:5199/cours/${theme}/lecons/${step}${query}`);
+   await fresh.getByRole('radio',{name:/Approfondi/}).check();
+   const practice=fresh.locator('.advanced-practice'),help=practice.locator('.practice-help'),answer=practice.locator('.practice-solution');
+   assert.equal(await help.evaluate(node=>node.open),false);assert.equal(await answer.evaluate(node=>node.open),false);
+   await help.locator('summary').focus();await fresh.keyboard.press('Enter');
+   const references=practiceSupport(courseEditorial[theme][step-1],theme,step);
+   assert.equal(await help.getByRole('link').count(),references.length);
+   for(const reference of references){
+    const link=help.getByRole('link',{name:reference.heading,exact:true});await link.focus();await fresh.keyboard.press('Enter');
+    await fresh.waitForFunction(id=>document.activeElement?.id===id,reference.id);
+    assert.equal(new URL(fresh.url()).search,query);
+    assert.equal(new URL(fresh.url()).hash,'#'+reference.id);
+    const box=await fresh.locator('#'+reference.id).boundingBox();assert.ok(box.y>=60&&box.y<200);
+    await fresh.getByRole('link',{name:'Revenir à la mise en pratique',exact:true}).click();
+    await fresh.waitForFunction(id=>document.activeElement?.id===id,lessonPracticeId(theme,step));
+    assert.equal(await answer.evaluate(node=>node.open),false);
+   }
+   assert.ok(await fresh.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+   assert.equal(await fresh.getByText('Comment est estimée la durée ?', {exact:true}).count(),0);
+   assert.equal(await practice.locator('.card-kicker').innerText(),'MISE EN PRATIQUE');
+  }
+ }finally{await context.close()}
+});
+test('a shared passage link opens detailed content and still allows a later switch to essential',async()=>{
+ const context=await browser.newContext(),fresh=await context.newPage();
+ try{
+  const lesson=courseEditorial[1][0],anchor=lessonSectionId(1,1,'deepDive',lesson.deepDive[0].heading);
+  await fresh.goto('http://127.0.0.1:5199/cours/1/lecons/1?parcours=bases#'+anchor);
+  await fresh.waitForFunction(id=>document.activeElement?.id===id,anchor);
+  assert.equal(await fresh.getByRole('radio',{name:/Approfondi/}).isChecked(),true);
+  await fresh.getByRole('radio',{name:/Essentiel/}).check();
+  assert.equal(await fresh.locator('.course-deep-dive').count(),0);
+  await fresh.reload();await fresh.waitForFunction(id=>document.activeElement?.id===id,anchor);
+  await fresh.getByRole('link',{name:'Revenir à la mise en pratique',exact:true}).click();
+  assert.equal(await fresh.locator('.practice-solution').evaluate(node=>node.open),false);
+ }finally{await context.close()}
+});
+test('course durations match their content and advanced practice is genuinely additional',async()=>{
+ const context=await browser.newContext({viewport:{width:1280,height:900}}),fresh=await context.newPage();
+ try{
+  for(const theme of [1,9,17,18]){
+   const lesson=courseEditorial[theme][0],timing=lessonTiming(theme,1,lesson);
+   await fresh.goto(`http://127.0.0.1:5199/cours/${theme}/lecons/1`);
+   await fresh.getByRole('radio',{name:/Essentiel/}).check();
+   assert.match(await fresh.locator('.course-depth-options').innerText(),new RegExp(formatDuration(timing.essential)));
+   assert.match(await fresh.locator('.course-depth-options').innerText(),new RegExp(formatDuration(timing.detailed)));
+   assert.equal(await fresh.locator('.advanced-practice').count(),0);
+   await fresh.getByRole('radio',{name:/Approfondi/}).check();
+   await fresh.getByRole('heading',{name:'À vous d’appliquer',exact:true}).waitFor();
+   assert.equal(await fresh.locator('.advanced-practice .practice-solution').evaluate(node=>node.open),false);
+   await fresh.getByText('Voir le corrigé raisonné',{exact:true}).click();
+   assert.ok((await fresh.locator('.advanced-practice .practice-solution').innerText()).includes(expandAbbreviations(lesson.practice.solution[0]).slice(0,40)));
+   assert.equal(await fresh.locator('.course-deep-dive .course-explanation').count(),lesson.deepDive.length);
+   await fresh.getByRole('radio',{name:/Essentiel/}).check();
+   assert.equal(await fresh.locator('.course-deep-dive,.advanced-practice').count(),0);
+  }
+ }finally{await context.close()}
+});
+test('goal journeys continue across themes, survive reload and return from notion cards',async()=>{
+ const context=await browser.newContext({viewport:{width:1280,height:900}}),fresh=await context.newPage();
+ try{
+  await fresh.goto('http://127.0.0.1:5199/apprendre');
+  await fresh.getByRole('link',{name:'Choisir un parcours par objectif',exact:true}).click();
+  await fresh.locator('.path-card').getByText('Comprendre les bases',{exact:true}).click();
+  await fresh.getByRole('link',{name:'Commencer ce parcours'}).click();
+  await fresh.waitForURL('**/cours/1/lecons/1?parcours=bases');
+  await fresh.getByRole('button',{name:'Terminer et continuer'}).click();
+  await fresh.waitForURL('**/cours/1/lecons/2?parcours=bases');
+  await fresh.getByRole('button',{name:'Terminer et continuer'}).click();
+  await fresh.waitForURL('**/cours/5/lecons/1?parcours=bases');
+  await fresh.locator('.course-term a').first().click();
+  await fresh.getByRole('link',{name:'Retour à la leçon'}).click();
+  await fresh.waitForURL('**/cours/5/lecons/1?parcours=bases');
+  await fresh.goto('http://127.0.0.1:5199/');
+  await fresh.getByRole('link',{name:'Reprendre mon parcours'}).click();
+  await fresh.waitForURL('**/cours/5/lecons/1?parcours=bases');
+  await fresh.reload();await fresh.getByRole('heading',{level:1}).waitFor();
+  await fresh.keyboard.press('ArrowLeft');await fresh.waitForURL('**/cours/1/lecons/2?parcours=bases');
+  await fresh.goto('http://127.0.0.1:5199/cours/1/lecons/3?parcours=bases');
+  await fresh.getByRole('button',{name:'Terminer et voir le parcours'}).click();
+  await fresh.waitForURL('**/parcours/bases');
+  assert.match(await fresh.locator('.goal-start').innerText(),/3\/6 leçons terminées/);
+ }finally{await context.close()}
+});
+test('search tolerates transpositions, finds courses and retains its query on return',async()=>{
+ const context=await browser.newContext({viewport:{width:390,height:844}}),fresh=await context.newPage();
+ try{
+  await fresh.goto('http://127.0.0.1:5199/glossaire');
+  const input=fresh.getByLabel('Rechercher une notion ou un cours');
+  await input.fill('serach vector');
+  await fresh.getByRole('region',{name:'Cours trouvés'}).getByRole('link',{name:/Embeddings et Vector Search/}).waitFor();
+  await fresh.locator('.gloss-card').first().click();
+  await fresh.getByRole('link',{name:'Retour au glossaire'}).click();
+  assert.equal(await input.inputValue(),'serach vector');
+  await fresh.reload();assert.equal(await input.inputValue(),'serach vector');
+  await fresh.getByRole('region',{name:'Cours trouvés'}).getByRole('link',{name:/Embeddings et Vector Search/}).click();
+  await fresh.waitForURL('**/cours/9/lecons/1');
+  await fresh.goBack();assert.equal(await input.inputValue(),'serach vector');
+  await input.fill('zzzzzzzzzzzz');await fresh.getByText('Aucune notion trouvée.',{exact:false}).waitFor();
+  assert.equal(await fresh.locator('.course-search-results').count(),0);
+ }finally{await context.close()}
+});
+test('titles and sharing metadata follow client navigation and ignore progress parameters',async()=>{
+ const context=await browser.newContext({viewport:{width:1280,height:900}}),fresh=await context.newPage();
+ try{
+  await fresh.goto('http://127.0.0.1:5199/cours/1?etape=2&parcours=bases');
+  await fresh.waitForURL('**/cours/1/lecons/2?parcours=bases');await fresh.locator('.course-term a').first().waitFor();
+  assert.match(await fresh.title(),/^Foundation Model/);
+  assert.match(await fresh.locator('link[rel="canonical"]').getAttribute('href'),/\/cours\/1\/lecons\/2$/);
+  await fresh.locator('.course-term a').first().click();await fresh.locator('.notion-understand').waitFor();
+  assert.equal(await fresh.title(),(await fresh.locator('h1').innerText())+' | Atlas IA');
+  assert.equal(await fresh.locator('meta[property="og:title"]').getAttribute('content'),await fresh.title());
+  assert.equal(await fresh.locator('meta[property="og:title"]').count(),1);
+  await fresh.goto('http://127.0.0.1:5199/cours/1/lecons/9');
+  await fresh.getByRole('heading',{name:'Oups, ce chemin n’existe pas.'}).waitFor();
+  assert.equal(await fresh.locator('meta[name="robots"]').getAttribute('content'),'noindex, follow');
+ }finally{await context.close()}
+});
+test('path catalog, goal pages and search results fit narrow screens in both themes',async()=>{
+ const context=await browser.newContext({viewport:{width:320,height:760}}),fresh=await context.newPage();
+ try{
+  for(const theme of ['light','dark']){
+   await fresh.goto('http://127.0.0.1:5199/');await fresh.evaluate(theme=>localStorage.setItem('atlas-theme',theme),theme);
+   for(const route of ['/apprendre','/parcours','/parcours/documents','/glossaire']){
+    await fresh.goto('http://127.0.0.1:5199'+route);await fresh.locator('h1').waitFor();
+    if(route==='/glossaire'){await fresh.getByLabel('Rechercher une notion ou un cours').fill('rag');await fresh.locator('.course-search-results').waitFor()}
+    assert.ok(await fresh.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),theme+' '+route);
+   }
+  }
+ }finally{await context.close()}
+});
 test('the first visit starts in light mode and remembers a later choice',async()=>{
  const context=await browser.newContext({colorScheme:'dark',viewport:{width:1280,height:800}});
  const fresh=await context.newPage();
@@ -35,7 +267,7 @@ test('invalid lesson URL remains usable', async()=>{
 test('lesson completion survives reload and home offers a next step', async()=>{
  await page.goto('http://127.0.0.1:5199/cours/1?etape=1');
  await page.getByRole('button',{name:'Terminer et continuer'}).click();
- await page.waitForURL('**/cours/1?etape=2');
+ await page.waitForURL('**/cours/1/lecons/2');
  await page.goto('http://127.0.0.1:5199/');
  assert.equal(await page.getByRole('link',{name:/Reprendre/}).count()>0,true);
  await page.goto('http://127.0.0.1:5199/progression');
@@ -43,7 +275,7 @@ test('lesson completion survives reload and home offers a next step', async()=>{
 });
 test('glossary search and comparisons can be filtered',async()=>{
  await page.goto('http://127.0.0.1:5199/glossaire');
- await page.getByLabel('Rechercher une notion').fill('transformer');
+ await page.getByLabel('Rechercher une notion ou un cours').fill('transformer');
  assert.match(await page.locator('.results-count').innerText(),/NOTION/);
  await page.goto('http://127.0.0.1:5199/distinctions');
  await page.getByLabel('Rechercher une distinction').fill('RAG');
@@ -221,7 +453,8 @@ test('mixed flashcard session keeps both directions after reload',async()=>{
 test('course and concept cards remind readers what abbreviations mean',async()=>{
  await page.goto('http://127.0.0.1:5199/cours/8?etape=1');
  await page.getByRole('heading',{level:1}).waitFor();
- assert.match(await page.locator('h1').innerText(),/TTFT \(Time To First Token\)/);
+ assert.equal(await page.locator('h1').innerText(),'Inference, TTFT et débit');
+ assert.match(await page.locator('.lesson-content').innerText(),/TTFT \(Time To First Token\)/);
  await page.goto('http://127.0.0.1:5199/notions/notion-243');
  await page.locator('.notion-understand').waitFor();
  assert.match(await page.locator('.notion-understand').innerText(),/TTFT \(Time To First Token\)/);
