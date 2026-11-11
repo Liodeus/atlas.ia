@@ -1,6 +1,5 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
 import {courseEditorial} from '../src/courseCurriculum.js';
 import themes from '../src/themes.js';
 
@@ -8,6 +7,7 @@ test('all glossary notions are included once in the guided lessons of their them
  let count=0;
  for(const theme of themes){
   const lessons=courseEditorial[theme.id];assert.equal(lessons?.length,3,`theme ${theme.id}`);
+  for(const lesson of lessons)assert.ok(lesson.concepts.length>0,`theme ${theme.id}: empty lesson`);
   const expected=theme.entries.map(e=>e.id).sort(),actual=lessons.flatMap(lesson=>lesson.concepts).sort();
   assert.deepEqual(actual,expected,`theme ${theme.id}: every notion must be covered exactly once`);
   count+=actual.length;

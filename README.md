@@ -1,6 +1,6 @@
 # Atlas IA
 
-Site pédagogique en français sur l’IA, les LLM et les agents. Les 506 définitions initiales proviennent du glossaire fourni. Deux modules complémentaires, Agent Harness & Tooling et Model Families, ajoutent 45 notions issues de sources officielles consultées le 9 novembre 2026. La couverture évolue et ne prétend pas être exhaustive. Le contenu, les quiz et la progression fonctionnent sans compte ni serveur applicatif.
+Site pédagogique en français sur l’IA, les LLM et les agents : 551 notions, 18 thèmes, 54 leçons, des schémas, des quiz et des flashcards. Le contenu et la progression fonctionnent sans compte ni serveur applicatif.
 
 ## Utilisation
 
@@ -29,21 +29,17 @@ npm test
 npm run build
 ```
 
-Le site compilé se trouve dans `dist`. Les données converties sont incluses dans `src/glossary.json` pour que la construction Docker reste autonome.
+Le site compilé se trouve dans `dist`. Tous les contenus utilisés par le site sont inclus dans `src` ; la compilation est autonome.
 
 ## Mettre à jour les contenus
 
-`npm run import` lit `glossaire_ia_llm_exhaustif.md` et met à jour uniquement `src/glossary.json`. Les nouvelles définitions du Markdown sont importées ; les identifiants existants sont conservés. Le fichier source contient une seconde définition de Pruning accolée à Weight-Only Quantization : l’import retire cette mention de la définition de Weight-Only. La première entrée Pruning reste accessible dans le thème MoE.
+Les définitions des 16 thèmes initiaux sont éditées directement dans `src/glossary.json`. Les deux thèmes complémentaires sont définis dans `src/extensionHarness.js` et `src/extensionFamilies.js`. Conserver les identifiants des notions : les cours, les liens et les sauvegardes des utilisateurs en dépendent.
 
-Les corrections relues sont dans `src/glossaryCorrections.json` : chaque entrée conserve le nom attendu, la définition source relue et sa correction. Si cette définition source change, l’import s’arrête avant toute écriture au lieu de masquer la modification. Relire alors la nouvelle source, actualiser `sourceDefinition` et `definition`, puis relancer l’import. Si le Markdown adopte directement la correction existante, l’import l’accepte. Pour apporter une nouvelle correction, ajouter une entrée dans ce fichier plutôt que modifier seulement le JSON généré.
+Les approfondissements sont dans `src/priorityContent.js` et `src/notionDetails/theme-*.json`, avec leurs références dans `src/notionDetails/sources-*.json` (consultées le 11 novembre 2026). Les leçons utilisent `src/courseEditorial*.json` et les deux modules complémentaires ; les comparaisons sont dans `src/distinctions.json`.
 
-Les comparaisons de `src/distinctions.json`, les 82 fiches de `src/priorityContent.js`, leurs 469 compléments dans `src/notionDetails/theme-*.json` et les leçons `src/courseEditorial*.json` et les modules `src/extensionHarness.js` et `src/extensionFamilies.js` sont des contenus rédigés séparément. Les ajouts sont agrégés dans `src/themes.js` et `src/allQuestions.js`. L’import les conserve sans modification et l’annonce explicitement. La section historique « 12 distinctions » du Markdown ne fait plus autorité : modifier les comparaisons directement dans `src/distinctions.json`. Les approfondissements sont agrégés dans `src/notionContent.js` et chargés à l’ouverture des cours et des fiches. Chaque complément possède une explication, un exemple fictif et une distinction spécifique, ainsi que des références dans `src/notionDetails/sources-*.json`, consultées le 11 novembre 2026. Ces sources sont accessibles dans « Pour aller plus loin ». Les liens vers les leçons et les comparaisons restent gérés par `src/notionLearningLinks.js`. Les fichiers de compléments ne sont pas réécrits par l’import du glossaire.
+Les schémas sont définis dans `src/LearningDiagrams.jsx`, leur présentation dans `src/learning-diagrams.css` et leurs associations aux cours dans `src/learningDiagrams.js`. Lorsqu’une section ou une notion change, actualiser également ses liens et vérifier la couverture avec `npm test`.
 
-Les illustrations sont définies dans `src/LearningDiagrams.jsx` et leur présentation dans `src/learning-diagrams.css`. `src/learningDiagrams.js` associe chaque figure à un titre de section précis, conserve les légendes et références, et configure les réutilisations. Lorsqu’un titre change, mettre à jour son ancrage : les tests signalent les associations manquantes. Les tests navigateur vérifient les 22 figures à 320 et 1280 pixels, les contrastes du texte, les démonstrations déplacées et les réutilisations.
-
-Pour ajouter, retirer ou renommer une notion, mettre également à jour sa répartition dans les cours et ses liens. L’import refuse une disparition d’identifiant ou une couverture différente de 16 thèmes et 506 notions tant que les contrôles correspondants n’ont pas été adaptés explicitement. Après une modification, exécuter `npm test` et `npm run build`.
-
-Les corrections techniques s’appuient notamment sur [Attention Is All You Need](https://arxiv.org/abs/1706.03762), [Switch Transformers](https://arxiv.org/abs/2101.03961), [Evaluating Large Language Models Trained on Code](https://arxiv.org/abs/2107.03374) et le chapitre [Autoencoders de Deep Learning](https://www.deeplearningbook.org/contents/autoencoders.html).
+Pour les contenus techniques, conserver les sources et la date de consultation, puis relire les affirmations avant publication.
 
 ## Aperçu Docker local
 

@@ -8,7 +8,6 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.js",
-    "import": "node scripts/import.mjs",
     "test:browser": "node --test tests/browser/*.test.js",
     "check:budget": "node scripts/check-budget.mjs",
     "build:pages": "VITE_BASE_PATH=/atlas.ia/ vite build",
@@ -22,8 +21,6 @@
   },
   "devDependencies": {
     "playwright": "1.56.1",
-    "vite": "8.3.7",
-    "@vitejs/plugin-react": "6.3.0",
-    "typescript": "7.0.2"
+    "vite": "8.3.7"
   }
 }
