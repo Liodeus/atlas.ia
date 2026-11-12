@@ -15,7 +15,7 @@ const pages={
  '/glossaire':['Le glossaire de l’IA',`Retrouvez ${entries.length} notions de l’IA, des LLM et des agents. Recherchez une définition ou un cours, par thème et par mots-clés.`],
  '/schemas':['Les schémas de l’IA','Explorez 22 schémas et 17 démonstrations interactives pour comprendre les modèles, le RAG et les agents.'],
  '/flashcards':['Réviser avec les flashcards',`Révisez les ${entries.length} notions d’Atlas IA avec des flashcards et retrouvez les notions à revoir.`],
- '/quiz':['Tester ses connaissances','Vérifiez votre compréhension de l’IA avec 278 questions, des corrections et des liens vers les notions.'],
+ '/quiz':['Tester ses connaissances','Vérifiez votre compréhension de l’IA avec 386 questions, des corrections et des liens vers les notions.'],
  '/progression':['Ma progression','Retrouvez vos leçons terminées, vos révisions et vos sauvegardes de progression sur cet appareil.']
 };
 

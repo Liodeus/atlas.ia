@@ -11,8 +11,8 @@
 .course-page .course-depth.is-compact .course-depth-heading small{white-space:nowrap}
 .course-page .continuous-reading .lesson-lead{max-width:none;margin:0 0 32px;font-size:17px;line-height:1.85;color:var(--muted)}
 .course-page .continuous-reading .course-section-grid{display:block;margin:0}
-.course-page .continuous-reading .course-explanation{padding:30px 0;margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
-.course-page .continuous-reading .course-explanation h2{max-width:none;margin:0 0 20px;font-size:26px;line-height:1.35}
+.course-page .continuous-reading .course-explanation{padding:36px 0;margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
+.course-page .continuous-reading .course-explanation>h2{max-width:none;margin:0 0 24px;padding-left:14px;border-left:4px solid var(--accent);font-family:inherit;font-size:26px;font-weight:700;line-height:1.4;color:var(--forest)}
 .course-page .continuous-reading .course-explanation>p{max-width:none;margin:0 0 20px;font-size:17px;line-height:1.9;color:var(--ink)}
 .course-page .continuous-reading .course-explanation>p:last-child{margin-bottom:0}
 .course-page .continuous-reading .course-deep-dive{margin:32px 0;background:var(--soft);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:24px 28px}
@@ -46,7 +46,7 @@
  .course-page .course-depth.is-compact .course-depth-heading small{font-size:10px}
  .course-page .continuous-reading .lesson-lead{font-size:16px;line-height:1.8}
  .course-page .continuous-reading .course-explanation{padding:24px 0}
- .course-page .continuous-reading .course-explanation h2{font-size:24px;margin-bottom:18px}
+ .course-page .continuous-reading .course-explanation>h2{font-size:22px;margin-bottom:20px;padding-left:12px}
  .course-page .continuous-reading .course-explanation>p{font-size:16px;line-height:1.85;margin-bottom:20px}
  .course-page .continuous-reading .course-deep-dive,.course-page .inline-workshop{padding:18px}
  .course-page .continuous-reading .course-deep-dive>h2{font-size:25px}

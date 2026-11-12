@@ -1,0 +1,2270 @@
+[
+  {
+    "id": "practice-1-1-1",
+    "theme": 1,
+    "concept": "notion-11",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un client écrit : « Je ne veux pas annuler, je demande la date de livraison. » Le système doit renvoyer une catégorie. Quel résultat correspond à la demande ?",
+    "answer": "Demande de suivi de livraison",
+    "options": [
+      "Demande de suivi de livraison",
+      "Demande d’annulation de commande",
+      "Demande de remboursement de livraison",
+      "Demande de modification d’adresse"
+    ],
+    "explanation": "La négation exclut l’annulation. Identifier l’intention demande de traiter la phrase entière, pas de classer le message sur le seul mot « annuler ».",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Reconnaître les tâches de langage"
+    }
+  },
+  {
+    "id": "practice-1-1-2",
+    "theme": 1,
+    "concept": "notion-6",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un assistant réussit tous les exemples connus de classement de courriels. L’équipe n’a testé aucune autre tâche. Quelle conclusion peut-elle défendre ?",
+    "answer": "Sa réussite est établie sur ces exemples de classement",
+    "options": [
+      "Sa réussite est établie sur ces exemples de classement",
+      "Sa réussite se transfère au classement de courriels futurs",
+      "Sa réussite établit une capacité générale de raisonnement",
+      "Sa réussite établit aussi sa capacité à rédiger des réponses"
+    ],
+    "explanation": "Le résultat porte sur la tâche et les exemples évalués. Ni le transfert à de nouvelles données, ni la rédaction, ni une intelligence générale ne sont démontrés par ce seul test.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Séparer performance et intelligence générale"
+    }
+  },
+  {
+    "id": "practice-1-2-1",
+    "theme": 1,
+    "concept": "notion-16",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une équipe ajoute « Réponds en trois phrases » à l’entrée d’un modèle, sans entraînement ni modification de ses poids. Qu’a-t-elle changé ?",
+    "answer": "La consigne fournie pour cette requête",
+    "options": [
+      "La consigne fournie pour cette requête",
+      "L’adaptation aux consignes enregistrée dans les poids",
+      "L’architecture des blocs du modèle",
+      "Le corpus ayant servi au préentraînement"
+    ],
+    "explanation": "Modifier le prompt change l’entrée de cette exécution. Une adaptation enregistrée dans les paramètres demande un apprentissage ; l’architecture et le corpus initial restent ici identiques.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "La base apprise et ses adaptations"
+    }
+  },
+  {
+    "id": "practice-1-2-2",
+    "theme": 1,
+    "concept": "notion-30",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un Transformer causal est entraîné sur une phrase de référence complète, avec un masque qui interdit à chaque position de lire sa continuation future. Qu’est-ce qui permet de calculer les prédictions de plusieurs positions en parallèle pendant cet entraînement ?",
+    "answer": "Les préfixes de référence sont disponibles et les couches du Transformer traitent ces positions sans récurrence entre elles",
+    "options": [
+      "Les préfixes de référence sont disponibles et les couches du Transformer traitent ces positions sans récurrence entre elles",
+      "Le masque donne à chaque position la réponse future au moment de calculer ses scores",
+      "Les Tokens sont choisis les uns après les autres avant que le calcul des autres positions commence",
+      "Les prédictions sont indépendantes des Tokens placés plus tôt dans la phrase"
+    ],
+    "explanation": "Les entrées de référence fournissent les préfixes et le Transformer peut traiter leurs positions en parallèle, sous masque causal. À la génération, les nouvelles continuations ne sont pas connues à l’avance. Un modèle récurrent n’offre pas la même parallélisation des positions.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Comprendre ce que nomme l’architecture"
+    }
+  },
+  {
+    "id": "practice-1-3-1",
+    "theme": 1,
+    "concept": "notion-24",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un moteur documentaire a déjà trouvé dix passages. Une seconde étape réévalue chacun avec la question pour en retenir trois. Quel rôle remplit cette seconde étape ?",
+    "answer": "Reclasser les passages candidats selon leur pertinence",
+    "options": [
+      "Reclasser les passages candidats selon leur pertinence",
+      "Transformer les trois passages retenus en réponse rédigée",
+      "Indexer tous les documents avant de recevoir une question",
+      "Mettre à jour les poids du générateur avec les dix passages"
+    ],
+    "explanation": "Un reranker réévalue des candidats déjà récupérés. Il intervient après la recherche et avant la construction du contexte utilisé pour rédiger la réponse.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Produire, représenter et reclasser"
+    }
+  },
+  {
+    "id": "practice-1-3-2",
+    "theme": 1,
+    "concept": "notion-20",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un assistant propose plusieurs programmes de calcul de remises. Le mieux noté pour son style échoue sur les arrondis. Quel critère doit guider la sélection pour vérifier le calcul demandé ?",
+    "answer": "La réussite à des tests couvrant les montants et arrondis attendus",
+    "options": [
+      "La réussite à des tests couvrant les montants et arrondis attendus",
+      "La préférence pour les commentaires jugés les plus pédagogiques",
+      "La similarité du code avec un exemple bien présenté",
+      "Le nombre d’étapes décrites dans la justification du programme"
+    ],
+    "explanation": "Un contrôle de validité doit mesurer le comportement attendu. Les tests exécutables sur les cas limites apportent ici un signal distinct d’une préférence de style ou d’une proximité textuelle.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Proposer une solution et la contrôler"
+    }
+  },
+  {
+    "id": "practice-2-1-1",
+    "theme": 2,
+    "concept": "notion-38",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un modèle gelé reçoit deux phrases différentes. Ses représentations internes changent entre les deux calculs. Quelle valeur peut changer sans nouvel entraînement ?",
+    "answer": "Le Hidden State calculé pour l’entrée courante",
+    "options": [
+      "Le Hidden State calculé pour l’entrée courante",
+      "Un poids appris de la projection de sortie",
+      "Un biais numérique stocké dans une couche",
+      "Une valeur apprise de la matrice d’Embedding"
+    ],
+    "explanation": "Les Hidden States sont calculés à partir de l’entrée. Les paramètres appris, dont poids, biais et matrice d’Embedding, restent fixes dans l’inférence ordinaire décrite.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Des valeurs stockées aux valeurs calculées"
+    }
+  },
+  {
+    "id": "practice-2-1-2",
+    "theme": 2,
+    "concept": "notion-51",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "La LM Head fournit trois Logits : 2, 0 et −1. Le moteur veut en tirer des probabilités positives dont la somme vaut 1 avant un tirage. Quelle transformation correspond à ce rôle ?",
+    "answer": "Appliquer Softmax à l’ensemble des trois scores",
+    "options": [
+      "Appliquer Softmax à l’ensemble des trois scores",
+      "Remplacer les scores négatifs par zéro avec ReLU",
+      "Centrer et normaliser les scores avec LayerNorm",
+      "Retenir le score maximal et supprimer les deux autres"
+    ],
+    "explanation": "Softmax normalise les exponentielles des scores en une distribution de probabilités. ReLU ne garantit pas une somme égale à 1, LayerNorm ne produit pas des probabilités positives, et retenir seulement le maximum correspond à un choix glouton.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Passer d’une représentation à des candidats"
+    }
+  },
+  {
+    "id": "practice-2-2-1",
+    "theme": 2,
+    "concept": "notion-42",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une couche applique ReLU à trois valeurs : −2, 0 et 3. Quelles valeurs obtient-elle ?",
+    "answer": "0, 0 et 3",
+    "options": [
+      "0, 0 et 3",
+      "−2, 0 et 3",
+      "2, 0 et 3",
+      "0, 0 et 1"
+    ],
+    "explanation": "ReLU remplace chaque valeur négative par zéro et conserve les valeurs positives. Ce n’est ni une valeur absolue ni une transformation de toute valeur positive en 1.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Introduire de la non-linéarité"
+    }
+  },
+  {
+    "id": "practice-2-2-2",
+    "theme": 2,
+    "concept": "notion-46",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Dans le bloc Transformer décrit au cours, l’Attention transmet des informations entre positions, puis le FFN transforme chaque position séparément. Si on retire l’Attention, que perd-on dans ce bloc précis ?",
+    "answer": "L’échange direct entre positions assuré par l’Attention",
+    "options": [
+      "L’échange direct entre positions assuré par l’Attention",
+      "Le partage des paramètres du FFN entre positions",
+      "Les non-linéarités appliquées dans le FFN",
+      "La possibilité de calculer une sortie pour chaque position"
+    ],
+    "explanation": "Le FFN classique transforme chaque représentation avec des paramètres partagés, sans effectuer lui-même l’échange entre positions. Retirer l’Attention retire ce chemin de communication dans le bloc considéré.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Deux opérations complémentaires"
+    }
+  },
+  {
+    "id": "practice-2-3-1",
+    "theme": 2,
+    "concept": "notion-55",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une équipe lit l’étape positionnelle d’un mécanisme RoPE. Quelle opération doit-elle y trouver avant le calcul des compatibilités Q/K ?",
+    "answer": "Des rotations de composantes des Queries et des Keys selon leur position",
+    "options": [
+      "Des rotations de composantes des Queries et des Keys selon leur position",
+      "L’ajout d’un biais de distance directement aux scores d’Attention",
+      "L’ajout d’un vecteur de position uniquement aux Embeddings d’entrée",
+      "La rotation des Values uniquement, sans modification des Queries ni des Keys"
+    ],
+    "explanation": "RoPE introduit la position par des rotations de Q et K. Un biais de distance sur les scores décrit plutôt ALiBi ; l’addition aux Embeddings décrit une autre forme d’encodage positionnel. Modifier seulement V ne décrit pas RoPE.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Donner un rôle à l’ordre"
+    }
+  },
+  {
+    "id": "practice-2-3-2",
+    "theme": 2,
+    "concept": "notion-66",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Une équipe ajoute un Steering Vector pendant l’Inference pour rendre les réponses plus formelles. Sur une seule demande, le ton s’améliore. Elle veut savoir si l’intervention produit cet effet sans dégrader l’exactitude. Quel protocole répond à cet objectif ?",
+    "answer": "Comparer avec et sans intervention sur les mêmes demandes, puis mesurer ton et exactitude séparément",
+    "options": [
+      "Comparer avec et sans intervention sur les mêmes demandes, puis mesurer ton et exactitude séparément",
+      "Comparer une demande juridique avec intervention à une demande familière sans intervention",
+      "Retenir uniquement les réponses où le ton est devenu formel, puis calculer leur taux de réussite",
+      "Augmenter la force du vecteur jusqu’à obtenir le ton voulu et mesurer seulement ce ton"
+    ],
+    "explanation": "Une comparaison sur les mêmes entrées isole mieux l’intervention. Des critères séparés détectent un progrès stylistique accompagné d’erreurs factuelles ; plusieurs demandes révèlent les effets dépendant du contexte. Changer les entrées ou ne garder que les succès biaiserait la conclusion.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Observer ce que représentent les calculs"
+    }
+  },
+  {
+    "id": "practice-3-1-1",
+    "theme": 3,
+    "concept": "notion-70",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Pendant une traduction, le décodeur fournit les Queries et consulte les Keys et Values issues du texte source encodé. Quel mécanisme est décrit ?",
+    "answer": "Cross-Attention",
+    "options": [
+      "Cross-Attention",
+      "Self-Attention du texte source seul",
+      "Normalisation RMSNorm",
+      "Sélection de tokens par Top-p"
+    ],
+    "explanation": "En Cross-Attention, Q et K/V proviennent de représentations différentes. La distinction porte sur leur origine, et non sur la qualité des informations sélectionnées.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Combiner des représentations selon le contexte"
+    }
+  },
+  {
+    "id": "practice-3-1-2",
+    "theme": 3,
+    "concept": "notion-71",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une séquence contient T1 à T6. Une tête utilise une Attention dense avec un masque uniquement causal, sans fenêtre locale ni positions de remplissage. Depuis T4, quelles positions sont directement autorisées ?",
+    "answer": "T1, T2, T3 et T4",
+    "options": [
+      "T1, T2, T3 et T4",
+      "T1, T2 et T3 seulement",
+      "T1, T2, T3, T4, T5 et T6",
+      "T4 seulement"
+    ],
+    "explanation": "Le masque causal autorise ici le passé et la position courante, donc T1 à T4. Dense signifie que toutes ces connexions sont considérées ; T5 et T6 restent interdites. Le poids de chaque position dépend ensuite du calcul d’Attention.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Passer de la compatibilité à une combinaison"
+    }
+  },
+  {
+    "id": "practice-3-2-1",
+    "theme": 3,
+    "concept": "notion-83",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Sur une ligne d’un masque d’Attention, la connexion vers un token est interdite. Quelle conséquence concerne le calcul d’Attention de cette ligne ?",
+    "answer": "Ce token ne peut pas y apporter directement sa contribution",
+    "options": [
+      "Ce token ne peut pas y apporter directement sa contribution",
+      "Ce token reçoit une faible pondération mais reste consulté",
+      "Ce token est supprimé du texte d’entrée du modèle",
+      "Ce token cesse d’appartenir au vocabulaire du modèle"
+    ],
+    "explanation": "Une connexion masquée interdit une contribution directe à ce calcul. Cela n’efface ni le token d’entrée ni son identifiant du vocabulaire.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Commencer par les positions interdites"
+    }
+  },
+  {
+    "id": "practice-3-2-2",
+    "theme": 3,
+    "concept": "notion-75",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un réseau empile plusieurs couches d’Attention locale. Un token ancien est hors de la fenêtre directe de la dernière couche. Quelle conclusion est justifiée ?",
+    "answer": "Une influence indirecte peut avoir transité par les couches précédentes",
+    "options": [
+      "Une influence indirecte peut avoir transité par les couches précédentes",
+      "Le token ancien a nécessairement été effacé de toutes les représentations",
+      "Chaque couche possède alors un accès direct à tous les tokens anciens",
+      "La fenêtre locale assure la restitution exacte de tout le passé"
+    ],
+    "explanation": "Une fenêtre locale décrit les connexions directes d’une couche. Des informations peuvent circuler indirectement sur plusieurs couches, sans garantie de conservation ou de restitution exacte.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Distinguer motif fixe et choix dépendant de l’entrée"
+    }
+  },
+  {
+    "id": "practice-3-3-1",
+    "theme": 3,
+    "concept": "notion-97",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un assistant retrouve une information au début et à la fin d’un document, mais la manque souvent au milieu. Quel test cible ce problème sans changer l’information cherchée ?",
+    "answer": "Déplacer la même information dans des contextes de longueur contrôlée",
+    "options": [
+      "Déplacer la même information dans des contextes de longueur contrôlée",
+      "Changer à la fois le sujet, la question et la longueur du document",
+      "Mesurer seulement la longueur maximale acceptée par l’API",
+      "Comparer uniquement des documents dont la réponse est en première ligne"
+    ],
+    "explanation": "Le phénomène Lost in the Middle s’étudie en faisant varier la position de l’information, avec d’autres conditions contrôlées. Accepter une longueur ne démontre pas une bonne utilisation de tout le contexte.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Accepter une longueur et utiliser l’information"
+    }
+  },
+  {
+    "id": "practice-3-3-2",
+    "theme": 3,
+    "concept": "notion-92",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un serveur conserve les mêmes modèles et les mêmes requêtes, mais gaspille de la mémoire en réservant pour chaque KV Cache une grande zone contiguë partiellement vide. Quelle modification vise directement ce gaspillage d’allocation ?",
+    "answer": "Organiser le KV Cache en blocs attribués selon les besoins avec PagedAttention",
+    "options": [
+      "Organiser le KV Cache en blocs attribués selon les besoins avec PagedAttention",
+      "Réorganiser le calcul de l’Attention avec FlashAttention en conservant ces réservations de cache",
+      "Modifier l’encodage positionnel pour accepter des séquences plus longues",
+      "Changer le motif d’Attention sans modifier les zones réservées pour le KV Cache"
+    ],
+    "explanation": "PagedAttention vise la gestion du KV Cache par blocs et limite le gaspillage lié à son allocation. FlashAttention vise surtout les mouvements mémoire pendant le calcul ; accepter une longueur supérieure ou changer les connexions ne corrige pas à lui seul les réservations décrites.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Optimiser calcul, cache et distribution"
+    }
+  },
+  {
+    "id": "practice-4-1-1",
+    "theme": 4,
+    "concept": "notion-106",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Dans le bloc MoE d’un modèle, un Router envoie une représentation à un Expert. Que fait cet Expert dans l’architecture décrite ?",
+    "answer": "Il transforme la représentation reçue comme un sous-réseau",
+    "options": [
+      "Il transforme la représentation reçue comme un sous-réseau",
+      "Il attribue les scores servant à choisir les Experts",
+      "Il calcule les connexions d’Attention entre positions",
+      "Il sélectionne le prochain token dans le vocabulaire de sortie"
+    ],
+    "explanation": "Dans de nombreux MoE, les Experts sont des sous-réseaux remplaçant certains FFN. Les scores de sélection relèvent du Router ; l’Attention et la sélection du token de sortie jouent d’autres rôles.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Remplacer une transformation par plusieurs possibilités"
+    }
+  },
+  {
+    "id": "practice-4-1-2",
+    "theme": 4,
+    "concept": "notion-110",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une fiche indique « deux Experts routés actifs et un Expert partagé utilisé pour chaque token ». Combien de contributions d’Experts faut-il considérer pour ce token dans ce bloc ?",
+    "answer": "Celles des deux routés et celle du partagé",
+    "options": [
+      "Celles des deux routés et celle du partagé",
+      "Celles des deux routés, le partagé étant seulement stocké",
+      "Celle du partagé, qui remplace les deux routés",
+      "Celles de tous les Experts routés présents dans le modèle"
+    ],
+    "explanation": "Le nombre d’Experts routés n’inclut pas forcément l’Expert partagé. Dans ce scénario, sa participation systématique s’ajoute aux deux contributions sélectionnées.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Experts partagés et Experts routés"
+    }
+  },
+  {
+    "id": "practice-4-2-1",
+    "theme": 4,
+    "concept": "notion-108",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Le Router classe E3, E1, E4 puis E2 pour un token. La règle choisie est Top-2, sans autre restriction de capacité. Quels Experts sont sélectionnés ?",
+    "answer": "E3 et E1",
+    "options": [
+      "E3 et E1",
+      "E1 et E2",
+      "E3 seulement",
+      "E3 et E4"
+    ],
+    "explanation": "Top-2 sélectionne les deux Experts les mieux classés pour ce token. Il ne désigne pas les Experts portant les numéros 1 et 2 et ne saute pas le deuxième du classement.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Du classement à la sélection"
+    }
+  },
+  {
+    "id": "practice-4-2-2",
+    "theme": 4,
+    "concept": "notion-116",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un bloc MoE applique du Token Dropping lorsqu’un Expert dépasse sa capacité. La trace montre que la représentation d’un Token contourne alors cet Expert par la branche résiduelle et continue vers la couche suivante. Que s’est-il passé pour ce Token ?",
+    "answer": "Sa transformation par cet Expert a été omise, mais sa représentation poursuit le réseau",
+    "options": [
+      "Sa transformation par cet Expert a été omise, mais sa représentation poursuit le réseau",
+      "Sa représentation entière a été supprimée avant la couche suivante",
+      "Sa transformation a été exécutée automatiquement par un autre Expert disponible",
+      "Sa transformation a été retardée jusqu’à ce que cet Expert libère une place"
+    ],
+    "explanation": "Dans le chemin explicitement décrit, seule la branche de cet Expert n’est pas exécutée ; la représentation continue par le résidu. Réacheminer ou mettre en attente seraient d’autres politiques, qui ne sont pas celles montrées par cette trace.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Éviter les files d’attente autour d’un seul Expert"
+    }
+  },
+  {
+    "id": "practice-4-3-1",
+    "theme": 4,
+    "concept": "notion-121",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un Router n’a sélectionné l’Expert E4 pour aucun des vingt exemples d’un essai. L’équipe envisage de retirer définitivement E4 par Pruning. Quelle vérification manque pour évaluer cette décision ?",
+    "answer": "Mesurer l’effet du retrait sur des entrées représentatives où E4 pourrait être utile",
+    "options": [
+      "Mesurer l’effet du retrait sur des entrées représentatives où E4 pourrait être utile",
+      "Vérifier seulement qu’E4 n’a reçu aucun de ces vingt exemples",
+      "Compter uniquement le nombre d’Experts encore stockés après le retrait",
+      "Conserver le même Top-k et supposer que les Experts restants donnent les mêmes sorties"
+    ],
+    "explanation": "Un Expert non sélectionné reste disponible pour d’autres entrées. Le retirer change le modèle ; vingt exemples sans appel ne démontrent pas son inutilité générale. Une comparaison avant/après sur des entrées plus représentatives permet d’examiner la perte éventuelle.",
+    "support": {
+      "step": 3,
+      "part": "deepDive",
+      "heading": "Cas guidé : choisir l’hypothèse à tester"
+    }
+  },
+  {
+    "id": "practice-4-3-2",
+    "theme": 4,
+    "concept": "notion-112",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Deux déploiements du même MoE ont des temps de réponse différents. L’équipe soupçonne le placement des Experts entre GPU. Quel essai aide à isoler l’effet des communications ?",
+    "answer": "Garder modèle et requêtes fixes, varier le placement et comparer les temps de transfert et de calcul",
+    "options": [
+      "Garder modèle et requêtes fixes, varier le placement et comparer les temps de transfert et de calcul",
+      "Changer simultanément le placement et le Top-k, puis comparer seulement le temps total",
+      "Garder le placement et réduire la longueur des requêtes dans le déploiement le plus lent",
+      "Comparer les nombres de paramètres actifs sans relever les transferts entre appareils"
+    ],
+    "explanation": "À modèle et requêtes fixes, les traces de transfert et de calcul permettent d’examiner l’effet du placement. Changer Top-k ou longueur des requêtes ajoute d’autres causes possibles ; le compte des paramètres actifs ne mesure pas les communications.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Évaluer un modèle dans son service réel"
+    }
+  },
+  {
+    "id": "practice-5-1-1",
+    "theme": 5,
+    "concept": "notion-122",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Le Tokenizer A associe l’ID 42 à « bonjour ». Le Tokenizer B associe l’ID 42 à « train ». Une application transmet directement l’ID produit par A à un modèle prévu pour B. Quelle unité ce modèle reçoit-il selon son vocabulaire ?",
+    "answer": "L’unité « train » associée à 42 dans le vocabulaire B",
+    "options": [
+      "L’unité « train » associée à 42 dans le vocabulaire B",
+      "L’unité « bonjour » car l’ID conserve le sens du texte d’origine",
+      "Les deux unités car leurs identifiants numériques sont égaux",
+      "Aucune unité car un identifiant ne peut pas être utilisé par deux Tokenizers"
+    ],
+    "explanation": "Un ID est interprété avec le vocabulaire du modèle. Le même nombre peut désigner une autre unité dans un autre Tokenizer ; transmettre les IDs de A à B ne traduit pas les unités automatiquement.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Vocabulaire et unités de sous-mots"
+    }
+  },
+  {
+    "id": "practice-5-1-2",
+    "theme": 5,
+    "concept": "notion-131",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un Batch contient une séquence de trois Tokens réels et une autre de cinq. Deux positions PAD complètent la première. Pourquoi le traitement doit-il distinguer ces deux positions des trois premières ?",
+    "answer": "Ce sont des positions de remplissage technique, pas du contenu fourni dans cette séquence",
+    "options": [
+      "Ce sont des positions de remplissage technique, pas du contenu fourni dans cette séquence",
+      "Ce sont les deux prochains Tokens que le modèle a déjà générés pour cette séquence",
+      "Ce sont deux marqueurs de fin qui demandent d’arrêter le traitement du Batch entier",
+      "Ce sont deux mots manquants que le modèle doit ajouter au texte d’entrée"
+    ],
+    "explanation": "PAD rend ici les tableaux de même longueur. Le masque et le traitement prévus par le modèle distinguent le remplissage des positions réelles ; il ne s’agit ni de mots saisis ni d’une réponse déjà produite. EOS et les règles d’arrêt jouent un autre rôle.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Reconnaître les marqueurs qui ne sont pas du texte ordinaire"
+    }
+  },
+  {
+    "id": "practice-5-2-1",
+    "theme": 5,
+    "concept": "notion-135",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un serveur traite d’abord tous les tokens d’une consigne, puis produit la réponse token après token. Comment nomme-t-on la première phase ?",
+    "answer": "Prefill",
+    "options": [
+      "Prefill",
+      "Decode",
+      "Streaming",
+      "Stop Sequence"
+    ],
+    "explanation": "Le Prefill traite l’entrée disponible. Le Decode prolonge la séquence ; le Streaming concerne l’affichage progressif, et une Stop Sequence est une condition d’arrêt.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Traiter le Prompt puis prolonger la séquence"
+    }
+  },
+  {
+    "id": "practice-5-2-2",
+    "theme": 5,
+    "concept": "notion-133",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Une application ajoute des consignes, l’historique et des documents avant de réserver de la place pour la réponse. Quel total doit-elle comparer au budget commun d’entrée et de sortie annoncé par son service ?",
+    "answer": "L’entrée réellement envoyée, marqueurs compris, et la sortie réservée",
+    "options": [
+      "L’entrée réellement envoyée, marqueurs compris, et la sortie réservée",
+      "Le dernier message utilisateur et la sortie déjà affichée seulement",
+      "Les documents récupérés et leur nombre de pages seulement",
+      "L’historique sans les marqueurs et la longueur moyenne des réponses passées"
+    ],
+    "explanation": "La fenêtre concerne l’entrée réelle, y compris les rôles et marqueurs du Chat Template selon le système, ainsi que la sortie dans le budget commun décrit. Compter le seul dernier message sous-estime cette utilisation.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Construire l’entrée réellement reçue"
+    }
+  },
+  {
+    "id": "practice-5-3-1",
+    "theme": 5,
+    "concept": "notion-139",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Sur les mêmes 30 demandes de slogans, le réglage A produit 20 formulations distinctes et respecte la référence produit dans 24 réponses. Avec une Temperature plus basse, B produit 8 formulations distinctes et respecte la référence dans 29 réponses. Quelle conclusion décrit cet essai ?",
+    "answer": "B est moins varié et plus fidèle à la référence sur cet essai, sans atteindre une fidélité parfaite",
+    "options": [
+      "B est moins varié et plus fidèle à la référence sur cet essai, sans atteindre une fidélité parfaite",
+      "B est moins varié et toutes ses réponses respectent désormais la référence",
+      "A est plus varié, donc ses réponses respectent mieux la référence",
+      "La baisse de Temperature garantit que B sera plus exact sur toutes les futures demandes"
+    ],
+    "explanation": "Les deux critères se lisent séparément : 8 formulations au lieu de 20, et 29 références correctes au lieu de 24. Une réponse reste incorrecte avec B ; cette comparaison n’établit pas une garantie générale sur la factualité.",
+    "support": {
+      "step": 3,
+      "part": "deepDive",
+      "heading": "Cas guidé : varier un slogan sans abîmer une référence"
+    }
+  },
+  {
+    "id": "practice-5-3-2",
+    "theme": 5,
+    "concept": "notion-149",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un moteur applique un Logit Bias négatif uniquement à l’ID 42. Une variante du mot avec une majuscule correspond à l’ID 87. Quel effet direct ce réglage a-t-il sur le Logit de 87, avant Softmax ?",
+    "answer": "Son Logit reste inchangé, même si sa probabilité relative peut changer",
+    "options": [
+      "Son Logit reste inchangé, même si sa probabilité relative peut changer",
+      "Son Logit reçoit le même biais parce que les deux unités ressemblent au même mot",
+      "Son Logit est supprimé de la liste parce qu’une variante est pénalisée",
+      "Son Logit augmente exactement de la valeur soustraite à celui de 42"
+    ],
+    "explanation": "Le Logit Bias cible les IDs spécifiés : le score de 87 n’est pas directement modifié ici. La normalisation de l’ensemble des scores peut néanmoins changer sa probabilité relative. Une pénalité finie sur 42 ne garantit pas non plus l’absence de ce Token ou de toutes les variantes du mot.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Influencer répétition, biais et reproductibilité"
+    }
+  },
+  {
+    "id": "practice-6-1-1",
+    "theme": 6,
+    "concept": "notion-152",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Pour entraîner un modèle à prédire la suite, on retire le dernier token d’une phrase et on le prend comme cible. Aucune personne n’étiquette cette cible séparément. Quel apprentissage est illustré ?",
+    "answer": "Self-Supervised Learning",
+    "options": [
+      "Self-Supervised Learning",
+      "Apprentissage par récompense d’une action",
+      "Évaluation sur un test réservé",
+      "Adaptation fondée sur des préférences humaines"
+    ],
+    "explanation": "La cible est construite à partir des données elles-mêmes, ce qui caractérise ici l’auto-supervision. Aucun signal de récompense ou classement humain de réponses n’est décrit.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Apprendre une tâche commence par définir un signal"
+    }
+  },
+  {
+    "id": "practice-6-1-2",
+    "theme": 6,
+    "concept": "notion-178",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un assistant devra traiter les tickets de clients jamais rencontrés à l’entraînement. Quel découpage évalue le mieux cette capacité ?",
+    "answer": "Réserver des clients entiers pour le test",
+    "options": [
+      "Réserver des clients entiers pour le test",
+      "Répartir au hasard les copies d’un même ticket entre les jeux",
+      "Tester sur les tickets ayant servi aux mises à jour",
+      "Choisir les réglages sur le test après chaque essai"
+    ],
+    "explanation": "Réserver des clients entiers correspond à l’usage annoncé. Réutiliser les mêmes tickets ou consulter le test pour choisir les réglages compromet l’évaluation de cette généralisation.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Séparer l’apprentissage, les choix et le jugement final"
+    }
+  },
+  {
+    "id": "practice-6-2-1",
+    "theme": 6,
+    "concept": "notion-161",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "La prédiction et la Loss ont été calculées. L’équipe veut maintenant obtenir les dérivées de cette Loss par rapport aux paramètres. Quelle opération effectue ce travail ?",
+    "answer": "Backpropagation",
+    "options": [
+      "Backpropagation",
+      "Mise à jour par l’Optimizer",
+      "Sélection du Checkpoint final",
+      "Répartition Train / Validation / Test"
+    ],
+    "explanation": "La Backpropagation calcule les gradients. L’Optimizer les utilise ensuite pour décider des nouvelles valeurs des paramètres ; ce sont deux opérations distinctes.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Calculer une direction puis décider d’un pas"
+    }
+  },
+  {
+    "id": "practice-6-2-2",
+    "theme": 6,
+    "concept": "notion-186",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Deux sauvegardes contiennent les mêmes poids, mais l’une conserve l’état d’Adam et l’autre le réinitialise. Pour reprendre le Training sur le même Batch, pourquoi peuvent-elles donner des mises à jour différentes ?",
+    "answer": "Adam utilise aussi un historique des Gradients, absent de la sauvegarde réinitialisée",
+    "options": [
+      "Adam utilise aussi un historique des Gradients, absent de la sauvegarde réinitialisée",
+      "Les poids sauvegardés déterminent à eux seuls toute mise à jour d’Adam",
+      "L’état d’Adam sert uniquement à afficher les anciennes courbes de Loss",
+      "Adam recalcule exactement son historique à partir du prochain Batch"
+    ],
+    "explanation": "Adam conserve des estimations mobiles des Gradients et de leurs carrés. Les mêmes poids et le même Batch ne restituent pas cet historique. Une reprise fidèle doit donc conserver les états d’optimisation, ainsi que le Schedule et les informations d’exécution pertinentes.",
+    "support": {
+      "step": 2,
+      "part": "deepDive",
+      "heading": "Cas suivi : une prédiction de Token incorrecte"
+    }
+  },
+  {
+    "id": "practice-6-3-1",
+    "theme": 6,
+    "concept": "notion-173",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un entraînement emploie un Dropout de 0,2. Quelle interprétation est correcte pour une activation concernée lors d’un calcul d’entraînement ?",
+    "answer": "Elle a 20 % de chances d’être annulée lors de ce calcul",
+    "options": [
+      "Elle a 20 % de chances d’être annulée lors de ce calcul",
+      "Elle est retirée définitivement du fichier avec 20 % des neurones",
+      "Son poids est systématiquement diminué de 20 % après chaque calcul",
+      "Elle est annulée uniquement quand sa valeur dépasse 0,2"
+    ],
+    "explanation": "Le Dropout agit aléatoirement sur les activations pendant l’entraînement. Il ne supprime pas définitivement une fraction du réseau et ne correspond pas à une diminution systématique des poids.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Réduire l’adaptation aux détails inutiles"
+    }
+  },
+  {
+    "id": "practice-6-3-2",
+    "theme": 6,
+    "concept": "notion-175",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un tableau affiche une Loss de Training plus élevée que celle de validation. L’équipe découvre que seule la première inclut une pénalité de Regularization. Que doit-elle faire avant d’interpréter cet écart comme un problème de généralisation ?",
+    "answer": "Comparer séparément les Losses prédictives calculées selon le même objectif",
+    "options": [
+      "Comparer séparément les Losses prédictives calculées selon le même objectif",
+      "Renforcer la Regularization pour faire monter la Loss de validation au même niveau",
+      "Retirer les exemples difficiles du Training jusqu’à faire coïncider les deux courbes",
+      "Conclure à un Underfitting à partir du seul écart entre ces deux valeurs"
+    ],
+    "explanation": "Les valeurs ne mesurent pas ici la même quantité. Il faut séparer la Loss prédictive et la pénalité, puis comparer des mesures compatibles. Un écart entre objectifs différents ne constitue pas à lui seul un diagnostic d’Overfitting ou d’Underfitting.",
+    "support": {
+      "step": 3,
+      "part": "deepDive",
+      "heading": "Cas suivi : le support s’améliore puis se dégrade"
+    }
+  },
+  {
+    "id": "practice-7-1-1",
+    "theme": 7,
+    "concept": "notion-197",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une équipe gèle les poids d’un modèle et entraîne seulement des vecteurs ajoutés à son entrée. Elle ne rédige pas de nouvelle consigne en français. Quelle méthode correspond à cette description ?",
+    "answer": "Prompt Tuning avec un Soft Prompt",
+    "options": [
+      "Prompt Tuning avec un Soft Prompt",
+      "Réécriture manuelle du prompt utilisateur",
+      "Full Fine-tuning de tous les poids",
+      "Ajout de documents par recherche RAG"
+    ],
+    "explanation": "Un Soft Prompt est constitué de vecteurs appris. Les poids du modèle peuvent rester gelés : il y a tout de même un apprentissage, contrairement à la simple rédaction d’une consigne.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Quand le mot Prompt désigne aussi des vecteurs appris"
+    }
+  },
+  {
+    "id": "practice-7-1-2",
+    "theme": 7,
+    "concept": "notion-220",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Après une adaptation au vocabulaire du support, un modèle répond mieux aux tickets mais moins bien aux tâches générales qu’il réussissait auparavant. Quelle comparaison aide à mesurer cette perte de compétences ?",
+    "answer": "Évaluer avant et après sur les mêmes cas de support et de tâches générales",
+    "options": [
+      "Évaluer avant et après sur les mêmes cas de support et de tâches générales",
+      "Évaluer seulement les nouveaux tickets ayant servi à l’adaptation",
+      "Comparer seulement le nombre de paramètres avant et après",
+      "Comparer les notes du support à celles d’un autre modèle sur un autre test"
+    ],
+    "explanation": "Le Catastrophic Forgetting se mesure sur des compétences antérieures. Des cas et des critères communs permettent de distinguer le gain sur la spécialité de la perte sur les autres tâches.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Une adaptation doit aussi préserver ce qui fonctionnait"
+    }
+  },
+  {
+    "id": "practice-7-2-1",
+    "theme": 7,
+    "concept": "notion-200",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une équipe veut qu’un petit modèle apprenne à reproduire les réponses d’un modèle plus grand. Elle utilise ces réponses comme exemples d’entraînement du petit modèle. De quelle démarche s’agit-il ?",
+    "answer": "Knowledge Distillation d’un Teacher vers un Student",
+    "options": [
+      "Knowledge Distillation d’un Teacher vers un Student",
+      "Model Merging des poids des deux modèles",
+      "Routage des requêtes entre deux modèles inchangés",
+      "Recherche documentaire dans les réponses sans entraînement"
+    ],
+    "explanation": "La distillation fait apprendre un Student à partir d’un Teacher. Fusionner des poids, choisir un modèle par requête ou fournir des documents ne décrit pas cet apprentissage.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Combiner des modèles n’est pas faire apprendre un Student"
+    }
+  },
+  {
+    "id": "practice-7-2-2",
+    "theme": 7,
+    "concept": "notion-199",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Deux adaptations du même modèle améliorent séparément le français et le code. Après fusion de leurs poids, quel test permet de savoir si le résultat conserve ces deux qualités ?",
+    "answer": "Comparer le modèle fusionné et les adaptations sur les mêmes tâches de français et de code",
+    "options": [
+      "Comparer le modèle fusionné et les adaptations sur les mêmes tâches de français et de code",
+      "Vérifier que le fichier fusionné contient autant de valeurs que le modèle de départ",
+      "Vérifier que chaque adaptation séparée avait obtenu un bon score",
+      "Moyenner les scores des adaptations séparées pour attribuer celui de la fusion"
+    ],
+    "explanation": "Des adaptations peuvent interférer lors du Model Merging. Seul un test du résultat sur les capacités visées permet de constater leur conservation ; leurs scores séparés ne suffisent pas.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Combiner des modèles n’est pas faire apprendre un Student"
+    }
+  },
+  {
+    "id": "practice-7-3-1",
+    "theme": 7,
+    "concept": "notion-205",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Pour entraîner un modèle à écrire du code, l’équipe récompense les programmes qui passent une batterie de tests exécutables. Quelle est ici l’origine du signal de récompense ?",
+    "answer": "Des résultats vérifiables par l’exécution des tests",
+    "options": [
+      "Des résultats vérifiables par l’exécution des tests",
+      "Des préférences exprimées par des évaluateurs humains",
+      "La préférence d’un autre modèle pour le style du code",
+      "La probabilité donnée à la réponse par le modèle entraîné"
+    ],
+    "explanation": "Dans ce cas de RLVR, les tests fournissent un signal vérifiable. Leur réussite ne garantit toutefois que ce qu’ils contrôlent : leur couverture reste déterminante.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "D’où vient la récompense, et comment est-elle utilisée ?"
+    }
+  },
+  {
+    "id": "practice-7-3-2",
+    "theme": 7,
+    "concept": "notion-213",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un assistant est récompensé à chaque citation ajoutée. Son score augmente, mais les citations ne soutiennent pas mieux ses affirmations. Quelle modification cible le défaut de ce signal ?",
+    "answer": "Vérifier que chaque citation soutient l’affirmation à laquelle elle est rattachée",
+    "options": [
+      "Vérifier que chaque citation soutient l’affirmation à laquelle elle est rattachée",
+      "Augmenter la récompense pour chaque citation afin de renforcer le signal actuel",
+      "Remplacer le nombre de citations par le nombre de mots de la réponse",
+      "Conserver la récompense et ne retenir que les réponses au score le plus élevé"
+    ],
+    "explanation": "Le modèle optimise ici un indicateur qui ne représente pas l’objectif réel : c’est un risque de Reward Hacking. Vérifier le lien entre affirmation et source rapproche le signal de la qualité recherchée.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Rendre le signal utile sans confondre score et objectif"
+    }
+  },
+  {
+    "id": "practice-8-1-1",
+    "theme": 8,
+    "concept": "notion-243",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un assistant affiche rapidement le premier token de sa réponse, puis met longtemps à terminer son message. Quelle mesure décrit précisément l’attente initiale ?",
+    "answer": "Le temps entre l’envoi de la requête et le premier token reçu",
+    "options": [
+      "Le temps entre l’envoi de la requête et le premier token reçu",
+      "Le temps entre l’envoi de la requête et le dernier token reçu",
+      "Le nombre total de requêtes traitées par seconde",
+      "Le nombre moyen de tokens produits par seconde après le premier token"
+    ],
+    "explanation": "Le TTFT mesure le délai jusqu’au premier token. Le TTLT inclut l’attente jusqu’au dernier ; le débit de génération et la capacité globale du service décrivent encore d’autres aspects.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Suivre une requête plutôt que chercher un seul chiffre"
+    }
+  },
+  {
+    "id": "practice-8-1-2",
+    "theme": 8,
+    "concept": "notion-248",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une nouvelle configuration améliore la latence médiane, mais son P99 augmente sur la même charge de test. Que montrent ces deux mesures ?",
+    "answer": "La requête médiane est plus rapide, mais le délai au 99e percentile est plus long",
+    "options": [
+      "La requête médiane est plus rapide, mais le délai au 99e percentile est plus long",
+      "Toutes les requêtes deviennent plus rapides puisque la médiane diminue",
+      "La plupart des requêtes deviennent plus lentes puisque le P99 augmente",
+      "Le service traite nécessairement moins de requêtes par seconde"
+    ],
+    "explanation": "La médiane et le P99 décrivent des positions différentes dans la distribution des délais. Une amélioration typique peut coexister avec une dégradation dans la queue ; ces mesures seules ne fixent pas le Throughput.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Distinguer l’expérience individuelle de la capacité du service"
+    }
+  },
+  {
+    "id": "practice-8-2-1",
+    "theme": 8,
+    "concept": "notion-259",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Deux services chargent les mêmes poids quantifiés en 4 bits. L’un répond à une courte question ; l’autre traite plusieurs longues conversations en parallèle. Quel poste peut expliquer une mémoire GPU plus élevée dans le second service ?",
+    "answer": "Le KV Cache et les autres états nécessaires aux conversations actives",
+    "options": [
+      "Le KV Cache et les autres états nécessaires aux conversations actives",
+      "Les poids de base, qui sont automatiquement dupliqués pour chaque token du contexte",
+      "Les poids de base, qui repassent automatiquement en 16 bits dès que la conversation s’allonge",
+      "Les seuls paramètres entraînables d’un Fine-tuning, alors qu’aucun apprentissage n’a lieu"
+    ],
+    "explanation": "Les poids identiques ne décrivent pas toute la mémoire d’inférence. Le KV Cache et les états d’exécution dépendent notamment des longueurs et du nombre de requêtes actives. Weight-Only ne signifie pas que ces autres éléments utilisent aussi 4 bits.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Stocker les Weights avec moins de bits"
+    }
+  },
+  {
+    "id": "practice-8-2-2",
+    "theme": 8,
+    "concept": "notion-260",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un modèle ne tient pas entièrement dans la mémoire GPU. L’équipe envisage de conserver une partie des données en mémoire CPU et de les transférer au besoin. Quel compromis doit-elle mesurer ?",
+    "answer": "Le gain de mémoire GPU et le délai ajouté par les transferts",
+    "options": [
+      "Le gain de mémoire GPU et le délai ajouté par les transferts",
+      "Le gain de mémoire GPU et la seule taille du fichier, sans mesurer les transferts",
+      "Le seul débit de calcul du GPU, en supposant le lien CPU–GPU sans coût",
+      "La seule capacité libre en RAM, en supposant qu’elle suffit à garantir une faible latence"
+    ],
+    "explanation": "L’Offloading réduit la quantité résidente sur le GPU, mais déplace des données entre mémoires. Son intérêt dépend donc aussi du coût et de la fréquence de ces transferts.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Le fichier, le moteur et la mémoire disponible"
+    }
+  },
+  {
+    "id": "practice-8-3-1",
+    "theme": 8,
+    "concept": "notion-239",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un serveur utilise Continuous Batching et une requête vient de se terminer. Plusieurs longues conversations continuent et occupent presque toute la mémoire de cache. Que faut-il vérifier avant d’admettre une nouvelle requête ?",
+    "answer": "Que les ressources disponibles, notamment le cache, permettent de traiter la nouvelle requête",
+    "options": [
+      "Que les ressources disponibles, notamment le cache, permettent de traiter la nouvelle requête",
+      "Que la nouvelle requête tient dans un emplacement logique, sans tenir compte de sa longueur",
+      "Que tous les utilisateurs emploient le même nombre de mots dans leur question",
+      "Que le débit moyen passé est élevé, sans mesurer la mémoire encore disponible"
+    ],
+    "explanation": "Continuous Batching permet de renouveler le lot actif, mais ne crée pas de mémoire supplémentaire. L’admission doit respecter les ressources, en particulier les états des longues conversations et de la nouvelle requête.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Faire avancer plusieurs requêtes"
+    }
+  },
+  {
+    "id": "practice-8-3-2",
+    "theme": 8,
+    "concept": "notion-256",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Une optimisation fusionne plusieurs opérations GPU et réduit les transferts intermédiaires. Avant de la retenir pour le service, quelle comparaison est probante ?",
+    "answer": "Mesurer qualité et délais sur les mêmes requêtes avec et sans cette optimisation",
+    "options": [
+      "Mesurer qualité et délais sur les mêmes requêtes avec et sans cette optimisation",
+      "Déduire l’accélération du seul fait que le nombre de kernels a diminué",
+      "Comparer le serveur optimisé chargé à un serveur de référence sans requête",
+      "Retenir la configuration dès qu’elle charge le fichier de poids sans erreur"
+    ],
+    "explanation": "Kernel Fusion vise à réduire certains surcoûts, mais le bénéfice dépend du moteur et de la charge. Une comparaison contrôlée mesure le gain réel et vérifie que les sorties restent acceptables.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Le moteur exécute une stratégie, pas seulement un fichier"
+    }
+  },
+  {
+    "id": "practice-9-1-1",
+    "theme": 9,
+    "concept": "notion-271",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un moteur doit retrouver à la fois la référence exacte « ZX-42 » et des descriptions comme « batterie qui ne tient plus ». Quel intérêt présente une recherche hybride ?",
+    "answer": "Combiner le signal des termes exacts et celui des représentations sémantiques",
+    "options": [
+      "Combiner le signal des termes exacts et celui des représentations sémantiques",
+      "Remplacer les références exactes par des termes plus fréquents dans tous les cas",
+      "Accepter uniquement les documents contenant chaque mot de la demande",
+      "Classer les documents uniquement selon leur date de publication"
+    ],
+    "explanation": "Hybrid Search associe des approches lexicales et sémantiques. Les références rares peuvent bénéficier du signal exact, tandis que les reformulations peuvent bénéficier de la proximité de sens.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Le sens et les mots exacts sont deux signaux utiles"
+    }
+  },
+  {
+    "id": "practice-9-1-2",
+    "theme": 9,
+    "concept": "notion-275",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une équipe règle un index ANN pour accélérer la recherche. Quel protocole mesure directement les voisins proches qu’elle perd en échange du gain de vitesse ?",
+    "answer": "Comparer temps et voisins retournés avec une recherche exacte sur les mêmes requêtes et vecteurs",
+    "options": [
+      "Comparer temps et voisins retournés avec une recherche exacte sur les mêmes requêtes et vecteurs",
+      "Comparer les temps seulement, en supposant que les voisins sont inchangés",
+      "Comparer les documents retrouvés sur un nouveau corpus avec ceux de l’ancien corpus",
+      "Comparer la similarité moyenne des réponses rédigées après avoir aussi changé le générateur"
+    ],
+    "explanation": "Le compromis ANN porte sur le coût de recherche et la récupération des voisins exacts. Une référence exacte sur les mêmes données permet de mesurer les voisins manqués ; modifier le corpus ou le générateur empêcherait d’attribuer cet effet au réglage de l’index.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Retrouver des voisins sans comparer chaque document"
+    }
+  },
+  {
+    "id": "practice-9-2-1",
+    "theme": 9,
+    "concept": "notion-280",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un règlement est découpé en passages très longs qui mélangent livraison, facturation et remboursements. Pour une question de livraison, beaucoup de contexte transmis au modèle porte sur les deux autres sujets. Quelle modification du découpage cible ce problème ?",
+    "answer": "Créer des passages par section cohérente en conservant leur titre et les conditions utiles",
+    "options": [
+      "Créer des passages par section cohérente en conservant leur titre et les conditions utiles",
+      "Regrouper tout le règlement en un seul passage encore plus long",
+      "Découper chaque phrase isolément et retirer les titres des passages",
+      "Garder le découpage et demander au moteur de renvoyer davantage de passages"
+    ],
+    "explanation": "Un Chunk trop long peut mélanger des sujets et consommer inutilement le contexte. Un découpage par unités compréhensibles améliore le ciblage, en conservant titres, conditions et exceptions. Rendre les passages minuscules sans contexte créerait le problème inverse.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Préparer des passages que la recherche pourra utiliser"
+    }
+  },
+  {
+    "id": "practice-9-2-2",
+    "theme": 9,
+    "concept": "notion-269",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Une recherche lexicale et une recherche vectorielle renvoient des listes dont les scores ne sont pas sur la même échelle. Comment RRF permet-il de les combiner ?",
+    "answer": "En utilisant le rang des documents dans chaque liste",
+    "options": [
+      "En utilisant le rang des documents dans chaque liste",
+      "En additionnant directement les scores bruts des deux moteurs",
+      "En gardant seulement la liste ayant le plus grand score maximal",
+      "En réentraînant le générateur sur les documents des deux listes"
+    ],
+    "explanation": "Reciprocal Rank Fusion combine les résultats à partir de leurs positions dans les listes. Il évite ainsi de supposer directement comparables les scores bruts des moteurs.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Récupérer puis classer les bons candidats"
+    }
+  },
+  {
+    "id": "practice-9-3-1",
+    "theme": 9,
+    "concept": "notion-296",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une compression transforme « Retours possibles sous 30 jours, sauf produits personnalisés » en « Retours possibles sous 30 jours ». Pourquoi cette version pose-t-elle problème pour répondre à un client ?",
+    "answer": "Elle a supprimé une exception qui change l’application de la règle",
+    "options": [
+      "Elle a supprimé une exception qui change l’application de la règle",
+      "Elle contient moins de mots, ce qui interdit toute utilisation en RAG",
+      "Elle reprend le délai de la source au lieu de le reformuler",
+      "Elle conserve une règle commerciale au lieu du nom de son auteur"
+    ],
+    "explanation": "Contextual Compression doit conserver les conditions et exceptions utiles. Le texte raccourci fait ici croire que la règle couvre aussi les produits personnalisés, contrairement à la source.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Préserver le sens quand le corpus évolue"
+    }
+  },
+  {
+    "id": "practice-9-3-2",
+    "theme": 9,
+    "concept": "notion-294",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Pour répondre sur une garantie, une première recherche trouve la procédure mais pas la version du produit concernée. Dans un RAG capable de piloter plusieurs recherches, quelle suite est justifiée ?",
+    "answer": "Chercher la version manquante, puis confronter les sources avant de conclure",
+    "options": [
+      "Chercher la version manquante, puis confronter les sources avant de conclure",
+      "Choisir la version la plus fréquente dans les autres documents du corpus",
+      "Répéter la première recherche sans tenir compte de l’information manquante",
+      "Rédiger une garantie générale en omettant la condition de version"
+    ],
+    "explanation": "Agentic RAG peut adapter les recherches aux résultats observés. L’information manquante guide une nouvelle étape ; elle ne doit pas être remplacée silencieusement par une hypothèse.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Chercher des relations et piloter plusieurs recherches"
+    }
+  },
+  {
+    "id": "practice-10-1-1",
+    "theme": 10,
+    "concept": "notion-300",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un résumé de ticket doit permettre au support de savoir ce qui s’est passé et ce qui reste à vérifier. Quelle consigne décrit le mieux ce résultat attendu ?",
+    "answer": "Résume les faits fournis, les actions déjà tentées et les informations encore manquantes",
+    "options": [
+      "Résume les faits fournis, les actions déjà tentées et les informations encore manquantes",
+      "Rédige un résumé professionnel, convaincant et aussi fluide que possible",
+      "Réécris le ticket en ajoutant la cause qui semble la plus vraisemblable",
+      "Réduis le ticket à une phrase, même si des étapes importantes disparaissent"
+    ],
+    "explanation": "Une consigne utile nomme les informations à conserver et les incertitudes à signaler. Le style ou la brièveté seuls ne définissent pas un résumé fidèle et exploitable.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Décrire le résultat attendu et les informations disponibles"
+    }
+  },
+  {
+    "id": "practice-10-1-2",
+    "theme": 10,
+    "concept": "notion-304",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une consigne classe « remboursement » dans Facturation, mais un exemple fourni le classe dans Livraison. Que faut-il corriger avant de multiplier les exemples ?",
+    "answer": "La contradiction entre la règle et la démonstration",
+    "options": [
+      "La contradiction entre la règle et la démonstration",
+      "Le nombre d’exemples, en répétant davantage le cas contradictoire",
+      "La longueur du message utilisateur, en supprimant le motif de sa demande",
+      "La température uniquement, en gardant consigne et exemple inchangés"
+    ],
+    "explanation": "Les exemples Few-Shot montrent un comportement attendu. S’ils contredisent la règle, ajouter des répétitions ou régler l’échantillonnage ne clarifie pas le classement voulu.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Montrer le comportement au lieu de seulement le nommer"
+    }
+  },
+  {
+    "id": "practice-10-2-1",
+    "theme": 10,
+    "concept": "notion-313",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une application attend un objet avec un champ « quantité » de type entier. Le modèle renvoie {\"quantité\":\"trois\"}. Quel contrôle distingue un JSON syntaxiquement valide d’un objet conforme au type demandé ?",
+    "answer": "Valider le type de « quantité » avec le JSON Schema attendu",
+    "options": [
+      "Valider le type de « quantité » avec le JSON Schema attendu",
+      "Vérifier uniquement que le texte peut être lu par un parseur JSON",
+      "Vérifier uniquement que la clé « quantité » est présente",
+      "Vérifier uniquement que la sortie est un objet plutôt qu’une liste"
+    ],
+    "explanation": "Le texte est un objet JSON lisible qui contient bien la clé demandée, mais sa valeur est une chaîne. Le schéma impose ici un entier : sa validation repère le défaut que les autres contrôles structurels plus limités ne détectent pas.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Une structure est un contrat de données"
+    }
+  },
+  {
+    "id": "practice-10-2-2",
+    "theme": 10,
+    "concept": "notion-314",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une génération contrainte garantit un objet JSON avec une date au bon format. Le modèle peut-il néanmoins fournir une mauvaise date de livraison ?",
+    "answer": "Oui, le respect de la structure ne prouve pas l’exactitude de la valeur",
+    "options": [
+      "Oui, le respect de la structure ne prouve pas l’exactitude de la valeur",
+      "Non, une grammaire valide vérifie aussi la date dans le système de commandes",
+      "Non, les dates au bon format sont nécessairement issues d’une source",
+      "Oui, mais uniquement si le JSON contient aussi une erreur de syntaxe"
+    ],
+    "explanation": "Constrained Decoding peut imposer une forme autorisée. La valeur choisie doit encore être confrontée aux données de la commande : conformité structurelle et exactitude sont deux contrôles différents.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Contraindre la génération ou vérifier son résultat"
+    }
+  },
+  {
+    "id": "practice-10-3-1",
+    "theme": 10,
+    "concept": "notion-311",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un premier appel extrait les faits d’un ticket, puis un second rédige le résumé à partir de cette extraction. Le premier omet une erreur importante. Quel contrôle cible le plus tôt cette perte ?",
+    "answer": "Vérifier l’extraction contre le ticket avant de lancer la rédaction",
+    "options": [
+      "Vérifier l’extraction contre le ticket avant de lancer la rédaction",
+      "Vérifier seulement l’orthographe du résumé final",
+      "Ajouter une troisième reformulation du résumé sans revoir le ticket",
+      "Demander au second appel d’allonger le résumé à partir de la même extraction"
+    ],
+    "explanation": "Dans un Prompt Chaining, une erreur peut se propager entre étapes. Contrôler la sortie de l’extraction avant de la transmettre permet de corriger l’omission à sa source.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Enchaîner des tâches avec des contrôles explicites"
+    }
+  },
+  {
+    "id": "practice-10-3-2",
+    "theme": 10,
+    "concept": "notion-309",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Plusieurs générations calculent le même montant de facture, mais elles réutilisent toutes une extraction où une ligne pourrait manquer. Quel contrôle apporte une vérification indépendante de cette erreur commune ?",
+    "answer": "Recalculer le montant à partir des lignes de la facture source",
+    "options": [
+      "Recalculer le montant à partir des lignes de la facture source",
+      "Générer davantage de calculs à partir de la même extraction",
+      "Faire voter les générations en donnant plus de poids aux réponses détaillées",
+      "Confier la même extraction à un autre modèle sans lui fournir la facture"
+    ],
+    "explanation": "Un accord entre générations ne corrige pas une donnée manquante commune. Revenir à la facture source permet de contrôler les entrées du calcul. Des essais supplémentaires ou un autre modèle alimentés uniquement par la même extraction ne vérifient pas la ligne potentiellement omise.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Décomposer et explorer une résolution"
+    }
+  },
+  {
+    "id": "practice-11-1-1",
+    "theme": 11,
+    "concept": "notion-323",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un assistant écrit « J’ai envoyé le message », mais aucun résultat de l’outil d’envoi n’a été reçu. Quelle information manque pour annoncer que l’envoi a réussi ?",
+    "answer": "Un résultat de l’outil confirmant l’exécution de l’envoi",
+    "options": [
+      "Un résultat de l’outil confirmant l’exécution de l’envoi",
+      "Une reformulation plus assurée de la phrase de l’assistant",
+      "Un plan mentionnant l’envoi comme prochaine étape",
+      "Le schéma décrivant les arguments possibles de l’outil"
+    ],
+    "explanation": "Une intention, un plan ou un appel proposé ne confirme pas l’exécution. L’application doit examiner le Tool Result avant de présenter l’action comme réussie.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Un modèle ne devient pas un outil en parlant d’une action"
+    }
+  },
+  {
+    "id": "practice-11-1-2",
+    "theme": 11,
+    "concept": "notion-334",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une cascade commence par un modèle économique pour extraire les dates d’un ticket. Le passage au second modèle est prévu si un contrôle constate une information obligatoire manquante. Le premier oublie une date présente dans la source. Quelle suite applique la règle annoncée ?",
+    "answer": "Transmettre le ticket et le défaut détecté au second modèle, puis contrôler sa sortie",
+    "options": [
+      "Transmettre le ticket et le défaut détecté au second modèle, puis contrôler sa sortie",
+      "Garder la première extraction parce qu’elle a été produite par le modèle le moins cher",
+      "Passer au second modèle uniquement si la première réponse est trop longue",
+      "Changer l’outil de stockage des tickets en conservant l’extraction incomplète"
+    ],
+    "explanation": "Model Cascading utilise une règle de passage, ici l’échec à un contrôle de contenu. Le second modèle reçoit les données utiles pour reprendre la tâche ; sa capacité supérieure ne dispense pas de valider son résultat.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Choisir un outil et choisir un modèle sont deux décisions"
+    }
+  },
+  {
+    "id": "practice-11-2-1",
+    "theme": 11,
+    "concept": "notion-332",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un agent transmet une recherche inachevée à un autre agent. Quel contenu permet au destinataire de reprendre utilement ?",
+    "answer": "L’objectif, les résultats établis, leurs sources et les points encore incertains",
+    "options": [
+      "L’objectif, les résultats établis, leurs sources et les points encore incertains",
+      "L’objectif seul, pour que le destinataire devine les étapes déjà réalisées",
+      "Tous les messages bruts, sans distinguer résultat confirmé et hypothèse",
+      "La réponse finale attendue, en présentant les inconnues comme résolues"
+    ],
+    "explanation": "Un Handoff transfère aussi le contexte nécessaire à la responsabilité reçue. Distinguer les faits, les preuves et ce qui reste à résoudre évite les répétitions et les conclusions prématurées.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Coopérer sans perdre l’objectif"
+    }
+  },
+  {
+    "id": "practice-11-2-2",
+    "theme": 11,
+    "concept": "notion-328",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "L’utilisateur cherche un rendez-vous mardi entre 14 h et 16 h. La réservation à 14 h échoue : l’outil indique que ce créneau est complet, mais la recherche d’autres créneaux reste possible. Quelle action exploite ce résultat tout en conservant les contraintes ?",
+    "answer": "Rechercher un autre créneau mardi entre 14 h et 16 h",
+    "options": [
+      "Rechercher un autre créneau mardi entre 14 h et 16 h",
+      "Réessayer immédiatement la réservation à 14 h sans changement de disponibilité",
+      "Élargir la recherche au mercredi puis réserver sans consulter l’utilisateur",
+      "Rechercher mardi entre 16 h et 18 h en supposant que deux heures de décalage conviennent"
+    ],
+    "explanation": "La nouvelle action doit tenir compte de l’indisponibilité observée et des contraintes de la demande. Si aucun autre créneau autorisé ne convient, l’agent peut ensuite demander comment élargir la recherche ; il ne doit pas inventer cette autorisation.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Une boucle doit avancer grâce à une observation"
+    }
+  },
+  {
+    "id": "practice-11-3-1",
+    "theme": 11,
+    "concept": "notion-345",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une personne approuve l’envoi d’un message à une adresse donnée après avoir lu le texte complet. Avant l’envoi, l’agent change le destinataire. Quelle étape maintient une approbation portant sur l’action effectivement réalisée ?",
+    "answer": "Présenter le message avec le nouveau destinataire et obtenir une validation de cet envoi",
+    "options": [
+      "Présenter le message avec le nouveau destinataire et obtenir une validation de cet envoi",
+      "Réutiliser la validation précédente parce que le texte n’a pas changé",
+      "Envoyer puis indiquer le changement de destinataire dans le compte rendu",
+      "Vérifier seulement que la nouvelle adresse respecte le format d’une adresse courriel"
+    ],
+    "explanation": "L’approbation porte sur une action concrète, avec son contenu et sa destination. Changer le destinataire change cette action ; une adresse bien formée ou une information après envoi ne remplace pas la validation de l’envoi modifié.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Limiter l’action avant de gérer son échec"
+    }
+  },
+  {
+    "id": "practice-11-3-2",
+    "theme": 11,
+    "concept": "notion-347",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un client demande deux réservations distinctes. Chacune peut devoir être réessayée après une coupure réseau, et le service reconnaît les doublons par identifiant d’opération. Quelle gestion des identifiants distingue les deux demandes tout en évitant de dupliquer leurs reprises ?",
+    "answer": "Un identifiant différent par réservation, conservé lors des reprises de cette même réservation",
+    "options": [
+      "Un identifiant différent par réservation, conservé lors des reprises de cette même réservation",
+      "Le même identifiant de client pour les deux réservations et toutes leurs reprises",
+      "Un nouvel identifiant à chaque tentative, même pour une réservation inchangée",
+      "Un identifiant seulement à partir de la première reprise, sans lien avec la tentative initiale"
+    ],
+    "explanation": "La clé identifie une opération logique, pas tous les actes d’un client. Deux réservations voulues demandent deux identifiants ; les reprises d’une même réservation réutilisent son identifiant selon le contrat d’idempotence du service.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Rejouer une étape sans répéter ses effets"
+    }
+  },
+  {
+    "id": "practice-12-1-1",
+    "theme": 12,
+    "concept": "notion-354",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une question de support accepte plusieurs formulations correctes. Comment construire une référence utile pour l’évaluer ?",
+    "answer": "Lister les faits requis et les erreurs interdites, sans imposer une phrase unique",
+    "options": [
+      "Lister les faits requis et les erreurs interdites, sans imposer une phrase unique",
+      "Accepter seulement une phrase exacte même si des paraphrases disent la même chose",
+      "Choisir la réponse la plus longue parmi les premières générations du modèle",
+      "Donner la même note à toutes les réponses mentionnant le sujet général"
+    ],
+    "explanation": "Un Golden Dataset peut décrire les critères d’une réponse correcte. Pour une tâche ouverte, une seule formulation littérale peut rejeter à tort des réponses équivalentes.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Construire une référence puis distinguer les qualités"
+    }
+  },
+  {
+    "id": "practice-12-1-2",
+    "theme": 12,
+    "concept": "notion-359",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un assistant répond bien à des questions soigneusement rédigées. Quel test examine sa robustesse aux variations de formulation, en gardant le même besoin ?",
+    "answer": "Reformuler les questions et ajouter des fautes légères, puis vérifier les mêmes critères",
+    "options": [
+      "Reformuler les questions et ajouter des fautes légères, puis vérifier les mêmes critères",
+      "Changer les réponses de référence sans modifier les questions",
+      "Évaluer uniquement les exemples qu’il vient de réussir",
+      "Remplacer les questions de support par des problèmes de géométrie"
+    ],
+    "explanation": "La Robustness peut se tester avec des variations réalistes qui préservent la tâche. Changer le domaine ou les références ne permet pas d’isoler l’effet de ces variations.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Tester aussi les cas où la réponse change"
+    }
+  },
+  {
+    "id": "practice-12-2-1",
+    "theme": 12,
+    "concept": "notion-366",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un classificateur repère les messages légitimes : sa classe positive signifie ici « légitime ». Il classe pourtant un spam comme légitime. Comment classer cette erreur ?",
+    "answer": "Un faux positif",
+    "options": [
+      "Un faux positif",
+      "Un faux négatif",
+      "Un vrai positif",
+      "Un vrai négatif"
+    ],
+    "explanation": "La classe positive est explicitement « légitime » dans cet exercice. Le modèle prédit positif pour un message qui ne l’est pas : c’est un faux positif. Il faut lire la convention de classe avant de nommer une erreur.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Définir ce que signifie positif"
+    }
+  },
+  {
+    "id": "practice-12-2-2",
+    "theme": 12,
+    "concept": "notion-372",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "La référence dit « livraison mardi » et une réponse dit « livraison jeudi ». Un outil trouve une forte similarité sémantique entre les deux phrases. Que peut-on en conclure ?",
+    "answer": "Les phrases peuvent être proches en sens général tout en se contredisant sur le fait évalué",
+    "options": [
+      "Les phrases peuvent être proches en sens général tout en se contredisant sur le fait évalué",
+      "Le score élevé confirme que jeudi et mardi sont interchangeables pour cette commande",
+      "La similarité prouve que la date de référence est incorrecte",
+      "Le score permet de supprimer le contrôle des dates dans l’évaluation"
+    ],
+    "explanation": "Semantic Similarity ne vérifie pas chaque fait. Les deux phrases partagent le sujet et la structure, mais la date, décisive pour la tâche, est différente.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Adapter la mesure aux autres tâches"
+    }
+  },
+  {
+    "id": "practice-12-3-1",
+    "theme": 12,
+    "concept": "notion-374",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un juge automatique préfère souvent la première des deux réponses présentées. Quel changement du protocole permet d’examiner ce biais de position ?",
+    "answer": "Présenter les mêmes paires dans les deux ordres et comparer les préférences",
+    "options": [
+      "Présenter les mêmes paires dans les deux ordres et comparer les préférences",
+      "Remplacer seulement la première réponse par un texte plus long",
+      "Conserver l’ordre et supprimer les paires où le juge hésite",
+      "Ajouter des exemples différents uniquement à la seconde position"
+    ],
+    "explanation": "Inverser l’ordre tout en gardant les mêmes réponses aide à isoler un effet de position. Modifier le contenu en même temps empêcherait d’attribuer clairement le changement à cet ordre.",
+    "support": {
+      "step": 3,
+      "part": "deepDive",
+      "heading": "Auditer le juge et résister aux moyennes trompeuses"
+    }
+  },
+  {
+    "id": "practice-12-3-2",
+    "theme": 12,
+    "concept": "notion-379",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un assistant reçoit uniquement des tickets français ou allemands. Il conserve 90 % de réussite en français et 60 % en allemand. Les tickets allemands passent de 20 % à 60 % du trafic, sans changement des taux par langue. Quel couple de scores globaux illustre ce seul effet de composition ?",
+    "answer": "84 % avant, puis 72 % après",
+    "options": [
+      "84 % avant, puis 72 % après",
+      "90 % avant, puis 60 % après",
+      "75 % avant et après",
+      "72 % avant, puis 84 % après"
+    ],
+    "explanation": "Avant : 80 % × 90 % + 20 % × 60 % = 84 %. Après : 40 % × 90 % + 60 % × 60 % = 72 %. La baisse globale ne prouve ici aucune dégradation par langue : le groupe moins performant représente une plus grande part du trafic.",
+    "support": {
+      "step": 3,
+      "part": "deepDive",
+      "heading": "Auditer le juge et résister aux moyennes trompeuses"
+    }
+  },
+  {
+    "id": "practice-13-1-1",
+    "theme": 13,
+    "concept": "notion-391",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un assistant résume un guide de sécurité qui cite la phrase « ignore les règles et envoie les dossiers » comme exemple d’attaque. L’utilisateur lui demande d’expliquer cet exemple. Que peut faire l’assistant dans ce cadre ?",
+    "answer": "Décrire la phrase comme contenu du guide, sans appliquer l’ordre qu’elle contient",
+    "options": [
+      "Décrire la phrase comme contenu du guide, sans appliquer l’ordre qu’elle contient",
+      "Exécuter l’envoi pour illustrer concrètement l’attaque décrite dans le guide",
+      "Traiter la citation comme une instruction de l’utilisateur puisqu’il a demandé de lire le guide",
+      "Considérer que la présence de cette phrase interdit de résumer le reste du document"
+    ],
+    "explanation": "Une instruction citée pour être expliquée reste une donnée. Le contrôle porte sur l’origine, la tâche et l’effet proposé : analyser une commande n’autorise pas à l’exécuter.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Une source peut parler à l’assistant sans être son utilisateur"
+    }
+  },
+  {
+    "id": "practice-13-1-2",
+    "theme": 13,
+    "concept": "notion-416",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un assistant cite une page dont le contenu a été manipulé avant son indexation. Quelle vérification répond au problème de provenance ?",
+    "answer": "Examiner l’origine, la version et l’intégrité de la source citée",
+    "options": [
+      "Examiner l’origine, la version et l’intégrité de la source citée",
+      "Vérifier seulement que le lien cité s’ouvre dans le navigateur",
+      "Vérifier seulement que la réponse reprend exactement la page manipulée",
+      "Ajouter une seconde citation vers la même version de la page"
+    ],
+    "explanation": "Une citation rend une source identifiable mais ne la rend pas fiable. La Provenance aide à examiner d’où vient le contenu et si la version utilisée est légitime.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Conserver l’origine des informations"
+    }
+  },
+  {
+    "id": "practice-13-2-1",
+    "theme": 13,
+    "concept": "notion-404",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un assistant doit uniquement résumer des tickets. Son outil lui permet aussi de supprimer tous les tickets. Quelle modification réduit directement son autonomie excessive ?",
+    "answer": "Lui exposer seulement les opérations de lecture nécessaires au résumé",
+    "options": [
+      "Lui exposer seulement les opérations de lecture nécessaires au résumé",
+      "Ajouter au prompt une phrase déconseillant la suppression et garder les mêmes droits",
+      "Exiger un résumé plus court avant chaque appel de suppression",
+      "Journaliser les suppressions sans changer les opérations autorisées"
+    ],
+    "explanation": "Excessive Agency vient ici d’une capacité inutile à la tâche. Réduire les opérations disponibles et leurs droits limite les effets possibles, au-delà d’une simple consigne textuelle.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Contrôler l’effet proposé par le modèle"
+    }
+  },
+  {
+    "id": "practice-13-2-2",
+    "theme": 13,
+    "concept": "notion-407",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un filtre ne détecte aucun contenu offensant dans un message de support. Le message joint pourtant le dossier de Bob alors qu’il est destiné à Alice, qui n’a pas accès à ce dossier. Quel contrôle aurait bloqué cette divulgation ?",
+    "answer": "Vérifier qu’Alice est autorisée à recevoir le dossier effectivement joint avant l’envoi",
+    "options": [
+      "Vérifier qu’Alice est autorisée à recevoir le dossier effectivement joint avant l’envoi",
+      "Vérifier que l’agent de support est autorisé à lire le dossier de Bob avant de rédiger le message",
+      "Vérifier que l’adresse d’Alice est une adresse de messagerie valide avant l’envoi",
+      "Vérifier que la pièce jointe ne contient pas de clé technique avant de l’ajouter au message"
+    ],
+    "explanation": "Le droit de l’agent à consulter le dossier, la validité de l’adresse et l’absence de secrets techniques ne donnent pas à Alice le droit de recevoir les données de Bob. Le contrôle doit relier destinataire et dossier.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Différencier filtrage, autorisation et prévention des fuites"
+    }
+  },
+  {
+    "id": "practice-13-3-1",
+    "theme": 13,
+    "concept": "notion-417",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Pour résumer les causes d’un incident, une application n’a besoin ni du téléphone ni de l’adresse personnelle du client. Quand retirer ces champs pour éviter de les transmettre au modèle ?",
+    "answer": "Avant de construire et d’envoyer le contexte de la requête",
+    "options": [
+      "Avant de construire et d’envoyer le contexte de la requête",
+      "Après réception de la réponse, en les retirant seulement de l’écran",
+      "Après avoir enregistré le prompt complet dans les journaux de production",
+      "Uniquement lorsqu’un utilisateur demande explicitement leur suppression"
+    ],
+    "explanation": "La minimisation et la PII Redaction doivent intervenir avant la transmission que l’on veut éviter. Masquer l’affichage final ne retire pas les données déjà envoyées ou journalisées.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Ne transmettre que ce qui sert à la tâche"
+    }
+  },
+  {
+    "id": "practice-13-3-2",
+    "theme": 13,
+    "concept": "notion-411",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Une tâche d’agent dispose d’un budget total de 20 appels payants, reprises comprises. Elle en a consommé 18 lorsqu’une panne interrompt la session. Pour reprendre sans dépasser le plafond, combien d’appels peut-on encore autoriser ?",
+    "answer": "Deux appels, en conservant la consommation déjà enregistrée pour cette tâche",
+    "options": [
+      "Deux appels, en conservant la consommation déjà enregistrée pour cette tâche",
+      "Vingt appels, puisque le budget redémarre avec chaque nouvelle session",
+      "Dix-huit appels, puisque ce nombre correspond au travail déjà effectué",
+      "Un nombre illimité de reprises, puisque la limite concerne seulement les premiers essais"
+    ],
+    "explanation": "Le budget porte ici sur la tâche entière et inclut explicitement les reprises. Changer de session ne remet pas le compteur à zéro : 20 moins 18 laisse deux appels possibles. La reprise doit conserver cet état de consommation.",
+    "support": {
+      "step": 3,
+      "part": "deepDive",
+      "heading": "Définir des budgets qui correspondent au travail réel"
+    }
+  },
+  {
+    "id": "practice-14-1-1",
+    "theme": 14,
+    "concept": "notion-418",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "La documentation annonce un modèle qui reçoit du texte et des images et renvoie du texte. Quelle tâche correspond à ce contrat ?",
+    "answer": "Répondre par écrit à une question sur une photo",
+    "options": [
+      "Répondre par écrit à une question sur une photo",
+      "Produire une nouvelle photo à partir d’une description",
+      "Convertir une réponse écrite en fichier audio",
+      "Générer une vidéo à partir d’une image de départ"
+    ],
+    "explanation": "La multimodalité doit se lire dans les deux directions : entrées acceptées et sorties produites. Recevoir une image ne signifie pas générer une image, de l’audio ou une vidéo.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Une capacité multimodale doit préciser ses entrées et sorties"
+    }
+  },
+  {
+    "id": "practice-14-1-2",
+    "theme": 14,
+    "concept": "notion-422",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un système décrit correctement une facture comme « un document de paiement », mais lit mal le montant imprimé. Quel test cible la capacité nécessaire à l’extraction du montant ?",
+    "answer": "Comparer le texte extrait aux chiffres visibles sur des factures de référence",
+    "options": [
+      "Comparer le texte extrait aux chiffres visibles sur des factures de référence",
+      "Noter seulement la qualité générale de la description de l’image",
+      "Vérifier que le système reconnaît la catégorie facture parmi des photos",
+      "Mesurer la ressemblance de l’image avec le mot paiement"
+    ],
+    "explanation": "Reconnaître la scène ou décrire le document ne valide pas l’OCR de ses chiffres. Le contrôle doit porter sur le texte et les champs réellement utilisés.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Lire, décrire et répondre ne sont pas la même tâche"
+    }
+  },
+  {
+    "id": "practice-14-2-1",
+    "theme": 14,
+    "concept": "notion-427",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une personne veut modifier les couleurs d’une image existante en la fournissant comme référence. Quelle transformation décrit le mieux cette demande ?",
+    "answer": "Image-to-Image",
+    "options": [
+      "Image-to-Image",
+      "Text-to-Video",
+      "Image Captioning",
+      "OCR"
+    ],
+    "explanation": "Image-to-Image transforme une image de référence. Décrire son contenu ou en extraire le texte ne produit pas l’image modifiée demandée.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Définir la transformation demandée"
+    }
+  },
+  {
+    "id": "practice-14-2-2",
+    "theme": 14,
+    "concept": "notion-435",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Pour une affiche, deux réglages de Guidance sont testés avec les mêmes consignes. Le réglage A donne une excellente image sur dix essais, puis neuf images avec du texte illisible ; B donne huit images lisibles et deux échecs. L’usage exige surtout un texte lisible régulièrement. Quel résultat doit guider le choix ?",
+    "answer": "La fréquence des images lisibles et leurs défauts sur l’ensemble des essais",
+    "options": [
+      "La fréquence des images lisibles et leurs défauts sur l’ensemble des essais",
+      "La beauté de la meilleure image de chaque réglage, en ignorant les neuf autres essais",
+      "La seule valeur numérique de Guidance, en choisissant la plus élevée des deux",
+      "La vitesse du meilleur essai, sans vérifier le texte des images obtenues"
+    ],
+    "explanation": "Un exemple réussi ne représente pas la régularité d’un réglage. Pour cet usage, il faut comparer la lisibilité et les défauts sur des essais comparables ; les images rejetées font partie du résultat observé.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Régler la trajectoire sans promettre une reproduction exacte"
+    }
+  },
+  {
+    "id": "practice-14-3-1",
+    "theme": 14,
+    "concept": "notion-444",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Dans l’audio d’une réunion, Léa dit « je valide », puis Marc dit « je refuse ». La sortie intermédiaire conserve les mots exacts mais étiquette les deux segments comme prononcés par Léa. Quelle étape faut-il corriger avant de rédiger le compte rendu ?",
+    "answer": "L’attribution des segments aux locuteurs, appelée Speaker Diarization",
+    "options": [
+      "L’attribution des segments aux locuteurs, appelée Speaker Diarization",
+      "La reconnaissance des mots, qui devrait modifier « je refuse » malgré sa présence exacte dans l’audio",
+      "La rédaction du résumé, en conservant comme référence les deux étiquettes de locuteur actuelles",
+      "La détection de parole, en supprimant le second segment pourtant clairement audible"
+    ],
+    "explanation": "Les mots sont corrects et les deux segments contiennent de la parole. L’erreur observée est l’étiquette de locuteur du second segment : il faut vérifier cette attribution avant qu’elle se propage au résumé.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Séparer les étapes d’une interaction vocale"
+    }
+  },
+  {
+    "id": "practice-14-3-2",
+    "theme": 14,
+    "concept": "notion-446",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un assistant vocal peut envoyer un devis. Une transcription partielle affiche « je confirme », puis le segment final devient « je ne confirme pas ». Aucun envoi n’a encore eu lieu. Quel état de décision correspond aux informations finalement reçues ?",
+    "answer": "L’envoi n’est pas autorisé par cette phrase finale ; le fragment provisoire ne vaut pas confirmation",
+    "options": [
+      "L’envoi n’est pas autorisé par cette phrase finale ; le fragment provisoire ne vaut pas confirmation",
+      "L’envoi reste autorisé parce que la première transcription contenait le mot « confirme »",
+      "L’envoi peut partir si la négation est retirée du résumé de la conversation",
+      "L’envoi est autorisé dès que le système dispose d’un texte final, quel que soit son contenu"
+    ],
+    "explanation": "Le Streaming ASR peut réviser une hypothèse pendant l’arrivée de l’audio. Ici la version finale exprime un refus : stabiliser la transcription et interpréter son sens sont deux conditions distinctes avant une action.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Vérifier ce qui compte avant d’utiliser la sortie"
+    }
+  },
+  {
+    "id": "practice-15-1-1",
+    "theme": 15,
+    "concept": "notion-476",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une équipe télécharge les poids d’un modèle et veut répondre aux utilisateurs depuis une adresse réseau. Quelle installation permet réellement de traiter leurs demandes ?",
+    "answer": "Un moteur qui charge le modèle, derrière un service qui reçoit les requêtes et gère les accès et ressources",
+    "options": [
+      "Un moteur qui charge le modèle, derrière un service qui reçoit les requêtes et gère les accès et ressources",
+      "Un serveur de fichiers qui propose le téléchargement des poids, sans exécuter le modèle",
+      "Un registre qui publie la version et les métriques du modèle, sans processus d’inférence",
+      "Une page de Model Card qui décrit les entrées attendues, sans service de calcul derrière cette page"
+    ],
+    "explanation": "Les poids, le registre et la documentation sont des composants utiles mais ne calculent pas les réponses. Un endpoint d’inférence donne accès à un service qui exécute le modèle et gère les requêtes.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Le service comprend davantage que les poids"
+    }
+  },
+  {
+    "id": "practice-15-1-2",
+    "theme": 15,
+    "concept": "notion-455",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Deux accélérateurs disposent de la même capacité mémoire, mais l’un transfère les données plus vite. Quelle distinction explique que leurs performances puissent différer ?",
+    "answer": "La quantité stockable et la bande passante sont deux propriétés différentes",
+    "options": [
+      "La quantité stockable et la bande passante sont deux propriétés différentes",
+      "La même capacité mémoire impose le même débit de transfert",
+      "Une bande passante supérieure signifie forcément davantage d’octets stockables",
+      "La vitesse de transfert dépend seulement du nombre de paramètres du modèle"
+    ],
+    "explanation": "La capacité décrit combien de données peuvent tenir en mémoire ; la bande passante décrit à quelle vitesse elles circulent. Une charge limitée par les transferts peut donc réagir différemment.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Relier capacité mémoire et environnement logiciel"
+    }
+  },
+  {
+    "id": "practice-15-2-1",
+    "theme": 15,
+    "concept": "notion-469",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "En Tensor Parallelism, deux GPU calculent des parties d’une même couche. Les calculs locaux sont plus courts qu’avec un GPU, mais le temps total ne diminue pas. Quelle mesure permet d’examiner une limite propre à ce découpage ?",
+    "answer": "Le temps de transfert et de combinaison des résultats entre les deux GPU",
+    "options": [
+      "Le temps de transfert et de combinaison des résultats entre les deux GPU",
+      "Le nombre total de paramètres, sans mesurer les échanges entre les GPU",
+      "La seule durée du calcul local sur le GPU le plus rapide",
+      "Le nombre de requêtes indépendantes acceptées par deux répliques complètes du modèle"
+    ],
+    "explanation": "Le Tensor Parallelism peut nécessiter des échanges entre dispositifs. Leur coût peut absorber le gain de calcul local ; une mesure limitée à une partie du calcul ne représente pas la durée de la requête.",
+    "support": {
+      "step": 2,
+      "part": "deepDive",
+      "heading": "Lire les flèches du schéma comme des échanges nécessaires"
+    }
+  },
+  {
+    "id": "practice-15-2-2",
+    "theme": 15,
+    "concept": "notion-473",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Dans une estimation simplifiée d’entraînement, les états autres que les activations occupent 4 Go et les activations 8 Go. Le checkpointing réduit de moitié la mémoire des activations sans modifier les autres états. En ignorant les buffers temporaires, quel total faut-il prévoir ?",
+    "answer": "8 Go : 4 Go d’autres états et 4 Go d’activations",
+    "options": [
+      "8 Go : 4 Go d’autres états et 4 Go d’activations",
+      "6 Go : la moitié de tous les 12 Go initiaux",
+      "4 Go : seules les activations restantes occupent encore de la mémoire",
+      "12 Go : la recomputation ne peut réduire aucune activation conservée"
+    ],
+    "explanation": "Le checkpointing agit ici sur les activations, pas sur tous les postes mémoire. La nouvelle estimation vaut 4 + 8/2 = 8 Go. En pratique, les buffers et les pics temporaires doivent aussi être mesurés.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Échanger de la mémoire contre du calcul ou de la communication"
+    }
+  },
+  {
+    "id": "practice-15-3-1",
+    "theme": 15,
+    "concept": "notion-479",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une requête d’assistant dure 12 secondes : 8 secondes en file d’attente, 3 pour le modèle et 1 pour un outil. L’équipe envisage de changer de modèle pour accélérer les réponses. Quel constat doit d’abord guider son diagnostic ?",
+    "answer": "La file représente la plus grande part du délai ; il faut examiner sa saturation et la charge",
+    "options": [
+      "La file représente la plus grande part du délai ; il faut examiner sa saturation et la charge",
+      "Le modèle explique nécessairement les 12 secondes puisque c’est lui qui rédige la réponse",
+      "L’outil doit être la priorité parce qu’il est externe, même s’il ne représente qu’une seconde",
+      "Le délai en file peut être exclu puisque le modèle ne calcule pas pendant cette attente"
+    ],
+    "explanation": "Les traces localisent le délai réellement ressenti : la file représente ici huit des douze secondes. Le choix d’une correction demande ensuite d’examiner pourquoi elle se forme ; cela ne démontre pas à lui seul quel matériel acheter.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Relier les mesures à un objectif de service"
+    }
+  },
+  {
+    "id": "practice-15-3-2",
+    "theme": 15,
+    "concept": "notion-483",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Pour un Canary Deployment, la règle est fixée avant le test : arrêter l’exposition si les erreurs dépassent 2 %. Sur un échantillon jugé suffisant par le protocole, la nouvelle version atteint 3 %, contre 1 % pour l’ancienne, tout en répondant plus vite. Quelle décision respecte ce protocole ?",
+    "answer": "Arrêter l’élargissement et rétablir la version précédente pour le trafic concerné",
+    "options": [
+      "Arrêter l’élargissement et rétablir la version précédente pour le trafic concerné",
+      "Poursuivre le déploiement parce que l’amélioration de vitesse compense le seuil d’erreurs",
+      "Relever le seuil à 4 % après observation pour valider cette nouvelle version",
+      "Mélanger les erreurs des deux versions et décider seulement sur la moyenne globale"
+    ],
+    "explanation": "Le seuil d’arrêt convenu est franchi pour la nouvelle version. Une meilleure latence ne l’annule pas ; modifier le seuil après coup ou masquer l’écart dans une moyenne empêcherait d’appliquer le protocole prévu.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Versionner, déployer et pouvoir revenir en arrière"
+    }
+  },
+  {
+    "id": "practice-16-1-1",
+    "theme": 16,
+    "concept": "notion-485",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une page propose les poids d’un modèle et un script d’inférence, mais ne mentionne ni données ni code d’entraînement. Quel inventaire peut-on établir à partir de cette page seule ?",
+    "answer": "Les poids et un moyen de les exécuter sont publiés ; les éléments d’entraînement restent à vérifier",
+    "options": [
+      "Les poids et un moyen de les exécuter sont publiés ; les éléments d’entraînement restent à vérifier",
+      "Le script d’inférence implique que le code d’entraînement complet est également fourni",
+      "La publication des poids implique que les données d’entraînement peuvent être reconstruites depuis eux",
+      "Le téléchargement public implique que tous les composants nécessaires à reproduire l’entraînement sont présents"
+    ],
+    "explanation": "L’accès aux poids et l’inférence ne décrivent pas la publication des données ou de la procédure d’entraînement. Il faut inventorier les éléments réellement fournis et leurs conditions, sans les déduire de l’étiquette Open Weights.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Télécharger un modèle ne répond pas à toutes les questions"
+    }
+  },
+  {
+    "id": "practice-16-1-2",
+    "theme": 16,
+    "concept": "notion-494",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une organisation installe et exploite elle-même un modèle sur des machines louées dans un centre de données externe. Quelle description est justifiée par ces seules informations ?",
+    "answer": "Elle gère un hébergement Self-Hosted, sans que cela implique des machines dans ses locaux",
+    "options": [
+      "Elle gère un hébergement Self-Hosted, sans que cela implique des machines dans ses locaux",
+      "Elle utilise nécessairement un modèle API-only dont les poids lui sont inaccessibles",
+      "Elle exécute nécessairement le modèle directement sur les téléphones des utilisateurs",
+      "Elle exploite nécessairement une infrastructure située dans ses propres locaux"
+    ],
+    "explanation": "Self-Hosted décrit la responsabilité d’hébergement, qui peut concerner une infrastructure louée. On-Premises et On-Device décrivent d’autres aspects du lieu d’exécution.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Choisir où l’exécution se déroule"
+    }
+  },
+  {
+    "id": "practice-16-2-1",
+    "theme": 16,
+    "concept": "notion-503",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une méthode est présentée dans un manuscrit publié sur arXiv. Que prouve ce dépôt à lui seul ?",
+    "answer": "Que le manuscrit est diffusé, sans certifier ses conclusions ni leur examen par les pairs",
+    "options": [
+      "Que le manuscrit est diffusé, sans certifier ses conclusions ni leur examen par les pairs",
+      "Que toutes les expériences ont été reproduites par une équipe indépendante",
+      "Que la méthode dépasse toutes les autres sur chaque tâche",
+      "Que le modèle décrit est disponible avec des poids et une licence commerciale"
+    ],
+    "explanation": "arXiv diffuse des prépublications. La validation, la reproduction des résultats et l’accès aux artefacts doivent être examinés séparément.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Distinguer description de recherche et preuve de résultat"
+    }
+  },
+  {
+    "id": "practice-16-2-2",
+    "theme": 16,
+    "concept": "notion-504",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une équipe veut refaire le score de qualité d’un modèle sur 200 résumés. Le rapport indique seulement le nom de la famille et la note finale. Quel complément permet de reconstruire un essai comparable ?",
+    "answer": "La révision du modèle, les 200 entrées, le protocole de notation, le code, les réglages et l’environnement",
+    "options": [
+      "La révision du modèle, les 200 entrées, le protocole de notation, le code, les réglages et l’environnement",
+      "La révision du modèle et sa taille, en remplaçant les 200 entrées par de nouveaux exemples",
+      "Les 200 entrées et la note finale, en laissant le choix de la variante et des réglages libre",
+      "Le code de calcul de la moyenne, sans conserver les entrées ni les règles de notation"
+    ],
+    "explanation": "Refaire la mesure demande d’identifier le candidat, les données et la procédure complète. Un seul de ces éléments ne fixe pas les conditions qui peuvent modifier le score ; la tolérance de reproduction doit aussi être annoncée.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Rendre une affirmation vérifiable"
+    }
+  },
+  {
+    "id": "practice-16-3-1",
+    "theme": 16,
+    "concept": "notion-498",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Deux assistants rédigent chacun 100 notices de longueur comparable. L’équipe ne publie une notice qu’après vérification des faits et correction des erreurs. Quelle mesure compare leur utilité dans ce travail ?",
+    "answer": "Le nombre de notices publiables et le temps de vérification et correction nécessaire pour les obtenir",
+    "options": [
+      "Le nombre de notices publiables et le temps de vérification et correction nécessaire pour les obtenir",
+      "Le nombre de mots rédigés par seconde avant toute vérification des faits",
+      "Le coût du premier appel pour chaque notice, en excluant toutes les corrections",
+      "La fluidité des notices non corrigées, sans contrôler les informations qu’elles contiennent"
+    ],
+    "explanation": "La tâche visée est une notice publiable. La vitesse, le prix du premier appel ou la fluidité éclairent une partie du processus, mais ne remplacent pas la qualité factuelle et le travail nécessaire à son obtention.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Mesurer la valeur de la sortie, pas son volume"
+    }
+  },
+  {
+    "id": "practice-16-3-2",
+    "theme": 16,
+    "concept": "notion-506",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Pour obtenir un résumé utilisable, A demande deux appels de 1 € chacun et 3 minutes de correction ; B demande un appel de 2,50 € et 1 minute. La correction coûte 0,50 € par minute. En ne comptant que ces postes et avec une qualité finale équivalente, quelle comparaison est correcte ?",
+    "answer": "B coûte 3 € par résumé utilisable, contre 3,50 € pour A",
+    "options": [
+      "B coûte 3 € par résumé utilisable, contre 3,50 € pour A",
+      "A coûte 1 € par résumé utilisable, contre 2,50 € pour B",
+      "A coûte 2 € par résumé utilisable, contre 2,50 € pour B",
+      "Les deux coûtent 3,50 € puisqu’ils aboutissent à la même qualité finale"
+    ],
+    "explanation": "A coûte 2 × 1 € + 3 × 0,50 € = 3,50 €. B coûte 2,50 € + 1 × 0,50 € = 3 €. Cette comparaison inclut les reprises et la correction dans le périmètre annoncé ; elle n’est pas un TCO exhaustif de l’exploitation.",
+    "support": {
+      "step": 3,
+      "part": "deepDive",
+      "heading": "Calculer le coût d’une tâche réellement terminée"
+    }
+  },
+  {
+    "id": "practice-17-1-1",
+    "theme": 17,
+    "concept": "notion-511",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "L’outil de recherche renvoie soit « recherche terminée : zéro résultat », soit « service indisponible : résultat inconnu ». L’assistant doit dire s’il a trouvé la procédure demandée. Pourquoi conserver ces deux états ?",
+    "answer": "Le premier constate l’absence de résultat dans la recherche effectuée ; le second ne permet pas cette conclusion",
+    "options": [
+      "Le premier constate l’absence de résultat dans la recherche effectuée ; le second ne permet pas cette conclusion",
+      "Les deux états établissent que la procédure est absente et permettent de répondre « elle n’existe pas »",
+      "Le premier doit être classé comme panne, tandis que le second constitue une recherche réussie",
+      "Le second permet de réutiliser une ancienne réponse comme résultat actuel sans la vérifier"
+    ],
+    "explanation": "Un résultat vide observé et l’impossibilité d’obtenir un résultat sont différents. L’assistant doit préserver cette incertitude ; même une recherche vide ne prouve pas nécessairement que la procédure n’existe nulle part.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Définir le contrat d’un outil avant de l’exposer"
+    }
+  },
+  {
+    "id": "practice-17-1-2",
+    "theme": 17,
+    "concept": "notion-512",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un agent possède dix appels d’outils autorisés pour une tâche. Après le dixième, la tâche reste incomplète. Quel comportement respecte ce budget d’exécution ?",
+    "answer": "Arrêter les nouveaux appels et signaler les résultats établis ainsi que ce qui reste à faire",
+    "options": [
+      "Arrêter les nouveaux appels et signaler les résultats établis ainsi que ce qui reste à faire",
+      "Continuer tant que le modèle estime qu’un prochain appel pourrait aider",
+      "Remettre automatiquement le compteur à zéro en reformulant le même objectif",
+      "Annoncer que la tâche est terminée pour masquer l’arrêt de la boucle"
+    ],
+    "explanation": "Un Execution Budget borne l’exécution. Atteindre la limite demande une sortie explicite sur l’état réel de la tâche, pas une boucle sans fin ni une réussite inventée.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Prévoir quand la boucle s’arrête"
+    }
+  },
+  {
+    "id": "practice-17-2-1",
+    "theme": 17,
+    "concept": "notion-519",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Un serveur MCP expose le contenu d’une procédure identifiée par une URI afin que le client puisse la lire. Quelle capacité décrit cette exposition ?",
+    "answer": "Une MCP Resource",
+    "options": [
+      "Une MCP Resource",
+      "Un MCP Prompt qui fournit un modèle de messages",
+      "Un MCP Tool défini comme opération à appeler avec des arguments",
+      "Le MCP Host qui accueille les connexions"
+    ],
+    "explanation": "Une MCP Resource expose un contenu identifié. Un Prompt fournit une trame de messages ; un Tool expose une opération, même si cette opération peut aussi effectuer une lecture.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Tools, Resources et Prompts"
+    }
+  },
+  {
+    "id": "practice-17-2-2",
+    "theme": 17,
+    "concept": "notion-522",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Un serveur MCP filtre correctement les résultats de recherche : Bob ne voit aucun document interne. Il expose aussi un outil de lecture directe par identifiant. Quel test complémentaire vérifie que Bob ne peut pas contourner la restriction ?",
+    "answer": "Tenter avec l’identité de Bob la lecture directe d’un identifiant interne connu et vérifier le refus",
+    "options": [
+      "Tenter avec l’identité de Bob la lecture directe d’un identifiant interne connu et vérifier le refus",
+      "Refaire seulement la recherche filtrée de Bob en changeant les mots de la requête",
+      "Vérifier que l’identifiant interne respecte le format attendu par l’outil de lecture",
+      "Lire le document avec un administrateur pour confirmer que l’identifiant existe"
+    ],
+    "explanation": "Un filtrage de recherche ne prouve pas que l’accès direct est protégé. L’autorisation doit s’appliquer à l’opération qui retourne réellement le document, avec l’identité du demandeur.",
+    "support": {
+      "step": 2,
+      "part": "deepDive",
+      "heading": "Raisonner sur une matrice de permissions"
+    }
+  },
+  {
+    "id": "practice-17-3-1",
+    "theme": 17,
+    "concept": "notion-525",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Pour préparer un rapport, un agent a vérifié le total dans tableau-v3.csv, mais suppose encore que les deux dossiers absents sont annulés. Comment transmettre ces éléments à la session suivante sans transformer cette supposition en fait ?",
+    "answer": "Référencer le calcul vérifié et sa source, puis marquer l’annulation comme hypothèse à contrôler",
+    "options": [
+      "Référencer le calcul vérifié et sa source, puis marquer l’annulation comme hypothèse à contrôler",
+      "Présenter le total et l’annulation comme deux conclusions équivalentes pour raccourcir le transfert",
+      "Conserver seulement l’hypothèse d’annulation puisqu’elle explique les dossiers manquants",
+      "Conserver seulement le total sans indiquer le fichier ni le contrôle qui l’établissent"
+    ],
+    "explanation": "Un Handoff doit distinguer observation vérifiée, hypothèse et travail restant. Le chemin vers la preuve permet de contrôler le total ; l’hypothèse d’annulation ne devient pas vraie parce qu’elle figure dans la synthèse.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Conserver les décisions et retrouver leurs preuves"
+    }
+  },
+  {
+    "id": "practice-17-3-2",
+    "theme": 17,
+    "concept": "notion-527",
+    "level": "avance",
+    "kind": "choice",
+    "prompt": "Un agent devait consulter une commande mais a demandé son annulation. L’équipe veut examiner le choix d’outil et le contrôle qui l’a bloqué, sans copier les dossiers clients dans les journaux. Quelle trace répond à cet objectif ?",
+    "answer": "Les descriptions d’outils proposées, le nom et les arguments utiles de l’appel avec données sensibles masquées, puis la décision du contrôle",
+    "options": [
+      "Les descriptions d’outils proposées, le nom et les arguments utiles de l’appel avec données sensibles masquées, puis la décision du contrôle",
+      "Le texte final présenté au client et le temps total, sans événement d’appel ni décision d’autorisation",
+      "Les dossiers complets de tous les clients, sans relier les données aux outils proposés et à l’appel tenté",
+      "Le seul nom de la famille du modèle et le nombre de tokens, sans conserver l’outil demandé"
+    ],
+    "explanation": "Les outils proposés, l’appel tenté et la décision du contrôle sont les événements utiles à ce diagnostic. Une trace technique doit conserver ce lien tout en limitant les données personnelles ; elle n’exige pas de recopier tous les dossiers.",
+    "support": {
+      "step": 3,
+      "part": "sections",
+      "heading": "Observer une trajectoire sans tout conserver indéfiniment"
+    }
+  },
+  {
+    "id": "practice-18-1-1",
+    "theme": 18,
+    "concept": "notion-600",
+    "level": "debutant",
+    "kind": "choice",
+    "prompt": "Une application GPT répond à une question récente en utilisant un outil de recherche Web. Un prototype appelle le même modèle mais lui transmet seulement le texte de la question. Quelle vérification porte sur la fonction qui manque au prototype ?",
+    "answer": "Vérifier si son interface permet de connecter et appeler une recherche, puis transmettre les résultats au modèle",
+    "options": [
+      "Vérifier si son interface permet de connecter et appeler une recherche, puis transmettre les résultats au modèle",
+      "Augmenter la longueur maximale de sortie pour que les mêmes poids récupèrent spontanément la page récente",
+      "Changer la température en conservant la même question et aucun accès à une source récente",
+      "Recopier le nom de l’outil dans la consigne sans fournir d’implémentation ni de résultat de recherche"
+    ],
+    "explanation": "La recherche est ici une fonction de l’application. Le modèle ne reçoit pas une page récente simplement parce que son nom ou ses réglages sont identiques : il faut une intégration réelle et les résultats correspondants.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Décomposer une annonce en informations vérifiables"
+    }
+  },
+  {
+    "id": "practice-18-1-2",
+    "theme": 18,
+    "concept": "notion-603",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "La fiche d’une variante Gemini indique « entrée : texte et images ; sortie : texte ». Une équipe veut l’utiliser pour créer l’image d’une affiche à partir d’un brief. Que permet cette fiche de conclure ?",
+    "answer": "La génération d’image n’est pas établie pour cette variante ; il faut une sortie image explicitement prise en charge",
+    "options": [
+      "La génération d’image n’est pas établie pour cette variante ; il faut une sortie image explicitement prise en charge",
+      "La prise en charge d’images en entrée garantit que la même interface peut produire une image en sortie",
+      "Une description textuelle de l’affiche vaut preuve que le modèle peut aussi livrer le fichier image",
+      "Le nom multimodal suffit à étendre les sorties de la variante aux mêmes types que ses entrées"
+    ],
+    "explanation": "Le contrat doit être lu dans chaque direction. Une description textuelle et un fichier image ne sont pas la même sortie. Les capacités d’un autre modèle ou d’une autre interface ne se transfèrent pas par le nom de famille.",
+    "support": {
+      "step": 1,
+      "part": "sections",
+      "heading": "Lire les modalités et les limites comme un contrat"
+    }
+  },
+  {
+    "id": "practice-18-2-1",
+    "theme": 18,
+    "concept": "notion-606",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une variante Qwen spécialisée en code réussit des complétions de petites fonctions. Une équipe veut lui confier des modifications dans plusieurs fichiers. Quel test correspond à cet usage ?",
+    "answer": "Des tâches représentatives sur un dépôt avec modifications et tests de validation",
+    "options": [
+      "Des tâches représentatives sur un dépôt avec modifications et tests de validation",
+      "Les mêmes petites complétions répétées sans contexte de dépôt",
+      "Un classement par taille de modèle sans exécuter les modifications proposées",
+      "Une mesure de la qualité du texte expliquant le code sans vérifier le code modifié"
+    ],
+    "explanation": "Une spécialisation en code recouvre plusieurs tâches. La complétion ne démontre pas à elle seule la capacité à coordonner des changements dans un dépôt et à satisfaire ses tests.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Identifier la spécialisation que l’on veut réellement tester"
+    }
+  },
+  {
+    "id": "practice-18-2-2",
+    "theme": 18,
+    "concept": "notion-608",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Les poids d’une variante Mistral chargent dans leur format d’origine. Le même moteur refuse un fichier quantifié et signale un format non pris en charge. Quelle modification cible ce diagnostic ?",
+    "answer": "Choisir un format quantifié pris en charge ou un moteur compatible avec ce format et l’architecture",
+    "options": [
+      "Choisir un format quantifié pris en charge ou un moteur compatible avec ce format et l’architecture",
+      "Réduire la température de génération sans changer le fichier ni le moteur",
+      "Réduire la longueur de la consigne alors que le refus survient avant toute requête",
+      "Changer la description des outils alors que le moteur ne parvient pas à lire les poids"
+    ],
+    "explanation": "Le message situe le problème au chargement du format. Les réglages de génération ou de consigne ne rendent pas ce format lisible ; il faut vérifier la compatibilité de la combinaison exacte.",
+    "support": {
+      "step": 2,
+      "part": "sections",
+      "heading": "Vérifier le format et le moteur d’exécution"
+    }
+  },
+  {
+    "id": "practice-18-3-1",
+    "theme": 18,
+    "concept": "notion-614",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Une recherche utilisant des embeddings BGE est évaluée sur 60 questions : 48 obtiennent le passage nécessaire. Parmi ces 48, le générateur fournit 36 réponses correctes et justifiées ; aucune des 12 autres questions n’est réussie. Quel diagnostic distingue les deux étapes ?",
+    "answer": "12 échecs sans passage utile et 12 échecs de réponse malgré un passage disponible",
+    "options": [
+      "12 échecs sans passage utile et 12 échecs de réponse malgré un passage disponible",
+      "24 échecs de recherche, puisque 24 réponses finales sont incorrectes",
+      "24 échecs du générateur malgré un passage utile pour chacune des 60 questions",
+      "12 échecs de recherche et aucune erreur restante puisque le générateur a reçu 48 passages"
+    ],
+    "explanation": "60 − 48 = 12 questions manquent de source utile. Parmi les 48 qui en disposent, 48 − 36 = 12 échouent encore. Ces comptes indiquent où examiner la chaîne ; ils ne prouvent pas à eux seuls quel réglage de BGE ou du générateur est fautif.",
+    "support": {
+      "step": 3,
+      "part": "deepDive",
+      "heading": "Diagnostiquer une chaîne documentaire avec des comptes séparés"
+    }
+  },
+  {
+    "id": "practice-18-3-2",
+    "theme": 18,
+    "concept": "notion-615",
+    "level": "intermediaire",
+    "kind": "choice",
+    "prompt": "Dans l’audio d’une réunion, la livraison est prévue « le quinze ». La transcription Whisper indique « le cinq » et le résumé reprend « le cinq ». Un second modèle relit ce résumé à partir de la même transcription et l’approuve. Quelle vérification permet de contrôler la date ?",
+    "answer": "Réécouter le passage audio concerné et corriger la transcription avant de vérifier le résumé",
+    "options": [
+      "Réécouter le passage audio concerné et corriger la transcription avant de vérifier le résumé",
+      "Accepter l’approbation du second modèle comme une confirmation indépendante de l’audio",
+      "Augmenter le nombre de résumés produits à partir de la transcription inchangée",
+      "Conserver la date du résumé parce qu’elle correspond exactement à celle de la transcription"
+    ],
+    "explanation": "Les deux modèles partagent ici la même entrée erronée. Leur accord confirme tout au plus la fidélité à cette transcription, pas à la réunion. La source audio permet de vérifier la date et de corriger l’erreur qui se propage.",
+    "support": {
+      "step": 3,
+      "part": "deepDive",
+      "heading": "Gérer une erreur qui se propage depuis l’audio"
+    }
+  }
+]
