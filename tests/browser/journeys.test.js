@@ -147,7 +147,11 @@ test('a shared passage link opens detailed content and still allows a later swit
   assert.equal(await fresh.getByRole('radio',{name:/Approfondi/}).isChecked(),true);
   await fresh.getByRole('radio',{name:/Essentiel/}).check();
   assert.equal(await fresh.locator('.course-deep-dive').count(),0);
-  await fresh.reload();await fresh.waitForFunction(id=>document.activeElement?.id===id,anchor);
+  await fresh.reload();await fresh.locator('.continuous-reading').waitFor();
+  assert.equal(await fresh.getByRole('radio',{name:/Essentiel/}).isChecked(),true);
+  assert.equal(new URL(fresh.url()).hash,'');
+  await fresh.goto('http://127.0.0.1:5199/cours/1/lecons/1?parcours=bases#'+anchor);
+  await fresh.waitForFunction(id=>document.activeElement?.id===id,anchor);
   await fresh.getByRole('link',{name:'Revenir à la mise en pratique',exact:true}).click();
   assert.equal(await fresh.locator('.practice-solution').evaluate(node=>node.open),false);
  }finally{await context.close()}

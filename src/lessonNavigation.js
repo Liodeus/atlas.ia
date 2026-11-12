@@ -24,7 +24,7 @@ export function shouldHandleLessonArrow(event){
  if(!['ArrowLeft','ArrowRight'].includes(event.key)||event.defaultPrevented||event.repeat||event.altKey||event.ctrlKey||event.metaKey||event.shiftKey)return false;
  const target=event.target;
  if(target?.isContentEditable)return false;
- if(typeof target?.closest==='function'&&target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="combobox"], [role="slider"], [role="dialog"], .demo'))return false;
+ if(typeof target?.closest==='function'&&target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="combobox"], [role="slider"], [role="dialog"], .demo, .course-workshop'))return false;
  return true;
 }
 export const lessonPath=lesson=>`/cours/${lesson.theme}/lecons/${lesson.step}`;

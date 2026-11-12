@@ -1,0 +1,56 @@
+/* Lecture continue : un seul fil de texte, sans commandes superposées. */
+.course-page.content{padding-top:28px;padding-bottom:48px}
+.course-page :is(h1,h2,h3,h4,p,li,dd,figcaption,.text-link){text-wrap:wrap}
+.course-page .back{margin-bottom:14px}
+.course-page .course-header h1{font-size:clamp(27px,2.7vw,36px);margin:10px 0 14px;line-height:1.25}
+.course-page .course-path-position:empty{display:none}
+.course-page .course-goal{max-width:none;font-size:14px;line-height:1.75;margin:0 0 24px;color:var(--muted)}
+.course-page .course-depth.is-compact{max-width:460px;margin:0 0 28px}
+.course-page .course-depth.is-compact legend{margin-bottom:8px;font-size:12px;color:var(--muted);font-weight:400}
+.course-page .course-depth.is-compact .course-depth-option>span{display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:8px;min-height:44px;padding:10px 12px}
+.course-page .course-depth.is-compact .course-depth-heading small{white-space:nowrap}
+.course-page .continuous-reading .lesson-lead{max-width:none;margin:0 0 32px;font-size:17px;line-height:1.85;color:var(--muted)}
+.course-page .continuous-reading .course-section-grid{display:block;margin:0}
+.course-page .continuous-reading .course-explanation{padding:30px 0;margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
+.course-page .continuous-reading .course-explanation h2{max-width:none;margin:0 0 20px;font-size:26px;line-height:1.35}
+.course-page .continuous-reading .course-explanation>p{max-width:none;margin:0 0 20px;font-size:17px;line-height:1.9;color:var(--ink)}
+.course-page .continuous-reading .course-explanation>p:last-child{margin-bottom:0}
+.course-page .continuous-reading .course-deep-dive{margin:32px 0;background:var(--soft);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:24px 28px}
+.course-page .continuous-reading .course-deep-dive>h2{margin:8px 0 22px;font-size:28px}
+.course-page .continuous-reading .course-deep-dive .course-explanation:first-child{border:0;padding-top:0}
+.course-page .continuous-reading .course-deep-dive .course-explanation:last-child{padding-bottom:0}
+.course-page .continuous-reading .learning-diagram{margin:26px 0 8px}
+.course-page .continuous-reading .course-term{border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;padding:18px 0}
+.course-page .continuous-reading .course-terms-grid{gap:8px 30px}
+.course-page .continuous-reading .course-takeaways{margin:28px 0}
+.course-page .inline-workshop{margin:28px 0 0;padding:24px;background:var(--soft);border-left:3px solid var(--accent);border-radius:0 10px 10px 0}
+.course-page .inline-workshop>h3{font:normal 24px/1.35 'DM Serif Display',Georgia,serif;margin:0 0 14px;color:var(--ink)}
+.course-page .course-workshop>h3{font-size:18px;line-height:1.5;margin:10px 0 16px}
+.course-page .workshop-caption{font-size:12px;line-height:1.6;margin:0;color:var(--muted)}
+.course-page .workshop-document{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 18px}
+.course-page .workshop-document p{font-size:15px;line-height:1.65;color:var(--ink);margin:8px 0 0}
+.course-page .workshop-options{border:0;margin:18px 0;padding:0;min-width:0}
+.course-page .workshop-options legend{font-size:14px;font-weight:700;margin-bottom:12px}
+.course-page .workshop-options>div{display:flex;gap:10px;flex-wrap:wrap}
+.course-page .workshop-options button{min-height:44px;border:1px solid var(--line);border-radius:8px;padding:10px 14px;background:var(--surface);color:var(--ink);font-size:14px;cursor:pointer}
+.course-page .workshop-options button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.course-page .workshop-result{border-left:3px solid var(--accent);padding:14px 18px;background:var(--surface);border-radius:0 8px 8px 0;margin-bottom:14px}
+.course-page .workshop-result>p{font-size:16px;line-height:1.65;margin:8px 0 0;color:var(--ink)}
+.course-page .workshop-result .workshop-feedback{font-size:13px;line-height:1.6;padding:10px 0 0;margin:10px 0 0;border-top:1px solid var(--line);color:var(--muted)}
+.course-page .course-workshop summary{font-size:14px;min-height:44px;padding:10px 0;color:var(--forest);cursor:pointer;font-weight:700}
+.course-page .course-workshop details p{font-size:14px;line-height:1.8}
+@media(max-width:600px){
+ .course-page.content{padding-top:18px}
+ .course-page .course-header h1{font-size:27px}
+ .course-page .course-depth.is-compact .course-depth-heading strong{font-size:13px}
+ .course-page .course-depth.is-compact .course-depth-heading small{font-size:10px}
+ .course-page .continuous-reading .lesson-lead{font-size:16px;line-height:1.8}
+ .course-page .continuous-reading .course-explanation{padding:24px 0}
+ .course-page .continuous-reading .course-explanation h2{font-size:24px;margin-bottom:18px}
+ .course-page .continuous-reading .course-explanation>p{font-size:16px;line-height:1.85;margin-bottom:20px}
+ .course-page .continuous-reading .course-deep-dive,.course-page .inline-workshop{padding:18px}
+ .course-page .continuous-reading .course-deep-dive>h2{font-size:25px}
+ .course-page .inline-workshop>h3{font-size:22px}
+ .course-page .workshop-options button{font-size:13px}
+}
+@media print{.course-page .course-depth{display:none}}

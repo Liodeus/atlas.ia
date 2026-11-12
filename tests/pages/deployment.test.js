@@ -26,6 +26,20 @@ before(async()=>{
  page=await browser.newPage();page.setDefaultTimeout(15000);
 });
 after(async()=>{await browser?.close();await new Promise(r=>server?.close(r))});
+test('the inline workshop opens directly within a complete lesson on Pages',async()=>{
+ const fresh=await browser.newPage({viewport:{width:390,height:844}});
+ try{
+  await fresh.goto(origin+base+'cours/9/lecons/2#lesson-9-2-atelier-contexte');
+  await fresh.locator('.rag-context-workshop').waitFor();
+  assert.equal(await fresh.locator('.sequence-panel').count(),0);
+  assert.equal(await fresh.locator('.course-section-grid > .course-explanation:visible').count(),3);
+  await fresh.getByRole('button',{name:'La règle et son exception',exact:true}).click();
+  assert.match(await fresh.locator('.workshop-feedback').innerText(),/L’exception est présente/);
+  await fresh.reload();await fresh.locator('.rag-context-workshop').waitFor();
+  assert.equal(new URL(fresh.url()).pathname,base+'cours/9/lecons/2');
+  assert.ok(await fresh.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+ }finally{await fresh.close()}
+});
 test('a filtered catalog refresh and its detail return preserve the Pages base and filters',async()=>{
  const context=await browser.newContext({viewport:{width:390,height:844}}),fresh=await context.newPage();
  try{

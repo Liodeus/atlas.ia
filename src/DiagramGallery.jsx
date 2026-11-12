@@ -1,4 +1,5 @@
 import {lessonPath} from './lessonNavigation.js';
+import {lessonSectionId} from './practiceSupport.js';
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
 import {ArrowRight,ChevronDown,Search} from 'lucide-react';
@@ -23,7 +24,7 @@ function GalleryItem({item}){
   </summary>
   {loaded&&<div className="gallery-item-content">
    {item.kind==='demo'?<Demo id={item.theme}/>:<LearningDiagram id={item.id}/>}
-   <Link className="gallery-lesson-link" to={lessonPath(item)} onClick={()=>{if(item.deep)setCourseDepth('detailed')}}>
+   <Link className="gallery-lesson-link" to={lessonPath(item)+'#'+(item.kind==='demo'?`lesson-${item.theme}-${item.step}-atelier`:lessonSectionId(item.theme,item.step,item.deep?'deepDive':'sections',item.section)+'-schema')} onClick={()=>{if(item.deep)setCourseDepth('detailed')}}>
     <span><b>Lire la leçon</b><small>{courseTitles[item.theme-1][item.step-1]}</small></span><ArrowRight size={18} aria-hidden="true"/>
    </Link>
   </div>}

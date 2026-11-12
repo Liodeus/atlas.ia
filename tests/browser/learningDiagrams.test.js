@@ -123,7 +123,7 @@ test('Schémas navigation opens a searchable gallery of all illustrations and de
   await page.locator('[data-catalog-id="heads"]>summary').focus();await page.keyboard.press('Enter');
   await page.locator('[data-diagram="heads"]').waitFor();
   await page.getByRole('link',{name:/Lire la leçon/}).click();
-  await page.waitForURL('**/cours/3/lecons/1');await page.locator('[data-diagram="heads"]').waitFor();
+  await page.waitForURL(url=>url.pathname==='/cours/3/lecons/1');await page.locator('[data-diagram="heads"]').waitFor();
  }finally{await page.close()}
 });
 test('mobile gallery menu closes and every illustration can be opened without horizontal overflow',async()=>{
