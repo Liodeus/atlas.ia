@@ -94,5 +94,8 @@
   ],
   "notion-260": [
     "https://huggingface.co/docs/accelerate/usage_guides/big_modeling"
+  ],
+  "notion-646": [
+    "https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md"
   ]
 }

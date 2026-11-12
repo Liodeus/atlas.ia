@@ -519,5 +519,35 @@
     },
     "difference": "Ces noms renvoient à des offres distinctes ; la disponibilité des Weights de gpt-oss ne définit pas les conditions de toutes les variantes GPT.",
     "example": "Avant de déployer un modèle localement, vérifiez les fichiers, la licence et les exigences de sa version précise."
+  },
+  {
+    "title": "Fidélité au modèle ≠ qualité sur la tâche",
+    "left": {
+      "name": "Fidélité au modèle",
+      "explanation": "Proximité avec une référence, évaluée par un protocole défini.",
+      "concept": "notion-641"
+    },
+    "right": {
+      "name": "Qualité sur la tâche",
+      "explanation": "Réussite des cas utiles selon les critères de l’application.",
+      "concept": null
+    },
+    "difference": "Préserver une distribution de probabilités ne garantit pas de bonnes réponses. Comparez aussi les résultats réels, les erreurs importantes et les contraintes du service.",
+    "example": "Sur un test fictif, A passe de 92 à 86 réussites et B de 80 à 79. B conserve mieux son score, mais A quantifié réussit davantage de cas. Ces scores seuls ne mesurent pas la proximité des distributions."
+  },
+  {
+    "title": "Machine virtuelle ≠ conteneur",
+    "left": {
+      "name": "Machine virtuelle",
+      "explanation": "Exécute un système invité avec son propre noyau.",
+      "concept": "notion-644"
+    },
+    "right": {
+      "name": "Conteneur",
+      "explanation": "Isole des processus qui partagent le noyau du système qui les héberge.",
+      "concept": "notion-645"
+    },
+    "difference": "Un conteneur peut fonctionner dans une VM. Dans les deux cas, vérifiez les quotas, les dépendances et les accélérateurs réellement accessibles avant de prévoir les performances.",
+    "example": "Un GPU présent sur le poste n’est pas nécessairement visible dans sa VM. Une image de conteneur ne garantit pas non plus à elle seule l’accès au GPU."
   }
 ]

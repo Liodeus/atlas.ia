@@ -1,3 +1,5 @@
+import {workshopConnections} from './workshopConnections.js';
+import {findWorkshop} from './workshopCatalog.js';
 import React,{useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {Link,useLocation} from 'react-router-dom';
 import {ArrowRight} from 'lucide-react';
@@ -75,6 +77,7 @@ export function CourseMaterial({lesson,mode,onDepthChange,intro,extra,entriesByI
    <div className="course-terms-grid">{ordered.visible.map(id=><CourseTerm key={id} id={id} entriesById={entriesById} details={details} mode={mode} returnTo={returnTo}/>)}</div>
    {lesson.concepts.length>6&&<details className="course-more-terms"><summary>Voir les {lesson.concepts.length-6} autres notions de cette leçon</summary><div className="course-terms-grid">{ordered.extra.map(id=><CourseTerm key={id} id={id} entriesById={entriesById} details={details} mode={mode} returnTo={returnTo}/>)}</div></details>}
   </section>
+  {workshopConnections[`${theme}-${step}`]&&<section className="lesson-check-link"><h2>Passer à la pratique</h2><p>Reliez les notions de cette leçon dans un atelier accompagné.</p><div className="actions">{workshopConnections[`${theme}-${step}`].map(id=><Link key={id} className="text-link" to={'/ateliers/'+id}>{findWorkshop(id).title} <ArrowRight size={14}/></Link>)}</div></section>}
   {conclusion}
  </article>;
 }

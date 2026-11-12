@@ -13,10 +13,10 @@ const batches = await Promise.all(Array.from({length:18}, async (_,index)=>{
  return {theme:index+1,content:await read('theme'),sources:await read('sources')};
 }));
 
-test('all 571 notions have teaching content and the original 82 remain intact',()=>{
- assert.equal(entries.length,571);
+test('all 577 notions have teaching content and the original 82 remain intact',()=>{
+ assert.equal(entries.length,577);
  assert.deepEqual(Object.keys(notionContent).sort(),entries.map(e=>e.id).sort());
- assert.equal(Object.keys(supplementalContent).length,489);
+ assert.equal(Object.keys(supplementalContent).length,495);
  for(const [id,content] of Object.entries(priorityContent)){
   assert.ok(!Object.hasOwn(supplementalContent,id),id);
   assert.deepEqual(notionContent[id],content,id);
@@ -31,7 +31,7 @@ test('each theme supplies exactly its missing notions and their references',()=>
   assert.deepEqual(Object.keys(sources).sort(),expected,`sources ${theme}`);
   for(const id of Object.keys(content)){assert.ok(!seen.has(id),`duplicate ${id}`);seen.add(id)}
  }
- assert.equal(seen.size,489);
+ assert.equal(seen.size,495);
 });
 
 test('new teaching fields are distinct, substantive and explicitly illustrative',()=>{

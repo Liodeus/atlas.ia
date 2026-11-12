@@ -1,3 +1,4 @@
+import {answerVariant} from '../workshopScenarioAnswers.js';
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
@@ -6,6 +7,7 @@ import {resolve,extname} from 'node:path';
 import {chromium} from 'playwright';
 import {courseEditorial} from '../../src/courseCurriculum.js';
 import {practiceSupport,lessonPracticeId} from '../../src/practiceSupport.js';
+import {workshopCatalog} from '../../src/workshopCatalog.js';
 import {learningPaths} from '../../src/learningPaths.js';
 
 let server,browser,page;const base=process.env.TEST_PAGES_BASE||'/atlas.ia/';const origin='http://127.0.0.1:5201';
@@ -170,4 +172,29 @@ test('the diagram gallery loads and refreshes from a direct Pages link',async()=
  assert.equal(await page.locator('.gallery-item').count(),39);
  await page.reload();await page.locator('[data-catalog-id="qkv"]>summary').click();
  await page.locator('[data-diagram="qkv"]').waitFor();
+});
+
+test('workshop routes and exact course references work under the GitHub Pages prefix',async()=>{
+ const context=await browser.newContext(),fresh=await context.newPage();
+ try{
+  for(const id of workshopCatalog.map(item=>item.id)){
+   const response=await fresh.goto(origin+base+'ateliers/'+id);assert.equal(response.status(),200);
+   await fresh.locator('.workshop-page').waitFor();
+   assert.equal(await fresh.locator('.sidebar').getByRole('link',{name:'Ateliers',exact:true}).getAttribute('aria-current'),'page');
+   for(const link of await fresh.locator('.workshop-references a').all())assert.ok((await link.getAttribute('href')).startsWith(base+'cours/'));
+  }
+  await fresh.goto(origin+base+'ateliers/budget-memoire');await fresh.getByRole('combobox',{name:'Précision des poids',exact:true}).selectOption('8');await fresh.getByRole('combobox',{name:'Positions par conversation',exact:true}).selectOption('8192');await fresh.getByRole('combobox',{name:'Conversations simultanées',exact:true}).selectOption('4');await answerVariant(fresh,'budget-memoire');await fresh.getByRole('button',{name:'Vérifier mes choix'}).click();await fresh.getByRole('heading',{name:'Mission réussie',exact:true}).waitFor();
+  await fresh.reload();await fresh.getByRole('heading',{name:'Mission réussie',exact:true}).waitFor();
+  await fresh.getByRole('link',{name:'Tous les ateliers',exact:true}).click();await fresh.locator('.workshop-card').first().waitFor();assert.equal(await fresh.locator('.workshop-card').count(),18);
+ }finally{await context.close()}
+});
+test('workshop static pages contain the scenario, data and course links without JavaScript',async()=>{
+ const context=await browser.newContext({javaScriptEnabled:false}),fresh=await context.newPage();
+ try{
+  await fresh.goto(origin+base+'ateliers');assert.equal(await fresh.locator('main>ul>li').count(),18);
+  await fresh.getByRole('link',{name:'Faire tenir un service en mémoire',exact:true}).click();await fresh.getByRole('heading',{name:'Votre mission'}).waitFor();
+  assert.match(await fresh.locator('main').innerText(),/12 GiB/);assert.equal(await fresh.locator('table').first().locator('tbody tr').count(),3);
+  const link=fresh.getByRole('link',{name:'Composer un budget mémoire sans sacrifier la tâche',exact:true});assert.ok((await link.getAttribute('href')).startsWith(base+'cours/8/lecons/2#'));
+  assert.match(await fresh.locator('link[rel="canonical"]').getAttribute('href'),/\/ateliers\/budget-memoire$/);
+ }finally{await context.close()}
 });

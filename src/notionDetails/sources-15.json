@@ -86,5 +86,17 @@
   ],
   "notion-484": [
     "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+  ],
+  "notion-642": [
+    "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#add-heatsinks"
+  ],
+  "notion-643": [
+    "https://www.kernel.org/doc/html/latest/power/powercap/powercap.html"
+  ],
+  "notion-644": [
+    "https://learn.microsoft.com/en-us/windows/wsl/tutorials/gpu-compute"
+  ],
+  "notion-645": [
+    "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/"
   ]
 }

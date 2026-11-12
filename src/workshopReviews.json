@@ -1,0 +1,128 @@
+{
+  "choisir-les-fichiers": {
+    "accepted": true,
+    "score": 95,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-core-v2",
+    "contentDigest": "e63e543681be2e27caba85003ec624a809b934aea685ea1f0a47dd04cd756a11"
+  },
+  "budget-memoire": {
+    "accepted": true,
+    "score": 97,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-core-v2",
+    "contentDigest": "376204350f8b4aa84968b4c27fb44b1244e9e913952621a98a5e18346645ff87"
+  },
+  "fidelite-et-qualite": {
+    "accepted": true,
+    "score": 96,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-core-v2",
+    "contentDigest": "9c1073eb33025a4b74226bdf0b27558f045db0890e52abfd26adf04b6112b8ba"
+  },
+  "performance-durable": {
+    "accepted": true,
+    "score": 96,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-core-v2",
+    "contentDigest": "31d149af653a9ff5564f9a0bc6d9ec28f3e5a7aab5e71a7b8d91fe07d967c7de"
+  },
+  "changer-environnement": {
+    "accepted": true,
+    "score": 96,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-core-v2",
+    "contentDigest": "306898fa732d190f77bd46714cd1295a9fae075c0cf73af15051d3a91222898c"
+  },
+  "masquer-attention": {
+    "accepted": true,
+    "score": 96,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-core-v2",
+    "contentDigest": "5a12f007b5ba21e2e2d9aea9c8dacfc24c6e1ef49bc7c96a58e5237b72a83b92"
+  },
+  "router-experts": {
+    "accepted": true,
+    "score": 94,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-core-v2",
+    "contentDigest": "2104deaf1d119ed0800df4ec10a82c658ad2a5274c68d9117eb5b3ccd3e0e5cf"
+  },
+  "composer-contexte": {
+    "accepted": true,
+    "score": 95,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-core-v2",
+    "contentDigest": "563166bc3af46ad49d206b91963e1a2dc12223fb2bac0e5872ca930c4e39f9ed"
+  },
+  "comparer-filtres": {
+    "accepted": true,
+    "score": 94,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-core-v2",
+    "contentDigest": "21ae1142180d324c819b1bbee926403b1d1082ef286a1e9cd5aa5a91ba8fc9e6"
+  },
+  "composer-une-chaine": {
+    "accepted": true,
+    "score": 97,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-applications-v2",
+    "contentDigest": "d798f5703b14546b838afddd548774ba0250baee6984ff6a815c9b84a4dc9110"
+  },
+  "entrainement-et-generalisation": {
+    "accepted": true,
+    "score": 97,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-applications-v2",
+    "contentDigest": "40454fcd9a4a04c63c82f8e1e017b7e1cf9a83b60c8ccc097b19ed402434442f"
+  },
+  "choisir-une-adaptation": {
+    "accepted": true,
+    "score": 95,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-applications-v2",
+    "contentDigest": "344c427b81e2efb851c8d31c75a45c74cf9871b3d9e08178805ba074a4eb6c90"
+  },
+  "assembler-des-preuves": {
+    "accepted": true,
+    "score": 98,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-applications-v2",
+    "contentDigest": "629c4bff8f5adec76c4d9c2a1ed7a4b769599267a82507780b95e1217b178509"
+  },
+  "valider-une-extraction": {
+    "accepted": true,
+    "score": 97,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-applications-v2",
+    "contentDigest": "c0afe56a63ac09bc230dbda4034ec447b85987ec87ce02959138036793b4ffca"
+  },
+  "reprendre-un-agent": {
+    "accepted": true,
+    "score": 96,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-trust-v2",
+    "contentDigest": "c83b8683f5a889030b3755d1a5d15c30471506436340b0d648e72b353b9ada67"
+  },
+  "contenir-une-injection": {
+    "accepted": true,
+    "score": 97,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-trust-v2",
+    "contentDigest": "207388b934b741842dc1138549ea065b6a7dce923f477cd72ee4730eea64071a"
+  },
+  "verifier-une-extraction": {
+    "accepted": true,
+    "score": 96,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-trust-v2",
+    "contentDigest": "05ee3f6e59942bc38f22c4c64320fb7821105a8588ffbff0323ee2a9db34c8c0"
+  },
+  "verifier-les-droits": {
+    "accepted": true,
+    "score": 96,
+    "reviewedAt": "2026-11-12",
+    "reviewedBy": "juge-trust-v2",
+    "contentDigest": "7667af24457f39157f183c6952d365238dbc8a189b98456c99e1ba34c3690ab1"
+  }
+}

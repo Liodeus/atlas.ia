@@ -633,6 +633,13 @@
             "Un même modèle peut être distribué dans plusieurs formats ou transformations. Une version quantifiée n’est pas seulement un fichier plus petit : elle impose des exigences au moteur et au matériel, et peut modifier les résultats. Vérifiez que le moteur prend en charge l’architecture, le format des poids et les fonctionnalités nécessaires. Une erreur de compatibilité ne signifie pas que la famille entière est inutilisable ; elle concerne une combinaison précise de composants.",
             "Conservez ensuite la configuration de l’essai : matériel, moteur, quantification, longueur des entrées et concurrence. La latence mesurée sur un poste ne se transfère pas automatiquement à un autre. Un modèle compact peut être rapide sur une configuration et mal exploité sur une autre. L’objectif est d’évaluer le système que vous pourrez réellement déployer, avec sa qualité et ses limites, plutôt que de déduire sa vitesse d’un adjectif commercial."
           ]
+        },
+        {
+          "heading": "Identifier une variante avant de la comparer",
+          "paragraphs": [
+            "Le nom fictif Modele-A-7B-Instruct-Q4_K_M.gguf rassemble plusieurs informations de natures différentes : famille, ordre de grandeur du nombre de paramètres, adaptation au suivi d’instructions, quantification et format. Deux fichiers de la même famille peuvent donc viser des usages et des moteurs différents. La présence du mot Instruct ne suffit pas à garantir une bonne réponse en français ou une compétence sur vos documents.",
+            "Avant une comparaison, relevez la version exacte, le fichier utilisé, le tokenizer, le Chat Template et les composants additionnels requis. Si la tâche inclut une image, vérifiez que la variante et toute sa chaîne d’entrée la prennent en charge. La fiche du modèle, son manifeste et un petit test représentatif apportent les preuves que le nom seul ne fournit pas."
+          ]
         }
       ],
       "deepDive": [
@@ -737,6 +744,10 @@
         {
           "label": "LLaDA : source de référence",
           "url": "https://github.com/ML-GSAI/LLaDA"
+        },
+        {
+          "label": "llama.cpp : lire les formats et les composants distribués",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md"
         }
       ]
     },

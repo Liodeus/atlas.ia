@@ -557,7 +557,7 @@ test('secondary glossary filters stay visible in the summary and survive a notio
  assert.equal(await page.locator('.results-count').innerText(),before);
  assert.match(await summary.innerText(),/Essentiels/);
  await page.getByRole('button',{name:'Réinitialiser',exact:true}).click();
- assert.match(await page.locator('.results-count').innerText(),/571 NOTIONS/);
+ assert.match(await page.locator('.results-count').innerText(),/577 NOTIONS/);
  assert.doesNotMatch(await summary.innerText(),/Essentiels/);
 });
 test('comparison deep links open the right disclosure and preserve keyboard access',async()=>{
@@ -569,7 +569,7 @@ test('comparison deep links open the right disclosure and preserve keyboard acce
  await page.keyboard.press('Enter');assert.equal(await item.evaluate(el=>el.open),true);
  await page.getByLabel('Rechercher une distinction').fill('aucun-resultat-xyz');
  await page.getByRole('button',{name:'Effacer la recherche'}).click();
- assert.equal(await page.locator('.distinction-card').count(),35);
+ assert.equal(await page.locator('.distinction-card').count(),37);
 });
 test('theme resources remain reachable by keyboard without obscuring the lessons',async()=>{
  await page.goto('http://127.0.0.1:5199/themes/1');

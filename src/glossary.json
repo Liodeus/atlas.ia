@@ -1927,6 +1927,13 @@
         "definition": "placement de certains poids ou caches sur CPU, disque ou autre mémoire.",
         "priority": false,
         "theme": 8
+      },
+      {
+        "id": "notion-646",
+        "name": "Model Artifact (artefact de modèle)",
+        "definition": "fichier distribué pour utiliser une version de modèle : poids, configuration, tokenizer ou composant associé.",
+        "priority": false,
+        "theme": 8
       }
     ]
   },
@@ -2833,6 +2840,13 @@
         "definition": "Stratégie qui permet au système de s’abstenir sur certains cas, afin de limiter les erreurs parmi les prédictions qu’il accepte de fournir.",
         "priority": false,
         "theme": 12
+      },
+      {
+        "id": "notion-641",
+        "name": "KL Divergence (divergence de Kullback-Leibler)",
+        "definition": "mesure de l’écart entre deux distributions de probabilités sur les mêmes événements, utilisée notamment pour comparer un modèle à une référence.",
+        "priority": false,
+        "theme": 12
       }
     ]
   },
@@ -3563,6 +3577,34 @@
         "id": "notion-484",
         "name": "Rollback Deployment",
         "definition": "retour à une version précédente lors d'un problème.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-642",
+        "name": "Thermal Throttling (limitation thermique)",
+        "definition": "réduction des fréquences de fonctionnement d’un composant pour respecter une contrainte de température.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-643",
+        "name": "Power Limit (limite de puissance)",
+        "definition": "enveloppe de puissance imposée à un composant, pouvant limiter ses fréquences même sans atteindre une limite thermique.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-644",
+        "name": "Virtual Machine (machine virtuelle, VM)",
+        "definition": "environnement qui exécute un système invité avec son propre noyau et des ressources présentées par un hyperviseur.",
+        "priority": false,
+        "theme": 15
+      },
+      {
+        "id": "notion-645",
+        "name": "Container (conteneur)",
+        "definition": "environnement qui isole des processus et leurs dépendances en partageant le noyau du système qui les héberge.",
         "priority": false,
         "theme": 15
       }

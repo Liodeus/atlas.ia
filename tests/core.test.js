@@ -14,7 +14,7 @@ test('the 16 source themes retain their original IDs and include the new notions
   const themes=JSON.parse(await readFile(new URL('../src/glossary.json',import.meta.url),'utf8'));
   assert.equal(themes.length,16);
   const entries=themes.flatMap(t=>t.entries);
-  assert.equal(entries.length,519);
+  assert.equal(entries.length,525);
   const ids=new Set(entries.map(entry=>entry.id));
   assert.equal(ids.size,entries.length);
   for(let id=1;id<=506;id++)assert.ok(ids.has(`notion-${id}`));

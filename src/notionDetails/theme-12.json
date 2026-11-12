@@ -148,5 +148,10 @@
     "explanation": "La prédiction sélective ajoute une possibilité de refus à la décision. On suit simultanément la couverture, c’est-à-dire la proportion de cas traités, et le risque parmi les cas acceptés. Le seuil se règle sur des données de validation ; les cas refusés peuvent être transmis à une personne ou à une autre procédure.",
     "example": "Exemple illustratif : Un outil accepte automatiquement 70 dossiers sur 100 et en renvoie 30 en vérification. Annoncer son taux d’erreur sans préciser cette couverture donnerait une image incomplète du service.",
     "misconception": "S’abstenir ne garantit pas que les réponses conservées sont correctes. Un score mal calibré ou un changement de données peut rendre le seuil choisi peu fiable."
+  },
+  "notion-641": {
+    "explanation": "La divergence KL sert à comparer des distributions de probabilités et dépend du sens choisi pour cette comparaison. Dans une évaluation de quantification, on peut l’appliquer aux probabilités du prochain token, à vocabulaire et contextes identiques. Elle décrit une proximité avec une référence, sans mesurer directement la pertinence des réponses pour une tâche.",
+    "example": "Exemple illustratif : deux conversions d’un même modèle sont comparées à ses probabilités de référence sur le même corpus. La conversion qui a la KL la plus faible est la plus proche selon cette mesure ; on vérifie ensuite ses réponses sur les cas métier.",
+    "misconception": "Une KL faible ne veut pas dire « peu d’erreurs » et n’est pas un pourcentage de qualité. Les valeurs de protocoles utilisant des références ou des tokenizers différents ne se comparent pas automatiquement."
   }
 }

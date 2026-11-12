@@ -8,6 +8,7 @@ import {conceptName} from './terminology.js';
 // Alias éditoriaux : les libellés regroupant plusieurs termes ne doivent pas
 // déclencher une recherche sur un fragment vague (« Full », « Size », « V »).
 const aliasesById={
+ 'notion-644':['Virtual Machine','machine virtuelle','VM'],
  'notion-35':['Parameters','Weights','Parameter','Weight'],
  'notion-39':['Hidden Dimension','d_model'],
  'notion-44':['SiLU','Swish'],

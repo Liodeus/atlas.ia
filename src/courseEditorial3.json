@@ -594,6 +594,14 @@
             "Un changement de distribution peut prendre une forme banale : davantage de documents scannés, des questions dans une nouvelle langue ou des dossiers deux fois plus longs. Le système rencontre alors des propriétés moins représentées pendant sa validation. Un résultat global stable ne prouve pas la stabilité de chaque usage. Il faut suivre quelques sous-groupes définis par la tâche et vérifier la qualité des références utilisées pour les mesurer.",
             "La Pareto Frontier aide à séparer élimination et préférence. Une configuration dominée sur les critères retenus n’apporte aucun avantage mesuré dans cette comparaison. Parmi les configurations non dominées, le choix demande des priorités : délai maximal, coût disponible, erreurs interdites. Modifier la liste des critères peut modifier la frontière. Une solution dominée en qualité moyenne et prix peut rester pertinente si elle est la seule à respecter une contrainte de traitement des données jusque-là absente du tableau."
           ]
+        },
+        {
+          "heading": "Distinguer fidélité au modèle et qualité sur la tâche",
+          "paragraphs": [
+            "La fidélité décrit à quel point une transformation préserve le comportement de sa référence. La qualité décrit la réussite du système sur la tâche choisie. Ce sont deux questions différentes : reproduire fidèlement une réponse erronée reste un échec. Une quantification peut préserver davantage un modèle moins compétent, sans devenir pour autant le meilleur choix pour votre usage. La KL Divergence, présentée dans l’approfondissement, compare des distributions de probabilités plutôt que des taux de réussite.",
+            "Sur un même test fictif de 100 cas, A passe de 92 réussites à 86 après quantification, tandis que B passe de 80 à 79. B perd moins de points sur ce test : un point contre six. Pourtant, la variante quantifiée de A réussit encore davantage de cas. Cette baisse de score mesure seulement la conservation du score agrégé ; elle ne prouve pas que les réponses ou les probabilités du modèle sont restées plus proches.",
+            "Pour décider, définissez des seuils avant de comparer : qualité minimale, mémoire disponible, délai acceptable et erreurs critiques. Gardez le même jeu de cas et les mêmes règles de correction ; regardez aussi les erreurs par catégorie et l’incertitude liée au nombre d’exemples. Un meilleur score global peut rester insuffisant si les quelques erreurs portent sur une contrainte indispensable."
+          ]
         }
       ],
       "deepDive": [
@@ -623,6 +631,13 @@
             "La Red Team Evaluation ajoute des cas conçus pour provoquer des erreurs. Son taux d’échec n’est pas une estimation directe de la fréquence d’incidents dans le trafic ordinaire, puisque les cas ont été sélectionnés pour être difficiles. Il sert à découvrir des mécanismes et à vérifier les contrôles. Les Regression Tests conservent ensuite les cas pertinents, avec les raisons de leur présence. Un test adversarial devenu connu n’épuise pas toute la famille de problèmes qu’il représente.",
             "L’arbitrage final combine qualité, ressources et solidité de la mesure. Un avantage de deux points sur cinquante exemples correspond à un seul exemple ; il ne mérite pas la même certitude qu’un gain cohérent sur plusieurs jeux. On rapporte effectifs, variabilité et limites, puis on choisit une configuration compatible avec les contraintes. Une frontière de Pareto calculée sur des mesures incertaines reste une aide à la décision. Elle ne transforme pas des scores fragiles en vérité universelle sur la supériorité d’un modèle."
           ]
+        },
+        {
+          "heading": "Ce que mesure une divergence KL",
+          "paragraphs": [
+            "La KL Divergence compare deux distributions de probabilités définies sur les mêmes événements. Pour un modèle de langage et sa version quantifiée, on peut comparer les distributions du prochain token sur des contextes fixés, avec le même vocabulaire et la même tokenisation. Une divergence plus faible indique une plus grande proximité selon ce protocole ; une valeur nulle correspond à des distributions identiques. Le sens de la comparaison compte : KL(P || Q) n’est généralement pas égal à KL(Q || P).",
+            "Une faible divergence KL n’est ni un pourcentage de bonnes réponses ni une garantie de pertinence. Le corpus, la référence et l’agrégation influencent le résultat. Comparer directement deux valeurs obtenues avec des références, des tokenizers ou des jeux de textes différents peut n’avoir aucun sens. Utilisez cette mesure pour diagnostiquer une transformation, puis contrôlez la qualité effective avec des exercices représentatifs et une correction adaptée à la tâche."
+          ]
         }
       ],
       "takeaways": [
@@ -642,7 +657,8 @@
         "notion-380",
         "notion-381",
         "notion-382",
-        "notion-383"
+        "notion-383",
+        "notion-641"
       ],
       "practice": {
         "prompt": "Sur le même jeu, A réussit 90 % des cas pour 2 unités et 2 secondes ; B réussit 90 % pour 3 unités et 4 secondes ; C réussit 94 % pour 5 unités et 3 secondes. Quelle solution est dominée ? Lesquelles restent à départager ? Donnez une vérification avant de retenir C.",
@@ -679,6 +695,10 @@
         {
           "label": "scikit-learn : pièges et fuite de données",
           "url": "https://scikit-learn.org/stable/common_pitfalls.html"
+        },
+        {
+          "label": "llama.cpp : perplexité et comparaison KL à une référence",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/master/tools/perplexity/README.md"
         }
       ]
     }
@@ -1430,6 +1450,13 @@
             "Une estimation des poids commence par le nombre de paramètres et les octets par paramètre. Sept milliards de paramètres stockés sur deux octets occupent quatorze milliards d’octets, soit environ quatorze gigaoctets décimaux, avant les éléments supplémentaires. Cette estimation ne comprend ni le cache, ni les buffers, ni les métadonnées éventuelles. Elle ne constitue donc pas une recommandation de capacité matérielle suffisante pour servir ce modèle.",
             "L’environnement logiciel détermine aussi le chemin d’exécution. Un format compact peut demander un kernel spécifique ; faute de support, le moteur peut refuser le chargement ou employer une autre stratégie moins avantageuse. Les versions du pilote, des bibliothèques et du moteur font partie de la configuration testée. Pour évaluer une machine, on vérifie d’abord la compatibilité, puis la mémoire sous une charge représentative et enfin les délais. Changer le matériel sans ce diagnostic peut laisser la cause principale inchangée."
           ]
+        },
+        {
+          "heading": "Exécution native, conteneur et machine virtuelle",
+          "paragraphs": [
+            "En exécution native, le moteur tourne directement dans le système installé. Une machine virtuelle, ou VM, fait fonctionner un système invité avec son propre noyau et des ressources présentées par l’hyperviseur. Un conteneur isole des processus et leurs dépendances en partageant le noyau du système qui l’héberge. Sur certains postes, ce système est lui-même une VM : conteneur et virtualisation peuvent donc se combiner.",
+            "Les ressources du poste physique ne sont pas toutes automatiquement utilisables. Une VM reçoit une allocation de mémoire et de processeurs virtuels ; un conteneur peut être soumis à des quotas. Un processeur virtuel n’est pas la promesse d’un cœur physique exclusivement réservé. Le GPU doit être rendu accessible par une configuration compatible, avec les pilotes et le moteur adaptés. Certaines VM le permettent ; d’autres configurations n’exposent aucun accélérateur au système invité."
+          ]
         }
       ],
       "deepDive": [
@@ -1459,6 +1486,14 @@
             "La capacité et la bande passante demandent deux diagnostics distincts. Une erreur d’allocation indique qu’une demande n’a pas trouvé la mémoire requise. Une utilisation mémoire stable avec une génération lente peut plutôt révéler une limite de transfert ou de calcul. Pour la multiplication de matrices donnée dans l’essentiel, on compte approximativement 2 × 128 × 64 × 32 = 524 288 opérations en comptant multiplication et addition séparément. Cette quantité ne prédit pas seule le temps : les lectures, écritures et frais de lancement interviennent aussi.",
             "Un essai utile fait varier un facteur à la fois : longueur du contexte à concurrence fixe, puis concurrence à longueur fixe. On mesure la mémoire maximale, le temps d’attente, le délai avant le premier Token et le débit de génération. On conserve aussi les erreurs et les limites effectivement appliquées. Si borner la concurrence supprime les échecs mais augmente fortement la file, la correction a déplacé le compromis. L’équipe doit alors ajuster capacité, admission ou promesse de service en restant explicite sur les longueurs réellement prises en charge."
           ]
+        },
+        {
+          "heading": "Migrer un service sans transposer ses performances",
+          "paragraphs": [
+            "Un fichier de poids compatible peut être réutilisable sur plusieurs architectures, mais un exécutable compilé pour x86 ne devient pas un programme ARM en étant copié. Préparez un moteur ou une image pour l’architecture de destination, vérifiez les instructions CPU requises et les dépendances. Gardez une trace du modèle, de son empreinte, du tokenizer, du Chat Template et des réglages afin de séparer un changement de matériel d’un changement du système évalué.",
+            "La validation fonctionnelle vérifie que le service charge les bons fichiers et répond correctement aux cas attendus. La validation de performance mesure, sur la destination, la mémoire maximale, le délai avant le premier token, le débit sous charge et la tenue dans le temps. Réussir la première ne remplace pas la seconde. De petites différences numériques entre moteurs peuvent exister ; l’exigence pertinente est la réussite des critères de la tâche, pas l’identité absolue de toutes les sorties.",
+            "Exemple fictif : une application validée sur un poste x86 avec GPU doit tourner dans une VM ARM à laquelle 16 GiB sont alloués, sans GPU exposé. Les poids GGUF sont annoncés compatibles avec le moteur ARM choisi. Il reste à vérifier les fichiers et dépendances, à tester le mode CPU réellement utilisé, puis à rejouer les cas fonctionnels et la charge attendue. Aucun pourcentage universel de ralentissement d’une VM ne permet de remplacer ces mesures."
+          ]
         }
       ],
       "takeaways": [
@@ -1477,7 +1512,9 @@
         "notion-459",
         "notion-460",
         "notion-476",
-        "notion-477"
+        "notion-477",
+        "notion-644",
+        "notion-645"
       ],
       "practice": {
         "prompt": "Une machine de 20 GiB consacre 10 GiB aux poids et 4 GiB aux autres allocations. Chaque séquence utilise 0,5 GiB de cache à la longueur choisie. Calculez le plafond théorique de séquences et expliquez pourquoi ce nombre ne suffit pas pour configurer le service.",
@@ -1510,6 +1547,14 @@
         {
           "label": "vLLM : moteur de service et mémoire",
           "url": "https://docs.vllm.ai/en/latest/"
+        },
+        {
+          "label": "Docker : conteneurs et machines virtuelles",
+          "url": "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/"
+        },
+        {
+          "label": "Microsoft : exemple d’accès au GPU dans WSL",
+          "url": "https://learn.microsoft.com/en-us/windows/wsl/tutorials/gpu-compute"
         }
       ]
     },
@@ -1656,6 +1701,14 @@
             "La version de service doit relier les poids, le moteur, le Prompt, les outils et les paramètres de recherche. Une modification du document récupéré peut changer la réponse sans changement de modèle. L’Experiment Tracking conserve les conditions d’un essai ; le Registry organise les versions de modèles et métadonnées disponibles. Aucun des deux ne remplace une politique de validation et de déploiement, mais ils rendent les décisions vérifiables.",
             "Un Canary a besoin de critères d’arrêt fixés à l’avance, d’un trafic identifiable et d’une version antérieure encore utilisable. Il peut détecter un problème de charge ou d’intégration absent des essais locaux. Il ne garantit pas qu’un petit volume contiendra tous les cas rares. Un Rollback rétablit une configuration logicielle ; il n’annule pas automatiquement les messages, modifications ou autres effets déjà produits. La stratégie de déploiement doit donc distinguer retour technique et traitement des conséquences métier."
           ]
+        },
+        {
+          "heading": "Mesurer la performance qui dure",
+          "paragraphs": [
+            "Une machine peut répondre vite au début puis ralentir après plusieurs minutes. Le Thermal Throttling est une réduction de fréquence liée à une contrainte thermique. Une limite de puissance peut aussi réduire les fréquences sans que la température maximale soit atteinte. À l’inverse, un délai plus long peut venir d’une file d’attente, d’un contexte plus grand ou d’une concurrence accrue : une température élevée ne démontre pas à elle seule la cause du ralentissement.",
+            "Pendant un essai prolongé, observez ensemble la charge, le débit, les latences, la température, les fréquences et les indicateurs de limitation disponibles. Comparez des fenêtres de mesure après échauffement, avec le même modèle, les mêmes requêtes, les mêmes longueurs d’entrée et de sortie, et les mêmes conditions de concurrence. Un débit de pointe sur quelques secondes ne décrit pas nécessairement le service que recevra le dixième utilisateur.",
+            "L’énergie consommée par tâche terminée complète la mesure de vitesse. Avec une puissance moyenne mesurée de 20 W pendant 10 secondes, une requête consomme 200 J au périmètre considéré. Une autre configuration à 12 W pendant 20 secondes consomme 240 J : une puissance plus faible ne signifie pas forcément moins d’énergie. Comparez la même tâche, à qualité acceptable, en précisant si la mesure porte sur une puce ou sur toute la machine, et si la veille est incluse."
+          ]
         }
       ],
       "deepDive": [
@@ -1685,6 +1738,14 @@
             "Pour un Canary fictif de 5 %, une journée de dix mille demandes fournit environ cinq cents observations. Une catégorie présente dans 1 % du trafic n’y représente qu’environ cinq cas en moyenne. L’absence d’échec sur ce petit groupe ne prouve pas sa robustesse. On complète donc l’exposition réelle par des Regression Tests ciblés. Si le Canary dégrade la fidélité sur les documents longs, on arrête selon le critère prévu, même si ses erreurs techniques restent faibles et son débit augmente.",
             "L’arbitrage de déploiement porte sur vitesse d’apprentissage et portée des conséquences. Une faible exposition limite l’impact mais demande plus de temps pour observer certains défauts. Une exposition plus large fournit davantage de données tout en touchant plus d’utilisateurs. Avant la progression, on vérifie la compatibilité de la configuration précédente avec les données et dépendances actuelles. Le rapport final relie la décision aux mesures : qualité conservée, objectifs de service respectés, coût observé et procédure de retour testée. Cette preuve vaut davantage qu’une démonstration rapide sur quelques questions choisies."
           ]
+        },
+        {
+          "heading": "Distinguer une limite thermique d’une limite de puissance",
+          "paragraphs": [
+            "Cas fictif : une charge répétée produit 18 tokens par seconde au démarrage, puis 9 après quinze minutes. Au même moment, la fréquence baisse et le journal indique une limitation thermique active. Cela soutient une hypothèse thermique, sans prouver que tout le ralentissement a cette seule cause. Pour la tester, répétez la même charge en ne changeant que le refroidissement, puis comparez les mesures stabilisées sur plusieurs essais.",
+            "Changer simultanément de modèle, de longueur de sortie et de refroidissement rendrait l’effet impossible à attribuer. Si les nouvelles mesures restent proches de 17 tokens par seconde et que le signal de limitation thermique disparaît, elles renforcent l’explication thermique dans ces conditions. Elles ne garantissent pas ce débit pour d’autres machines, saisons, contextes ou niveaux de concurrence.",
+            "Une Power Limit fixe une enveloppe de puissance, avec parfois plusieurs fenêtres de temps selon le matériel. Un journal indiquant cette limite, sans signal thermique, invite à examiner le profil d’alimentation plutôt qu’à conclure automatiquement à un défaut de refroidissement. Conservez les protections du matériel : le but est de choisir une configuration viable et de mesurer ses compromis, pas de supprimer les limites de sécurité."
+          ]
         }
       ],
       "takeaways": [
@@ -1706,7 +1767,9 @@
         "notion-481",
         "notion-482",
         "notion-483",
-        "notion-484"
+        "notion-484",
+        "notion-642",
+        "notion-643"
       ],
       "practice": {
         "prompt": "Une nouvelle configuration traite 20 % de demandes en plus, mais son Canary fait passer les erreurs de 0,5 % à 2 %. Le critère fixé pour ce Canary exige au moins 99 % de demandes sans erreur sur les 1 000 demandes observées. Combien d’erreurs observe-t-on et quelle décision prendre avant d’étendre le trafic ?",
@@ -1747,6 +1810,14 @@
         {
           "label": "TensorRT-LLM : périmètre du moteur",
           "url": "https://docs.nvidia.com/tensorrt-llm/index.html"
+        },
+        {
+          "label": "Raspberry Pi : gestion thermique et refroidissement",
+          "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#add-heatsinks"
+        },
+        {
+          "label": "Noyau Linux : limites de puissance et fenêtres de temps",
+          "url": "https://www.kernel.org/doc/html/latest/power/powercap/powercap.html"
         }
       ]
     }

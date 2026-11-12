@@ -158,5 +158,10 @@
     "explanation": "L'Offloading place certaines données ou certains états hors de la mémoire rapide de l'accélérateur, généralement en RAM ou sur disque, et les récupère au besoin. Il permet d'exécuter des modèles ou des contextes qui dépasseraient autrement la capacité disponible ; les transferts, leur anticipation et la répartition du calcul déterminent le ralentissement éventuel.",
     "example": "Exemple illustratif : une station conserve une partie des couches d'un modèle en RAM et les transfère vers le GPU lorsqu'elles doivent calculer. Le modèle devient utilisable malgré une mémoire GPU limitée.",
     "misconception": "L'Offloading n'est pas une compression et ne rend pas les transferts gratuits. Déplacer les poids, le KV Cache ou les états d'entraînement correspond à des besoins différents."
+  },
+  "notion-646": {
+    "explanation": "Les artefacts matérialisent les éléments nécessaires à l’utilisation d’une version du modèle. Selon le format et le moteur, certains éléments sont regroupés et d’autres restent séparés. Il faut relever leurs versions, vérifier leur intégrité et consulter le manifeste pour savoir quels fichiers sont requis pour la tâche prévue.",
+    "example": "Exemple illustratif : un déploiement multimodal demande un fichier de poids GGUF et un projecteur compatible de la même variante. Télécharger seulement le fichier de langage ne valide pas le traitement des images.",
+    "misconception": "Un nom de fichier renseigne sur une variante sans prouver son contenu, sa compatibilité ou ses droits d’usage. La taille sur disque ne remplace pas une mesure de mémoire en service."
   }
 }

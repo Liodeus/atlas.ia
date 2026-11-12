@@ -1,3 +1,4 @@
+import {validateWorkshops} from './workshopProgress.js';
 import {validateFlashcards} from './flashcards.js';
 import {validateStudyMarks} from './studyMarks.js';
 export const normalize = s => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
@@ -17,7 +18,7 @@ export function validateProgress(p) {
  const origin=x=>x==null||(typeof x==='object'&&!Array.isArray(x)&&Number.isInteger(x.theme)&&x.theme>0&&x.theme<=10000&&Number.isInteger(x.step)&&x.step>=1&&x.step<=3);
  const answer=x=>typeof x==='string'||strings(x);
  const details=h=>(h.origin===undefined||origin(h.origin))&&(h.mode===undefined||['practice','exam'].includes(h.mode))&&(h.level===undefined||['all','debutant','intermediaire','avance'].includes(h.level))&&(h.themes===undefined||(Array.isArray(h.themes)&&h.themes.length<=100&&h.themes.every(t=>Number.isInteger(t)&&t>0&&t<=10000)))&&(h.results===undefined||(Array.isArray(h.results)&&h.results.length<=1000&&h.results.every(r=>r&&typeof r==='object'&&typeof r.id==='string'&&r.id.length<200&&typeof r.correct==='boolean'&&answer(r.value))));
- if(!p||p.version!==1||!strings(p.completed)||!strings(p.favorites)||!strings(p.errors)||!Array.isArray(p.history)||p.history.length>50||(p.flashcards!==undefined&&!validateFlashcards(p.flashcards))||(p.studyMarks!==undefined&&!validateStudyMarks(p.studyMarks))) return false;
+ if(!p||p.version!==1||(p.workshops!==undefined&&!validateWorkshops(p.workshops))||!strings(p.completed)||!strings(p.favorites)||!strings(p.errors)||!Array.isArray(p.history)||p.history.length>50||(p.flashcards!==undefined&&!validateFlashcards(p.flashcards))||(p.studyMarks!==undefined&&!validateStudyMarks(p.studyMarks))) return false;
  if(!p.history.every(h=>h&&typeof h.id==='number'&&typeof h.date==='string'&&!Number.isNaN(Date.parse(h.date))&&Number.isInteger(h.correct)&&Number.isInteger(h.total)&&h.correct>=0&&h.correct<=h.total&&details(h)))return false;
  const s=p.session;
  if(s==null)return true;

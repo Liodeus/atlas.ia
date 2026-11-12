@@ -869,6 +869,14 @@
             "Le test de compatibilité porte sur plusieurs éléments : architecture du modèle, types de tenseurs, méthode de Quantization, opérations prises en charge et matériel. Un fichier peut être lisible tout en déclenchant une conversion coûteuse ou un calcul sur le CPU. L’extension représente un contrat de stockage ou d’échange, tandis que le moteur détermine l’exécution disponible.",
             "La mémoire maximale doit être mesurée pendant un scénario représentatif, pas seulement après le chargement. On prévoit une marge pour les allocations temporaires et les variations de longueur. Si l’Offloading devient nécessaire, le débit du lien entre CPU et GPU peut devenir décisif. Une capacité de RAM suffisante ne garantit pas un temps de réponse acceptable."
           ]
+        },
+        {
+          "heading": "Lire le nom et le contenu d’un fichier de modèle",
+          "paragraphs": [
+            "Prenons le nom fictif Modele-A-7B-Instruct-Q4_K_M.gguf. Modele-A désigne une famille ; 7B annonce environ sept milliards de paramètres ; Instruct indique une variante adaptée au suivi d’instructions ; Q4_K_M nomme une recette de quantification ; .gguf indique le format du fichier. Ces indices servent à trier les téléchargements, mais la fiche du modèle et les métadonnées doivent confirmer ce qu’il contient. Un nom de fichier peut être incomplet ou trompeur.",
+            "Q4_K_M ne promet ni exactement quatre bits pour chaque poids ni une taille totale calculable en divisant simplement le nombre de paramètres par deux. Une recette peut combiner plusieurs précisions et ajouter des métadonnées. Pour préparer la mémoire, partez de la taille réelle des poids chargés, puis ajoutez le KV Cache, les buffers et une marge. Un modèle qui tient sur le disque ne tient pas nécessairement en mémoire pendant son utilisation.",
+            "Un artefact de modèle est un fichier distribué pour utiliser une version donnée : poids, configuration, tokenizer ou composant associé. Vérifiez l’origine, la version, la licence, l’intégrité du téléchargement et les formats réellement acceptés par votre moteur. Le tokenizer et le Chat Template doivent correspondre à cette variante ; ils peuvent être intégrés au fichier ou fournis séparément. Renommer une extension ne convertit jamais un modèle."
+          ]
         }
       ],
       "deepDive": [
@@ -894,6 +902,20 @@
             "Pour choisir, l’équipe fixe une limite de dégradation acceptable avant les essais. Elle peut demander que l’extraction de codes produits conserve son taux de réussite, tout en mesurant le gain de mémoire et le temps par requête. Une petite variation de Perplexity ne garantit pas la stabilité de cette extraction. Les cas où deux réponses plausibles sont proches peuvent basculer après une perturbation numérique faible, même si la plupart des réponses restent similaires.",
             "Enfin, la Quantization peut accélérer un calcul limité par les transferts en réduisant les octets lus, mais elle peut ajouter une déquantification ou employer un Kernel mal adapté. Le meilleur compromis peut donc être une version 8 bits rapide plutôt qu’une version 4 bits plus petite, sur un matériel donné. Une version plus compacte peut néanmoins rester préférable si elle évite l’Offloading. Le budget mémoire et la mesure de latence doivent être examinés ensemble, avec la même charge et les mêmes critères de qualité."
           ]
+        },
+        {
+          "heading": "Préparer tous les composants d’un modèle multimodal",
+          "paragraphs": [
+            "Une capacité multimodale ne se déduit pas du seul nom de la famille. Dans certains déploiements avec llama.cpp, le fichier GGUF du modèle de langage doit être accompagné d’un fichier mmproj contenant des composants nécessaires à la modalité image ou audio. Le manifeste de la variante et les instructions du moteur précisent les fichiers requis. Un projecteur d’une autre version n’est pas un remplacement interchangeable.",
+            "Exemple fictif : un manifeste demande Modele-A-7B-Instruct-Q4_K_M.gguf et mmproj-Modele-A-v2.gguf pour répondre à des questions sur des images. Il précise que le tokenizer et le Chat Template sont déjà intégrés, et que cette paire est prise en charge par le moteur installé. Le jeu de données d’entraînement et une conversion ONNX destinée à un autre moteur ne font pas partie de ce téléchargement minimal. Après vérification des fichiers, testez une image connue : un chargement réussi du seul modèle de langage ne valide pas la chaîne visuelle."
+          ]
+        },
+        {
+          "heading": "Composer un budget mémoire sans sacrifier la tâche",
+          "paragraphs": [
+            "Pour dimensionner un service, fixez d’abord ce qu’il doit fournir : longueur de contexte, nombre de séquences simultanées et qualité minimale. Dans une estimation simplifiée à cache dense de précision fixe, le KV Cache total est le coût par position et par séquence multiplié par le nombre de positions conservées et par le nombre de séquences. Un coût de 128 KiB, 8 192 positions et quatre séquences donnent 4 GiB, car 1 GiB vaut 1 048 576 KiB. Ici le contexte inclut les tokens d’entrée et ceux générés qui restent en cache.",
+            "Exemple entièrement fictif : une machine dispose de 16 GiB, dont 4 sont réservés au système et à la marge. Les poids occupent 6,4 GiB, les buffers 1 GiB et le cache 4 GiB : le service utilise 11,4 GiB sur ses 12 GiB disponibles. Réduire le contexte ou le nombre de séquences ferait baisser la consommation, mais ne respecterait plus une mission exigeant 8 192 positions et quatre utilisateurs simultanés. Quantifier davantage exige aussi de refaire l’évaluation de qualité. Ce calcul n’est pas un prédicteur de vitesse ; les allocations réelles et leur pic doivent être mesurés."
+          ]
         }
       ],
       "takeaways": [
@@ -913,7 +935,8 @@
         "notion-230",
         "notion-231",
         "notion-259",
-        "notion-260"
+        "notion-260",
+        "notion-646"
       ],
       "practice": {
         "prompt": "Un modèle possède six milliards de Weights. Estimez leur stockage brut en 16 bits puis en 4 bits, en Go décimaux. La version 4 bits utilise ensuite 0,4 Go de métadonnées, 2 Go de cache et 1 Go de buffers. Tient-elle dans 6 Go disponibles ? Quelle vérification de qualité faire avant de la retenir ?",
@@ -950,6 +973,10 @@
         {
           "label": "Frantar et al., GPTQ",
           "url": "https://arxiv.org/abs/2210.17323"
+        },
+        {
+          "label": "llama.cpp : formats de quantification et composants multimodaux",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md"
         }
       ]
     },

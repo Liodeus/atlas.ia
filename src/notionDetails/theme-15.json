@@ -143,5 +143,25 @@
     "explanation": "Un rollback remet en service une version antérieure lorsqu’un changement dégrade le fonctionnement. Dans une application d’IA, cette version peut inclure le modèle, le prompt, l’index et leur configuration compatible ; le retour doit donc être préparé et testé, avec les artefacts nécessaires encore disponibles et un moyen de réorienter les requêtes.",
     "example": "Exemple illustratif : Un nouveau prompt provoque des réponses mal formatées. L’équipe restaure la version précédente du prompt et du parseur associé, puis vérifie que les nouvelles requêtes retrouvent le comportement attendu.",
     "misconception": "Un rollback ne supprime pas les actions déjà exécutées ni les données déjà modifiées. Restaurer un service et réparer ses effets passés sont deux opérations différentes."
+  },
+  "notion-642": {
+    "explanation": "Une limitation thermique peut réduire la vitesse d’un calcul prolongé lorsque le composant doit contenir sa température. Pour la diagnostiquer, il faut rapprocher les fréquences, les températures, le débit et les signaux de limitation exposés par le matériel, tout en maintenant la charge de travail comparable.",
+    "example": "Exemple illustratif : le débit d’un service baisse après un quart d’heure et un signal de limitation thermique apparaît. Un nouvel essai identique avec un refroidissement amélioré permet de tester cette hypothèse.",
+    "misconception": "Toute baisse de débit ne vient pas de la chaleur. Une file d’attente, une limite de puissance ou un contexte plus long peuvent aussi modifier les performances."
+  },
+  "notion-643": {
+    "explanation": "Une limite de puissance encadre la consommation d’un composant selon des règles et des durées propres au matériel. Elle peut expliquer des fréquences différentes entre deux profils d’alimentation. Pour évaluer un service, on associe ce réglage aux mesures de durée, de puissance et d’énergie par tâche correctement terminée.",
+    "example": "Exemple illustratif : une tâche prend 10 secondes à 20 W, soit 200 J, contre 20 secondes à 12 W, soit 240 J. Sur ce périmètre fictif, le profil le moins puissant consomme davantage d’énergie par tâche.",
+    "misconception": "Puissance et énergie ne sont pas interchangeables : les watts décrivent un rythme de consommation, alors que les joules intègrent aussi la durée de la tâche."
+  },
+  "notion-644": {
+    "explanation": "Une machine virtuelle reçoit une vue de processeurs, de mémoire et de périphériques qui dépend de sa configuration. Ces ressources peuvent être partagées avec d’autres activités du poste. L’accès à un accélérateur est possible dans certaines configurations, mais sa présence physique ne suffit pas à le rendre utilisable dans le système invité.",
+    "example": "Exemple illustratif : un ordinateur possède un GPU, mais une VM de test ne voit que ses processeurs virtuels. Le moteur y utilise le CPU tant qu’un accès compatible au GPU n’a pas été configuré et vérifié.",
+    "misconception": "Une VM n’est ni forcément privée de GPU ni forcément aussi rapide que le système hôte. Les capacités réellement exposées et la charge mesurée déterminent le résultat."
+  },
+  "notion-645": {
+    "explanation": "Un conteneur facilite la distribution cohérente d’une application et de ses dépendances. Son exécution reste liée au noyau, à l’architecture et aux ressources disponibles. Des quotas peuvent limiter le CPU et la mémoire, et les accélérateurs nécessitent une configuration adaptée ; l’image seule ne définit donc pas toute la machine d’exécution.",
+    "example": "Exemple illustratif : le même service conteneurisé est testé avec 8 puis 16 GiB de mémoire autorisée. Il peut démarrer dans les deux cas, mais supporter des charges simultanées différentes.",
+    "misconception": "Un conteneur n’est pas une machine virtuelle complète. Il peut toutefois fonctionner à l’intérieur d’une VM, et sa portabilité ne garantit pas des performances identiques."
   }
 }

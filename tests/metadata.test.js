@@ -29,7 +29,7 @@ test('unknown pages are not indexed and public sitemap paths are unique and vali
   const meta=pageMetadata(path);assert.equal(meta.noindex,true);assert.equal(meta.url,null);
  }
  const paths=publicPagePaths();assert.equal(new Set(paths).size,paths.length);
- assert.equal(paths.filter(path=>path.startsWith('/notions/')).length,571);
+ assert.equal(paths.filter(path=>path.startsWith('/notions/')).length,577);
  assert.equal(paths.filter(path=>path.startsWith('/cours/')).length,54);
  assert.ok(!paths.includes('/progression'));
  for(const path of paths)assert.equal(pageMetadata(path).noindex,false,path);
