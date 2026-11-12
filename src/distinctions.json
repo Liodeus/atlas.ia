@@ -549,5 +549,155 @@
     },
     "difference": "Un conteneur peut fonctionner dans une VM. Dans les deux cas, vérifiez les quotas, les dépendances et les accélérateurs réellement accessibles avant de prévoir les performances.",
     "example": "Un GPU présent sur le poste n’est pas nécessairement visible dans sa VM. Une image de conteneur ne garantit pas non plus à elle seule l’accès au GPU."
+  },
+  {
+    "title": "Format valide ≠ contenu correct",
+    "left": {
+      "name": "Format valide",
+      "explanation": "Respecte les règles de structure attendues : champs obligatoires, types de valeurs et contraintes déclarées dans un schéma, par exemple JSON Schema.",
+      "concept": "notion-313"
+    },
+    "right": {
+      "name": "Contenu correct",
+      "explanation": "Donne des informations exactes pour la tâche. Cette vérification demande de confronter les valeurs aux sources et aux règles métier pertinentes.",
+      "concept": "notion-356"
+    },
+    "difference": "Le schéma vérifie les contraintes qu’il exprime ; il ne prouve pas que les valeurs correspondent aux faits. Validez la structure, puis vérifiez le contenu.",
+    "example": "Une extraction renvoie {\"montant\": 120, \"devise\": \"EUR\"}. Ces champs peuvent être conformes au schéma alors que la facture indique 102 euros."
+  },
+  {
+    "title": "Probabilité d’un token ≠ probabilité que la réponse soit vraie",
+    "left": {
+      "name": "Probabilité d’un token",
+      "explanation": "Indique la probabilité attribuée par le modèle à une continuation donnée dans son contexte. Un Logprob en est le logarithme.",
+      "concept": "notion-138"
+    },
+    "right": {
+      "name": "Probabilité que la réponse soit vraie",
+      "explanation": "Estime la chance qu’une affirmation corresponde aux faits. Une estimation fiable demande une méthode évaluée sur des réponses dont on connaît la justesse.",
+      "concept": "notion-360"
+    },
+    "difference": "La vraisemblance d’une continuation textuelle ne mesure pas directement sa vérité. Un token très probable ne suffit donc pas à annoncer un pourcentage de certitude factuelle.",
+    "example": "Dans un cas fictif, après « La date de livraison est le », le modèle attribue 90 % au token « 12 ». Cela ne signifie pas que le colis a 90 % de chances d’arriver le 12 : il faut consulter le suivi."
+  },
+  {
+    "title": "Grande fenêtre de contexte ≠ bonne exploitation du contexte",
+    "left": {
+      "name": "Grande fenêtre de contexte",
+      "explanation": "Permet de traiter une quantité importante de tokens dans les limites d’entrée et de sortie du système. Elle décrit une capacité, pas un score de compréhension.",
+      "concept": "notion-133"
+    },
+    "right": {
+      "name": "Bonne exploitation du contexte",
+      "explanation": "Consiste à retrouver les informations utiles, à les relier et à les utiliser correctement pour répondre. Cette capacité doit être évaluée sur la tâche visée.",
+      "concept": "notion-97"
+    },
+    "difference": "Un document peut tenir entièrement dans la fenêtre sans que tous ses détails soient correctement exploités. Testez notamment différentes positions du passage décisif et la présence d’informations parasites.",
+    "example": "Un contrat entier tient dans l’entrée, mais le modèle oublie une exception au milieu du document. L’acceptation du fichier ne garantit pas que sa réponse applique cette clause."
+  },
+  {
+    "title": "Appel d’outil ≠ action réalisée",
+    "left": {
+      "name": "Appel d’outil",
+      "explanation": "Demande l’exécution d’une opération avec des arguments, par exemple créer un événement. L’application doit encore autoriser, transmettre et exécuter cette demande.",
+      "concept": "notion-322"
+    },
+    "right": {
+      "name": "Action réalisée",
+      "explanation": "Correspond à l’effet attendu effectivement obtenu dans le système concerné. On le vérifie avec le statut d’exécution et, si nécessaire, l’état de la ressource créée ou modifiée.",
+      "concept": null
+    },
+    "difference": "Une demande d’action ne constitue pas une preuve d’exécution. Un résultat peut signaler une erreur ou une simple mise en attente ; annoncez la réussite uniquement au niveau réellement confirmé.",
+    "example": "Le modèle demande de créer une réunion à 14 h, mais l’outil répond « accès refusé ». La réunion n’est pas créée : l’assistant doit expliquer le refus, pas annoncer un rendez-vous confirmé."
+  },
+  {
+    "title": "Délai d’attente dépassé ≠ action échouée",
+    "left": {
+      "name": "Délai d’attente dépassé",
+      "explanation": "Signifie que l’appelant n’a pas obtenu la réponse attendue dans le temps prévu. Ce Timeout ne révèle pas, à lui seul, l’état final de l’opération distante.",
+      "concept": "notion-513"
+    },
+    "right": {
+      "name": "Action échouée",
+      "explanation": "Signifie qu’une information fiable établit que l’opération n’a pas abouti comme prévu. Selon l’outil, il faut encore vérifier si elle a produit des effets partiels.",
+      "concept": null
+    },
+    "difference": "L’absence de réponse laisse parfois l’issue inconnue. Vérifiez le statut avant de relancer ; si l’outil le permet, réutilisez une clé d’idempotence pour éviter de répéter l’effet de la même demande.",
+    "example": "Un service crée un ticket, mais sa réponse se perd sur le réseau. Après le Timeout, renvoyer la création sans vérification peut produire un deuxième ticket."
+  },
+  {
+    "title": "Token ≠ mot",
+    "left": {
+      "name": "Token",
+      "explanation": "Est une unité produite par le Tokenizer. Dans un texte, elle peut représenter un mot, un fragment, un signe de ponctuation ou inclure un espace, selon le vocabulaire utilisé.",
+      "concept": "notion-122"
+    },
+    "right": {
+      "name": "Mot",
+      "explanation": "Est une unité linguistique que l’on reconnaît à la lecture. Ses frontières ne correspondent pas nécessairement à celles du découpage effectué pour le modèle.",
+      "concept": null
+    },
+    "difference": "Il n’existe pas de conversion fixe entre nombre de mots et nombre de tokens. Pour vérifier une limite de contexte ou un volume facturé en tokens, utilisez le Tokenizer du modèle concerné.",
+    "example": "Un mot rare peut devenir plusieurs tokens alors qu’un mot courant n’en forme qu’un. Deux phrases de dix mots ne coûtent donc pas nécessairement le même nombre de tokens."
+  },
+  {
+    "title": "Jeu de validation ≠ jeu de test",
+    "left": {
+      "name": "Jeu de validation",
+      "explanation": "Sert à comparer des réglages ou des variantes pendant la mise au point. Ses résultats influencent le choix final, même sans servir directement à calculer les mises à jour des poids.",
+      "concept": "notion-178"
+    },
+    "right": {
+      "name": "Jeu de test",
+      "explanation": "Sert à évaluer la solution retenue sur des données préservées des choix de développement. Il doit représenter l’usage visé et rester distinct des données utilisées pour ces choix.",
+      "concept": null
+    },
+    "difference": "La validation aide à choisir ; le test mesure le résultat du choix. Si vous modifiez la solution en fonction des erreurs du test, ce jeu n’est plus une évaluation finale indépendante.",
+    "example": "Une équipe compare trois réglages sur la validation, en retient un puis l’évalue sur le test. Choisir ensuite un autre réglage parce qu’il réussit mieux sur ce test revient à l’utiliser pour la sélection."
+  },
+  {
+    "title": "Modèle ≠ moteur d’inférence",
+    "left": {
+      "name": "Modèle",
+      "explanation": "Désigne ici le réseau défini par son architecture et ses paramètres appris. Pour un LLM, cet ensemble sert à calculer des prédictions à partir des tokens fournis.",
+      "concept": "notion-4"
+    },
+    "right": {
+      "name": "Moteur d’inférence",
+      "explanation": "Est le logiciel qui charge un modèle compatible et organise ses calculs sur le matériel disponible. Il gère notamment les opérations, la mémoire et certains mécanismes de cache.",
+      "concept": "notion-255"
+    },
+    "difference": "Le modèle fournit les paramètres appris ; le moteur les exécute. Changer de moteur peut modifier la vitesse et la mémoire utilisée sans réentraînement, sous réserve de compatibilité et de réglages comparables.",
+    "example": "llama.cpp peut exécuter un modèle compatible distribué au format GGUF. Mettre à jour llama.cpp change le logiciel d’exécution ; cela ne réentraîne pas les poids contenus dans le fichier."
+  },
+  {
+    "title": "Quantification des poids ≠ quantification du KV Cache",
+    "left": {
+      "name": "Quantification des poids",
+      "explanation": "Réduit la précision numérique des paramètres appris, par exemple en stockant des poids sur 4 bits. Elle agit sur la mémoire occupée par ces paramètres.",
+      "concept": "notion-259"
+    },
+    "right": {
+      "name": "Quantification du KV Cache",
+      "explanation": "Réduit la précision des clés et valeurs calculées pour les tokens et conservées afin de les réutiliser. Elle agit sur la mémoire du cache pendant l’inférence.",
+      "concept": "notion-235"
+    },
+    "difference": "Les deux techniques ciblent des postes mémoire différents. Quantifier les poids ne quantifie pas automatiquement le cache ; vérifiez séparément leur prise en charge, leurs gains et leurs effets sur la qualité et la vitesse.",
+    "example": "Un moteur peut charger des poids en 4 bits tout en conservant le KV Cache en 16 bits. Réduire ensuite la précision du cache constitue un autre réglage, à évaluer sur les contextes utilisés."
+  },
+  {
+    "title": "Puissance ≠ énergie consommée",
+    "left": {
+      "name": "Puissance",
+      "explanation": "Décrit le rythme de consommation d’énergie, en watts : un watt correspond à un joule par seconde. Une limite de puissance est un plafond de fonctionnement, pas une mesure de l’énergie totale.",
+      "concept": "notion-643"
+    },
+    "right": {
+      "name": "Énergie consommée",
+      "explanation": "Cumule la consommation sur une durée, en joules ou en wattheures. Sur un même périmètre de mesure, elle correspond à la puissance moyenne multipliée par la durée.",
+      "concept": null
+    },
+    "difference": "Une puissance plus faible peut s’accompagner d’une exécution plus longue et d’une énergie totale plus élevée. Comparez l’énergie par tâche correctement terminée, avec le même périmètre matériel et les mêmes critères de réussite.",
+    "example": "Mesures fictives pour une même tâche réussie : 10 secondes à 20 W de moyenne donnent 200 J ; 20 secondes à 12 W donnent 240 J. Le second réglage utilise moins de puissance, mais davantage d’énergie."
   }
 ]

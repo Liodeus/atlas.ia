@@ -9,6 +9,7 @@ import {courseEditorial} from '../../src/courseCurriculum.js';
 import {lessonTiming,formatDuration} from '../../src/courseTiming.js';
 import {practiceSupport,lessonSectionId,lessonPracticeId} from '../../src/practiceSupport.js';
 import {learningPaths} from '../../src/learningPaths.js';
+import distinctions from '../../src/distinctions.json' with {type:'json'};
 
 let server, browser, page; const pageErrors=[];
 before(async()=>{
@@ -569,7 +570,7 @@ test('comparison deep links open the right disclosure and preserve keyboard acce
  await page.keyboard.press('Enter');assert.equal(await item.evaluate(el=>el.open),true);
  await page.getByLabel('Rechercher une distinction').fill('aucun-resultat-xyz');
  await page.getByRole('button',{name:'Effacer la recherche'}).click();
- assert.equal(await page.locator('.distinction-card').count(),37);
+ assert.equal(await page.locator('.distinction-card').count(),distinctions.length);
 });
 test('theme resources remain reachable by keyboard without obscuring the lessons',async()=>{
  await page.goto('http://127.0.0.1:5199/themes/1');
