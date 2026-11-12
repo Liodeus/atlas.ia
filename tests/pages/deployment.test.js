@@ -77,7 +77,7 @@ test('exercise reminder links work from a direct GitHub Pages lesson link',async
 test('lesson and notion HTML expose distinct metadata and content without JavaScript',async()=>{
  const context=await browser.newContext({javaScriptEnabled:false}),fresh=await context.newPage();
  try{
-  for(const [route,title,content] of [['cours/1/lecons/2','Foundation Model','Les notions à connaître'],['notions/notion-2','Machine Learning','Pour comprendre'],['parcours/documents','Concevoir un assistant','Indexation puis pipeline RAG']]){
+  for(const [route,title,content] of [['cours/1/lecons/2','Foundation Model','Les notions à connaître'],['notions/notion-2','Machine Learning','Pour comprendre'],['notions/notion-621','Jev','TypeSafe'],['notions/notion-640','Engram','mémoire conditionnelle'],['parcours/documents','Concevoir un assistant','Indexation puis pipeline RAG']]){
    const response=await fresh.goto(origin+base+route);assert.equal(response.status(),200);
    assert.ok((await fresh.title()).includes(title));await fresh.getByText(content,{exact:false}).first().waitFor();
    const canonical=await fresh.locator('link[rel="canonical"]').getAttribute('href');assert.ok(canonical.endsWith('/'+route));
@@ -87,7 +87,7 @@ test('lesson and notion HTML expose distinct metadata and content without JavaSc
   const image=await fetch(origin+base+'social-card.png');assert.equal(image.status,200);
   assert.equal(Buffer.from(await image.arrayBuffer()).subarray(1,4).toString(),'PNG');
   const sitemap=await (await fetch(origin+base+'sitemap.xml')).text();
-  assert.ok(sitemap.includes('/cours/1/lecons/2'));assert.ok(sitemap.includes('/notions/notion-620'));assert.ok(!sitemap.includes('/progression'));
+  assert.ok(sitemap.includes('/cours/1/lecons/2'));assert.ok(sitemap.includes('/notions/notion-620'));assert.ok(sitemap.includes('/notions/notion-640'));assert.ok(!sitemap.includes('/progression'));
  }finally{await context.close()}
 });
 test('project homepage loads with assets from the Pages subpath',async()=>{

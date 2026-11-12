@@ -158,5 +158,10 @@
     "explanation": "CLIP apprend à rapprocher les représentations d’images et de textes associés grâce à un objectif contrastif. Une fois entraîné, il peut comparer une image à plusieurs descriptions ou rechercher des images par texte ; les résultats reflètent les associations apprises et dépendent notamment des formulations choisies, des données et du domaine d’utilisation.",
     "example": "Exemple illustratif : une photothèque compare une image aux descriptions « une rue enneigée » et « une plage ensoleillée ». Le score de proximité aide à choisir une étiquette parmi ces propositions.",
     "misconception": "CLIP n’est pas, à lui seul, un générateur d’images ni un rédacteur de légendes. Un score de similarité ne constitue pas une probabilité universelle que la description soit vraie."
+  },
+  "notion-630": {
+    "explanation": "Un modèle du monde conditionné par les actions reçoit une observation ou sa représentation ainsi qu’une commande candidate. Il prédit un état ultérieur, éventuellement dans un espace latent. Un planificateur peut comparer plusieurs suites d’actions avec un objectif donné. L’entraînement doit relier des actions à leurs conséquences, au-delà de la seule observation de vidéos.",
+    "example": "Exemple illustratif : Un robot envisage de pousser un objet vers la droite ou de le contourner. Le modèle estime les effets de ces actions ; le planificateur choisit ensuite selon l’objectif et les contraintes.",
+    "misconception": "Prédire une vidéo plausible ne suffit pas à simuler correctement une intervention. Les erreurs peuvent s’accumuler sur plusieurs étapes, surtout pour des situations éloignées des données apprises."
   }
 }

@@ -70,5 +70,17 @@
   ],
   "notion-530": [
     "https://www.anthropic.com/engineering/claude-code-sandboxing"
+  ],
+  "notion-636": [
+    "https://agentclientprotocol.com/get-started/introduction"
+  ],
+  "notion-637": [
+    "https://agents.md/"
+  ],
+  "notion-638": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/client/sampling"
+  ],
+  "notion-639": [
+    "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
   ]
 }

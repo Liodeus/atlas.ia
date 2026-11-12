@@ -143,5 +143,25 @@
     "explanation": "Un Dense Model utilise généralement les mêmes blocs de calcul pour chaque token, au lieu de sélectionner seulement certains experts selon l’entrée. Cette régularité simplifie l’exécution, mais le coût dépend aussi de la longueur de séquence et des opérations utilisées ; le nombre de paramètres ne résume donc pas toute la charge.",
     "example": "Exemple illustratif : lors du déploiement d’un modèle dense, une équipe estime la mémoire des poids puis mesure séparément le coût des longues requêtes, qui mobilisent aussi des activations et du cache.",
     "misconception": "Dense ne signifie pas que chaque paramètre stocké est lu à chaque token : les tables d’embeddings, notamment, utilisent les lignes correspondant aux identifiants consultés."
+  },
+  "notion-622": {
+    "explanation": "TypeSafe emploie System One Model pour décrire une approche qui transforme un contexte en décisions directement exploitables par un programme. L’application définit les réponses possibles et reçoit des valeurs et probabilités. Le nom s’inspire de la distinction psychologique entre pensée rapide et délibérée ; il décrit ici un positionnement technique et commercial, pas une capacité cognitive humaine démontrée.",
+    "example": "Exemple illustratif : Dans un catalogue, un composant classe une nouvelle annonce parmi des rubriques définies. Un autre modèle peut ensuite rédiger sa description : les deux composants remplissent des fonctions différentes.",
+    "misconception": "Ce n’est pas une catégorie normalisée de toute l’industrie. Une probabilité bien calibrée décrit un ensemble de prédictions et ne certifie pas chaque décision."
+  },
+  "notion-623": {
+    "explanation": "Un modèle discriminatif apprend une relation entre des observations et une sortie cible. Il peut séparer des classes ou estimer une valeur numérique ; une formulation probabiliste vise par exemple la probabilité d’une classe sachant l’entrée. Ce repère aide à comprendre pourquoi un système de décision n’a pas forcément besoin de produire du langage pour être utile.",
+    "example": "Exemple illustratif : À partir du texte d’un message, un classificateur estime s’il concerne une panne ou une demande commerciale. On mesure ses erreurs de catégorie, sans lui demander de rédiger une réponse.",
+    "misconception": "Discriminatif ne signifie ni simple ni infaillible. Ce terme ne désigne pas uniquement le Discriminator d’un GAN, et un modèle génératif peut aussi servir à classer."
+  },
+  "notion-627": {
+    "explanation": "Un modèle de langage par diffusion apprend à reconstruire du texte à partir d’une version altérée. Dans une diffusion à masques, plusieurs positions sont initialement inconnues, puis des prédictions successives complètent la séquence. Cette organisation change la manière de générer sans imposer l’abandon du Transformer. LLaDA constitue un exemple de cette famille de méthodes.",
+    "example": "Exemple illustratif : Pour compléter une phrase, un modèle part de plusieurs positions masquées et les renseigne au fil des étapes. Il ne doit pas nécessairement fixer chaque mot dans l’ordre de lecture.",
+    "misconception": "Prédire plusieurs positions ne garantit pas une génération plus rapide. Le nombre d’étapes, la longueur et le moteur d’exécution influencent le coût et la qualité."
+  },
+  "notion-631": {
+    "explanation": "Le raisonnement latent explore des étapes intermédiaires qui restent dans l’espace des représentations du modèle. Dans Coconut, un état caché peut être réinjecté comme entrée de l’étape suivante au lieu d’être décodé en token textuel. Cette approche modifie le chemin de calcul et son entraînement ; elle se juge sur les résultats et les ressources nécessaires.",
+    "example": "Exemple illustratif : Pour résoudre un petit problème, un prototype effectue plusieurs transitions internes avant d’émettre sa réponse. L’évaluateur compare les solutions obtenues et le calcul consommé, sans inventer une traduction de chaque état.",
+    "misconception": "Masquer une chaîne de pensée écrite n’est pas du raisonnement latent au sens de cette méthode. Ces représentations ne constituent pas non plus une preuve de pensée humaine."
   }
 }

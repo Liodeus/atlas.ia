@@ -240,6 +240,34 @@
         "definition": "modèle où les composants concernés sont généralement activés pour chaque token, par opposition à un routage sparse.",
         "priority": false,
         "theme": 1
+      },
+      {
+        "id": "notion-622",
+        "name": "System One Model",
+        "definition": "Appellation de TypeSafe pour des modèles de décision à sorties typées, dont Jev. Elle évoque des jugements rapides et ciblés.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-623",
+        "name": "Discriminative Model",
+        "definition": "Modèle discriminatif qui apprend à prédire une catégorie ou une valeur à partir d’une entrée, plutôt qu’à modéliser la génération des données.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-627",
+        "name": "Diffusion Language Model (dLLM)",
+        "definition": "Modèle de langage génératif qui construit du texte par débruitage progressif, notamment en prédisant des tokens masqués, plutôt que seulement de gauche à droite.",
+        "priority": false,
+        "theme": 1
+      },
+      {
+        "id": "notion-631",
+        "name": "Latent Reasoning",
+        "definition": "Approche où des étapes de calcul intermédiaires utilisent des représentations internes continues, au lieu de produire chaque étape sous forme de mots.",
+        "priority": false,
+        "theme": 1
       }
     ]
   },
@@ -726,6 +754,20 @@
         "id": "notion-102",
         "name": "LSTM",
         "definition": "type de RNN avec portes pour préserver des informations sur de longues périodes.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-632",
+        "name": "Titans",
+        "definition": "Famille d’architectures de recherche associant notamment attention et mémoire neuronale capable d’apprendre à mémoriser pendant l’utilisation du modèle.",
+        "priority": false,
+        "theme": 3
+      },
+      {
+        "id": "notion-640",
+        "name": "Engram / Conditional Memory",
+        "definition": "Module de mémoire conditionnelle étudié par DeepSeek, qui retrouve des représentations de séquences de tokens dans des tables et les combine aux états du modèle.",
         "priority": false,
         "theme": 3
       }
@@ -1334,6 +1376,13 @@
         "definition": "état sauvegardé du modèle pendant ou après l'entraînement.",
         "priority": false,
         "theme": 6
+      },
+      {
+        "id": "notion-633",
+        "name": "Nested Learning",
+        "definition": "Cadre de recherche qui décrit plusieurs niveaux d’optimisation imbriqués, avec des contextes et des fréquences de mise à jour différents.",
+        "priority": false,
+        "theme": 6
       }
     ]
   },
@@ -1576,6 +1625,20 @@
         "id": "notion-220",
         "name": "Catastrophic Forgetting",
         "definition": "perte de certaines compétences lors d'une adaptation sur de nouvelles données.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-624",
+        "name": "RLCD (Reinforcement Learning for Calibrated Decisions)",
+        "definition": "Nom donné par TypeSafe à un apprentissage par renforcement visant des décisions accompagnées de probabilités calibrées, utilisé pour Jev.",
+        "priority": false,
+        "theme": 7
+      },
+      {
+        "id": "notion-626",
+        "name": "Test-Time Training (TTT)",
+        "definition": "Adaptation de paramètres pendant le traitement de données de test, à partir d’un objectif d’apprentissage auxiliaire, souvent auto-supervisé.",
         "priority": false,
         "theme": 7
       }
@@ -2134,6 +2197,20 @@
         "id": "notion-298",
         "name": "Embedding Drift",
         "definition": "changement de caractéristiques des représentations affectant les comparaisons dans le temps.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-634",
+        "name": "Late Chunking",
+        "definition": "Méthode qui encode d’abord un texte avec son contexte, puis agrège les représentations de tokens par passage pour produire les embeddings de recherche.",
+        "priority": false,
+        "theme": 9
+      },
+      {
+        "id": "notion-635",
+        "name": "Matryoshka Representation Learning (MRL)",
+        "definition": "Apprentissage de représentations emboîtées dont des préfixes plus courts restent utilisables, pour ajuster la taille des vecteurs aux besoins.",
         "priority": false,
         "theme": 9
       }
@@ -2749,6 +2826,13 @@
         "definition": "ensemble des compromis non dominés, par exemple qualité contre coût et latence.",
         "priority": false,
         "theme": 12
+      },
+      {
+        "id": "notion-625",
+        "name": "Selective Prediction / Abstention",
+        "definition": "Stratégie qui permet au système de s’abstenir sur certains cas, afin de limiter les erreurs parmi les prédictions qu’il accepte de fournir.",
+        "priority": false,
+        "theme": 12
       }
     ]
   },
@@ -3235,6 +3319,13 @@
         "id": "notion-451",
         "name": "CLIP",
         "definition": "approche d'apprentissage contrastif reliant représentations d'images et de textes.",
+        "priority": false,
+        "theme": 14
+      },
+      {
+        "id": "notion-630",
+        "name": "Action-Conditioned World Model",
+        "definition": "Modèle du monde qui prédit une évolution possible à partir d’un état et d’actions candidates, pour aider à comparer leurs conséquences.",
         "priority": false,
         "theme": 14
       }

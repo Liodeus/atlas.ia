@@ -88,5 +88,11 @@
   ],
   "notion-298": [
     "https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/semantic-text-setup-configuration"
+  ],
+  "notion-634": [
+    "https://jina.ai/news/late-chunking-in-long-context-embedding-models/"
+  ],
+  "notion-635": [
+    "https://arxiv.org/abs/2205.13147"
   ]
 }

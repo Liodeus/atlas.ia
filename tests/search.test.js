@@ -29,3 +29,16 @@ test('course search includes lesson prose and ranks matching titles first',()=>{
  assert.ok(searchIndex(courseSearchIndex,'permissions').some(({item})=>item.theme===11&&item.step===3));
  assert.equal(searchIndex(courseSearchIndex,'Indexation puis pipeline RAG')[0].item.step,2);
 });
+
+test('recent model names, acronyms and agent conventions lead to their notion and course',()=>{
+ for(const [query,id,theme,step] of [
+  ['JEV','notion-621',18,3],['RLCD','notion-624',7,3],
+  ['dLLM','notion-627',1,2],['LLaDA','notion-628',18,2],
+  ['V-JEPA','notion-629',18,3],['Titans','notion-632',3,3],
+  ['MRL','notion-635',9,1],['ACP','notion-636',17,2],
+  ['AGENTS.md','notion-637',17,1],['Engram','notion-640',3,3]
+ ]){
+  assert.equal(searchIndex(index,query)[0].item.id,id,query);
+  assert.ok(searchIndex(courseSearchIndex,query).some(({item})=>item.theme===theme&&item.step===step),query);
+ }
+});

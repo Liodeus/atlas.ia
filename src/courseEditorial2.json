@@ -144,7 +144,8 @@
             "Le Learning Rate Schedule fait évoluer le Learning Rate au cours du Training. Un Warmup l’augmente progressivement au début, avant les phases suivantes du Schedule. Si un Batch souhaité ne tient pas en mémoire, Gradient Accumulation permet d’accumuler les contributions de plusieurs Micro-batches avant une mise à jour. Le Batch effectif augmente, sans rendre chaque Micro-batch physiquement plus grand.",
             "Un Checkpoint sauvegarde l’état du modèle à une étape donnée. Pour reprendre fidèlement un Training interrompu, les Weights seuls peuvent ne pas suffire : les états de l’Optimizer, du Schedule et de l’exécution comptent aussi. Pour comparer deux essais, il faut donc identifier non seulement le fichier final, mais aussi les données, la Batch Size, les mises à jour et les réglages qui y ont conduit.",
             "Pour 1 024 exemples et une Batch Size de 32 sur un seul appareil, une Epoch contient 32 Batches. En accumulant quatre Micro-batches de 8 exemples, on peut former le même Batch effectif de 32. Cela demande toujours quatre calculs successifs, mais une seule mise à jour. L’économie concerne principalement les Activations à conserver simultanément, pas le nombre total d’exemples traités.",
-            "Un essai reproductible enregistre également le Tokenizer, l’ordre des données et les versions logicielles utiles. Sauvegarder régulièrement évite de perdre tout le Training après une interruption. Pour sélectionner le modèle à utiliser, on compare des Checkpoints avec une validation définie, au lieu de supposer que le dernier est nécessairement le meilleur."
+            "Un essai reproductible enregistre également le Tokenizer, l’ordre des données et les versions logicielles utiles. Sauvegarder régulièrement évite de perdre tout le Training après une interruption. Pour sélectionner le modèle à utiliser, on compare des Checkpoints avec une validation définie, au lieu de supposer que le dernier est nécessairement le meilleur.",
+            "Nested Learning décrit des niveaux d’optimisation imbriqués pouvant évoluer à des fréquences différentes. Cette perspective de recherche relie mémoire, architecture et apprentissage ; elle demande de préciser les paramètres mis à jour et les connaissances effectivement conservées."
           ]
         }
       ],
@@ -194,7 +195,8 @@
         "notion-169",
         "notion-170",
         "notion-171",
-        "notion-186"
+        "notion-186",
+        "notion-633"
       ],
       "practice": {
         "prompt": "Vous avez 2 400 exemples, un Micro-batch de 10, une accumulation de 4 et un seul GPU. Calculez le Batch effectif et les mises à jour par Epoch. Que devient un Warmup de 12 mises à jour si l’accumulation passe à 8 ? Quelle vérification ajouter pour des textes de longueurs différentes ?",
@@ -235,6 +237,10 @@
         {
           "label": "Loshchilov et Hutter, AdamW",
           "url": "https://arxiv.org/abs/1711.05101"
+        },
+        {
+          "label": "Nested Learning : source de référence",
+          "url": "https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/"
         }
       ]
     },
@@ -359,7 +365,8 @@
             "Réécrire un Prompt change les informations données au modèle pendant une requête. Le Fine-tuning utilise au contraire un apprentissage pour adapter des Parameters à partir de nouveaux exemples. Cette distinction permet de poser le bon diagnostic : si un assistant manque du document utile, lui donner ce document peut suffire ; s’il applique mal un comportement répété sur de nombreux cas, une adaptation peut être pertinente.",
             "Le Post-training regroupe les étapes d’adaptation après le Pretraining initial. Instruction Tuning désigne un entraînement visant le suivi des consignes. Continued Pretraining poursuit plutôt un objectif de préentraînement sur un nouveau corpus. Domain Adaptation décrit le but, adapter le modèle à un secteur ou à une distribution particulière, et peut employer différentes méthodes. Ces noms ne décrivent donc pas tous le même niveau de décision.",
             "Le diagnostic peut se dérouler en trois essais. On fournit d’abord la bonne information, puis on clarifie le comportement attendu, enfin on mesure les erreurs qui persistent sur de nouveaux cas. Si le modèle réussit dès qu’il dispose de la notice, le problème principal concernait l’accès au contexte. S’il possède les faits mais continue à mal classer les demandes, des exemples d’apprentissage peuvent devenir pertinents.",
-            "Un nouvel apprentissage n’est pas une mise à jour garantie d’une base de connaissances. Une information peut être mal apprise, interférer avec d’autres ou devenir périmée. Pour des procédures fréquemment modifiées, une source externe versionnée facilite souvent la correction et la vérification. L’adaptation sert alors surtout à apprendre comment utiliser cette source."
+            "Un nouvel apprentissage n’est pas une mise à jour garantie d’une base de connaissances. Une information peut être mal apprise, interférer avec d’autres ou devenir périmée. Pour des procédures fréquemment modifiées, une source externe versionnée facilite souvent la correction et la vérification. L’adaptation sert alors surtout à apprendre comment utiliser cette source.",
+            "Test-Time Training (TTT) ajoute des mises à jour de paramètres pendant l’utilisation des entrées de test. Il se distingue d’un contexte enrichi ou de plusieurs essais de génération, qui peuvent laisser les paramètres inchangés."
           ]
         },
         {
@@ -421,7 +428,8 @@
         "notion-217",
         "notion-218",
         "notion-219",
-        "notion-220"
+        "notion-220",
+        "notion-626"
       ],
       "practice": {
         "prompt": "Un assistant suit bien les consignes, mais ignore une procédure publiée hier. Il répond aussi mal au format attendu sur 20 % des tickets, même lorsque la notice est fournie. Proposez deux interventions distinctes et deux critères de contrôle après une adaptation. Un refus de révéler une ancienne donnée prouve-t-il son Unlearning ?",
@@ -462,6 +470,10 @@
         {
           "label": "Bourtoule et al., Machine Unlearning",
           "url": "https://arxiv.org/abs/1912.03817"
+        },
+        {
+          "label": "Test-Time Training (TTT) : source de référence",
+          "url": "https://arxiv.org/abs/1909.13231"
         }
       ]
     },
@@ -605,7 +617,8 @@
             "Reward Shaping consiste à construire ou ajouter des récompenses qui guident l’apprentissage, notamment sur des progrès intermédiaires. Reward Hacking apparaît quand le modèle améliore ce signal sans mieux satisfaire l’objectif réel. Par exemple, récompenser systématiquement la longueur peut apprendre à détailler des réponses plutôt qu’à les rendre exactes.",
             "Constitutional AI utilise des principes explicites pour guider l’évaluation ou la révision de réponses dans un processus d’adaptation. Human-in-the-Loop maintient une intervention humaine à des étapes choisies, par exemple pour annoter des cas ambigus ou revoir les échecs importants. Ces dispositifs aident à construire et contrôler les signaux ; ils ne dispensent pas d’évaluer le comportement obtenu sur des situations distinctes.",
             "L’Alignment doit se traduire en comportements observables : reconnaître une information manquante, appliquer une procédure, répondre de façon utile ou respecter une limite d’action. Un objectif formulé seulement comme « maximiser la satisfaction » laisse trop de décisions implicites. Les annotateurs, les modèles juges et les vérificateurs ont besoin de critères qui séparent les dimensions importantes.",
-            "Le contrôle humain peut intervenir en sélectionnant les cas, en arbitrant des désaccords ou en examinant les échecs après entraînement. Il ne signifie pas nécessairement qu’une personne relit chaque réponse en production. L’équipe choisit les points où ce contrôle apporte de l’information et vérifie si les autres étapes restent fiables sur des cas qui n’ont pas servi à construire le signal."
+            "Le contrôle humain peut intervenir en sélectionnant les cas, en arbitrant des désaccords ou en examinant les échecs après entraînement. Il ne signifie pas nécessairement qu’une personne relit chaque réponse en production. L’équipe choisit les points où ce contrôle apporte de l’information et vérifie si les autres étapes restent fiables sur des cas qui n’ont pas servi à construire le signal.",
+            "RLCD, employé par TypeSafe pour Jev, vise des décisions calibrées. Pour le comprendre, distinguez le bon choix de catégorie et la qualité des probabilités : prédire correctement tout en annonçant une certitude injustifiée reste un défaut à mesurer."
           ]
         }
       ],
@@ -655,7 +668,8 @@
         "notion-213",
         "notion-214",
         "notion-215",
-        "notion-216"
+        "notion-216",
+        "notion-624"
       ],
       "practice": {
         "prompt": "Un assistant de programmation reçoit +1 si son code réussit cinq tests visibles. Il apprend à renvoyer les cinq réponses attendues sans traiter d’autres entrées. Identifiez le défaut, proposez un signal ou contrôle supplémentaire et expliquez pourquoi passer de PPO à DPO ne suffit pas à le corriger.",
@@ -700,6 +714,10 @@
         {
           "label": "Bai et al., Constitutional AI et RLAIF",
           "url": "https://arxiv.org/abs/2212.08073"
+        },
+        {
+          "label": "RLCD (Reinforcement Learning for Calibrated Decisions) : source de référence",
+          "url": "https://docs.typesafe.ai/introduction/machine-learning-primer"
         }
       ]
     }
@@ -1063,7 +1081,8 @@
             "Un Embedding est un vecteur numérique représentant une entrée. Les vecteurs vivent dans un Embedding Space où une mesure permet de les comparer. L’objectif est que certaines relations utiles à la tâche soient reflétées par cette proximité. Deux textes proches dans cet espace ne sont pas pour autant des preuves mutuelles : une question et une affirmation fausse sur le même sujet peuvent être très proches.",
             "Un Bi-Encoder calcule séparément les représentations de la requête et du document. Les documents peuvent ainsi être représentés avant l’arrivée de la question. La Cosine Similarity compare l’orientation des vecteurs ; le Dot Product tient aussi compte de leur amplitude. Si les vecteurs sont normalisés à une longueur unitaire, les deux scores coïncident. Le choix de la mesure doit rester compatible avec l’apprentissage et l’usage des Embeddings.",
             "Le parcours commence par choisir un modèle adapté à la relation recherchée. Trouver une phrase équivalente et trouver un passage qui répond à une question ne sont pas exactement la même tâche. Certains modèles distinguent l’encodage des requêtes et des documents, avec des préfixes ou chemins dédiés. Utiliser le même nombre de dimensions ne suffit pas à rendre deux configurations compatibles.",
-            "Pour une recherche documentaire, on calcule les vecteurs des passages une fois, puis celui de chaque nouvelle question. L’index renvoie des identifiants ; l’application retrouve les textes et leurs métadonnées. Le vecteur facilite la recherche, mais ne remplace ni le document original ni les informations nécessaires pour vérifier sa version et son origine."
+            "Pour une recherche documentaire, on calcule les vecteurs des passages une fois, puis celui de chaque nouvelle question. L’index renvoie des identifiants ; l’application retrouve les textes et leurs métadonnées. Le vecteur facilite la recherche, mais ne remplace ni le document original ni les informations nécessaires pour vérifier sa version et son origine.",
+            "Matryoshka Representation Learning (MRL) entraîne des vecteurs dont plusieurs préfixes restent utiles. On peut ainsi tester des représentations plus courtes pour réduire stockage et calcul, sans supposer que toute troncature d’un embedding conserve sa qualité."
           ]
         },
         {
@@ -1128,7 +1147,8 @@
         "notion-275",
         "notion-276",
         "notion-277",
-        "notion-285"
+        "notion-285",
+        "notion-635"
       ],
       "practice": {
         "prompt": "La recherche exhaustive donne les voisins A, B, C et D ; ANN donne A, B, D et E. Seul C contient la réponse nécessaire. Calculez le Recall ANN par rapport aux voisins exacts, expliquez pourquoi il ne mesure pas la pertinence finale et proposez un test si un code produit exact est souvent confondu.",
@@ -1169,6 +1189,10 @@
         {
           "label": "Sentence Transformers, recherche sémantique",
           "url": "https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html"
+        },
+        {
+          "label": "Matryoshka Representation Learning (MRL) : source de référence",
+          "url": "https://arxiv.org/abs/2205.13147"
         }
       ]
     },
@@ -1182,7 +1206,8 @@
             "Le Chunking découpe les documents en passages. Chunk Size indique leur taille ; Overlap conserve une partie commune entre passages voisins. Un passage trop court peut perdre une exception ou un titre. Un passage trop long peut mélanger des sujets et utiliser beaucoup de contexte. Parent-Child Retrieval permet de chercher des petits passages précis puis de restituer un contexte parent plus large.",
             "Metadata Filtering limite les candidats selon leurs attributs : produit, date, langue ou périmètre autorisé. Pour un corpus partagé entre clients, les permissions doivent être appliquées avant de fournir les contenus au modèle. La similarité vectorielle ne vérifie pas un droit d’accès. La préparation doit donc conserver les métadonnées utiles, et pas seulement le texte et son vecteur.",
             "Chaque Chunk doit pouvoir être relié à son document, sa version et son emplacement. Un identifiant stable permet ensuite de citer le bon passage et de retrouver ses voisins. Les titres et unités d’un tableau peuvent être nécessaires pour interpréter ses lignes. Les retirer pour produire un texte « propre » peut rendre les données inutilisables, même si leurs Embeddings se calculent sans erreur.",
-            "La préparation et la recherche forment deux chemins distincts. Une nouvelle version de notice suit le chemin d’indexation ; une question suit celui de récupération. Lorsqu’une information manque, cette distinction aide à vérifier si elle n’a jamais été indexée ou si elle a été perdue lors de la sélection."
+            "La préparation et la recherche forment deux chemins distincts. Une nouvelle version de notice suit le chemin d’indexation ; une question suit celui de récupération. Lorsqu’une information manque, cette distinction aide à vérifier si elle n’a jamais été indexée ou si elle a été perdue lors de la sélection.",
+            "Late Chunking encode le texte avant d’agréger ses représentations par passage. Cette méthode peut préserver un lien entre une phrase et un élément mentionné ailleurs, mais exige un encodeur compatible et reste limitée par son contexte disponible."
           ]
         },
         {
@@ -1250,7 +1275,8 @@
         "notion-286",
         "notion-287",
         "notion-288",
-        "notion-289"
+        "notion-289",
+        "notion-634"
       ],
       "practice": {
         "prompt": "Une recherche récupère 30 passages, dont la règle et son exception. Le Reranker place l’exception au rang 7 ; seuls les 5 premiers passages entrent dans le contexte. La réponse applique la règle générale. Où localiser la perte ? Proposez deux corrections et un contrôle permettant de les départager.",
@@ -1295,6 +1321,10 @@
         {
           "label": "Gao et al., HyDE",
           "url": "https://arxiv.org/abs/2212.10496"
+        },
+        {
+          "label": "Late Chunking : source de référence",
+          "url": "https://jina.ai/news/late-chunking-in-long-context-embedding-models/"
         }
       ]
     },

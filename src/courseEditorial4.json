@@ -7,7 +7,8 @@
           "heading": "Le modèle est une pièce du système",
           "paragraphs": [
             "Un Agent Harness est l’ensemble des composants qui mettent le modèle au travail dans une application. Le modèle produit des propositions ; le Harness prépare les informations, organise les échanges et applique les règles de l’application. Selon le produit, ces responsabilités sont réparties différemment. Un Harness n’est donc ni un nouveau type de modèle ni une garantie de fiabilité.",
-            "L’Agent Runtime exécute cette organisation. Dans une Agent Loop, l’application transmet un objectif et du contexte, reçoit éventuellement une proposition d’action, traite le résultat puis décide de poursuivre ou de s’arrêter. Par exemple, un assistant peut chercher une facture, examiner le résultat et préparer une réponse. C’est l’application qui pilote les accès et les appels."
+            "L’Agent Runtime exécute cette organisation. Dans une Agent Loop, l’application transmet un objectif et du contexte, reçoit éventuellement une proposition d’action, traite le résultat puis décide de poursuivre ou de s’arrêter. Par exemple, un assistant peut chercher une facture, examiner le résultat et préparer une réponse. C’est l’application qui pilote les accès et les appels.",
+            "AGENTS.md fournit des consignes de projet aux agents compatibles, comme les commandes de vérification et les conventions de code. Le Harness doit toujours appliquer ses contrôles : un fichier de consignes n’est pas un mécanisme d’autorisation."
           ]
         },
         {
@@ -94,7 +95,8 @@
         "notion-511",
         "notion-512",
         "notion-513",
-        "notion-514"
+        "notion-514",
+        "notion-637"
       ],
       "practice": {
         "minutes": 3,
@@ -135,6 +137,10 @@
         {
           "label": "LangGraph : persistance et reprise",
           "url": "https://docs.langchain.com/oss/python/langgraph/persistence"
+        },
+        {
+          "label": "AGENTS.md : source de référence",
+          "url": "https://agents.md/"
         }
       ]
     },
@@ -145,14 +151,17 @@
           "heading": "Host, Client et Server",
           "paragraphs": [
             "MCP, ou Model Context Protocol, définit des échanges entre une application d’AI et des serveurs qui exposent des capacités. Le MCP Host est l’application qui accueille les connexions et orchestre leur usage. Un MCP Client est le composant qui communique avec un MCP Server, lequel propose des capacités. Un Host peut utiliser plusieurs connexions selon son implémentation.",
-            "Imaginez un assistant de documentation connecté à un serveur de recherche et à un serveur de calendrier. Le protocole décrit leurs échanges ; il ne donne pas à lui seul le droit de lire tous les documents ni de modifier tous les événements. Les accès restent à configurer et à vérifier par les systèmes concernés."
+            "Imaginez un assistant de documentation connecté à un serveur de recherche et à un serveur de calendrier. Le protocole décrit leurs échanges ; il ne donne pas à lui seul le droit de lire tous les documents ni de modifier tous les événements. Les accès restent à configurer et à vérifier par les systèmes concernés.",
+            "Agent Client Protocol (ACP) relie notamment un éditeur de code à un agent de programmation. MCP relie un client à des capacités exposées par des serveurs : une même application peut utiliser les deux protocoles pour des relations différentes."
           ]
         },
         {
           "heading": "Tools, Resources et Prompts",
           "paragraphs": [
             "Un MCP Tool expose une opération que le client peut demander avec des arguments, par exemple rechercher un document. Une MCP Resource expose du contenu identifié par une URI, par exemple le texte d’un guide. Un MCP Prompt propose un modèle de messages réutilisable, choisi et utilisé par le client. Les trois catégories ne correspondent pas au même rôle.",
-            "Un résultat provenant d’un serveur externe peut contenir des informations utiles mais aussi une instruction malveillante. Le fait qu’un contenu arrive par MCP ne lui donne pas autorité sur les consignes de l’application. Le Host doit traiter le texte externe comme une donnée et maintenir les contrôles sur les actions demandées."
+            "Un résultat provenant d’un serveur externe peut contenir des informations utiles mais aussi une instruction malveillante. Le fait qu’un contenu arrive par MCP ne lui donne pas autorité sur les consignes de l’application. Le Host doit traiter le texte externe comme une donnée et maintenir les contrôles sur les actions demandées.",
+            "MCP Sampling désigne une demande de génération de modèle adressée par un serveur au client. Cette capacité est dépréciée depuis la spécification 2026-07-28 : il faut reconnaître son rôle dans les intégrations existantes et prévoir leur migration.",
+            "MCP Elicitation demande une information à l’utilisateur, contrairement à Sampling qui sollicite un modèle. Le formulaire permet de fournir des valeurs structurées ; les interactions portant sur des secrets doivent emprunter le mode URL prévu par le protocole."
           ]
         },
         {
@@ -232,7 +241,10 @@
         "notion-519",
         "notion-520",
         "notion-521",
-        "notion-522"
+        "notion-522",
+        "notion-636",
+        "notion-638",
+        "notion-639"
       ],
       "practice": {
         "minutes": 3,
@@ -273,6 +285,18 @@
         {
           "label": "MCP : spécification de référence",
           "url": "https://modelcontextprotocol.io/specification/2026-07-28"
+        },
+        {
+          "label": "Agent Client Protocol (ACP) : source de référence",
+          "url": "https://agentclientprotocol.com/get-started/introduction"
+        },
+        {
+          "label": "MCP Sampling : source de référence",
+          "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/sampling"
+        },
+        {
+          "label": "MCP Elicitation : source de référence",
+          "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
         }
       ]
     },
@@ -576,7 +600,8 @@
           "heading": "Noms commerciaux et architecture",
           "paragraphs": [
             "Mistral désigne plusieurs familles de modèles de Mistral AI. Certains modèles visent des usages généraux et d’autres des tâches spécialisées ; leurs modalités et droits sont à examiner variante par variante.",
-            "Mixtral est une série de Mistral AI utilisant une architecture Mixture of Experts. MoE décrit une organisation du modèle et ne signifie pas automatiquement que tous les Experts sont actifs à chaque Token. Mistral et Mixtral ne sont pas deux façons de nommer toute la même collection."
+            "Mixtral est une série de Mistral AI utilisant une architecture Mixture of Experts. MoE décrit une organisation du modèle et ne signifie pas automatiquement que tous les Experts sont actifs à chaque Token. Mistral et Mixtral ne sont pas deux façons de nommer toute la même collection.",
+            "LLaDA est une famille de modèles de langage par diffusion à masques. Elle conserve une architecture Transformer tout en changeant la façon de reconstruire le texte ; son nom ne désigne pas une variante de Llama."
           ]
         },
         {
@@ -666,7 +691,8 @@
         "notion-611",
         "notion-618",
         "notion-619",
-        "notion-620"
+        "notion-620",
+        "notion-628"
       ],
       "practice": {
         "minutes": 3,
@@ -707,6 +733,10 @@
         {
           "label": "Hugging Face : Model Cards",
           "url": "https://huggingface.co/docs/hub/model-cards"
+        },
+        {
+          "label": "LLaDA : source de référence",
+          "url": "https://github.com/ML-GSAI/LLaDA"
         }
       ]
     },
@@ -717,7 +747,9 @@
           "heading": "Génération et couverture linguistique",
           "paragraphs": [
             "Command est une famille de modèles de Cohere comprenant des variantes orientées vers différentes tâches. L’API et la Model Card indiquent les entrées disponibles, le contexte et le statut de chaque version.",
-            "Aya est une famille multilingue de Cohere Labs, auparavant Cohere For AI. Son objectif de couverture linguistique ne garantit pas le même niveau de qualité pour chaque langue : testez les langues et registres importants pour votre usage."
+            "Aya est une famille multilingue de Cohere Labs, auparavant Cohere For AI. Son objectif de couverture linguistique ne garantit pas le même niveau de qualité pour chaque langue : testez les langues et registres importants pour votre usage.",
+            "Jev, proposé par TypeSafe, vise les décisions typées : choisir une catégorie ou estimer un score à partir d’un contexte. Il convient de tester ces décisions sur des cas représentatifs, puis de confier leur utilisation aux règles du logiciel.",
+            "V-JEPA, développé par Meta, apprend des représentations de vidéos par prédiction latente. Distinguez l’encodeur vidéo et la variante V-JEPA 2-AC conditionnée par les actions : leurs rôles dans une application ne sont pas interchangeables."
           ]
         },
         {
@@ -811,7 +843,9 @@
         "notion-614",
         "notion-615",
         "notion-616",
-        "notion-617"
+        "notion-617",
+        "notion-621",
+        "notion-629"
       ],
       "practice": {
         "minutes": 3,
@@ -852,6 +886,14 @@
         {
           "label": "Hugging Face : contenu des Model Cards",
           "url": "https://huggingface.co/docs/hub/model-cards"
+        },
+        {
+          "label": "Jev : source de référence",
+          "url": "https://docs.typesafe.ai/introduction"
+        },
+        {
+          "label": "V-JEPA : source de référence",
+          "url": "https://github.com/facebookresearch/vjepa2"
         }
       ]
     }

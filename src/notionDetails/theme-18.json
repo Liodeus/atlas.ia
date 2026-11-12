@@ -103,5 +103,20 @@
     "explanation": "MiniMax-M est une série de modèles de langage de MiniMax comprenant des variantes orientées vers le code et les parcours avec outils. Certaines reposent sur des experts, ce qui impose de distinguer paramètres actifs et paramètres totaux ; pour un usage agentique, la qualité doit être mesurée sur les tâches achevées et les actions effectivement exécutées par l’application.",
     "example": "Exemple illustratif : Un environnement de développement utilise une variante MiniMax-M pour proposer une modification puis demander l’exécution des tests disponibles. Il conserve les résultats et les différences de code afin qu’un humain puisse vérifier la correction.",
     "misconception": "La capacité à produire des appels d’outils ne garantit pas que le programme final soit correct. Un résultat de benchmark dépend aussi des outils et du protocole d’évaluation."
+  },
+  "notion-621": {
+    "explanation": "Avec Jev, l’application fournit un état décrivant la situation et des questions dont les sorties sont définies à l’avance. Elle peut demander un choix parmi des catégories ou une estimation numérique. Le logiciel reçoit des valeurs structurées qu’il peut combiner avec ses propres règles. Le nom désigne un modèle précis de TypeSafe, pas une architecture universelle.",
+    "example": "Exemple illustratif : Une médiathèque souhaite orienter ses demandes vers « inscription », « emprunt » ou « événement ». Jev attribue une catégorie ; le logiciel conserve la possibilité de faire vérifier les demandes ambiguës.",
+    "misconception": "Une réponse conforme au type attendu peut être incorrecte sur le fond. L’absence de texte libre ne supprime ni les erreurs de classement ni le besoin d’évaluation."
+  },
+  "notion-628": {
+    "explanation": "LLaDA illustre la génération de texte par reconstruction de positions masquées. Son réseau utilise un Transformer, mais sa modélisation probabiliste diffère d’un générateur autorégressif classique. Le projet distingue notamment un modèle de base et une adaptation aux instructions. Pour comparer une variante, il faut regarder sa procédure de génération et la tâche réellement évaluée.",
+    "example": "Exemple illustratif : Une équipe compare un modèle LLaDA et un modèle autorégressif sur les mêmes consignes. Elle mesure la qualité, mais aussi les délais selon le nombre d’étapes de débruitage retenu.",
+    "misconception": "LLaDA n’est pas une variante de Llama malgré la proximité des noms. Diffusion et Transformer ne s’opposent pas : l’une décrit ici la modélisation, l’autre le réseau."
+  },
+  "notion-629": {
+    "explanation": "V-JEPA applique l’apprentissage prédictif de représentations à la vidéo. Le modèle apprend à prédire des caractéristiques de parties masquées sans devoir reconstruire chaque pixel. La famille inclut des encodeurs vidéo ; une variante comme V-JEPA 2-AC ajoute un conditionnement par les actions pour la planification. Le suffixe de la variante change donc le rôle du modèle.",
+    "example": "Exemple illustratif : Une équipe utilise un encodeur vidéo pour analyser un mouvement. Pour comparer les conséquences de commandes d’un robot, elle doit choisir une variante entraînée à prendre ces actions en compte.",
+    "misconception": "V-JEPA n’est pas automatiquement un générateur de vidéos ni un contrôleur de robot complet. Les capacités observées dépendent de la variante, de l’adaptation et de l’évaluation."
   }
 }

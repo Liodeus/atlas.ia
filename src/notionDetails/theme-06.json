@@ -163,5 +163,10 @@
     "explanation": "Un Checkpoint conserve un état du modèle à un moment donné pour l'évaluer, le distribuer ou reprendre son entraînement. Pour une reprise fidèle, les poids seuls peuvent être insuffisants : l'état de l'Optimizer, le Schedule, la progression dans les données et les générateurs aléatoires contribuent aussi à déterminer les mises à jour suivantes.",
     "example": "Exemple illustratif : après une interruption du serveur, une équipe recharge le dernier Checkpoint avec les poids, les moyennes d'AdamW et le compteur de progression, puis reprend le traitement des données.",
     "misconception": "Un fichier de poids destiné à l'Inference n'est pas nécessairement un Checkpoint complet de reprise. La compatibilité du code et de la configuration reste à vérifier."
+  },
+  "notion-633": {
+    "explanation": "Nested Learning propose de considérer ensemble architecture et apprentissage comme des problèmes d’optimisation liés. Des composants peuvent apprendre à des rythmes différents et à partir de flux d’information distincts. Le cadre sert notamment à explorer l’apprentissage continu et la mémoire, avec des architectures expérimentales comme Hope. Il invite à préciser ce qui change, à quelle fréquence et sous quel objectif.",
+    "example": "Exemple illustratif : Dans une expérience, un composant s’adapte souvent aux observations récentes et un autre évolue plus lentement. L’équipe teste si le système retient mieux les connaissances anciennes après de nouveaux apprentissages.",
+    "misconception": "Ce n’est pas simplement empiler davantage de couches. Le cadre ne prouve pas que l’oubli catastrophique est résolu pour tout modèle ou tout déploiement."
   }
 }

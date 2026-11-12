@@ -8,7 +8,8 @@
           "paragraphs": [
             "Imaginez un service de courrier fictif. Un programme applique une règle écrite : si une adresse figure sur une liste, le message est bloqué. Un autre apprend à reconnaître des messages indésirables à partir d’exemples. Tous deux peuvent participer à un système d’Artificial Intelligence (AI), mais seul le second utilise ici le Machine Learning (ML). AI désigne un ensemble de techniques ; ML désigne l’apprentissage de régularités à partir de données.",
             "Le Deep Learning (DL) est une famille de ML qui utilise des réseaux de neurones à plusieurs couches. Ces couches apprennent des transformations des entrées. Il ne faut donc pas choisir entre AI, ML et DL comme entre trois produits exclusifs : un même système peut relever des trois. La question utile est de savoir quelle tâche il accomplit et comment il a été construit.",
-            "Pour construire le filtre appris, l’équipe rassemble des messages et les étiquettes attendues, transforme le contenu en une représentation exploitable, puis ajuste le modèle pour réduire ses erreurs. Elle conserve des messages distincts pour vérifier le résultat. Lorsqu’un nouveau message arrive, le modèle calcule une prédiction avec ce qu’il a appris. La différence essentielle avec la liste de blocage se situe donc dans l’origine de la règle de décision. Une règle explicite peut être préférable lorsque le critère est exact et stable ; un modèle appris devient intéressant lorsque les indices sont nombreux et variables. Le choix ne dépend pas d’un prestige technologique : bloquer une adresse connue ne nécessite pas forcément un réseau profond, tandis que reconnaître des formulations nouvelles demande une capacité de généralisation."
+            "Pour construire le filtre appris, l’équipe rassemble des messages et les étiquettes attendues, transforme le contenu en une représentation exploitable, puis ajuste le modèle pour réduire ses erreurs. Elle conserve des messages distincts pour vérifier le résultat. Lorsqu’un nouveau message arrive, le modèle calcule une prédiction avec ce qu’il a appris. La différence essentielle avec la liste de blocage se situe donc dans l’origine de la règle de décision. Une règle explicite peut être préférable lorsque le critère est exact et stable ; un modèle appris devient intéressant lorsque les indices sont nombreux et variables. Le choix ne dépend pas d’un prestige technologique : bloquer une adresse connue ne nécessite pas forcément un réseau profond, tandis que reconnaître des formulations nouvelles demande une capacité de généralisation.",
+            "Un Discriminative Model apprend à associer une entrée à une catégorie ou une valeur. Classer une demande et rédiger sa réponse sont ainsi deux objectifs distincts, même lorsqu’une application utilise un seul modèle pour les réaliser."
           ]
         },
         {
@@ -66,7 +67,8 @@
         "notion-9",
         "notion-10",
         "notion-11",
-        "notion-12"
+        "notion-12",
+        "notion-623"
       ],
       "references": [
         {
@@ -76,6 +78,10 @@
         {
           "label": "DeepMind : dimensions de performance et généralité",
           "url": "https://arxiv.org/abs/2311.02462"
+        },
+        {
+          "label": "Discriminative Model : source de référence",
+          "url": "https://developers.google.com/machine-learning/glossary#discriminative-model"
         }
       ],
       "practice": {
@@ -122,7 +128,8 @@
           "paragraphs": [
             "Un Encoder-only Model transforme l’entrée en représentations, utiles notamment à la classification ou à la recherche. Un Decoder-only Model autorégressif prolonge un préfixe. Une architecture Encoder-Decoder encode une entrée puis produit une sortie en s’appuyant sur cette représentation. Elle est souvent utilisée pour le Seq2Seq (Sequence-to-Sequence), qui transforme une séquence en une autre, par exemple pour traduire un texte.",
             "Enfin, Dense Model décrit une organisation où les composants concernés sont utilisés pour chaque Token, à la différence d’un routage qui en sélectionne seulement une partie. Dense n’oppose pas compréhension et génération. Pour lire une fiche, séparez donc quatre questions : quelle architecture, quelle adaptation, quel mode de génération et quels composants actifs ?",
-            "Pour choisir l’organisation, partons de trois besoins. Classer un avis à partir de son texte entier correspond naturellement à un encodeur qui consulte les deux côtés. Compléter une phrase à mesure qu’elle se construit correspond à un décodeur causal. Traduire une phrase déjà disponible peut utiliser un encodeur pour la source puis un décodeur pour la traduction. Ce sont des affinités, pas des frontières absolues : un modèle génératif peut aussi produire une étiquette. Le choix dépend de la qualité mesurée, du coût et du format souhaité. Enfin, Dense décrit l’exécution des blocs concernés ; cela ne signifie pas que chaque neurone a une valeur non nulle, ni que tous les éléments du logiciel tournent à chaque instant."
+            "Pour choisir l’organisation, partons de trois besoins. Classer un avis à partir de son texte entier correspond naturellement à un encodeur qui consulte les deux côtés. Compléter une phrase à mesure qu’elle se construit correspond à un décodeur causal. Traduire une phrase déjà disponible peut utiliser un encodeur pour la source puis un décodeur pour la traduction. Ce sont des affinités, pas des frontières absolues : un modèle génératif peut aussi produire une étiquette. Le choix dépend de la qualité mesurée, du coût et du format souhaité. Enfin, Dense décrit l’exécution des blocs concernés ; cela ne signifie pas que chaque neurone a une valeur non nulle, ni que tous les éléments du logiciel tournent à chaque instant.",
+            "Un Diffusion Language Model (dLLM) génère du texte par débruitage, par exemple en remplissant progressivement des positions masquées. L’architecture peut rester un Transformer : ce qui change ici est notamment l’organisation de l’apprentissage et de la génération."
           ]
         }
       ],
@@ -165,7 +172,8 @@
         "notion-31",
         "notion-32",
         "notion-33",
-        "notion-34"
+        "notion-34",
+        "notion-627"
       ],
       "references": [
         {
@@ -179,6 +187,10 @@
         {
           "label": "Hugging Face : Chat Templates",
           "url": "https://huggingface.co/docs/transformers/chat_templating"
+        },
+        {
+          "label": "Diffusion Language Model (dLLM) : source de référence",
+          "url": "https://arxiv.org/abs/2502.09992"
         }
       ],
       "practice": {
@@ -221,7 +233,8 @@
           "paragraphs": [
             "Un Verifier Model évalue la validité d’une solution candidate selon un critère. Un Reward Model apprend à donner des scores à des réponses ou comportements. Les rôles peuvent se rapprocher, mais un score de préférence ou de style ne constitue pas automatiquement un contrôle factuel. Pour une preuve, il faut savoir ce que le vérificateur vérifie réellement.",
             "Test-Time Compute désigne le calcul mobilisé pendant la résolution d’une requête : essais supplémentaires, recherche de pistes ou vérification. Inference-Time Scaling décrit l’amélioration possible avec davantage de ce calcul. Dans un cas fictif, vérifier plusieurs programmes avec des tests peut aider à sélectionner un candidat ; produire davantage de programmes sans critère fiable ne garantit aucun progrès.",
-            "Pour un programme qui calcule une remise, le candidat peut sembler clair et recevoir une bonne préférence humaine tout en arrondissant mal certains montants. Un test exécutable sur les cas limites apporte un signal différent d’un jugement de style. Le Verifier peut être un modèle, mais la vérification peut aussi être un calcul, une exécution ou un contrôle humain. Avant d’acheter davantage de calcul, écrivez ce qui permet de reconnaître une meilleure réponse. Un budget de dix essais est utile seulement si les essais explorent des solutions différentes et si la sélection sait distinguer les bonnes. Lorsque le contrôle est incomplet, le système peut apprendre ou choisir des candidats qui paraissent convaincants sans résoudre la difficulté réelle."
+            "Pour un programme qui calcule une remise, le candidat peut sembler clair et recevoir une bonne préférence humaine tout en arrondissant mal certains montants. Un test exécutable sur les cas limites apporte un signal différent d’un jugement de style. Le Verifier peut être un modèle, mais la vérification peut aussi être un calcul, une exécution ou un contrôle humain. Avant d’acheter davantage de calcul, écrivez ce qui permet de reconnaître une meilleure réponse. Un budget de dix essais est utile seulement si les essais explorent des solutions différentes et si la sélection sait distinguer les bonnes. Lorsque le contrôle est incomplet, le système peut apprendre ou choisir des candidats qui paraissent convaincants sans résoudre la difficulté réelle.",
+            "Latent Reasoning désigne des étapes intermédiaires dans un espace de représentations, comme dans Coconut. Ce mécanisme diffère d’une chaîne de raisonnement textuelle simplement cachée à l’utilisateur ; il faut en mesurer les effets sur les résultats."
           ]
         },
         {
@@ -229,7 +242,8 @@
           "paragraphs": [
             "Un Multimodal Model accepte ou produit plusieurs types de signaux. Un Vision-Language Model (VLM) relie vision et langage, par exemple une photo et une question. Un Vision-Language-Action Model (VLA) relie perception, langage et actions, notamment pour piloter un système robotique. Accepter une image n’implique ni accepter tous les formats ni pouvoir exécuter une action.",
             "Un World Model apprend une représentation de l’évolution d’un environnement. Il peut servir à prévoir les conséquences d’une action, mais cette prévision peut être imparfaite. Pour choisir, décrivez la tâche, les données disponibles, les sorties attendues et le contrôle possible. Un assistant documentaire, un lecteur de photos et un robot n’ont pas les mêmes besoins ni les mêmes conséquences en cas d’erreur.",
-            "Une modalité introduit ses propres erreurs. Sur une photo, un reflet peut masquer une lettre ; sur un document numérisé, la disposition en colonnes peut inverser l’ordre de lecture. Un VLM doit donc être testé sur les images réellement rencontrées, avec leur résolution et leurs défauts. Pour un VLA, il faut ajouter les conséquences de l’action et les contraintes physiques du dispositif. Un World Model peut aider à comparer des trajectoires possibles, mais une prédiction plausible ne rend pas l’action sûre. Le système doit pouvoir détecter une observation insuffisante, demander un nouvel élément ou s’arrêter. Le choix des modèles découle ainsi du chemin complet entre observation, décision et contrôle du résultat."
+            "Une modalité introduit ses propres erreurs. Sur une photo, un reflet peut masquer une lettre ; sur un document numérisé, la disposition en colonnes peut inverser l’ordre de lecture. Un VLM doit donc être testé sur les images réellement rencontrées, avec leur résolution et leurs défauts. Pour un VLA, il faut ajouter les conséquences de l’action et les contraintes physiques du dispositif. Un World Model peut aider à comparer des trajectoires possibles, mais une prédiction plausible ne rend pas l’action sûre. Le système doit pouvoir détecter une observation insuffisante, demander un nouvel élément ou s’arrêter. Le choix des modèles découle ainsi du chemin complet entre observation, décision et contrôle du résultat.",
+            "System One Model est le nom utilisé par TypeSafe pour des modèles tels que Jev, destinés aux décisions structurées. Cette appellation ne remplace pas les critères de choix : sortie attendue, erreurs acceptables et comportement sur les cas incertains."
           ]
         }
       ],
@@ -272,7 +286,9 @@
         "notion-26",
         "notion-27",
         "notion-28",
-        "notion-29"
+        "notion-29",
+        "notion-622",
+        "notion-631"
       ],
       "references": [
         {
@@ -286,6 +302,14 @@
         {
           "label": "Ha et Schmidhuber : World Models",
           "url": "https://arxiv.org/abs/1803.10122"
+        },
+        {
+          "label": "System One Model : source de référence",
+          "url": "https://docs.typesafe.ai/concepts/system-one"
+        },
+        {
+          "label": "Latent Reasoning : source de référence",
+          "url": "https://arxiv.org/abs/2412.06769"
         }
       ],
       "practice": {
@@ -853,7 +877,9 @@
           "paragraphs": [
             "Un Recurrent Neural Network (RNN) transmet un état d’une étape à la suivante. LSTM est une famille de RNN utilisant des portes pour gérer la conservation et la mise à jour d’information. Un State Space Model (SSM) décrit l’évolution d’un état selon une dynamique. Ces familles sont liées par le traitement séquentiel, sans être des noms interchangeables.",
             "Mamba utilise des SSM sélectifs dont des éléments de la dynamique dépendent de l’entrée. Une Hybrid Architecture peut combiner SSM et Attention. Un état compact limite certains coûts, mais ne conserve pas forcément chaque détail du passé. Pour choisir, demandez si la tâche exige de retrouver exactement un passage ancien ou de suivre surtout une évolution générale.",
-            "Le contraste entre cache et état aide à comprendre les alternatives. Un Transformer causal peut conserver des Keys et Values pour de nombreuses positions ; une récurrence met à jour un état qui résume l’historique selon sa dynamique. Cet état rend possible un coût borné par étape pour certaines architectures à dimension fixée, mais il doit sélectionner ce qu’il conserve. Des mécanismes de portes ou de sélection donnent au modèle une manière apprise de garder ou d’oublier. Une architecture hybride peut associer des blocs récurrents à des blocs d’Attention pour équilibrer coûts et accès au passé. Le bon choix dépend du besoin : estimer une tendance dans un flux et retrouver mot pour mot une référence ancienne ne sollicitent pas les mêmes propriétés."
+            "Le contraste entre cache et état aide à comprendre les alternatives. Un Transformer causal peut conserver des Keys et Values pour de nombreuses positions ; une récurrence met à jour un état qui résume l’historique selon sa dynamique. Cet état rend possible un coût borné par étape pour certaines architectures à dimension fixée, mais il doit sélectionner ce qu’il conserve. Des mécanismes de portes ou de sélection donnent au modèle une manière apprise de garder ou d’oublier. Une architecture hybride peut associer des blocs récurrents à des blocs d’Attention pour équilibrer coûts et accès au passé. Le bon choix dépend du besoin : estimer une tendance dans un flux et retrouver mot pour mot une référence ancienne ne sollicitent pas les mêmes propriétés.",
+            "Titans explore une mémoire neuronale apprise au fil de l’utilisation, combinée notamment à l’attention. Le passé ne reste donc pas nécessairement sous forme de tokens tous relus : une partie peut être représentée dans les paramètres d’un module de mémoire.",
+            "Engram / Conditional Memory explore des tables de représentations de groupes de tokens, consultées puis combinées aux états du modèle. Cette mémoire conditionnelle complète le calcul neuronal ; elle ne correspond pas à une base de documents citables comme dans un RAG."
           ]
         }
       ],
@@ -898,7 +924,9 @@
         "notion-99",
         "notion-100",
         "notion-101",
-        "notion-102"
+        "notion-102",
+        "notion-632",
+        "notion-640"
       ],
       "references": [
         {
@@ -916,6 +944,14 @@
         {
           "label": "Gu et Dao : Mamba",
           "url": "https://arxiv.org/abs/2312.00752"
+        },
+        {
+          "label": "Titans : source de référence",
+          "url": "https://arxiv.org/abs/2501.00663"
+        },
+        {
+          "label": "Engram / Conditional Memory : source de référence",
+          "url": "https://github.com/deepseek-ai/Engram"
         }
       ],
       "practice": {

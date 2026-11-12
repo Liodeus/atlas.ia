@@ -123,5 +123,15 @@
     "explanation": "Un LSTM est un réseau récurrent qui maintient un état de cellule et utilise des portes apprises pour régler la conservation, l’ajout et la sortie d’informations. Cette organisation facilite certains apprentissages de dépendances longues par rapport à un RNN simple, tout en conservant une capacité limitée et un traitement dépendant des étapes précédentes.",
     "example": "Exemple illustratif : pour analyser une phrase, un LSTM maintient dans son état une information utile rencontrée plus tôt, tout en modulant l’ajout de nouveaux éléments au fil des mots reçus.",
     "misconception": "Le nom Long Short-Term Memory ne promet pas une mémoire illimitée : la conservation est apprise et peut échouer sur des dépendances absentes ou rares pendant l’entraînement."
+  },
+  "notion-632": {
+    "explanation": "Titans explore une mémoire neuronale dont les paramètres peuvent être adaptés au fil des données reçues. L’attention prend en charge une partie du contexte immédiat, tandis qu’un module de mémoire apprend à conserver de l’information historique. Cette mémoire intégrée au calcul se distingue d’une base documentaire externe consultée par recherche.",
+    "example": "Exemple illustratif : Sur un long flux de mesures, un prototype combine les observations récentes avec un état de mémoire mis à jour au fil du flux. On vérifie ensuite quelles dépendances anciennes restent exploitables.",
+    "misconception": "Titans n’est pas une mémoire parfaite ni un historique automatiquement disponible dans chaque assistant. La rétention et le coût dépendent de la variante et des conditions évaluées."
+  },
+  "notion-640": {
+    "explanation": "Engram associe des groupes de tokens à des représentations apprises accessibles par recherche déterministe dans des tables. Le module fusionne ces informations avec les états cachés du réseau. Il explore ainsi une mémoire conditionnelle complémentaire du calcul conditionnel des MoE : retrouver certains motifs appris peut éviter de les reconstruire uniquement par les couches de calcul.",
+    "example": "Exemple illustratif : Dans un prototype, une courte séquence de tokens déclenche la consultation d’entrées de mémoire. Le réseau combine les vecteurs obtenus avec le contexte courant avant de poursuivre son calcul.",
+    "misconception": "Il ne s’agit pas d’un RAG sur des documents ni d’une mémoire de conversation de l’utilisateur. Une table de représentations apprises ne garantit pas l’exactitude des faits produits."
   }
 }

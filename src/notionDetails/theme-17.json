@@ -118,5 +118,25 @@
     "explanation": "Une Tool Permission Policy définit quelles opérations un agent peut effectuer, sur quelles ressources et dans quelles conditions. Elle s’applique à l’exécution, en tenant compte du contexte et des droits accordés ; séparer lecture, modification et transmission de données aide à ajuster l’autonomie sans donner un accès global à tous les outils disponibles.",
     "example": "Exemple illustratif : un assistant peut lire les documents d’un projet et préparer des modifications, mais l’envoi à un destinataire externe exige que la demande autorise précisément cette transmission et son contenu.",
     "misconception": "Une consigne textuelle demandant d’être prudent ne suffit pas comme contrôle d’accès. La politique doit être appliquée par le système, même si le modèle propose autre chose."
+  },
+  "notion-636": {
+    "explanation": "Agent Client Protocol définit une interface commune entre un agent de programmation et l’application qui l’accueille. Un éditeur compatible peut ainsi intégrer plusieurs agents sans réimplémenter chaque échange depuis zéro. Il faut néanmoins vérifier les fonctions prises en charge de chaque côté : l’existence du protocole ne rend pas toutes les intégrations identiques.",
+    "example": "Exemple illustratif : Une équipe remplace l’agent de programmation utilisé dans son éditeur. Si les deux composants prennent en charge ACP, une partie de leur communication suit la même interface.",
+    "misconception": "ACP signifie ici Agent Client Protocol. Son rôle diffère de MCP pour les outils et ressources, et d’A2A pour les interactions entre agents."
+  },
+  "notion-637": {
+    "explanation": "Un fichier AGENTS.md place les informations utiles à l’agent près du code : installation, vérifications et conventions du projet. Des fichiers locaux peuvent préciser les consignes d’un sous-dossier selon les règles de l’outil utilisé. Le contenu reste du texte à interpréter par l’agent ; le dépôt ne gagne pas de contrôle d’accès grâce à ce seul fichier.",
+    "example": "Exemple illustratif : Un dépôt indique dans AGENTS.md la commande de test et le répertoire contenant les composants. Un agent compatible peut s’appuyer sur ces repères avant de proposer une modification.",
+    "misconception": "Ce fichier ne garantit pas l’exécution des tests ni le respect des permissions. Sa portée et sa prise en compte doivent être vérifiées dans l’agent utilisé."
+  },
+  "notion-638": {
+    "explanation": "MCP Sampling permet à un serveur de demander au client une génération, avec contrôle du modèle et des permissions côté client. La capacité doit être prise en charge et déclarée. La spécification du 28 juillet 2026 la déprécie et recommande aux nouvelles intégrations de passer directement par les API des fournisseurs de modèles. Le terme reste utile pour lire des intégrations existantes.",
+    "example": "Exemple illustratif : En examinant une ancienne intégration, une équipe rencontre sampling/createMessage. Elle identifie cet appel au modèle via le client, puis prépare sa migration selon les recommandations du protocole.",
+    "misconception": "Déprécié ne signifie pas immédiatement supprimé. Il ne faut toutefois pas présenter cette capacité comme le choix recommandé pour une nouvelle intégration MCP."
+  },
+  "notion-639": {
+    "explanation": "MCP Elicitation organise une demande d’information humaine pendant une interaction. Le mode formulaire recueille des valeurs structurées ; le mode URL dirige vers un parcours externe pour les interactions sensibles. Le client doit prendre en charge le mode demandé, identifier le serveur et permettre à la personne de contrôler sa réponse ou de refuser.",
+    "example": "Exemple illustratif : Un serveur de planification demande quelle salle choisir avant de poursuivre une recherche. Le client présente les options à l’utilisateur, qui peut répondre, refuser ou annuler la demande.",
+    "misconception": "Un formulaire d’Elicitation ne doit pas recueillir de mots de passe, de clés API ou de moyens de paiement. Une demande d’information n’accorde pas tous les droits au serveur."
   }
 }

@@ -97,5 +97,8 @@
   ],
   "notion-186": [
     "https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html"
+  ],
+  "notion-633": [
+    "https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/"
   ]
 }

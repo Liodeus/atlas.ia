@@ -4,7 +4,12 @@ export const harnessSources=[
  {label:'MCP : spécification et architecture',url:'https://modelcontextprotocol.io/specification/2026-07-28'},
  {label:'MCP : nouveautés de la spécification 2026-07-28',url:'https://blog.modelcontextprotocol.io/posts/2026-07-28/'},
  {label:'MCP : sécurité et bonnes pratiques',url:'https://modelcontextprotocol.io/specification/2026-07-28/basic/security_best_practices'},
- {label:'Anthropic : évaluer les agents',url:'https://www.anthropic.com/research/demystifying-evals-for-ai-agents'}
+ {label:'Anthropic : évaluer les agents',url:'https://www.anthropic.com/research/demystifying-evals-for-ai-agents'},
+ // Compléments vérifiés le 12 novembre 2026.
+ {label:'ACP : Agent Client Protocol',url:'https://agentclientprotocol.com/get-started/introduction'},
+ {label:'AGENTS.md : consignes de dépôt',url:'https://agents.md/'},
+ {label:'MCP : Sampling (déprécié)',url:'https://modelcontextprotocol.io/specification/2026-07-28/client/sampling'},
+ {label:'MCP : Elicitation',url:'https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation'}
 ];
 
 const definitions=[
@@ -31,9 +36,14 @@ const definitions=[
  ['Agent Trajectory','Suite des décisions, appels d’outils, observations et résultats d’une exécution d’agent.'],
  ['Agent Evals','Évaluations du comportement d’un agent sur des tâches et critères définis, y compris ses actions et résultats.'],
  ['MCP Apps','Extension MCP permettant à un serveur de fournir des interfaces interactives intégrées dans une application compatible.'],
- ['Tool Permission Policy','Ensemble de règles qui limite les outils et actions autorisés selon le contexte et les droits accordés.']
+ ['Tool Permission Policy','Ensemble de règles qui limite les outils et actions autorisés selon le contexte et les droits accordés.'],
+ // Ajouts sourcés le 12 novembre 2026 ; identifiants explicites pour préserver les liens.
+ ["Agent Client Protocol (ACP)", "Protocole qui standardise les échanges entre des clients, notamment des éditeurs de code, et des agents de programmation compatibles.", 636],
+ ["AGENTS.md", "Convention de fichier Markdown pour fournir aux agents de programmation les consignes d’un dépôt : commandes, organisation du code et règles de contribution.", 637],
+ ["MCP Sampling", "Capacité MCP permettant à un serveur de solliciter une génération de modèle via le client, dépréciée depuis la version 2026-07-28 du protocole.", 638],
+ ["MCP Elicitation", "Capacité MCP permettant à un serveur de demander une information à l’utilisateur par l’intermédiaire du client, avec possibilité de refus ou d’annulation.", 639]
 ];
-export const harnessTheme={id:17,title:'Agent Harness & Tooling',entries:definitions.map(([name,definition],i)=>({id:`notion-${507+i}`,name,definition,priority:false,theme:17}))};
+export const harnessTheme={id:17,title:'Agent Harness & Tooling',entries:definitions.map(([name,definition,id],i)=>({id:`notion-${id??507+i}`,name,definition,priority:false,theme:17}))};
 
 
 const C=(n,level,concept,prompt,options,explanation)=>({id:`author-17-${n}`,theme:17,level,concept:`notion-${concept}`,kind:'choice',prompt,answer:options[0],options,explanation});

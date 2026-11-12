@@ -143,5 +143,10 @@
     "explanation": "La Pareto Frontier rassemble les solutions pour lesquelles aucune autre option évaluée n’est au moins aussi bonne sur tous les critères et strictement meilleure sur au moins l’un d’eux. Elle aide à comparer qualité, coût et latence lorsque ces objectifs se concurrencent ; le choix final dépend des contraintes de l’application et de la valeur accordée à chaque compromis.",
     "example": "Exemple illustratif : une équipe compare plusieurs configurations d’assistant. Certaines sont plus rapides, d’autres plus précises ; elle écarte une configuration à la fois plus lente, plus coûteuse et moins bonne qu’une autre.",
     "misconception": "Être sur la frontière de Pareto ne désigne pas un vainqueur unique. La frontière dépend des options testées, des métriques retenues et de l’incertitude des mesures."
+  },
+  "notion-625": {
+    "explanation": "La prédiction sélective ajoute une possibilité de refus à la décision. On suit simultanément la couverture, c’est-à-dire la proportion de cas traités, et le risque parmi les cas acceptés. Le seuil se règle sur des données de validation ; les cas refusés peuvent être transmis à une personne ou à une autre procédure.",
+    "example": "Exemple illustratif : Un outil accepte automatiquement 70 dossiers sur 100 et en renvoie 30 en vérification. Annoncer son taux d’erreur sans préciser cette couverture donnerait une image incomplète du service.",
+    "misconception": "S’abstenir ne garantit pas que les réponses conservées sont correctes. Un score mal calibré ou un changement de données peut rendre le seuil choisi peu fiable."
   }
 }

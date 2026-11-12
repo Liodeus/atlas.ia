@@ -76,5 +76,11 @@
   ],
   "notion-102": [
     "https://docs.pytorch.org/docs/2.15/generated/torch.nn.LSTM.html"
+  ],
+  "notion-632": [
+    "https://arxiv.org/abs/2501.00663"
+  ],
+  "notion-640": [
+    "https://github.com/deepseek-ai/Engram"
   ]
 }

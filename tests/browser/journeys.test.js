@@ -459,8 +459,8 @@ test('course and concept cards remind readers what abbreviations mean',async()=>
  await page.locator('.notion-understand').waitFor();
  assert.match(await page.locator('.notion-understand').innerText(),/TTFT \(Time To First Token\)/);
 });
-test('formerly incomplete notions now show their own explanation, example and references',async()=>{
- for(const id of ['notion-2','notion-3','notion-467','notion-507','notion-620']){
+test('completed and recent notions show their explanation, example and sources on mobile',async()=>{
+ for(const id of ['notion-2','notion-3','notion-467','notion-507','notion-620',...Array.from({length:20},(_,i)=>`notion-${621+i}`)]){
   await page.goto('http://127.0.0.1:5199/notions/'+id);
   await page.getByRole('heading',{name:'Pour comprendre',exact:true}).waitFor();
   assert.equal(await page.locator('.notion-understand p').innerText(),expandAbbreviations(notionContent[id].explanation));
@@ -472,6 +472,26 @@ test('formerly incomplete notions now show their own explanation, example and re
   for(const source of notionContentSources[id])assert.ok(await more.locator('a').evaluateAll((links,url)=>links.some(a=>a.href===url),source),`${id}: ${source}`);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth),true,id);
  }
+});
+test('searching JEV opens its sourced notion and the lesson that teaches it',async()=>{
+ const context=await browser.newContext({viewport:{width:1440,height:900}}),fresh=await context.newPage();
+ try{
+  await fresh.goto('http://127.0.0.1:5199/glossaire');
+  await fresh.getByLabel('Rechercher une notion ou un cours').fill('JEV');
+  const result=fresh.locator('.gloss-card').first();
+  assert.equal(await result.getAttribute('href'),'/notions/notion-621');
+  await result.click();
+  await fresh.getByRole('heading',{level:1,name:'Jev',exact:true}).waitFor();
+  await fresh.locator('.notion-more > summary').click();
+  await fresh.locator('.notion-course-link').click();
+  await fresh.waitForURL('**/cours/18/lecons/3');
+  assert.match(await fresh.locator('.lesson-content').innerText(),/Jev, proposé par TypeSafe/);
+  await fresh.getByRole('radio',{name:/Approfondi/}).check();
+  await fresh.locator('.course-more-terms > summary').click();
+  const term=fresh.locator('.course-term').filter({has:fresh.locator('a[href="/notions/notion-621"]')});
+  await term.locator('.course-term-detail > summary').click();
+  assert.match(await term.innerText(),/Une médiathèque/);
+ }finally{await context.close()}
 });
 test('all course terms offer an optional deepening while essential mode stays compact',async()=>{
  for(const theme of [1,17,18]){
@@ -533,7 +553,7 @@ test('secondary glossary filters stay visible in the summary and survive a notio
  assert.equal(await page.locator('.results-count').innerText(),before);
  assert.match(await summary.innerText(),/Essentiels/);
  await page.getByRole('button',{name:'Réinitialiser',exact:true}).click();
- assert.match(await page.locator('.results-count').innerText(),/551 NOTIONS/);
+ assert.match(await page.locator('.results-count').innerText(),/571 NOTIONS/);
  assert.doesNotMatch(await summary.innerText(),/Essentiels/);
 });
 test('comparison deep links open the right disclosure and preserve keyboard access',async()=>{

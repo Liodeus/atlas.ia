@@ -461,7 +461,8 @@
             "Le F1 Score combine Precision et Recall par une moyenne harmonique : une valeur faible de l’une limite le résultat, même si l’autre est élevée. Il résume leur équilibre, mais ne décrit pas directement le coût d’un message important bloqué. La règle de calcul des cas sans prédiction positive doit être précisée dans l’évaluation.",
             "Dans un exemple fictif de 100 messages, on compte 16 indésirables bloqués, 4 indésirables manqués, 8 messages légitimes bloqués et 72 messages légitimes conservés. L’Accuracy est 88 %, la Precision environ 66,7 % et le Recall 80 %. Le F1 Score vaut environ 72,7 %. Aucun de ces nombres ne dit seul si le filtre convient à l’utilisateur.",
             "Dans notre exemple, le calcul de Precision divise 16 par 24 : les 24 messages bloqués comprennent 8 erreurs. Le Recall divise 16 par 20 : quatre indésirables échappent au filtre. L’Accuracy divise 16 + 72 par 100. F1 peut se calculer directement comme 2 × 16 / (2 × 16 + 8 + 4), soit 32/44. Ces opérations montrent exactement comment chaque type d’erreur influence le score.",
-            "Un pourcentage gagne à être accompagné de son effectif. Une Precision de 100 % observée sur deux messages bloqués ne constitue pas la même preuve que sur deux mille. Les petits jeux peuvent donner des écarts instables et ne couvrent pas forcément les cas rares. Pour une décision réelle, on examine les exemples responsables du changement, les nombres bruts et les conséquences de chaque erreur, puis on vérifie le comportement sur des données distinctes."
+            "Un pourcentage gagne à être accompagné de son effectif. Une Precision de 100 % observée sur deux messages bloqués ne constitue pas la même preuve que sur deux mille. Les petits jeux peuvent donner des écarts instables et ne couvrent pas forcément les cas rares. Pour une décision réelle, on examine les exemples responsables du changement, les nombres bruts et les conséquences de chaque erreur, puis on vérifie le comportement sur des données distinctes.",
+            "Selective Prediction / Abstention autorise le refus de certains cas. Il faut alors publier deux mesures : la proportion de demandes traitées et les erreurs parmi les réponses acceptées. Améliorer la seconde en refusant presque tout ne suffit pas."
           ]
         },
         {
@@ -519,7 +520,8 @@
         "notion-369",
         "notion-370",
         "notion-371",
-        "notion-372"
+        "notion-372",
+        "notion-625"
       ],
       "practice": {
         "prompt": "Un détecteur trouve 18 défauts parmi 30 pièces signalées. Le lot contient réellement 24 pièces défectueuses sur 100. Calculez Precision, Recall et Accuracy, puis indiquez pourquoi le seul taux de signalement ne suffit pas.",
@@ -556,6 +558,10 @@
         {
           "label": "BLEU : article original",
           "url": "https://aclanthology.org/P02-1040/"
+        },
+        {
+          "label": "Selective Prediction / Abstention : source de référence",
+          "url": "https://arxiv.org/abs/1705.08500"
         }
       ]
     },
@@ -1057,7 +1063,8 @@
             "Le Contrastive Learning rapproche des représentations de paires liées et distingue celles de paires différentes. CLIP, Contrastive Language-Image Pretraining, relie ainsi représentations d’images et de textes. Cette proximité aide notamment à comparer une image à des descriptions candidates ; elle ne transforme pas automatiquement une similarité en preuve factuelle.",
             "JEPA, Joint Embedding Predictive Architecture, désigne une famille d’approches qui apprennent à prédire des représentations latentes plutôt qu’à reconstruire directement tous les détails du signal brut. Ce principe concerne la manière d’apprendre des représentations. Il ne permet pas de déduire, à partir du seul nom, quelles modalités ou actions un produit prend en charge.",
             "Dans un apprentissage contrastif image-texte, l’objectif rapproche des couples associés par les données et écarte d’autres couples. Une représentation utile émerge de nombreuses comparaisons. On peut ensuite comparer une image à plusieurs descriptions candidates, mais le résultat dépend de ces candidates : la meilleure parmi trois propositions peut encore être fausse si aucune ne correspond à l’image. Le score exprime une compatibilité relative dans le système, pas une certitude universelle.",
-            "Les approches prédictives de type JEPA cherchent plutôt à anticiper des représentations à partir d’autres représentations. Cette distinction concerne l’objectif d’apprentissage ; elle ne résout pas automatiquement l’extraction d’une date ou la génération d’une image. Pour comparer des produits multimodaux, partez donc de tâches observables : lire un champ, retrouver sa région, expliquer une relation ou détecter un événement. Les noms d’architectures donnent des indices sur les mécanismes, mais ne remplacent pas ces essais concrets."
+            "Les approches prédictives de type JEPA cherchent plutôt à anticiper des représentations à partir d’autres représentations. Cette distinction concerne l’objectif d’apprentissage ; elle ne résout pas automatiquement l’extraction d’une date ou la génération d’une image. Pour comparer des produits multimodaux, partez donc de tâches observables : lire un champ, retrouver sa région, expliquer une relation ou détecter un événement. Les noms d’architectures donnent des indices sur les mécanismes, mais ne remplacent pas ces essais concrets.",
+            "Un Action-Conditioned World Model prédit des conséquences en tenant compte d’actions candidates. Un planificateur peut comparer ces prédictions, mais doit composer avec leurs erreurs : un futur plausible n’est pas une garantie de résultat réel."
           ]
         }
       ],
@@ -1106,7 +1113,8 @@
         "notion-425",
         "notion-449",
         "notion-450",
-        "notion-451"
+        "notion-451",
+        "notion-630"
       ],
       "practice": {
         "prompt": "Une affiche contient « Concert : 18 juillet » au centre et « Réservation avant le 10 juillet » en bas. L’OCR restitue les deux lignes correctement, mais l’assistant annonce un concert le 10 juillet. Identifiez l’étape fautive et proposez deux contrôles adaptés.",
@@ -1143,6 +1151,10 @@
         {
           "label": "I-JEPA : prédiction de représentations",
           "url": "https://arxiv.org/abs/2301.08243"
+        },
+        {
+          "label": "Action-Conditioned World Model : source de référence",
+          "url": "https://arxiv.org/abs/2506.09985"
         }
       ]
     },

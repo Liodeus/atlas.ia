@@ -9,11 +9,15 @@ test('quiz questions never repeat', () => { const q=Array.from({length:12},(_,i)
 test('progress rejects unknown versions', () => assert.equal(validateProgress({version:99}),false));
 test('progress rejects malformed imported history', () => assert.equal(validateProgress({version:1,completed:[],favorites:[],history:[null],errors:[],session:null}),false));
 test('progress accepts an empty profile', () => assert.equal(validateProgress({version:1,completed:[],favorites:[],history:[],errors:[],session:null}),true));
-test('import retains the 16 themes and 506 notions from the glossary', async () => {
+test('the 16 source themes retain their original IDs and include the new notions', async () => {
   const {readFile}=await import('node:fs/promises');
   const themes=JSON.parse(await readFile(new URL('../src/glossary.json',import.meta.url),'utf8'));
   assert.equal(themes.length,16);
-  assert.equal(themes.flatMap(t=>t.entries).length,506);
+  const entries=themes.flatMap(t=>t.entries);
+  assert.equal(entries.length,519);
+  const ids=new Set(entries.map(entry=>entry.id));
+  assert.equal(ids.size,entries.length);
+  for(let id=1;id<=506;id++)assert.ok(ids.has(`notion-${id}`));
   assert.equal(themes.flatMap(t=>t.entries).filter(e=>e.priority).length,82);
   assert.ok(themes.flatMap(t=>t.entries).every(e=>!e.definition.includes('—')&&!e.definition.includes('**')));
 });

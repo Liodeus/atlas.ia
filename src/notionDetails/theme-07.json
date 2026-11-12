@@ -128,5 +128,15 @@
     "explanation": "Le Catastrophic Forgetting correspond à une perte marquée de performances sur des tâches antérieures lorsque le modèle apprend de nouvelles données. Les mises à jour utiles au nouveau domaine peuvent modifier des paramètres importants pour l'ancien ; rejouer certains exemples, contraindre les changements ou isoler des adaptations peut limiter cet effet selon le contexte.",
     "example": "Exemple illustratif : après une adaptation intensive aux notices industrielles, un modèle classe moins bien les messages courants. L'équipe mesure cette régression sur un jeu conservé et expérimente un mélange de domaines.",
     "misconception": "Toute baisse après adaptation n'est pas automatiquement un oubli catastrophique. Un changement de prompt, de format ou de protocole peut également expliquer une régression apparente."
+  },
+  "notion-624": {
+    "explanation": "RLCD désigne la méthode de post-entraînement présentée par TypeSafe pour travailler la qualité des décisions et leur calibration. L’objectif est que les probabilités annoncées correspondent aux fréquences observées sur des ensembles comparables. Cette orientation diffère d’une récompense portant seulement sur la réponse choisie : une prédiction correcte mais excessivement assurée peut rester problématique.",
+    "example": "Exemple illustratif : Sur un ensemble fictif de décisions annoncées à 80 % de probabilité, une équipe vérifie si environ huit sur dix sont correctes. Elle examine aussi séparément les catégories peu représentées.",
+    "misconception": "RLCD est un nom de méthode propre à ce fournisseur. Il ne prouve pas que la calibration reste bonne sur un nouveau domaine ou sur chaque cas individuel."
+  },
+  "notion-626": {
+    "explanation": "Le Test-Time Training effectue une mise à jour de paramètres à partir des entrées rencontrées au moment de la prédiction. Dans la formulation initiale, un objectif auto-supervisé exploite l’exemple sans connaître sa bonne réponse. La prédiction utilise ensuite le modèle adapté. Il faut préciser quels paramètres changent et si cet état est conservé entre les exemples.",
+    "example": "Exemple illustratif : Un modèle de vision rencontre des images de caméra différentes de son corpus initial. Avant de les classer, il adapte certains paramètres avec une tâche auxiliaire définie lors de sa conception.",
+    "misconception": "Consacrer davantage de calcul à une réponse n’est pas forcément du TTT. Le Test-Time Compute peut multiplier les essais sans modifier les paramètres du modèle."
   }
 }

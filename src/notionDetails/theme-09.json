@@ -148,5 +148,15 @@
     "explanation": "L'Embedding Drift désigne une évolution des représentations ou de leur comportement, par exemple après un changement de modèle, de prétraitement ou de population de documents. On surveille la qualité des recherches et les distributions de scores pour détecter ces écarts ; une migration de modèle demande généralement de régénérer les vecteurs concernés et de vérifier leur compatibilité avec les requêtes.",
     "example": "Exemple illustratif : une équipe remplace son encodeur mais conserve provisoirement les anciens vecteurs documentaires. Des tests révèlent des classements incohérents ; elle prépare un index cohérent avec le nouvel encodeur.",
     "misconception": "Les vecteurs déjà stockés ne dérivent pas spontanément. Le terme peut décrire plusieurs changements, et une dimension identique ne garantit pas un espace de représentation compatible."
+  },
+  "notion-634": {
+    "explanation": "Le Late Chunking retarde l’agrégation par passage jusqu’après l’encodage contextuel. Le modèle traite le document, dans la limite de sa fenêtre, puis les vecteurs des tokens sont regroupés selon les frontières des passages. Chaque embedding peut ainsi conserver des informations provenant d’autres parties du texte, tout en représentant un morceau utilisable par la recherche.",
+    "example": "Exemple illustratif : Une notice nomme un appareil au début, puis emploie « ce modèle » plus loin. Encoder le texte avant d’agréger les passages peut aider à préserver ce lien dans les vecteurs de recherche.",
+    "misconception": "Le Late Chunking ne supprime pas les limites de contexte. Il se distingue de la Late Interaction, qui compare plusieurs représentations lors du calcul de pertinence."
+  },
+  "notion-635": {
+    "explanation": "Matryoshka Representation Learning entraîne plusieurs préfixes d’une même représentation à porter de l’information utile. Un système peut ensuite choisir une longueur de vecteur selon son budget de stockage et de calcul. Cette organisation permet d’explorer un compromis entre précision et ressources, à condition que le modèle ait été entraîné pour ces dimensions emboîtées.",
+    "example": "Exemple illustratif : Une recherche utilise des vecteurs courts pour sélectionner des candidats, puis une représentation plus longue pour les comparer plus finement. Les deux étapes sont évaluées sur les demandes réelles.",
+    "misconception": "Couper arbitrairement un embedding ordinaire n’équivaut pas à MRL. Même avec un modèle adapté, il faut vérifier la qualité aux dimensions choisies."
   }
 }

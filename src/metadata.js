@@ -8,13 +8,13 @@ import {defaultSiteUrl,normalizeSiteUrl} from './siteUrl.js';
 export {defaultSiteUrl,normalizeSiteUrl} from './siteUrl.js';
 const summary=text=>{const value=String(text).replace(/\s+/g,' ').trim();return value.length>170?value.slice(0,167).replace(/\s+\S*$/,'')+'…':value.charAt(0).toUpperCase()+value.slice(1)};
 const pages={
- '/':['Comprendre l’intelligence artificielle','Apprenez l’IA, les LLM et les agents à votre rythme : 18 thèmes, 54 leçons et 551 notions, avec schémas, quiz et flashcards.'],
+ '/':['Comprendre l’intelligence artificielle',`Apprenez l’IA, les LLM et les agents à votre rythme : 18 thèmes, 54 leçons et ${entries.length} notions, avec schémas, quiz et flashcards.`],
  '/apprendre':['Les thèmes de l’IA','Explorez les 18 thèmes d’Atlas IA ou choisissez un parcours guidé selon votre objectif.'],
  '/parcours':['Les parcours d’apprentissage',`${learningPaths.length} parcours pour comprendre l’IA, concevoir des applications, évaluer les réponses, protéger les données et préparer un déploiement.`],
  '/distinctions':['35 distinctions à ne pas mélanger','Comparez les notions proches de l’IA : leurs différences, des exemples concrets et les fiches pour les comprendre.'],
- '/glossaire':['Le glossaire de l’IA','Retrouvez 551 notions de l’IA, des LLM et des agents. Recherchez une définition ou un cours, par thème et par mots-clés.'],
+ '/glossaire':['Le glossaire de l’IA',`Retrouvez ${entries.length} notions de l’IA, des LLM et des agents. Recherchez une définition ou un cours, par thème et par mots-clés.`],
  '/schemas':['Les schémas de l’IA','Explorez 22 schémas et 17 démonstrations interactives pour comprendre les modèles, le RAG et les agents.'],
- '/flashcards':['Réviser avec les flashcards','Révisez les 551 notions d’Atlas IA avec des flashcards et retrouvez les notions à revoir.'],
+ '/flashcards':['Réviser avec les flashcards',`Révisez les ${entries.length} notions d’Atlas IA avec des flashcards et retrouvez les notions à revoir.`],
  '/quiz':['Tester ses connaissances','Vérifiez votre compréhension de l’IA avec 278 questions, des corrections et des liens vers les notions.'],
  '/progression':['Ma progression','Retrouvez vos leçons terminées, vos révisions et vos sauvegardes de progression sur cet appareil.']
 };

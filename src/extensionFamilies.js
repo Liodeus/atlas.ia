@@ -21,9 +21,13 @@ const definitions=[
  ['FLUX','Ensemble de familles de modèles de Black Forest Labs, dont certaines générations servent à créer ou modifier des images et d’autres produisent de la vidéo.','https://help.bfl.ai/articles/7655484417-what-flux-models-are-available'],
  ['Kimi','Famille de modèles de Moonshot AI. Certaines variantes visent le langage, les agents ou plusieurs modalités ; vérifiez la version utilisée.','https://github.com/MoonshotAI'],
  ['GLM','Famille de modèles associée à Z.ai. Les générations et variantes possèdent leurs propres caractéristiques et conditions de distribution.','https://github.com/zai-org/GLM-5'],
- ['MiniMax-M','Série de modèles de langage de MiniMax comprenant plusieurs variantes destinées notamment aux tâches avec outils et au code.','https://github.com/MiniMax-AI/MiniMax-M2']
+ ['MiniMax-M','Série de modèles de langage de MiniMax comprenant plusieurs variantes destinées notamment aux tâches avec outils et au code.','https://github.com/MiniMax-AI/MiniMax-M2'],
+ // Ajouts sourcés le 12 novembre 2026 ; identifiants explicites pour préserver les liens.
+ ["Jev", "Modèle de TypeSafe conçu pour renvoyer des décisions typées et des probabilités à partir d’un contexte, plutôt que rédiger une réponse libre.", "https://docs.typesafe.ai/introduction", 621],
+ ["LLaDA", "Famille de modèles de langage génératifs fondés sur la diffusion à masques, étudiée comme alternative à la prédiction autorégressive du prochain token.", "https://github.com/ML-GSAI/LLaDA", 628],
+ ["V-JEPA", "Famille de modèles de Meta qui apprend des représentations vidéo par prédiction dans un espace latent, avec des variantes aux objectifs distincts.", "https://github.com/facebookresearch/vjepa2", 629]
 ];
-export const familyTheme={id:18,title:'Model Families et écosystèmes',entries:definitions.map(([name,definition,source],index)=>({id:`notion-${600+index}`,name,definition,source,priority:false,theme:18}))};
+export const familyTheme={id:18,title:'Model Families et écosystèmes',entries:definitions.map(([name,definition,source,id],index)=>({id:`notion-${id??600+index}`,name,definition,source,priority:false,theme:18}))};
 
 
 const choice=(n,level,concept,prompt,options,explanation)=>({id:`author-18-${n}`,theme:18,level,concept:`notion-${concept}`,kind:'choice',prompt,options,answer:options[0],explanation});
